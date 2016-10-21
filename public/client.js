@@ -18,7 +18,7 @@ app.controller("authController", function($scope, $firebaseArray, $firebaseAuth,
       firebaseUser.getToken().then(function(idToken){
         $http({
           method: 'GET',
-          url: '/adminLogin',
+          url: '/auth/adminLogin',
           headers: {
             id_token: idToken
           }

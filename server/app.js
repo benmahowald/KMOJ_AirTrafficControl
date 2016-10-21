@@ -14,19 +14,9 @@ firebase.initializeApp({
 
 app.use(bodyParser.json());
 
-//Login
-app.get("/adminLogin", function(req, res){
-  firebase.auth().verifyIdToken(req.headers.id_token).then(function(decodedToken) {
-    //logged in user information
-    console.log(decodedToken);
-    //select * from permissions where email=...
-    res.send("You are logged in " + decodedToken.name);
-  })//end verifyIdToken success
-  .catch(function(error) {
-    console.log("Login error:",error);
-    res.send("Please Login");
-  });//end id_token error
-});//end adminLogin
+// require and use auth router
+var auth = require('../routers/auth');
+app.use('/auth', auth);
 
 var portDecision = process.env.PORT || 5000;
 
