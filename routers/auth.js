@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var firebase = require('firebase');
-
+  
 //Login
 router.get("/adminLogin", function(req, res){
   firebase.auth().verifyIdToken(req.headers.id_token).then(function(decodedToken) {
