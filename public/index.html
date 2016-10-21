@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="App">
+  <head>
+    <meta charset="utf-8">
+    <title>KMOJ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
+    <script src="config.js"></script>
+    <script src="client.js"></script>
+  </head>
+  <body ng-controller="authController">
+    <h1>Please Login</h1>
+    <button ng-click="logIn()">Log In</button>
+    <button ng-click="logOut()">Log Out</button>
+    <div>
+      {{signedIn}}
+    </div>
+  </body>
+</html>
