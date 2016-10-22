@@ -18,6 +18,20 @@ app.use(bodyParser.json());
 var auth = require('../routers/auth');
 app.use('/auth', auth);
 
+// require other server-side routers
+var admin = require ('../routers/admin');
+app.use('/admin', admin);
+
+var underwrite = require ('../routers/underwrite');
+app.use('/underwrite', underwrite);
+
+var traffic = require ('../routers/traffic');
+app.use('/traffic', traffic);
+
+var production = require ('../routers/production');
+app.use('/production', production);
+
+//port 5000 being used
 var portDecision = process.env.PORT || 5000;
 
 app.listen(portDecision, function(){
