@@ -3,7 +3,10 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
-
+var pg = require ('pg');
+var connectionString = 'postgres://localhost:5432/kmoj';
+var urlencodedParser = bodyParser.urlencoded({extended: false});
+console.log('connected to db');
 // Static files
 app.use(express.static('public'));
 
