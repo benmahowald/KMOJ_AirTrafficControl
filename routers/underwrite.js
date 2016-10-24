@@ -7,7 +7,9 @@ var connectionString = 'postgres://localhost:5432/kmoj';
 
 // console.log('in underwrite router');
 //router.post master
-router.post ('/underwrite', function (req, res){
+
+
+router.post ('/master', function (req, res){
 	console.log('req.body is', req.body);
 	var master = req.body;
 	pg.connect(connectionString, function (err, client, done){
