@@ -1,67 +1,63 @@
 <!DOCTYPE html>
 <html ng-app="App">
-  <head>
-    <meta charset="utf-8">
-    <title>KMOJ Air Traffic Control</title>
-    <link href="vendors/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/styles.min.css"/>
-    <script src="vendors/angular.min.js"></script>
-    <script src="vendors/angular-route.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
-    <script src="vendors/xeditable.min.js"></script>
-    <script src="vendors/jquery.min.js"></script>
-    <script src="vendors/bootstrap.min.js"></script>
-    <script src="vendors/moment-with-locales.min.js"></script>
-    <script src="scripts/config.js"></script>
-    <script src="scripts/client.js"></script>
-    <script src="scripts/controllers/adminController.js"></script>
-    <script src="scripts/controllers/dashController.js"></script>
-    <script src="scripts/controllers/prodController.js"></script>
-    <script src="scripts/controllers/reportController.js"></script>
-    <script src="scripts/controllers/searchController.js"></script>
-    <script src="scripts/controllers/trafficController.js"></script>
-    <script src="scripts/controllers/uwController.js"></script>
-    <base href="/"> <!-- Coupled with html5Mode, this makes pretty URLs -->
-  </head>
-  <body ng-controller="authController">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Hamburger Menu Display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">KMOJ</a>
-        </div>
+<head>
+  <meta charset="utf-8">
+  <title>KMOJ Air Traffic Control</title>
+  <link href="vendors/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/styles.min.css"/>
+  <script src="vendors/angular.min.js"></script>
+  <script src="vendors/angular-route.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
+  <script src="vendors/xeditable.min.js"></script>
+  <script src="vendors/jquery.min.js"></script>
+  <script src="vendors/bootstrap.min.js"></script>
+  <script src="vendors/moment-with-locales.min.js"></script>
+  <script src="scripts/config.js"></script>
+  <script src="scripts/client.js"></script>
+  <script src="scripts/controllers/adminController.js"></script>
+  <script src="scripts/controllers/dashController.js"></script>
+  <script src="scripts/controllers/prodController.js"></script>
+  <script src="scripts/controllers/reportController.js"></script>
+  <script src="scripts/controllers/searchController.js"></script>
+  <script src="scripts/controllers/trafficController.js"></script>
+  <script src="scripts/controllers/uwController.js"></script>
+  <base href="/"> <!-- Coupled with html5Mode, this makes pretty URLs -->
+</head>
+<body ng-controller="mainController">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Hamburger Menu Display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">KMOJ</a>
+      </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><a href="#">Contracts</a></li>
-            <li><a href="#">Search</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Users</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><button ng-click="logOut()">Log Out</button></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-    <div class="ng-view"></div>
-    <img src="assets/logo.png" style="width:150px;" alt="logo"><br>
-    <button ng-click="logIn()">Log In</button>
-    <button ng-click="logOut()">Log Out</button>
-    <div>
-      {{signedIn}}
-    </div>
-    <main ng-view autoscroll="true">
-			<!-- NG-routing shows up here -->
-		</main>
-  </body>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li ng-repeat="link in linkList"><a ng-href={{link.route}}>{{link.text}}</a></li>
+        </ul>
+        <ul ng-controller="authController" class="nav navbar-nav navbar-right">
+          <button ng-click="logIn()">Log In</button>
+          <button ng-click="logOut()">Log Out</button>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <img src="assets/logo.png" style="width:150px;" alt="logo"><br>
+
+  <div>
+    {{signedIn}}
+  </div>
+  <main ng-view autoscroll="true">
+    <!-- NG-routing shows up here -->
+  </main>
+</body>
 </html>

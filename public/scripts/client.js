@@ -42,6 +42,18 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
   };//end logOut
 });//end authController
 
+app.controller('mainController', function($scope, $http) {
+  $scope.linkList =[
+    {route:'admin',text:'Admin'},
+    {route:'dashboard',text:'Dashboard'},
+    {route:'production',text:'Production'},
+    {route:'report',text:'Report'},
+    {route:'search',text:'Search'},
+    {route:'traffic',text:'Traffic'},
+    {route:'underwriter',text:'Underwriter'}
+  ];
+});
+
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
   console.log('$routeProvider:',$routeProvider);
 
