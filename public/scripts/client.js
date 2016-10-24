@@ -1,14 +1,14 @@
-var app = angular.module("App", ["firebase"]);
+var app = angular.module('App', ['ngRoute', 'firebase']);
 
-app.controller("authController", function($scope, $firebaseArray, $firebaseAuth, $http) {
+app.controller('authController', function($scope, $firebaseArray, $firebaseAuth, $http) {
   var auth = $firebaseAuth();
 
   //Login
   $scope.logIn = function login(){
-    auth.$signInWithPopup("google").then(function(firebaseUser) {
-      console.log("Signed in as:", firebaseUser.user.displayName);
+    auth.$signInWithPopup('google').then(function(firebaseUser) {
+      console.log('Signed in as:', firebaseUser.user.displayName);
     }).catch(function(error) {
-      console.log("Authentication failed:", error);
+      console.log('Authentication failed:', error);
     });//end error
   };//end logIn
 
@@ -30,7 +30,7 @@ app.controller("authController", function($scope, $firebaseArray, $firebaseAuth,
     }//end if
     else {
       console.log('Not logged in.');
-      $scope.signedIn = "Please Login";
+      $scope.signedIn = 'Please Login';
     }//end else
   });//end onAuthStateChanged
 
@@ -42,7 +42,7 @@ app.controller("authController", function($scope, $firebaseArray, $firebaseAuth,
   };//end logOut
 });//end authController
 
-App.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
   console.log('$routeProvider:',$routeProvider);
 
   $routeProvider.
