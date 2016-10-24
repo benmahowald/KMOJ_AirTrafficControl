@@ -1,3 +1,3 @@
-myApp.controller('dashController', ['$scope', function($scope){
+app.controller('dashController', ['$scope', function($scope){
   console.log('Dashboard Controller');
 }]);
