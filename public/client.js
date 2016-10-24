@@ -29,7 +29,7 @@ app.controller("authController", function($scope, $firebaseArray, $firebaseAuth,
     }//end if
     else {
       console.log('Not logged in.');
-      $scope.signedIn = "Please Login"
+      $scope.signedIn = "Please Login";
     }//end else
   });//end onAuthStateChanged
 
