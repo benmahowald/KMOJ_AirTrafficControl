@@ -13,6 +13,13 @@
     <script src="vendors/moment-with-locales.min.js"></script>
     <script src="scripts/config.js"></script>
     <script src="scripts/client.js"></script>
+    <script src="scripts/controllers/adminController.js"></script>
+    <script src="scripts/controllers/dashController.js"></script>
+    <script src="scripts/controllers/prodController.js"></script>
+    <script src="scripts/controllers/reportController.js"></script>
+    <script src="scripts/controllers/searchController.js"></script>
+    <script src="scripts/controllers/trafficController.js"></script>
+    <script src="scripts/controllers/uwController.js"></script>
     <link href="vendors/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.min.css"/>
     <base href="/"> <!-- Coupled with html5Mode, this makes pretty URLs -->
@@ -24,5 +31,8 @@
     <div>
       {{signedIn}}
     </div>
+    <main ng-view autoscroll="true">
+			<!-- NG-routing shows up here -->
+		</main>
   </body>
 </html>

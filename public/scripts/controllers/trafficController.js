@@ -1,3 +1,3 @@
-myApp.controller('trafficController', ['$scope', function($scope){
+app.controller('trafficController', ['$scope', function($scope){
   console.log('Traffic Controller');
 }]);

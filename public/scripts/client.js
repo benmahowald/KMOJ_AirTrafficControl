@@ -54,7 +54,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: '/views/partials/adminView.html',
     controller: 'adminController'
   }).
-  when('/prod', {
+  when('/production', {
     templateUrl: '/views/partials/prodView.html',
     controller: 'prodController'
   }).
