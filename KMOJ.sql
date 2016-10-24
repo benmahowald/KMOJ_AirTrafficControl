@@ -27,7 +27,7 @@ copy_id VARCHAR (30)
 --CREATE clients table:
 
 CREATE TABLE clients(
-id SERIAL PRIMARY KEY,
+client_id SERIAL PRIMARY KEY,
 name VARCHAR (50),
 contact VARCHAR (50),
 address VARCHAR (200),
@@ -40,7 +40,6 @@ fax VARCHAR (15),
 email VARCHAR (50),
 webiste VARCHAR (100),
 users_id VARCHAR (50)
-
 );
 
 --Create users table:
