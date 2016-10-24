@@ -12,7 +12,7 @@ router.post ('/underwrite', function (req, res){
 	var master = req.body;
 	pg.connect(connectionString, function (err, client, done){
 		if (err){
-			console.log('connection error in master' err);
+			console.log('connection error in master', err);
 		} else {
 			var queryResults = client.query ('INSERT INTO master (users_id, client_id, sign_date, event_name, spot_number, total_cost) ' +
 																				('interviews, socialmedia, instructions, man_app, uw_app, pr_app, tr_app, spot_type, ' +
