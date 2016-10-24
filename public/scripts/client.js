@@ -1,4 +1,5 @@
 var app = angular.module("App", ["firebase"]);
+
 app.controller("authController", function($scope, $firebaseArray, $firebaseAuth, $http) {
   var auth = $firebaseAuth();
 
@@ -40,3 +41,43 @@ app.controller("authController", function($scope, $firebaseArray, $firebaseAuth,
     });//end response
   };//end logOut
 });//end authController
+
+App.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+  console.log('$routeProvider:',$routeProvider);
+
+  $routeProvider.
+  when('/dashboard', {
+    templateUrl: '/views/partials/dashView.html',
+    controller: 'dashController'
+  }).
+  when('/admin', {
+    templateUrl: '/views/partials/adminView.html',
+    controller: 'adminController'
+  }).
+  when('/prod', {
+    templateUrl: '/views/partials/prodView.html',
+    controller: 'prodController'
+  }).
+  when('/report', {
+    templateUrl: '/views/partials/reportView.html',
+    controller: 'reportController'
+  }).
+  when('/search', {
+    templateUrl: '/views/partials/searchView.html',
+    controller: 'searchController'
+  }).
+  when('/traffic', {
+    templateUrl: '/views/partials/trafficView.html',
+    controller: 'trafficController'
+  }).
+  when('/underwriter', {
+    templateUrl: '/views/partials/uwView.html',
+    controller: 'uwController'
+  }).
+  otherwise({
+    redirectTo: '/dashboard'
+  });
+
+  // use the HTML5 History API for pretty URLs
+  $locationProvider.html5Mode(true);
+}]);// end NG-routing
