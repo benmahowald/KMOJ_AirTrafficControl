@@ -1,7 +1,7 @@
 --Create master table:
 CREATE TABLE master(
 id SERIAL PRIMARY KEY,
-uw_user_id VARCHAR (30),
+users_id VARCHAR (30),
 client_id VARCHAR (30),
 sign_date TIMESTAMP NOT NULL,
 event_name VARCHAR (100),
@@ -23,7 +23,9 @@ prod_id VARCHAR (30),
 copy_id VARCHAR (30)
 );
 
+
 --CREATE clients table:
+
 CREATE TABLE clients(
 id SERIAL PRIMARY KEY,
 name VARCHAR (50),
@@ -37,16 +39,17 @@ cell VARCHAR (15),
 fax VARCHAR (15),
 email VARCHAR (50),
 webiste VARCHAR (100),
-uw_user_id VARCHAR (50)
+users_id VARCHAR (50)
+
 );
 
 --Create users table:
 CREATE TABLE users (
 id SERIAL PRIMARY KEY,
 email VARCHAR (100),
-permission BOOLEAN DEFAULT 'false',
+permission INT,
 name VARCHAR (100),
-active BOOLEAN DEFAULT 'false'
+active BOOLEAN DEFAULT 'true'
 );
 
 --CREATE slots table:
