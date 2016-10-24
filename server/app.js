@@ -17,6 +17,9 @@ firebase.initializeApp({
 
 app.use(bodyParser.json());
 
+
+var underwrite = require ('../routers/underwrite');
+app.use('/underwrite', underwrite);
 // require and use auth router
 var auth = require('../routers/auth');
 app.use('/auth', auth);
@@ -25,8 +28,7 @@ app.use('/auth', auth);
 var admin = require ('../routers/admin');
 app.use('/admin', admin);
 
-var underwrite = require ('../routers/underwrite');
-app.use('/underwrite', underwrite);
+
 
 var traffic = require ('../routers/traffic');
 app.use('/traffic', traffic);
