@@ -3,11 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>KMOJ Air Traffic Control</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
     <script src="vendors/angular.min.js"></script>
     <script src="vendors/angular-route.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
     <script src="vendors/jquery.min.js"></script>
     <script src="vendors/bootstrap.min.js"></script>
     <script src="vendors/xeditable.min.js"></script>
@@ -16,6 +15,7 @@
     <script src="scripts/client.js"></script>
     <link href="vendors/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.min.css"/>
+    <base href="/"> <!-- Coupled with html5Mode, this makes pretty URLs -->
   </head>
   <body ng-controller="authController">
     <h1>Please Login</h1>
