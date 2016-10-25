@@ -41,6 +41,7 @@ router.post ('/flight', function (req, res){
 	});//end pg.connect for flight table
 });//end router.post for flight table
 
+<<<<<<< HEAD
 //get traffic info from db for traffic
 router.get('/trafficinfo', function (req, res){
 	console.log('in get traffic info');
@@ -84,6 +85,48 @@ router.get('/clientinfo', function (req, res){
 		}
 	});//end pg.connect for traffic info
 });//end router.get for traffic info
+=======
+router.get('/getslots', function (req, res){
+	console.log('in get slots');
+	pg.connect(connectionString, function(err, client, done){
+		if(err){
+			console.log('get slots connection error is', err);
+		} else {
+			var results = [];
+			var queryResults = client.query ('SELECT * FROM slots');
+			queryResults.on('row', function(row){
+				results.push(row);
+			});
+			queryResults.on('end', function(){
+				done();
+				return res.json(results);
+				console.log('slots results are', results);
+			});//end query results for getslots
+		}
+	}); //end pg.connect for getslots
+});//end router.getslots
+
+router.get('/getflight', function (req, res){
+	console.log('in get flight');
+	pg.connect(connectionString, function(err, client, done){
+		if(err){
+			console.log('get flight connection error is', err);
+		} else {
+			var results = [];
+			var queryResults = client.query ('SELECT * FROM flight');
+			queryResults.on('row', function(row){
+				results.push(row);
+			});
+			queryResults.on('end', function(){
+				done();
+				return res.json(results);
+				console.log('flight results are', results);
+			});//end queryResults for getflight
+		}
+	}); //end pg.connect for get flight
+});//end router.getflight
+
+>>>>>>> 2982dee94fde054749ea7a9c39235a984d48ad65
 
 
 

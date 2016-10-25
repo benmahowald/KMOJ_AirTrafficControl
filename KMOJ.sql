@@ -1,8 +1,8 @@
 --Create master table:
 CREATE TABLE master(
 id SERIAL PRIMARY KEY,
-users_id INT,
-client_id INT,
+users_id VARCHAR (30),
+client_id VARCHAR (30),
 sign_date TIMESTAMP NOT NULL,
 event_name VARCHAR (100),
 spot_number INT,
@@ -18,9 +18,9 @@ spot_type VARCHAR (3),
 spot_length VARCHAR (5),
 spot_rate NUMERIC,
 total_spots INT,
-flight_id INT,
-prod_id INT,
-copy_id INT
+flight_id VARCHAR (30),
+prod_id VARCHAR (30),
+copy_id VARCHAR (30)
 );
 
 
@@ -39,7 +39,7 @@ cell VARCHAR (15),
 fax VARCHAR (15),
 email VARCHAR (50),
 webiste VARCHAR (100),
-users_id INT
+users_id VARCHAR (50)
 );
 
 --Create users table:
@@ -57,13 +57,13 @@ id SERIAL PRIMARY KEY,
 day_of_run INT,
 plays INT,
 slot VARCHAR (20),
-flight_id INT
+flight_id VARCHAR (300)
 );
 
 --CREATE table flight:
 CREATE TABLE flight (
 id SERIAL PRIMARY KEY,
-contract_id INT,
+contract_id VARCHAR (300),
 start_date DATE NOT NULL,
 end_date DATE NOT NULL,
 cart_number VARCHAR (15)
@@ -72,7 +72,7 @@ cart_number VARCHAR (15)
 --CREATE table production:
 CREATE TABLE production (
 id SERIAL PRIMARY KEY,
-contract_id INT,
+contract_id VARCHAR (300),
 talent VARCHAR (100),
 who VARCHAR (200),
 what VARCHAR (500),
