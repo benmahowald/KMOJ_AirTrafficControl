@@ -47,29 +47,4 @@ router.post ('/master', function (req, res){
 	});//end pg.connect
 });//end router.post for master table
 
-
-// get information from db for contract view
-router.get ('/contract', function (req, res){
-	console.log('in get contract');
-	pg.connect(connectionString, function (err, client, done){
-		if (err){
-			console.log('error in get contract info');
-		} else {
-			var results = [];
-			var queryResults = client.query ('SELECT master.total_spots, master.spot_length, master.total_cost, master.interviews, master.socialmedia, master.sign_date, clients.name' +
-			 																 'FROM master INNER JOIN clients ON clients.client_id = master.client_id');
-					queryResults.on('row', function (row){
-						results.push(row)
-					});//end queryResults on row
-					queryResults.on('end', function (){
-						done();
-						res.send.json(results);
-						console.log('results for get contract info', results);
-					});//end queryResults on end
-		}
-	});//end pg.connect for contract
-});//end router.get for contract
-
-
-
 module.exports = router;
