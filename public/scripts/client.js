@@ -7,6 +7,7 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
   $scope.logIn = function login(){
     auth.$signInWithPopup('google').then(function(firebaseUser) {
       console.log('Signed in as:', firebaseUser.user.displayName);
+      $scope.loggedIn = true;
     }).catch(function(error) {
       console.log('Authentication failed:', error);
     });//end error
@@ -38,6 +39,7 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
   $scope.logOut = function(){
     auth.$signOut().then(function(){
       console.log('Logged out');
+      $scope.loggedIn = false;
     });//end response
   };//end logOut
 });//end authController
