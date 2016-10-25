@@ -41,7 +41,6 @@ router.post ('/flight', function (req, res){
 	});//end pg.connect for flight table
 });//end router.post for flight table
 
-<<<<<<< HEAD
 //get traffic info from db for traffic
 router.get('/trafficinfo', function (req, res){
 	console.log('in get traffic info');
@@ -85,7 +84,6 @@ router.get('/clientinfo', function (req, res){
 		}
 	});//end pg.connect for traffic info
 });//end router.get for traffic info
-=======
 router.get('/getslots', function (req, res){
 	console.log('in get slots');
 	pg.connect(connectionString, function(err, client, done){
@@ -129,5 +127,5 @@ router.get('/getflight', function (req, res){
 >>>>>>> 2982dee94fde054749ea7a9c39235a984d48ad65
 
 
- 
+
 module.exports = router;
