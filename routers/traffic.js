@@ -41,6 +41,49 @@ router.post ('/flight', function (req, res){
 	});//end pg.connect for flight table
 });//end router.post for flight table
 
+//get traffic info from db for traffic
+router.get('/trafficinfo', function (req, res){
+	console.log('in get traffic info');
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in trafficinfo');
+		} else {
+			var results = [];
+			var queryResults = client.query('SELECT master.event_name, master.total_cost, master.sign_date, master.interviews, master.socialmedia, master.instructions, master.spot_type, master.spot_length, master.spot_rate, master.total_spots, users.name FROM master ' +
+																			'INNER JOIN users ON users.id = master.users_id;');
+					queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						return res.json(results);
+						console.log('results are', results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for traffic info
+});//end router.get for traffic info
+
+//get client info from db for traffic
+
+router.get('/clientinfo', function (req, res){
+	console.log('in get client info');
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in clientinfo');
+		} else {
+			var results = [];
+			var queryResults = client.query('SELECT * FROM clients');
+					queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						return res.json(results);
+						console.log('results are', results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for traffic info
+});//end router.get for traffic info
 
 
 
