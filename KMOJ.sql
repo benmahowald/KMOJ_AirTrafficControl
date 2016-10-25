@@ -80,3 +80,22 @@ site VARCHAR (200),
 why VARCHAR (500),
 cart_number VARCHAR (15)
 );
+
+--ALTER tables to link id's with foreign keys:
+ALTER TABLE master
+ADD FOREIGN KEY (client_id) REFERENCES clients;
+
+ALTER TABLE master
+ADD FOREIGN KEY (flight_id) REFERENCES flight;
+
+ALTER TABLE master
+ADD FOREIGN KEY (prod_id) REFERENCES production;
+
+ALTER TABLE flight
+ADD FOREIGN KEY (contract_id) REFERENCES master;
+
+ALTER TABLE production
+ADD FOREIGN KEY (contract_id) REFERENCES master;
+
+ALTER TABLE slots
+ADD FOREIGN KEY (flight_id) REFERENCES flight;
