@@ -124,7 +124,6 @@ router.get('/getflight', function (req, res){
 	}); //end pg.connect for get flight
 });//end router.getflight
 
->>>>>>> 2982dee94fde054749ea7a9c39235a984d48ad65
 
 
 
