@@ -9,7 +9,8 @@ router.get('/reports', function (req, res){
 			console.log('connection err in reports');
 		} else {
 			var results = [];
-			var queryResults = client.query('SELECT flight.cart_number, flight.start_date, flight.end_date, clients.name, users.name, master.total_cost FROM flight INNER JOIN clients ON clients.client_id = flight.id INNER JOIN users ON users.id = flight.id INNER JOIN master ON master.id = flight.id');
+			var queryResults = client.query('SELECT flight.cart_number, flight.start_date, flight.end_date, clients.name, users.name, master.total_cost') +
+																		 ('FROM flight INNER JOIN clients ON clients.client_id = flight.id INNER JOIN users ON users.id = flight.id INNER JOIN master ON master.id = flight.id');
           queryResults.on('row', function(row){
             results.push(row);
 					});//end queryResults.on 'row'
