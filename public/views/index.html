@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <title>KMOJ Air Traffic Control</title>
   <link href="vendors/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/styles.min.css"/>
   <script src="vendors/angular.min.js"></script>
   <script src="vendors/angular-route.min.js"></script>
@@ -45,8 +44,8 @@
           <li ng-repeat="link in linkList"><a ng-href={{link.route}}>{{link.text}}</a></li>
         </ul>
         <ul ng-controller="authController" class="nav navbar-nav navbar-right">
-          <button ng-click="logIn()">Log In</button>
-          <button ng-click="logOut()">Log Out</button>
+          <button class="navLog" ng-click="logIn()">Log In</button>
+          <button class="navLog" ng-click="logOut()">Log Out</button>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

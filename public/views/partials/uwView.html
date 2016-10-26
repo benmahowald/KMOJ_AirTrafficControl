@@ -1,3 +1,18 @@
 <p>
-  Underwriter View
+  Traffic Entry View
 </p>
+
+<p>How many weeks in the rotation? <input type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks)" value="1"></p>
+<table ng-repeat="week in weeks">
+  <th>
+    <td ng-repeat="day in days">{{day}}</td>
+    <td>| Totals |</td>
+  </th>
+  <tr ng-repeat="hour in hours">
+    <td>{{hour.text}}</td>
+    <td ng-repeat="day in days">
+      <input type="number" ng-model="week[hour.name][day]" value="">
+    </td>
+  </tr>
+</table>
+<button type="button" ng-click="showObject()">Show Object</button>
