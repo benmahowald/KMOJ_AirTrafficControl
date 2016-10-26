@@ -4,7 +4,6 @@ html, body {
   font-family: arial, sans-serif;
 }
 input {
-  display: block;
   width: 200px;
 }
 .form {

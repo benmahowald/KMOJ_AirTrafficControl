@@ -85,6 +85,8 @@
   <label for="ATA-FA">PSA</label>
   <input type="radio" name="ATA-PSA" value="PSA" ng-model="psa">
   <textarea  rows="5" cols="100" placeholder="Special Instructions." ng-model="instructions"></textarea>
-  <button type="button" name="flightInfoSubmit" ng-click="submitMaster()">Submit</button>
+  <input type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
+  <input type="text" name="agency_commission" ng-model="agency_comission" value="" placeholder=".15">
+  <button type="button" name="submitMaster" ng-click="submitMaster()">Submit</button>
 </form>
 </div>
