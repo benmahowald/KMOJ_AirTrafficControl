@@ -36,8 +36,8 @@ router.post ('/master', function (req, res){
 		} else {
 			var queryResults = client.query ('INSERT INTO master (users_id, client_id, sign_date, event_name, spot_number, total_cost) ' +
 																				('interviews, socialmedia, instructions, man_app, uw_app, pr_app, tr_app, spot_type, ' +
-																				('spot_length, spot_rate, total_spots, flight_id, prod_id, copy_id ' +
-																				('VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)' ,
+																				('spot_length, spot_rate, total_spots, flight_id, prod_id, copy_id, discounts, commission ' +
+																				('VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)' ,
 																			  [master]))));
 		}
 		queryResults.on('end', function(){
@@ -46,5 +46,31 @@ router.post ('/master', function (req, res){
 		});//end queryResults
 	});//end pg.connect
 });//end router.post for master table
+
+//get underwriter info from db for underwriter
+router.get('/underwriterinfo', function (req, res){
+	console.log('in get underwriter info');
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in underwriterinfo');
+		} else {
+			var results = [];
+			var queryResults = client.query('SELECT flight.start_date, flight.end_date, slots.slot, slots.day_of_run, slots.plays, master.discounts') +
+			 															 ('master.commission, master.spot_length, master.spot_type, master.copy_id, master.total_spots, master.spot_rate') +
+																		 ('master.total_cost, clients.name, users.name FROM flight INNER JOIN slots ON slots.id = flight.id') +
+																		 ('INNER JOIN master ON master.id = flight.id INNER JOIN clients ON clients.client_id = flight.id INNER JOIN users ON users.id = flight.id;');
+					queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						return res.json(results);
+						console.log('results are', results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for underwriter info
+});//end router.get for underwriter info
+
+
 
 module.exports = router;

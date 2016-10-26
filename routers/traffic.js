@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
+var pg = require('pg');
+var bodyParser = require('body-parser');
+var connectionString = 'postgres://localhost:5432/kmoj';
 
 // console.log('in traffic router');
 //router.post slots
@@ -84,6 +88,8 @@ router.get('/clientinfo', function (req, res){
 		}
 	});//end pg.connect for traffic info
 });//end router.get for traffic info
+
+//get slots info
 router.get('/getslots', function (req, res){
 	console.log('in get slots');
 	pg.connect(connectionString, function(err, client, done){
@@ -103,6 +109,8 @@ router.get('/getslots', function (req, res){
 		}
 	}); //end pg.connect for getslots
 });//end router.getslots
+
+//get the flight info
 
 router.get('/getflight', function (req, res){
 	console.log('in get flight');

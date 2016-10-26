@@ -18,8 +18,8 @@ firebase.initializeApp({
 app.use(bodyParser.json());
 
 
-var underwrite = require ('../routers/underwrite');
-app.use('/underwrite', underwrite);
+var underwriter = require ('../routers/underwriter');
+app.use('/underwriter', underwriter);
 // require and use auth router
 var auth = require('../routers/auth');
 app.use('/auth', auth);
@@ -28,13 +28,14 @@ app.use('/auth', auth);
 var admin = require ('../routers/admin');
 app.use('/admin', admin);
 
-
-
 var traffic = require ('../routers/traffic');
 app.use('/traffic', traffic);
 
 var production = require ('../routers/production');
 app.use('/production', production);
+
+var reports = require ('../routers/reports');
+app.use('/reports', reports);
 
 //port 5000 being used
 var portDecision = process.env.PORT || 5000;
