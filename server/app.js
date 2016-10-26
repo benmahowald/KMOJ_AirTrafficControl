@@ -18,8 +18,8 @@ firebase.initializeApp({
 app.use(bodyParser.json());
 
 
-var underwrite = require ('../routers/underwrite');
-app.use('/underwrite', underwrite);
+var underwriter = require ('../routers/underwriter');
+app.use('/underwriter', underwriter);
 // require and use auth router
 var auth = require('../routers/auth');
 app.use('/auth', auth);
