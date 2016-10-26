@@ -1,11 +1,10 @@
 <h3>Run Sheet Entry</h3>
 <div class="form">
-<form name="client">
+<form name="master">
   <h3>Event Info</h3>
   <input type="text" name="event" ng-model="event" value="" placeholder="Event">
   <input type="text" name="client" ng-model="client" value="" placeholder="Client">
   <input type="text" name="contact" ng-model="clientContact" value="" placeholder="Contact's Name">
-  <button type="button" name="clientSubmit" ng-click="submitEventInfo()">Submit</button>
 </form>
 <form name="contactInfo">
   <h3>Contact</h3>
@@ -14,7 +13,6 @@
   <input type="text" name="fax" ng-model="fax" value="" placeholder="Fax">
   <input type="email" name="email" ng-model="email" value="" placeholder="Email">
   <input type="url" name="website" ng-model="website" value="" placeholder="Website">
-  <button type="button" name="contactInfoSubmit" ng-click="submitContactInfo()">Submit</button>
 </form>
 <form name="address">
   <h3>Address</h3>
@@ -75,7 +73,6 @@
     <option value="WY">Wyoming</option>
   </select>
   <input type="text" name="zip" ng-model="zip" value="" placeholder="ZIP">
-  <button type="button" name="addressSubmit" ng-click="submitAddressInfo()">Submit</button>
 </form>
 <form name="flightInfo">
   <h3>Flight Info</h3>
@@ -88,6 +85,8 @@
   <label for="ATA-FA">PSA</label>
   <input type="radio" name="ATA-PSA" value="PSA" ng-model="psa">
   <textarea  rows="5" cols="100" placeholder="Special Instructions." ng-model="instructions"></textarea>
-  <button type="button" name="flightInfoSubmit" ng-click="submitFlightInfo()">Submit</button>
+  <input type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
+  <input type="text" name="agency_commission" ng-model="agency_comission" value="" placeholder=".15">
+  <button type="button" name="submitMaster" ng-click="submitMaster()">Submit</button>
 </form>
 </div>
