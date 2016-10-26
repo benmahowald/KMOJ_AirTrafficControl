@@ -99,3 +99,5 @@ ADD FOREIGN KEY (contract_id) REFERENCES master;
 
 ALTER TABLE slots
 ADD FOREIGN KEY (flight_id) REFERENCES flight;
+
+ALTER TABLE production ADD COLUMN producer VARCHAR (50);
