@@ -6,7 +6,7 @@ app.controller('uwController', ['$scope', function($scope){
     var objectToSend = {
       event: $scope.event,
       client: $scope.client,
-      clientContact: $scope.clientContact,
+      client_contact: $scope.clientContact,
       phone: $scope.phone,
       cell: $scope.cell,
       fax: $scope.fax,
@@ -15,12 +15,13 @@ app.controller('uwController', ['$scope', function($scope){
       street: $scope.street,
       city: $scope.city,
       zip: $scope.zip,
-      startDate: $scope.startDate,
-      endDate: $scope.endDate,
+      start_date: $scope.startDate,
+      end_date: $scope.endDate,
       fa: $scope.fa,
       psa: $scope.psa,
       instructions: $scope.instructions
     };
+    console.log('UW objectToSend:', objectToSend);
   }; // end submitRunSheetEntry
 
   $scope.submitEventInfo = function () {
