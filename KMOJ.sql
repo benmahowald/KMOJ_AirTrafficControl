@@ -1,8 +1,8 @@
 --Create master table:
 CREATE TABLE master(
 id SERIAL PRIMARY KEY,
-users_id VARCHAR (30),
-client_id VARCHAR (30),
+users_id INT,
+client_id INT,
 sign_date TIMESTAMP NOT NULL,
 event_name VARCHAR (100),
 spot_number INT,
@@ -18,9 +18,9 @@ spot_type VARCHAR (3),
 spot_length VARCHAR (5),
 spot_rate NUMERIC,
 total_spots INT,
-flight_id VARCHAR (30),
-prod_id VARCHAR (30),
-copy_id VARCHAR (30)
+flight_id INT,
+prod_id INT,
+copy_id INT
 );
 
 
@@ -39,7 +39,7 @@ cell VARCHAR (15),
 fax VARCHAR (15),
 email VARCHAR (50),
 webiste VARCHAR (100),
-users_id VARCHAR (50)
+users_id INT
 );
 
 --Create users table:
@@ -57,13 +57,13 @@ id SERIAL PRIMARY KEY,
 day_of_run INT,
 plays INT,
 slot VARCHAR (20),
-flight_id VARCHAR (300)
+flight_id INT
 );
 
 --CREATE table flight:
 CREATE TABLE flight (
 id SERIAL PRIMARY KEY,
-contract_id VARCHAR (300),
+contract_id INT,
 start_date DATE NOT NULL,
 end_date DATE NOT NULL,
 cart_number VARCHAR (15)
@@ -72,7 +72,7 @@ cart_number VARCHAR (15)
 --CREATE table production:
 CREATE TABLE production (
 id SERIAL PRIMARY KEY,
-contract_id VARCHAR (300),
+contract_id INT,
 talent VARCHAR (100),
 who VARCHAR (200),
 what VARCHAR (500),
@@ -80,6 +80,7 @@ site VARCHAR (200),
 why VARCHAR (500),
 cart_number VARCHAR (15)
 );
+
 
 --ALTER tables to link id's with foreign keys:
 ALTER TABLE master
@@ -103,6 +104,7 @@ ADD FOREIGN KEY (flight_id) REFERENCES flight;
 
 ALTER TABLE production ADD COLUMN producer VARCHAR (50);
 
+<<<<<<< HEAD
 ALTER TABLE master ADD COLUMN discounts DECIMAL;
 
 ALTER TABLE master ADD COLUMN commission INTEGER;
@@ -110,3 +112,12 @@ ALTER TABLE master ADD COLUMN commission INTEGER;
 ALTER TABLE master DROP COLUMN commission;
 
 ALTER TABLE master ADD COLUMN commission DECIMAL;
+=======
+ALTER TABLE production ADD COLUMN complete_date DATE;
+
+ALTER TABLE master ALTER COLUMN sign_date SET DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE flight ALTER COLUMN start_date SET DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE flight ALTER COLUMN end_date SET DEFAULT CURRENT_TIMESTAMP;
+>>>>>>> tablequeries
