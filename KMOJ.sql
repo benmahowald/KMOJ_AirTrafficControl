@@ -100,4 +100,13 @@ ADD FOREIGN KEY (contract_id) REFERENCES master;
 ALTER TABLE slots
 ADD FOREIGN KEY (flight_id) REFERENCES flight;
 
+
 ALTER TABLE production ADD COLUMN producer VARCHAR (50);
+
+ALTER TABLE master ADD COLUMN discounts DECIMAL;
+
+ALTER TABLE master ADD COLUMN commission INTEGER;
+
+ALTER TABLE master DROP COLUMN commission;
+
+ALTER TABLE master ADD COLUMN commission DECIMAL;
