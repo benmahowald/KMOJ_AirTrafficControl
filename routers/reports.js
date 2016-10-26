@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
+var pg = require('pg');
+var bodyParser = require('body-parser');
+var connectionString = 'postgres://localhost:5432/kmoj';
 
 //generate a report from by getting info from db
 router.get('/reports', function (req, res){
