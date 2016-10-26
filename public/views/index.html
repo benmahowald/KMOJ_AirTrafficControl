@@ -35,7 +35,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">KMOJ</a>
+        <a class="navbar-brand" style="top:-10px" href="#"><img src="assets/kmoj.png" style="width:40px;" alt="logo"></a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,14 +44,12 @@
           <li ng-repeat="link in linkList"><a ng-href={{link.route}}>{{link.text}}</a></li>
         </ul>
         <ul ng-controller="authController" class="nav navbar-nav navbar-right">
-          <button class="navLog" ng-click="logIn()">Log In</button>
-          <button class="navLog" ng-click="logOut()">Log Out</button>
+          <button ng-click="logIn()" ng-hide="loggedIn">Log In</button>
+          <button ng-click="logOut()"ng-show="loggedIn">Log Out</button>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <img src="assets/logo.png" style="width:150px;" alt="logo"><br>
-
   <div>
     {{signedIn}}
   </div>
