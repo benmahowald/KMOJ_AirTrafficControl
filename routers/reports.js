@@ -26,3 +26,5 @@ router.get('/reports', function (req, res){
 		}
 	});//end pg.connect for getting reports
 });//end router.get for getting reports
+
+module.exports = router;
