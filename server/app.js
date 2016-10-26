@@ -28,13 +28,14 @@ app.use('/auth', auth);
 var admin = require ('../routers/admin');
 app.use('/admin', admin);
 
-
-
 var traffic = require ('../routers/traffic');
 app.use('/traffic', traffic);
 
 var production = require ('../routers/production');
 app.use('/production', production);
+
+var reports = require ('../routers/reports');
+app.use('/reports', reports);
 
 //port 5000 being used
 var portDecision = process.env.PORT || 5000;
