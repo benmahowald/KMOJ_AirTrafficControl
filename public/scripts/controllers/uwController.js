@@ -1,7 +1,7 @@
 app.controller('uwController', ['$scope', function($scope){
   console.log('Underwriter Controller');
 
-  $scope.submitRunSheetEntry = function (){
+  $scope.submitMaster = function (){
     console.log('in submitRunSheetEntry');
     var objectToSend = {
       event: $scope.event,
