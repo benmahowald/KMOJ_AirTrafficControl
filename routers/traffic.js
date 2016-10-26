@@ -88,6 +88,8 @@ router.get('/clientinfo', function (req, res){
 		}
 	});//end pg.connect for traffic info
 });//end router.get for traffic info
+
+//get slots info
 router.get('/getslots', function (req, res){
 	console.log('in get slots');
 	pg.connect(connectionString, function(err, client, done){
@@ -107,6 +109,8 @@ router.get('/getslots', function (req, res){
 		}
 	}); //end pg.connect for getslots
 });//end router.getslots
+
+//get the flight info
 
 router.get('/getflight', function (req, res){
 	console.log('in get flight');
