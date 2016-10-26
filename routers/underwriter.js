@@ -36,8 +36,8 @@ router.post ('/master', function (req, res){
 		} else {
 			var queryResults = client.query ('INSERT INTO master (users_id, client_id, sign_date, event_name, spot_number, total_cost) ' +
 																				('interviews, socialmedia, instructions, man_app, uw_app, pr_app, tr_app, spot_type, ' +
-																				('spot_length, spot_rate, total_spots, flight_id, prod_id, copy_id ' +
-																				('VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)' ,
+																				('spot_length, spot_rate, total_spots, flight_id, prod_id, copy_id, discounts, commission ' +
+																				('VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22)' ,
 																			  [master]))));
 		}
 		queryResults.on('end', function(){
