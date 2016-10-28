@@ -57,7 +57,7 @@ app.controller('mainController', function($scope, $http) {
 });
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
-  console.log('$routeProvider:',$routeProvider);
+  // console.log('$routeProvider:',$routeProvider);
 
   $routeProvider.
   when('/dashboard', {

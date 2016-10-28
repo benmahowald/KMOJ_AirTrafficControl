@@ -1,4 +1,4 @@
-app.controller('prodController', ['$scope', function($scope){
+app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
   // get call to retrieve some info from master doc
@@ -15,11 +15,12 @@ app.controller('prodController', ['$scope', function($scope){
     complete_date: new Date()
   }; // end prodToSend
 
-  console.log('prodToSend', prodToSend);
-
 // send data onto server through post route
+$scope.sendProduction = function () {
+  console.log('prodToSend', prodToSend);
   $http({
     method: 'POST',
+    //////////////needs url route ////////////////
     url: '/',
     data: prodToSend,
   }).then(function (response){
@@ -27,5 +28,6 @@ app.controller('prodController', ['$scope', function($scope){
       }, function (error) {
         console.log('error in prodCtrl post route:', error);
       }); // end then function
+}; // end sendProduction
 
 }]);
