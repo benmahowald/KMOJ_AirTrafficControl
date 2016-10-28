@@ -77,17 +77,16 @@
 <form name="flightInfo">
   <h3>Flight Info</h3>
   <label for="startDate">Start Date</label>
-  <input type="date" name="startDate" ng-model="startDate">
-  <label for="endDate">End Date</label>
-  <input type="date" name="endDate" ng-model="endDate">
-  <label for="ATA-FA">FA</label>
-  <input type="radio" name="ATA-FA" value="FA" ng-model="fa">
-  <label for="ATA-FA">PSA</label>
-  <input type="radio" name="ATA-PSA" value="PSA" ng-model="psa">
+  <input type="date" name="startDate" ng-model="startDate"><br>
+  <label for="endDate">End Date</label><br>
+  <input type="date" name="endDate" ng-model="endDate"><br>
+  <label for="FA">FA</label>
+  <input type="checkbox" name="FA" value="FA" ng-model="fa">
+  <label for="PSA">PSA</label>
+  <input type="checkbox" name="PSA" value="PSA" ng-model="psa">
   <textarea  rows="5" cols="100" placeholder="Special Instructions." ng-model="instructions"></textarea>
   <input type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
   <input type="text" name="agency_commission" ng-model="agency_comission" value="" placeholder=".15">
-  <button type="button" name="submitMaster" ng-click="submitMaster()">Submit</button>
 </form>
 </div>
 <p>How many weeks in the rotation? <input type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks)" value="1"></p>
@@ -103,4 +102,5 @@
     </td>
   </tr>
 </table>
-<button type="button" ng-click="showObject()">Show Object</button>
+<input type="button" value="Show Object" ng-click="showObject()"><br>
+<input type="button" value="Complete Form" ng-click="submitMaster()">
