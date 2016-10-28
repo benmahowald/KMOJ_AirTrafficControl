@@ -40,6 +40,10 @@ app.controller('uwController', ['$scope', function($scope){
     }
   };
 
+  $scope.updateTotal = function(){
+    
+  };
+
   $scope.submitRunSheetEntry = function (){
     console.log('in submitRunSheetEntry');
     var objectToSend = {
