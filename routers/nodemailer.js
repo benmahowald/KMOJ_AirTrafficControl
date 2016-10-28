@@ -5,12 +5,14 @@ var pg = require ('pg');
 var router = express.Router();
 
 //using superadmin gmail account with following credentials:
-//username: kmojatc  password: 
+//username: kmojatc  password: manager@kmoj
+//This is being used as a dummy account for presentation purposes
+//Future developer will need to use auth. service to encrypt this info.
 var transporter = nodemailer.createTransport({
 	service: 'Gmail',
 	auth: {
 		user: 'kmojatc@gmail.com',
-		pass: ''
+		pass: 'manager@kmoj'
 	}
 });
 
