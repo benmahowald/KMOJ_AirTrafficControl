@@ -89,7 +89,7 @@
   <input type="text" name="agency_commission" ng-model="agency_comission" value="" placeholder=".15">
 </form>
 </div>
-<p>How many weeks in the rotation? <input type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks)" value="1"></p>
+<p>How many weeks in the rotation? <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks)" value="1"></p>
 <table ng-repeat="week in weeks">
   <th>
     <td ng-repeat="day in days">{{day}}</td>

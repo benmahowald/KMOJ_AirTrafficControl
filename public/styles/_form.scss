@@ -14,7 +14,7 @@ input, select, textarea {
   padding: 0 0 0 6px;
 }
 
-input[type=checkbox] {
+input[type=checkbox], input[type=radio] {
   display: inline;
   width: 25px;
   text-align: left;

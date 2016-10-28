@@ -12,11 +12,14 @@ html, body, td, table {
   text-align: center;
   font-family: 'Quicksand', sans-serif;
   font-weight: lighter;
-
 }
 
 body {
   background-color: #dcb500;
+}
+
+li {
+  color: #fff;
 }
 
 h1, h2, h3, h4 {
@@ -43,4 +46,15 @@ input[type=number]::-webkit-outer-spin-button {
   width: 60px;
   text-align: center;
   margin: 0;
+}
+.navbar-default .navbar-nav>li>a {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav>li:hover {
+  background-color: #3f3f3f;
 }
