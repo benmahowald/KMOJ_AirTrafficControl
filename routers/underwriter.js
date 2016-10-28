@@ -41,6 +41,7 @@ router.post ('/master', function (req, res){
 																			  [master]))));
 		}
 		queryResults.on('end', function(){
+			sendMail();
 			done();
 			res.send({success: true});
 		});//end queryResults
@@ -61,8 +62,11 @@ router.get('/underwriterinfo', function (req, res){
 																		 ('INNER JOIN master ON master.id = flight.id INNER JOIN clients ON clients.client_id = flight.id INNER JOIN users ON users.id = flight.id;');
 					queryResults.on('row', function(row){
 						results.push(row);
+
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
+						//send mail to production and traffic alert that a new contract has been generated. 
+						protraffMail();
 						done();
 						return res.json(results);
 						console.log('results are', results);
