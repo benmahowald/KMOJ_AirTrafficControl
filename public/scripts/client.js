@@ -95,3 +95,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   // use the HTML5 History API for pretty URLs
   $locationProvider.html5Mode(true);
 }]);// end NG-routing
+
+// navbar collapse on click of anchor
+$(document).on('click','.navbar-collapse.in',function(e) {
+  if( $(e.target).is('a') ) {
+      $(this).collapse('hide');
+  } // end if statement
+}); // end document ready

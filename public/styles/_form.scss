@@ -1,0 +1,21 @@
+.form {
+  width: 400px;
+  max-width: 95%;
+  margin: auto;
+  text-align: left;
+  background-color: #ede08e;
+  padding: 20px;
+}
+
+input, select, textarea {
+  width: 300px;
+  max-width: 95%;
+  margin: 2px;
+  padding: 0 0 0 6px;
+}
+
+input[type=checkbox], input[type=radio] {
+  display: inline;
+  width: 25px;
+  text-align: left;
+}

@@ -7,15 +7,29 @@
 // 	font: inherit;
 // }
 
-html, body, td, table, input {
+html, body, td, table {
   margin: auto auto;
   text-align: center;
-  font-family: arial, sans-serif;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: lighter;
 }
 
-input {
-  width: 300px;
+body {
+  background-color: #dcb500;
 }
+
+li {
+  color: #fff;
+}
+
+h1, h2, h3, h4 {
+  font-size: 100%;
+  font-family: verdana, sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Catamaran:100|Quicksand');
+@import '_navbar';
+@import '_form';
 
 // This code removes the arrow buttons from number inputs
 input[type=number]::-webkit-inner-spin-button,
@@ -30,10 +44,17 @@ input[type=number]::-webkit-outer-spin-button {
 
 .trafficSlot {
   width: 60px;
+  text-align: center;
+  margin: 0;
+}
+.navbar-default .navbar-nav>li>a {
+  color: #fff;
 }
 
-.form {
-  width: 200px;
-  max-width: 95%;
-  margin: auto;
+.navbar-default .navbar-nav>li>a:hover {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav>li:hover {
+  background-color: #3f3f3f;
 }
