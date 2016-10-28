@@ -4,6 +4,7 @@ app.controller('uwController', ['$scope', function($scope){
   // Initialize variables
   // weeks will hold the actual scheduling information
   $scope.weeks = {week1:{}};
+  $scope.totals = {};
   $scope.currentNumWeeks = 1;
   // This object is used as a scaffold help build the grid
   $scope.hours = {
@@ -40,7 +41,7 @@ app.controller('uwController', ['$scope', function($scope){
     }
   };
 
-  $scope.updateTotal = function(){
+  $scope.updateTotal = function(thisHour){
     
   };
 

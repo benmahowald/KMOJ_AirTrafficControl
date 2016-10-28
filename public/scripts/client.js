@@ -46,13 +46,13 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
 
 app.controller('mainController', function($scope, $http) {
   $scope.linkList =[
-    {route:'admin',text:'Admin'},
-    {route:'dashboard',text:'Dashboard'},
-    {route:'production',text:'Production'},
-    {route:'report',text:'Report'},
-    {route:'search',text:'Search'},
-    {route:'traffic',text:'Traffic'},
-    {route:'underwriter',text:'Underwriter'}
+    {route:'admin',text:'Admin', permission:''},
+    {route:'dashboard',text:'Dashboard', permission:''},
+    {route:'production',text:'Production', permission:''},
+    {route:'report',text:'Report', permission:''},
+    {route:'search',text:'Search', permission:''},
+    {route:'traffic',text:'Traffic', permission:''},
+    {route:'underwriter',text:'Underwriter', permission:''}
   ];
 });
 
