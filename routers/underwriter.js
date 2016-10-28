@@ -68,8 +68,8 @@ router.get('/underwriterinfo', function (req, res){
 						//send mail to production and traffic alert that a new contract has been generated. 
 						protraffMail();
 						done();
+							console.log('results are', results);
 						return res.json(results);
-						console.log('results are', results);
 					});//end queryResults on 'end'
 		}
 	});//end pg.connect for underwriter info
