@@ -1,0 +1,33 @@
+.navbar-default {
+    background-color: #262626;
+    border: none;
+    border-radius: 0;
+    color: #fff;
+}
+.navbar-toggle {
+  border: none;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #dcb500;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border: none;
+}
+
+.logo {
+  padding-top: 8px;
+}
+
+.logoImg {
+  width: 115px;
+}
+
+.logInOut {
+  margin-top: 11px;
+  background-color: transparent;
+}
