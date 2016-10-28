@@ -19,6 +19,7 @@ router.get('/reports', function (req, res){
             results.push(row);
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
+						invoiceMail();
 						done();
 						return res.json(results);
 						console.log('results are', results);
