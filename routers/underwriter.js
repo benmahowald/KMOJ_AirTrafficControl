@@ -64,8 +64,8 @@ router.get('/underwriterinfo', function (req, res){
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
 						done();
+							console.log('results are', results);
 						return res.json(results);
-						console.log('results are', results);
 					});//end queryResults on 'end'
 		}
 	});//end pg.connect for underwriter info
