@@ -41,7 +41,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li ng-style="color:#fff;" ng-repeat="link in linkList"><a ng-href={{link.route}}>{{link.text}}</a></li>
+          <li ng-repeat="link in linkList"><a ng-href={{link.route}}>{{link.text}}</a></li>
         </ul>
         <ul ng-controller="authController" class="nav navbar-nav navbar-right">
           <button class="logInOut" ng-click="logIn()" ng-hide="loggedIn">Log In</button>
