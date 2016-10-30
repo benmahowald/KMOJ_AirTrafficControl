@@ -50,7 +50,6 @@ app.controller('mainController', function($scope, $http) {
     {route:'dashboard',text:'Dashboard', permission:''},
     {route:'production',text:'Production', permission:''},
     {route:'report',text:'Report', permission:''},
-    {route:'search',text:'Search', permission:''},
     {route:'traffic',text:'Traffic', permission:''},
     {route:'underwriter',text:'Underwriter', permission:''}
   ];

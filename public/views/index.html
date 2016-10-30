@@ -42,6 +42,8 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li ng-repeat="link in linkList" ng-if="user.permission === link.permission"><a ng-href={{link.route}}>{{link.text}}</a></li>
+          <!-- The search is separated from the list because everyone should see it regardless of permission -->
+          <li><a href="search">Search</a></li>
         </ul>
         <ul ng-controller="authController" class="nav navbar-nav navbar-right">
           <button class="logInOut" ng-click="logIn()" ng-hide="loggedIn">Log In</button>
