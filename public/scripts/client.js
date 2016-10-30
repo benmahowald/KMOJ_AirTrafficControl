@@ -10,7 +10,6 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
       auth.$signInWithEmailAndPassword($scope.userEmail, $scope.userPassword).then(function(firebaseUser) {
         console.log("Authentication Success!");
         $scope.loggedIn = true;
-        clearInputs();
       }).catch(function(error) {
         console.log("Authentication failed: ", error);
       });//end catch error
