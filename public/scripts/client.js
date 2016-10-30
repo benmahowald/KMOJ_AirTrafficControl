@@ -46,47 +46,6 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
     };//end logOut
   });//end authController
 
-  // //Login
-  // $scope.logIn = function login(){
-  //   auth.$signInWithPopup('google').then(function(firebaseUser) {
-  //     console.log('Signed in as:', firebaseUser.user.displayName);
-  //     $scope.loggedIn = true;
-  //   }).catch(function(error) {
-  //     console.log('Authentication failed:', error);
-  //   });//end error
-  // };//end logIn
-  //
-  // //runs whenever the user changes authentication states
-  // auth.$onAuthStateChanged(function(firebaseUser){
-  //   // firebaseUser will be null if not logged in
-  //   if(firebaseUser) {
-  //     firebaseUser.getToken().then(function(idToken){
-  //       $http({
-  //         method: 'GET',
-  //         url: '/auth/adminLogin',
-  //         headers: {
-  //           id_token: idToken
-  //         }
-  //       }).then(function(response){
-  //         $scope.signedIn = response.data;
-  //       });//end response
-  //     });//end getToken
-  //   }//end if
-  //   else {
-  //     console.log('Not logged in.');
-  //     $scope.signedIn = 'Please Login';
-  //   }//end else
-  // });//end onAuthStateChanged
-  //
-  // //Logout
-  // $scope.logOut = function(){
-  //   auth.$signOut().then(function(){
-  //     console.log('Logged out');
-  //     $scope.loggedIn = false;
-  //   });//end response
-  // };//end logOut
-// });//end authController
-
 app.controller('mainController', function($scope, $http) {
   $scope.linkList =[
     {route:'admin',text:'Admin'},
