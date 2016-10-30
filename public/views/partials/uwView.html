@@ -1,106 +1,108 @@
-<h3>Run Sheet Entry</h3>
 <div class="form">
-<form name="master">
-  <h3>Event Info</h3>
-  <input type="text" name="event" ng-model="event" value="" placeholder="Event">
-  <input type="text" name="client" ng-model="client" value="" placeholder="Client">
-  <input type="text" name="contact" ng-model="clientContact" value="" placeholder="Contact's Name">
-</form>
-<form name="contactInfo">
-  <h3>Contact</h3>
-  <input type="text" name="phone" ng-model="phone" value="" placeholder="Phone">
-  <input type="text" name="cell" ng-model="cell" value="" placeholder="Cell">
-  <input type="text" name="fax" ng-model="fax" value="" placeholder="Fax">
-  <input type="email" name="email" ng-model="email" value="" placeholder="Email">
-  <input type="url" name="website" ng-model="website" value="" placeholder="Website">
-</form>
-<form name="address">
-  <h3>Address</h3>
-  <input type="text" name="street" ng-model="street" value="" placeholder="Street">
-  <input type="text" name="city" ng-model="city" value="" placeholder="City">
-  <select>
-    <option value="" selected>-State-</option>
-    <option value="AL">Alabama</option>
-    <option value="AK">Alaska</option>
-    <option value="AZ">Arizona</option>
-    <option value="AR">Arkansas</option>
-    <option value="CA">California</option>
-    <option value="CO">Colorado</option>
-    <option value="CT">Connecticut</option>
-    <option value="DE">Delaware</option>
-    <option value="DC">District Of Columbia</option>
-    <option value="FL">Florida</option>
-    <option value="GA">Georgia</option>
-    <option value="HI">Hawaii</option>
-    <option value="ID">Idaho</option>
-    <option value="IL">Illinois</option>
-    <option value="IN">Indiana</option>
-    <option value="IA">Iowa</option>
-    <option value="KS">Kansas</option>
-    <option value="KY">Kentucky</option>
-    <option value="LA">Louisiana</option>
-    <option value="ME">Maine</option>
-    <option value="MD">Maryland</option>
-    <option value="MA">Massachusetts</option>
-    <option value="MI">Michigan</option>
-    <option value="MN">Minnesota</option>
-    <option value="MS">Mississippi</option>
-    <option value="MO">Missouri</option>
-    <option value="MT">Montana</option>
-    <option value="NE">Nebraska</option>
-    <option value="NV">Nevada</option>
-    <option value="NH">New Hampshire</option>
-    <option value="NJ">New Jersey</option>
-    <option value="NM">New Mexico</option>
-    <option value="NY">New York</option>
-    <option value="NC">North Carolina</option>
-    <option value="ND">North Dakota</option>
-    <option value="OH">Ohio</option>
-    <option value="OK">Oklahoma</option>
-    <option value="OR">Oregon</option>
-    <option value="PA">Pennsylvania</option>
-    <option value="RI">Rhode Island</option>
-    <option value="SC">South Carolina</option>
-    <option value="SD">South Dakota</option>
-    <option value="TN">Tennessee</option>
-    <option value="TX">Texas</option>
-    <option value="UT">Utah</option>
-    <option value="VT">Vermont</option>
-    <option value="VA">Virginia</option>
-    <option value="WA">Washington</option>
-    <option value="WV">West Virginia</option>
-    <option value="WI">Wisconsin</option>
-    <option value="WY">Wyoming</option>
-  </select>
-  <input type="text" name="zip" ng-model="zip" value="" placeholder="ZIP">
-</form>
-<form name="flightInfo">
-  <h3>Flight Info</h3>
-  <label for="startDate">Start Date</label>
-  <input type="date" name="startDate" ng-model="startDate">
-  <label for="endDate">End Date</label>
-  <input type="date" name="endDate" ng-model="endDate">
-  <label for="ATA-FA">FA</label>
-  <input type="radio" name="ATA-FA" value="FA" ng-model="fa">
-  <label for="ATA-FA">PSA</label>
-  <input type="radio" name="ATA-PSA" value="PSA" ng-model="psa">
-  <textarea  rows="5" cols="100" placeholder="Special Instructions." ng-model="instructions"></textarea>
-  <input type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
-  <input type="text" name="agency_commission" ng-model="agency_comission" value="" placeholder=".15">
-  <button type="button" name="submitMaster" ng-click="submitMaster()">Submit</button>
-</form>
+  <form name="master">
+    <h3>Event Info</h3>
+    <input type="text" name="event" ng-model="event" value="" placeholder="Event">
+    <input type="text" name="client" ng-model="client" value="" placeholder="Client">
+    <input type="text" name="contact" ng-model="clientContact" value="" placeholder="Contact's Name">
+  </form>
+  <form name="contactInfo">
+    <h3>Contact</h3>
+    <input type="text" name="phone" ng-model="phone" value="" placeholder="Phone">
+    <input type="text" name="cell" ng-model="cell" value="" placeholder="Cell">
+    <input type="text" name="fax" ng-model="fax" value="" placeholder="Fax">
+    <input type="email" name="email" ng-model="email" value="" placeholder="Email">
+    <input type="url" name="website" ng-model="website" value="" placeholder="Website">
+  </form>
+  <form name="address">
+    <h3>Address</h3>
+    <input type="text" name="street" ng-model="street" value="" placeholder="Street">
+    <input type="text" name="city" ng-model="city" value="" placeholder="City">
+    <select>
+      <option value="" selected>-State-</option>
+      <option value="AL">Alabama</option>
+      <option value="AK">Alaska</option>
+      <option value="AZ">Arizona</option>
+      <option value="AR">Arkansas</option>
+      <option value="CA">California</option>
+      <option value="CO">Colorado</option>
+      <option value="CT">Connecticut</option>
+      <option value="DE">Delaware</option>
+      <option value="DC">District Of Columbia</option>
+      <option value="FL">Florida</option>
+      <option value="GA">Georgia</option>
+      <option value="HI">Hawaii</option>
+      <option value="ID">Idaho</option>
+      <option value="IL">Illinois</option>
+      <option value="IN">Indiana</option>
+      <option value="IA">Iowa</option>
+      <option value="KS">Kansas</option>
+      <option value="KY">Kentucky</option>
+      <option value="LA">Louisiana</option>
+      <option value="ME">Maine</option>
+      <option value="MD">Maryland</option>
+      <option value="MA">Massachusetts</option>
+      <option value="MI">Michigan</option>
+      <option value="MN">Minnesota</option>
+      <option value="MS">Mississippi</option>
+      <option value="MO">Missouri</option>
+      <option value="MT">Montana</option>
+      <option value="NE">Nebraska</option>
+      <option value="NV">Nevada</option>
+      <option value="NH">New Hampshire</option>
+      <option value="NJ">New Jersey</option>
+      <option value="NM">New Mexico</option>
+      <option value="NY">New York</option>
+      <option value="NC">North Carolina</option>
+      <option value="ND">North Dakota</option>
+      <option value="OH">Ohio</option>
+      <option value="OK">Oklahoma</option>
+      <option value="OR">Oregon</option>
+      <option value="PA">Pennsylvania</option>
+      <option value="RI">Rhode Island</option>
+      <option value="SC">South Carolina</option>
+      <option value="SD">South Dakota</option>
+      <option value="TN">Tennessee</option>
+      <option value="TX">Texas</option>
+      <option value="UT">Utah</option>
+      <option value="VT">Vermont</option>
+      <option value="VA">Virginia</option>
+      <option value="WA">Washington</option>
+      <option value="WV">West Virginia</option>
+      <option value="WI">Wisconsin</option>
+      <option value="WY">Wyoming</option>
+    </select>
+    <input type="text" name="zip" ng-model="zip" value="" placeholder="ZIP">
+  </form>
+  <form name="flightInfo">
+    <h3>Flight Info</h3>
+    <label for="startDate">Start Date</label>
+    <input type="date" name="startDate" ng-model="startDate"><br>
+    <label for="endDate">End Date</label><br>
+    <input type="date" name="endDate" ng-model="endDate"><br>
+    <label for="FA">FA</label>
+    <input type="checkbox" name="FA" value="FA" ng-model="fa">
+    <label for="PSA">PSA</label>
+    <input type="checkbox" name="PSA" value="PSA" ng-model="psa">
+    <textarea  rows="5" cols="100" placeholder="Special Instructions." ng-model="instructions"></textarea>
+    <input type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
+    <input type="text" name="agency_commission" ng-model="agency_comission" value="" placeholder=".15">
+  </form>
 </div>
-<p>How many weeks in the rotation? <input type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks)" value="1"></p>
-<table ng-repeat="week in weeks">
-  <th>
-    <td ng-repeat="day in days">{{day}}</td>
-    <td>| Totals |</td>
-  </th>
-  <tr ng-repeat="hour in hours">
-    <td>{{hour.text}}</td>
-    <td ng-repeat="day in days">
-      <input class="trafficSlot" type="number" ng-model="week[hour.name][day]" value="">
-    </td>
-  </tr>
-</table>
-<button type="button" ng-click="showObject()">Show Object</button>
+<div id="trafficGrid">
+  <h3>Run Sheet Entry</h3>
+  <p>How many weeks in the rotation? <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks)" placeholder="1"></p>
+  <table ng-repeat="week in weeks">
+    <th>
+      <td ng-repeat="day in days">{{day}}</td>
+      <td>---Totals---</td>
+    </th>
+    <tr ng-repeat="hour in hours">
+      <td>{{hour.text}}</td>
+      <td ng-repeat="day in days">
+        <input class="trafficSlot" type="number" ng-model="week[hour.name][day]" ng-change="updateTotal(hour.name)" value="">
+      </td>
+      <td></td>
+    </tr>
+  </table>
+  <button type="button" ng-click="showObject()">Show Object</button>
+</div>

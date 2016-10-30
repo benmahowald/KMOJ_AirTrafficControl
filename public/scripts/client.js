@@ -46,13 +46,12 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
 
 app.controller('mainController', function($scope, $http) {
   $scope.linkList =[
-    {route:'admin',text:'Admin'},
-    {route:'dashboard',text:'Dashboard'},
-    {route:'production',text:'Production'},
-    {route:'report',text:'Report'},
-    {route:'search',text:'Search'},
-    {route:'traffic',text:'Traffic'},
-    {route:'underwriter',text:'Underwriter'}
+    {route:'admin',text:'Admin', permission:''},
+    {route:'dashboard',text:'Dashboard', permission:''},
+    {route:'production',text:'Production', permission:''},
+    {route:'report',text:'Report', permission:''},
+    {route:'traffic',text:'Traffic', permission:''},
+    {route:'underwriter',text:'Underwriter', permission:''}
   ];
 });
 
@@ -95,3 +94,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   // use the HTML5 History API for pretty URLs
   $locationProvider.html5Mode(true);
 }]);// end NG-routing
+
+// navbar collapse on click of anchor
+$(document).on('click','.navbar-collapse.in',function(e) {
+  if( $(e.target).is('a') ) {
+      $(this).collapse('hide');
+  } // end if statement
+}); // end document ready
