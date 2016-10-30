@@ -44,8 +44,16 @@
           <li ng-repeat="link in linkList"><a ng-href={{link.route}}>{{link.text}}</a></li>
         </ul>
         <ul ng-controller="authController" class="nav navbar-nav navbar-right">
-          <button ng-click="logIn()" ng-hide="loggedIn">Log In</button>
-          <button ng-click="logOut()"ng-show="loggedIn">Log Out</button>
+
+          <div class="login">
+            <div ng-hide="loggedIn">
+              E-mail: <input type="email" class="loginInput" ng-model="userEmail"/>
+              Password: <input type="password" class="loginInput" ng-model="userPassword"/>
+              <button ng-click="logIn()" >Log In</button>
+            </div>
+            <button ng-click="logOut()" ng-show="loggedIn">Log Out</button>
+          </div>
+
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

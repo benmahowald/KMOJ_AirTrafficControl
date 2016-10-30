@@ -17,6 +17,14 @@ input {
   width: 300px;
 }
 
+.login {
+  margin-top: 15px;
+}
+
+.loginInput {
+  width:130px;
+}
+
 // This code removes the arrow buttons from number inputs
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
