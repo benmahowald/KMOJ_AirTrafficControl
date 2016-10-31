@@ -3,7 +3,7 @@
 <div class="form">
   <form name="client">
     <input type="text" name="client" ng-model="clientz" value="" placeholder="Client Name">
-    <input type="text" name="contact" ng-model="client_contact" value="" placeholder="Contact's Name">
+    <input type="text" name="contact" ng-model="contact" value="" placeholder="Contact's Name">
     <input type="text" name="phone" ng-model="phone" value="" placeholder="Phone">
     <input type="text" name="cell" ng-model="cell" value="" placeholder="Cell">
     <input type="text" name="fax" ng-model="fax" value="" placeholder="Fax">
@@ -70,12 +70,20 @@
   </form>
 </div>
 
+<h3>Choose a client to edit.</h3>
+<select name="clientSelect">
+  <option ng-repeat="client in clientNames" value={{clientNames.id}}>{{clientNames.name}}</option>
+</select>
+
 <form class="form" editable-form name="editableForm" onaftersave="updateClient()">
-  <span class="manageEl">Name: <span editable-text="clientData.bus_name" onbeforesave="updateClient({bus_name: $data})" blur="submit">{{ clientData.bus_name || "empty" }}</span></span><br>
-  <span class="manageEl">Contact: <span editable-text="clientData.contact_name" onbeforesave="updateClient({contact_name: $data})" blur="submit">{{ clientData.contact_name || "empty" }}</span></span><br>
-  <span class="manageEl">Phone: <span buttons="no" editable-text="clientData.bus_phone" onbeforesave="updateClient({bus_phone: $data})" blur="submit">{{ clientData.bus_phone || "empty" }}</span></span><br>
-  <span class="manageEl">Pick-up Time: <span buttons="no" editable-text="clientData.pickup_time" onbeforesave="updateClient({pickup_time: $data})" blur="submit">{{ clientData.pickup_time || "empty" }}</span></span><br>
-  <span class="manageEl">Street: <span buttons="no" editable-text="clientData.street" onbeforesave="updateClient({street: $data})" blur="submit">{{ clientData.street || "empty" }}</span></span><br>
+  <span class="manageEl">Client: <span editable-text="clientData.client_name" onbeforesave="updateClient({client_name: $data})" blur="submit">{{ clientData.client_name || "empty" }}</span></span><br>
+  <span class="manageEl">Contact Name: <span editable-text="clientData.contact" onbeforesave="updateClient({contact: $data})" blur="submit">{{ clientData.contact || "empty" }}</span></span><br>
+  <span class="manageEl">Phone: <span buttons="no" editable-text="clientData.phone" onbeforesave="updateClient({phone: $data})" blur="submit">{{ clientData.phone || "empty" }}</span></span><br>
+  <span class="manageEl">Cell: <span buttons="no" editable-text="clientData.cell" onbeforesave="updateClient({cell: $data})" blur="submit">{{ clientData.cell || "empty" }}</span></span><br>
+  <span class="manageEl">Fax <span buttons="no" editable-text="clientData.fax" onbeforesave="updateClient({fax: $data})" blur="submit">{{ clientData.fax || "empty" }}</span></span><br>
+  <span class="manageEl">Email <span buttons="no" editable-text="clientData.email" onbeforesave="updateClient({email: $data})" blur="submit">{{ clientData.email || "empty" }}</span></span><br>
+  <span class="manageEl">Website <span buttons="no" editable-text="clientData.webiste" onbeforesave="updateClient({webiste: $data})" blur="submit">{{ clientData.webiste || "empty" }}</span></span><br>
+  <span class="manageEl">Street: <span buttons="no" editable-text="clientData.address" onbeforesave="updateClient({address: $data})" blur="submit">{{ clientData.street || "empty" }}</span></span><br>
   <span class="manageEl">City: <span buttons="no" editable-text="clientData.city" onbeforesave="updateClient({city: $data})" blur="submit">{{ clientData.city || "empty" }}</span></span><br>
   <span class="manageEl">State:<span buttons="no" editable-text="clientData.state" onbeforesave="updateClient({state: $data})" blur="submit">{{ clientData.state || "empty" }}</span></span><br>
   <span class="manageEl">ZIP: <span buttons="no" editable-text="clientData.zip" onbeforesave="updateClient({zip: $data})" blur="submit">{{ clientData.zip || "empty" }}</span></span><br>
