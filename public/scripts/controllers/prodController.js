@@ -20,8 +20,7 @@ $scope.sendProduction = function () {
   console.log('prodToSend', prodToSend);
   $http({
     method: 'POST',
-    //////////////needs url route ////////////////
-    url: '/',
+    url: '/production',
     data: prodToSend,
   }).then(function (response){
         console.log('success in prodCtrl post route:', response);

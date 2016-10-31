@@ -37,8 +37,8 @@ app.use('/production', production);
 var reports = require ('../routers/reports');
 app.use('/reports', reports);
 
-// var nodemailer = require ('../routers/nodemailer');
-// app.use('/nodemailer', nodemailer);
+var nodemailer = require ('../routers/nodemailer');
+app.use('/nodemailer', nodemailer);
 
 //port 5000 being used
 var portDecision = process.env.PORT || 5000;
