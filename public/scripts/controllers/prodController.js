@@ -16,12 +16,12 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
   }; // end prodToSend
 
 // send data onto server through post route
-$scope.sendProduction = function () {
+$scope.sendProduction = function (prodtoSend) {
   console.log('prodToSend', prodToSend);
   $http({
     method: 'POST',
     url: '/production',
-    data: prodToSend,
+    data: prodToSend
   }).then(function (response){
         console.log('success in prodCtrl post route:', response);
       }, function (error) {
