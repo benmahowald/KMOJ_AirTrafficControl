@@ -2,47 +2,48 @@ var app = angular.module('App', ['ngRoute', 'firebase']);
 
 app.controller('authController', function($scope, $firebaseArray, $firebaseAuth, $http) {
   var auth = $firebaseAuth();
+  console.log('in authController');
 
-  //Login
-  $scope.logIn = function login(){
-    auth.$signInWithPopup('google').then(function(firebaseUser) {
-      console.log('Signed in as:', firebaseUser.user.displayName);
-      $scope.loggedIn = true;
-    }).catch(function(error) {
-      console.log('Authentication failed:', error);
-    });//end error
-  };//end logIn
+    //User login
+    $scope.logIn = function(){
+      console.log('in logIn()');
+      auth.$signInWithEmailAndPassword($scope.userEmail, $scope.userPassword).then(function(firebaseUser) {
+        console.log("Authentication Success!");
+        $scope.loggedIn = true;
+      }).catch(function(error) {
+        console.log("Authentication failed: ", error);
+      });//end catch error
+    };//end logIn()
 
-  //runs whenever the user changes authentication states
-  auth.$onAuthStateChanged(function(firebaseUser){
-    // firebaseUser will be null if not logged in
-    if(firebaseUser) {
-      firebaseUser.getToken().then(function(idToken){
-        $http({
-          method: 'GET',
-          url: '/auth/adminLogin',
-          headers: {
-            id_token: idToken
-          }
-        }).then(function(response){
-          $scope.signedIn = response.data;
-        });//end response
-      });//end getToken
-    }//end if
-    else {
-      console.log('Not logged in.');
-      $scope.signedIn = 'Please Login';
-    }//end else
-  });//end onAuthStateChanged
+    //Authentication state change
+    auth.$onAuthStateChanged(function(firebaseUser){
+      if(firebaseUser) {
+        firebaseUser.getToken().then(function(idToken){
+          $http({
+            method: 'GET',
+            url: '/auth/adminLogin',
+            headers: {
+              id_token: idToken
+            }//end header object
+          }).then(function(response){
+            $scope.signedIn = response.data;
+          });//end response
+        });//end return idToken
+      }//end if(firebaseUser)
+      else{
+        console.log('Not logged in.');
+        $scope.signedIn = "Please login"
+      }//end else
+    });//end onAuthStateChanged()
 
-  //Logout
-  $scope.logOut = function(){
-    auth.$signOut().then(function(){
-      console.log('Logged out');
-      $scope.loggedIn = false;
-    });//end response
-  };//end logOut
-});//end authController
+    //User logout
+    $scope.logOut = function(){
+      auth.$signOut().then(function(){
+        console.log('Logging the user out!');
+        $scope.loggedIn = false;
+      });//end signOut
+    };//end logOut
+  });//end authController
 
 app.controller('mainController', function($scope, $http) {
   $scope.linkList =[
