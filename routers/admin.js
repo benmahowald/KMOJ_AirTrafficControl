@@ -4,6 +4,7 @@ var firebase = require('firebase');
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
+<<<<<<< HEAD
 router.post("/createNewUser", function(req, res){
   firebase.auth().verifyIdToken(req.headers.id_token).then(function(decodedToken) {
     console.log(decodedToken);
