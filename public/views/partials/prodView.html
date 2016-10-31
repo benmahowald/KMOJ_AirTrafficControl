@@ -1,18 +1,18 @@
 <h3>Production</h3>
 <div class="form">
   <form class="production">
-    <input type="text" name="voice_talent" value="" placeholder="Voice Talent">
-    <input type="text" name="producer" value="" placeholder="Producer" ><br>
-    <input type="radio" name="spot_length" value=":15">15-sec
-    <input type="radio" name="spot_length" value=":30">30-sec
-    <input type="radio" name="spot_length" value=":60">60-sec
+    <input type="text" name="voice_talent" ng-model="talent" value="" placeholder="Voice Talent">
+    <input type="text" name="producer" value="" ng-model="producer" placeholder="Producer" ><br>
+    <input type="radio" name="spot_length" ng-model = "spot_length" value=":15">15-sec
+    <input type="radio" name="spot_length" ng-model = "spot_length" value=":30">30-sec
+    <input type="radio" name="spot_length" ng-model = "spot_length" value=":60">60-sec
   </form>
   <form class="production2">
-    <input type="text" name="cart_number" value="" placeholder="Cart #">
-    <input type="text" name="who" value="" placeholder="Who">
-    <input type="text" name="where" value="" placeholder="Where">
+    <input type="text" name="cart_number" ng-model="cart_number" value="" placeholder="Cart #">
+    <input type="text" name="who" value="" ng-model="who" placeholder="Who">
+    <input type="text" name="where" value="" ng-model="site" placeholder="Where">
     <input type="text" name="for_more_info" ng-model="why" value="" placeholder="For More Info">
-    <textarea name="what" rows="8" cols="30" placeholder="What"></textarea>
+    <textarea name="what" rows="8" cols="30" ng-model = "what" placeholder="What"></textarea>
     <input type="button" name="submitProd" value="Submit" ng-click="sendProduction()">
   </form>
 </div>
