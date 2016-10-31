@@ -12,8 +12,8 @@ router.post ('/production', function (req, res){
 		if (err){
 			console.log('connection error in client', client);
 		} else {
-			var queryResults = client.query ('INSERT INTO production (contract_id, talent, who, what, site, why, cart_number) '+
-																				'VALUES ($1, $2, $3, $4, $5, $6, $7)' ,
+			var queryResults = client.query ('INSERT INTO production (contract_id, talent, who, what, site, why, cart_number, producer, complete_date) '+
+																				'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)' ,
 																			[production]);
 		}
 		queryResults.on('end', function(){
