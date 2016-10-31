@@ -35,7 +35,15 @@ h1, h2, h3, h4 {
 @import '_form';
 
 .login {
-  margin-top: 15px;
+  margin-top: 12px;
+}
+
+.signin {
+  color: white;
+  display:inline;
+}
+.signin:hover {
+  color: white;
 }
 
 .userInput {

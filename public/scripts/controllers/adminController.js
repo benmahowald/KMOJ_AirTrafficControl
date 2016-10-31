@@ -7,13 +7,14 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     { name: 'Production', permission: '3' },
     { name: 'Traffic', permission: '4' },
     { name: 'View Only Production/Traffic', permission: '5' }
-  ];//end scope.permission
+  ];//end scope.authLevels
 
   var clearFields=function(){
+    $scope.newUserName = "";
     $scope.newUserEmail="";
     $scope.newUserPassword = "";
     $scope.auth= $scope.authLevels;
-  }
+  }//end clearFields
 
   //Create a new user
   $scope.createNewUser = function(){
@@ -34,13 +35,15 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
             },//end header object
             data: {
               email: $scope.newUserEmail,
-              permission: $scope.auth.permission
+              permission: $scope.auth.permission,
+              name: $scope.newUserName,
+              active: true
             }//end data object
           })//end http
           .then(function(response){
             $scope.createNewUserResponse = response.data;
             console.log(response);
-          clearFields();
+            clearFields();
           });//end response
         });//end http call /createNewUser
       });//success in creating new user in firebase
@@ -49,7 +52,5 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
       console.log('Log in to create a new user');
       clearFields();
     }//end else
-
   };//end createNewUser()
-
 }]);//end authController

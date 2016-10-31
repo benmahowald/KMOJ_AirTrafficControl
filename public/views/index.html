@@ -49,8 +49,8 @@
         <ul ng-controller="authController" class="nav navbar-nav navbar-right">
           <div class="login">
             <div ng-hide="loggedIn">
-              E-mail: <input type="email" class="userInput" ng-model="userEmail"/>
-              Password: <input type="password" class="userInput" ng-model="userPassword"/>
+              <p class ="signin">E-mail: </p><input type="email" class="userInput" ng-model="userEmail"/>
+              <p class ="signin">Password: </p><input type="password" class="userInput" ng-model="userPassword"/>
               <button ng-click="logIn()" >Log In</button>
             </div>
             <button ng-click="logOut()" ng-show="loggedIn">Log Out</button>
