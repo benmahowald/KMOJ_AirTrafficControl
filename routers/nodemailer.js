@@ -1,8 +1,8 @@
 var express = require ('express');
-var nodemailer = require ('nodemailer');
 var app = express();
 var pg = require ('pg');
 var router = express.Router();
+var nodemailer = require ('nodemailer');
 
 //using superadmin gmail account with following credentials:
 //username: kmojatc  password: manager@kmoj
