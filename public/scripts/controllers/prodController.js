@@ -2,7 +2,7 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
 
-$scope.sendProduction = function(){
+
   var prodToSend = {
     talent: $scope.talent,
     who: $scope.who,
