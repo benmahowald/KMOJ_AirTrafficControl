@@ -1,4 +1,4 @@
-app.controller('uwController', ['$scope', function($scope){
+app.controller('uwController', ['$scope', '$mdDialog', function($scope, $mdDialog){
   console.log('Underwriter Controller');
   //// code for the traffic entry grid
   // Initialize variables
@@ -25,21 +25,93 @@ app.controller('uwController', ['$scope', function($scope){
     console.log($scope.weeks);
   };
 
-  $scope.updateWeeks = function(weekRequest){
+  $scope.updateWeeks = function(weekRequest, ev){
     console.log('in updateWeeks with:', weekRequest);
+
     var currentMaxWeek = $scope.currentNumWeeks;
-    console.log('currentMaxWeek:', currentMaxWeek);
-    var weeksToAdd = weekRequest - currentMaxWeek;
-    console.log('weeksToAdd:', weeksToAdd);
-    if (weeksToAdd > 0){
-      var nextWeekNum = currentMaxWeek+1;
-      var newTotalWeeks = currentMaxWeek+weeksToAdd;
-      for (var i = nextWeekNum; i <= newTotalWeeks; i++) {
-        $scope.weeks['week'+i]={num: i};
-        $scope.totals['week'+i]={total: 0};
-        $scope.currentNumWeeks++;
-      }
+    // Disallow negative or 0 week requests
+    if (weekRequest <= 0) {
+      weekRequest = currentMaxWeek;
     }
+    console.log('currentMaxWeek:', currentMaxWeek);
+    var weeksDiff = weekRequest - currentMaxWeek;
+    console.log('weeksDiff:', weeksDiff);
+    if (weeksDiff > 0){
+      var nextWeekNum = currentMaxWeek+1;
+      var newTotalWeeks = currentMaxWeek+weeksDiff;
+      var weekToAdd;
+      for (var i = nextWeekNum; i <= newTotalWeeks; i++) {
+        weekToAdd = 'week'+i;
+        $scope.weeks[weekToAdd]={num: i};
+        $scope.totals[weekToAdd]={total: 0};
+        $scope.currentNumWeeks++;
+      } // end for loop
+    } else if (weeksDiff < 0) {
+      // make weeksDiff positive to be usable in various ways
+      weeksDiff = -weeksDiff;
+      var newMaxWeek = currentMaxWeek-weeksDiff;
+      var emptyOfInfo = true;
+      var weekInQuestion = newMaxWeek+1;
+      var thisWeek;
+      // Check to see if any information has been entered in the weeks that are
+      // about to be deleted
+      while (emptyOfInfo) {
+        thisWeek = 'week'+weekInQuestion;
+        // check for any hours in the week object
+        for (var hour in $scope.weeks[thisWeek]) {
+          if ($scope.weeks[thisWeek].hasOwnProperty(hour)) {
+            // check for any days in the hour object
+            for (var day in $scope.weeks[thisWeek][hour]) {
+              if ($scope.weeks[thisWeek][hour].hasOwnProperty(day)) {
+                // if the value there is not equal to zero
+                if($scope.weeks[thisWeek][hour][day] !== 0) {
+                  // then we have info to lose!
+                  emptyOfInfo = false;
+                } // end zero check
+              }
+            } // end loop through days
+          }
+        } // end loop through hours
+        weekInQuestion++;
+      }
+      var removeWeeks;
+
+      // if the weeks in question are not empty of information
+      if (!emptyOfInfo) {
+        // then confirm the action with the user
+        var confirm = $mdDialog.confirm()
+        .title('Remove '+weeksDiff+' weeks - Are you sure?')
+        .textContent('You have entered information in the '+weeksDiff+' weeks you are about to remove.')
+        .ariaLabel('Removal Warning')
+        .targetEvent(ev)
+        .ok('Remove extra weeks')
+        .cancel('Cancel and review');
+
+        $mdDialog.show(confirm).then(function() {
+          removeWeeks = true;
+        }, function() {
+          removeWeeks = false;
+        });
+      } else {
+        // else the week are empty of information and we can remove them
+        removeWeeks = true;
+      }
+
+      // if we need to here's where we finally remove the weeks in question
+      if (removeWeeks) {
+        for (var j = weekInQuestion; j <= currentMaxWeek; j++) {
+          thisWeek = 'week'+j;
+          delete $scope.weeks[thisWeek];
+          delete $scope.totals[thisWeek];
+          $scope.currentNumWeeks--;
+        }
+        // if it was not empty of info then we need to recalculate the totals
+        if (!emptyOfInfo){
+          // sending coordinates of first slot - safe because always present
+          $scope.updateTotals(1, 'am2', 'Mon');
+        }
+      }
+    } // end weeksDiff check (if-else)
   };
 
   $scope.updateTotals = function(thisWeek, thisHour, thisDay){
@@ -57,16 +129,16 @@ app.controller('uwController', ['$scope', function($scope){
       // if there is a total for that day then add it to the sum
       if ($scope.weeks[weekName][thisHour][dayCheck]) {
         $scope.totals[weekName][thisHour] =
-          $scope.totals[weekName][thisHour] +
-          $scope.weeks[weekName][thisHour][dayCheck];
+        $scope.totals[weekName][thisHour] +
+        $scope.weeks[weekName][thisHour][dayCheck];
       }
       //// Update the week's total
       for (var hour in $scope.hours) {
         if ($scope.hours.hasOwnProperty(hour)) {
           if ($scope.weeks[weekName][hour] && $scope.weeks[weekName][hour][dayCheck]) {
             $scope.totals[weekName].total =
-              $scope.totals[weekName].total +
-              $scope.weeks[weekName][hour][dayCheck];
+            $scope.totals[weekName].total +
+            $scope.weeks[weekName][hour][dayCheck];
           }
         }
       }  // End for loop throuh hours in day
@@ -75,8 +147,8 @@ app.controller('uwController', ['$scope', function($scope){
     //// Update the flight's total
     console.log($scope.currentNumWeeks);
     for (var j = 1; j <= $scope.currentNumWeeks; j++) {
-        $scope.flightTotal = $scope.flightTotal + $scope.totals['week'+j].total;
-        console.log('flightTotal:', $scope.flightTotal);
+      $scope.flightTotal = $scope.flightTotal + $scope.totals['week'+j].total;
+      console.log('flightTotal:', $scope.flightTotal);
     }
     console.log('totals:',$scope.totals);
   }; // end updateTotals
@@ -125,10 +197,10 @@ app.controller('uwController', ['$scope', function($scope){
       url: '/',
       data: objectToSend,
     }).then(function (response){
-          console.log('success in uwCtrl post route:', response);
-        }, function (error) {
-          console.log('error in uwCtrl post route:', error);
-        }); // end then function
+      console.log('success in uwCtrl post route:', response);
+    }, function (error) {
+      console.log('error in uwCtrl post route:', error);
+    }); // end then function
   }; // end submitRunSheetEntry
 
   // $scope.submitEventInfo = function () {

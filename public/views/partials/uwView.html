@@ -92,25 +92,24 @@
   <h3>Run Sheet Entry</h3>
   <p>
     <span class="boldFont">How many weeks in the rotation?</span>
-    <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks)" placeholder="1">
+    <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks, $event)" placeholder="1">
     <button type="button" ng-click="showObject()">Submit Schedule</button>
-    <span class="boldFont">Total Spots in flight: {{flightTotal}}</span>
+    <span class="boldFont">Total Spots in Flight: {{flightTotal}}</span>
   </p>
   <div ng-repeat="week in weeks">
     <table>
       <th>
-        <td ng-repeat="day in days">{{day}}</td>
         <td>---Totals---</td>
+        <td ng-repeat="day in days">{{day}}</td>
       </th>
       <tr ng-repeat="hour in hours">
         <td>{{hour.text}}</td>
+        <td>{{totals["week"+week.num][hour.title]}}</td>
         <td ng-repeat="day in days">
           <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="updateTotals(week.num, hour.title, day)" ng-click="incrementCount(week.num, hour.title, day)">
         </td>
-        <td>{{totals["week"+week.num][hour.title]}}</td>
       </tr>
     </table>
-    <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}
-    </p>
+    <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
   </div>
 </div>
