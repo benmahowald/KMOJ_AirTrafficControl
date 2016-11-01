@@ -14,7 +14,7 @@ router.post ('/slots', function (req, res){
 		if (err){
 			console.log('connection error in slots', slots);
 		} else {
-			var queryResults = slots.query ('INSERT INTO slots (day_of_run, plays, slot, flight_id,) '+
+			var queryResults = client.query ('INSERT INTO slots (day_of_run, plays, slot, flight_id,) '+
 																				'VALUES ($1, $2, $3, $4)' ,
 																			[req.body.day_of_run, req.body.plays, req.body.slot, req.body.flight_id]);
 		}
@@ -35,8 +35,8 @@ router.post ('/media', function (req, res){
 		if (err){
 			console.log('connection error in media', media);
 		} else {
-			var queryResults = media.query ('INSERT INTO master (interviews, socialmedia, man_app, uw_app, pr_app, tr_app) '+
-																				'VALUES ($1, $2, $3, $4)' ,
+			var queryResults = client.query ('INSERT INTO master (interviews, socialmedia, man_app, uw_app, pr_app, tr_app) '+
+																				'VALUES ($1, $2, $3, $4, $5, $6)' ,
 																			[req.body.interviews, req.body.socialmedia, req.body.man_app, req.body.uw_app, req.body.pr_app, req.body.tr_app]);
 		}
 		queryResults.on('end', function(){
