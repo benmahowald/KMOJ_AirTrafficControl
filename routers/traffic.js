@@ -36,7 +36,7 @@ router.post ('/media', function (req, res){
 			console.log('connection error in media', media);
 		} else {
 			var queryResults = client.query ('INSERT INTO master (interviews, socialmedia, man_app, uw_app, pr_app, tr_app) '+
-																				'VALUES ($1, $2, $3, $4, $5, $6)' ,
+																				'VALUES ($1, $2, $3, $4, $5, $6) WHERE users_id = ($1)' ,
 																			[req.body.interviews, req.body.socialmedia, req.body.man_app, req.body.uw_app, req.body.pr_app, req.body.tr_app]);
 		}
 		queryResults.on('end', function(){
