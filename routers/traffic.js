@@ -47,6 +47,7 @@ router.post ('/media', function (req, res){
 	});//end pg.connect for media table
 });//end router.post for media table
 
+
 // //router.post flights
 //
 // router.post ('/flight', function (req, res){
