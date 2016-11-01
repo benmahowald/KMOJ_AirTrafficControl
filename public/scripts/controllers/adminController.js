@@ -26,6 +26,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
       $scope.users = response.data;
     }); //end return
   };//end viewUsers
+
   viewUsers();
 
   //Create a new user
