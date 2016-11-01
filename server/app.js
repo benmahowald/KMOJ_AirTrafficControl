@@ -17,16 +17,15 @@ firebase.initializeApp({
 
 app.use(bodyParser.json());
 
-
-var underwriter = require ('../routers/underwriter');
-app.use('/underwriter', underwriter);
-// require and use auth router
+// require server-side routers
 var auth = require('../routers/auth');
 app.use('/auth', auth);
 
-// require other server-side routers
 var admin = require ('../routers/admin');
 app.use('/admin', admin);
+
+var underwriter = require ('../routers/underwriter');
+app.use('/underwriter', underwriter);
 
 var traffic = require ('../routers/traffic');
 app.use('/traffic', traffic);

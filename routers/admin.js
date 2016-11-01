@@ -4,6 +4,11 @@ var firebase = require('firebase');
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({extended: false});
+router.use(bodyParser.json());
+
+
 // array to hold all `users`
 var user=[];
 
@@ -64,5 +69,29 @@ router.get('/userList', function(req,res){
     }; // end no error
   }); // end connect
 });//end userList
+
+//delete task
+router.delete('/deleteUser', function(req,res){
+  console.log('in deleteUser');
+  pg.connect(connectionString, function(err,client,done){
+    if(err){
+      console.log('error: ',err);
+    }//end if
+    else{
+      console.log('connected to database in deleteUser');
+      console.log('Deleted: ', req.body);
+      //clear resultArray
+      var resultArray = [];
+      var resultQuery=client.query('DELETE FROM users WHERE id=($1)',[req.body.id]);
+      resultQuery.on('row', function(row){
+        resultArray.push(row);
+      });//end on row
+      resultQuery.on('end', function(){
+        done();
+        return res.json(resultArray);
+      });//end on end
+    };//end else
+  });//end pg connect
+});//end deleteUser
 
 module.exports = router;
