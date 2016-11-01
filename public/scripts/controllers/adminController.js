@@ -2,13 +2,14 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
   console.log('Admin Controller');
 
   $scope.authLevels = [
-    { name: 'Administration', permission: '1' },
-    { name: 'Underwriter', permission: '2' },
-    { name: 'Production', permission: '3' },
-    { name: 'Traffic', permission: '4' },
-    { name: 'View Only Production/Traffic', permission: '5' }
+    { permission: 'Administration'},
+    { permission: 'Underwriter'},
+    { permission: 'Production'},
+    { permission: 'Traffic'},
+    { permission: 'View Only Production and Traffic'}
   ];//end scope.authLevels
 
+//clear input fields
   var clearFields=function(){
     $scope.newUserName = "";
     $scope.newUserEmail="";
@@ -16,7 +17,9 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     $scope.auth= $scope.authLevels;
   }//end clearFields
 
+  //array to hold users
   $scope.users = [];
+
   var viewUsers = function(){
     $http({
       method: 'Get',
@@ -27,6 +30,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     })//end return
   };//end viewUsers
 
+  //view users on DOM when page is loaded
   viewUsers();
 
   //Create a new user
@@ -56,6 +60,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
           .then(function(response){
             $scope.createNewUserResponse = response.data;
             console.log(response);
+            // clearView();
             clearFields();
             viewUsers();
           });//end response
@@ -64,6 +69,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     }//end if
     else {
       console.log('Log in to create a new user');
+      // clearView();
       clearFields();
     }//end else
   };//end createNewUser()

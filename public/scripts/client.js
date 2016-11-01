@@ -4,49 +4,49 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
   var auth = $firebaseAuth();
   console.log('in authController');
 
-    //User login
-    $scope.logIn = function(){
-      console.log('in logIn()');
-      auth.$signInWithEmailAndPassword($scope.userEmail, $scope.userPassword).then(function(firebaseUser) {
-        console.log("Authentication Success!");
-        $scope.loggedIn = true;
-      }).catch(function(error) {
-        console.log("Authentication failed: ", error);
-      });//end catch error
-    };//end logIn()
+  //User login
+  $scope.logIn = function(){
+    console.log('in logIn()');
+    auth.$signInWithEmailAndPassword($scope.userEmail, $scope.userPassword).then(function(firebaseUser) {
+      console.log("Authentication Success!");
+      $scope.loggedIn = true;
+    }).catch(function(error) {
+      console.log("Authentication failed: ", error);
+    });//end catch error
+  };//end logIn()
 
-    //Authentication state change
-    auth.$onAuthStateChanged(function(firebaseUser){
-      if(firebaseUser) {
-        firebaseUser.getToken().then(function(idToken){
-          $http({
-            method: 'GET',
-            url: '/auth/adminLogin',
-            headers: {
-              id_token: idToken
-            }//end header object
-          }).then(function(response){
-            $scope.signedIn = response.data;
+  //Authentication state change
+  auth.$onAuthStateChanged(function(firebaseUser){
+    if(firebaseUser) {
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'GET',
+          url: '/auth/adminLogin',
+          headers: {
+            id_token: idToken
+          }//end header object
+        }).then(function(response){
+          $scope.signedIn = response.data;
+          //clear login input fields
+          $scope.userEmail = "";
+          $scope.userPassord="";
+        });//end response
+      });//end return idToken
+    }//end if(firebaseUser)
+    else{
+      console.log('Not logged in.');
+      $scope.signedIn = "Please login"
+    }//end else
+  });//end onAuthStateChanged()
 
-              $scope.userName = "";
-              $scope.userEmail="";
-          });//end response
-        });//end return idToken
-      }//end if(firebaseUser)
-      else{
-        console.log('Not logged in.');
-        $scope.signedIn = "Please login"
-      }//end else
-    });//end onAuthStateChanged()
-
-    //User logout
-    $scope.logOut = function(){
-      auth.$signOut().then(function(){
-        console.log('Logging the user out!');
-        $scope.loggedIn = false;
-      });//end signOut
-    };//end logOut
-  });//end authController
+  //User logout
+  $scope.logOut = function(){
+    auth.$signOut().then(function(){
+      console.log('Logging the user out!');
+      $scope.loggedIn = false;
+    });//end signOut
+  };//end logOut
+});//end authController
 
 app.controller('mainController', function($scope, $http) {
   $scope.linkList =[
@@ -102,6 +102,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 // navbar collapse on click of anchor
 $(document).on('click','.navbar-collapse.in',function(e) {
   if( $(e.target).is('a') ) {
-      $(this).collapse('hide');
+    $(this).collapse('hide');
   } // end if statement
 }); // end document ready

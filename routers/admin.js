@@ -46,7 +46,8 @@ router.get('/userList', function(req,res){
     } //end if error connecting
     else{
       console.log( 'connected to database' );
-
+      //clear user array
+      user = [];
       // query call to database table
       var queryResults = client.query( 'SELECT * FROM users ORDER BY active ASC' );
       queryResults.on( 'row', function( row ){
