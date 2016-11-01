@@ -27,6 +27,9 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
             }//end header object
           }).then(function(response){
             $scope.signedIn = response.data;
+
+              $scope.userName = "";
+              $scope.userEmail="";
           });//end response
         });//end return idToken
       }//end if(firebaseUser)
