@@ -5,26 +5,27 @@ var pg = require('pg');
 var bodyParser = require('body-parser');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
-// // console.log('in traffic router');
-// //router.post slots
-// router.post ('/slots', function (req, res){
-// 	console.log ('req.body for slots is', req.body);
-// 	var slots = req.body;
-// 	pg.connect(connectionString, function (err, slots, done){
-// 		if (err){
-// 			console.log('connection error in slots', slots);
-// 		} else {
-// 			var queryResults = slots.query ('INSERT INTO slots (day_of_run, plays, slot, flight_id,) '+
-// 																				'VALUES ($1, $2, $3, $4)' ,
-// 																			[slots]);
-// 		}
-// 		queryResults.on('end', function(){
-// 			done();
-// 			res.send({success: true});
-// 		});//end queryResults for slots table
-// 	});//end pg.connect for slots table
-// });//end router.post for slots table
-//
+// console.log('in traffic router');
+//router.post slots
+router.post ('/slots', function (req, res){
+	console.log ('req.body for slots is', req.body);
+	var slots = req.body;
+	pg.connect(connectionString, function (err, slots, done){
+		if (err){
+			console.log('connection error in slots', slots);
+		} else {
+			var queryResults = slots.query ('INSERT INTO slots (day_of_run, plays, slot, flight_id,) '+
+																				'VALUES ($1, $2, $3, $4)' ,
+																			[req.body.day_of_run, req.body.plays, req.body.slot, req.body.flight_id]);
+		}
+		queryResults.on('end', function(){
+			done();
+			res.send({success: true});
+		});//end queryResults for slots table
+	});//end pg.connect for slots table
+});//end router.post for slots table
+
+
 // //router.post flights
 //
 // router.post ('/flight', function (req, res){
