@@ -14,7 +14,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     $scope.newUserEmail="";
     $scope.newUserPassword = "";
     $scope.auth= $scope.authLevels;
-  }//end clearFields
+  }; //end clearFields
 
   $scope.users = [];
   var viewUsers = function(){
@@ -24,7 +24,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     }).then(function(response){
       console.log('returned from server ', response);
       $scope.users = response.data;
-    })//end return
+    }); //end return
   };//end viewUsers
   viewUsers();
 
@@ -56,7 +56,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
             $scope.createNewUserResponse = response.data;
             console.log(response);
             clearFields();
-            $scope.viewUsers();
+            viewUsers();
           });//end response
         });//end http call /createNewUser
       });//success in creating new user in firebase

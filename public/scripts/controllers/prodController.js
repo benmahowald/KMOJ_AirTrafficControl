@@ -2,7 +2,8 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
 
-
+  // send data onto server through post route
+  $scope.sendProduction = function (prodtoSend) {
   var prodToSend = {
     talent: $scope.talent,
     who: $scope.who,
@@ -14,9 +15,6 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     complete_date: new Date()
   };
 
-
-// send data onto server through post route
-$scope.sendProduction = function (prodtoSend) {
   console.log('prodToSend', prodToSend);
   $http({
     method: 'POST',
