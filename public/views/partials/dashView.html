@@ -2,16 +2,16 @@
 <h3>Create A Client</h3>
 <div class="form">
   <form name="client">
-    <input type="text" name="client" ng-model="clientz" value="" placeholder="Client Name">
+    <input type="text" name="client" ng-model="client_name" value="" placeholder="Client Name">
     <input type="text" name="contact" ng-model="contact" value="" placeholder="Contact's Name">
     <input type="text" name="phone" ng-model="phone" value="" placeholder="Phone">
-    <input type="text" name="cell" ng-model="cell" value="" placeholder="Cell">
-    <input type="text" name="fax" ng-model="fax" value="" placeholder="Fax">
+    <input type="number" name="cell" ng-model="cell" value="" placeholder="Cell">
+    <input type="number" name="fax" ng-model="fax" value="" placeholder="Fax">
     <input type="email" name="email" ng-model="email" value="" placeholder="Email">
-    <input type="url" name="website" ng-model="website" value="" placeholder="Website">
+    <input type="text" name="website" ng-model="website" value="" placeholder="Website">
     <input type="text" name="street" ng-model="street" value="" placeholder="Street">
     <input type="text" name="city" ng-model="city" value="" placeholder="City">
-    <select>
+    <select ng-model="state">
       <option value="" selected>-State-</option>
       <option value="AL">Alabama</option>
       <option value="AK">Alaska</option>
@@ -65,15 +65,17 @@
       <option value="WI">Wisconsin</option>
       <option value="WY">Wyoming</option>
     </select>
-    <input type="text" name="zip" ng-model="zip" value="" placeholder="ZIP">
+    <input type="number" name="zip" ng-model="zip" value="" placeholder="ZIP">
     <input type="button" name="submitClient" value="Create Client" ng-click="submitClient()">
   </form>
 </div>
 
 <h3>Choose a client to edit.</h3>
-<select name="clientSelect">
-  <option ng-repeat="client in clientNames" value={{clientNames.id}}>{{clientNames.name}}</option>
-</select>
+<select ng-model="selectedName" ng-options="name for name in clientNameList">
+  <!-- <option value="" selected>-Select a client-</option>
+  <option ng-repeat="current_name in clientNameList" value={{current_name}}>{{current_name}}</option> -->
+</select><br>
+<input type="button" name="getClients" value="Get Client" ng-click="getClientInfo()">
 
 <form class="form" editable-form name="editableForm" onaftersave="updateClient()">
   <span class="manageEl">Client: <span editable-text="clientData.client_name" onbeforesave="updateClient({client_name: $data})" blur="submit">{{ clientData.client_name || "empty" }}</span></span><br>

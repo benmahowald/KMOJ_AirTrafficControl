@@ -4,51 +4,64 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
   $scope.submitClient = function (){
     console.log('in submitClient');
     var clientToSend = {
-      client: $scope.clientz,
+      client_name: $scope.client_name,
       // client_id: $scope.client_id,
       contact: $scope.contact,
       phone: $scope.phone,
       cell: $scope.cell,
       fax: $scope.fax,
       email: $scope.email,
-      webiste: $scope.website,
+      website: $scope.website,
       street: $scope.street,
       city: $scope.city,
       state: $scope.state,
       zip: $scope.zip
+      // users_id: $scope.userProfile.users_id
     };
     console.log('clientToSend -----------', clientToSend);
 
+    // post route to create a new client
     $http({
       method: 'POST',
       url: '/client',
       data: clientToSend,
     }).then(function (response){
-          console.log('success in uwCtrl client post route:', response);
+          console.log('success in dash client post route:', response);
         }, function (error) {
-          console.log('error in uwCtrl client post route:', error);
+          console.log('error in dash client post route:', error);
         }); // end then function
+    $scope.clearCreateClient();
   }; //end submitClient
 
+  $scope.clientNameList = [];
+
+  // retrieves all clients and pushs each name into clientNameList array
+  // for client drop down meny
   $scope.getAllClients = function () {
     $http({
       method: 'GET',
-      url: '/client/' + $scope.client_id,
+      url: '/client',
     }).then(function (response){
           $scope.allClients = response.data;
-          $scope.clientNames = response.data.name;
           console.log('getAllClients success:', $scope.allClients);
+          for (var i = 0; i < $scope.allClients.length; i++) {
+            $scope.clientNameList.push($scope.allClients[i].name);
+            console.log('client name:' + i + " " + $scope.allClients[i].name);
+          }
         }, function (error) {
           console.log('error in getAllClients;', error);
         }); // end then function
+        console.log('outside http call:', $scope.clientNameList);
     }; // end getAllClients
+
 
   $scope.getAllClients();
 
+  // calls for xeditable functionality to edit client info
   $scope.getClient = function () {
     $http({
       method: 'GET',
-      url: '/client/' + $scope.client_id,
+      url: '/client/' + $scope.selectedName,
     }).then(function (response){
           console.log('get manage account success:', response.data);
           $scope.clientData = response.data;
@@ -67,5 +80,20 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
   			data: data
   		}).then($scope.getClient);
     }; // end updateClient
+
+  $scope.clearCreateClient = function () {
+    $scope.client_name = '';
+    // $scope.client_id
+    $scope.contact = '';
+    $scope.phone = '';
+    $scope.cell = '';
+    $scope.fax = '';
+    $scope.email = '';
+    $scope.website = '';
+    $scope.street = '';
+    $scope.city = '';
+    $scope.state = '';
+    $scope.zip = '';
+  }; // end clearCreateClient
 
 }]); // end dashController

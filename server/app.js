@@ -67,6 +67,45 @@ app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);
 });
 
+/////////////////////////////// client router ////////////////////////////////
+//router.post client
+app.post('/client', function (req, res){
+  console.log ('a wrecked body', req.body);
+	pg.connect(connectionString, function (err, client, done){
+		if (err){
+			console.log('connection error in client', client);
+		} else {
+			var queryResults = client.query('INSERT INTO clients (name, contact, address, city, state, zip, phone, cell, fax, email, webiste, users_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [req.body.client_name, req.body.contact, req.body.street, req.body.city, req.body.state, req.body.zip, req.body.phone, req.body.cell, req.body.fax, req.body.email, req.body.website, req.body.users_id]);
+		}
+		queryResults.on('end', function(){
+			done();
+			res.send({success: true});
+		});//end queryResults for client table
+	});//end pg.connect for client table
+});//end router.post for client table
+
+//////////// retrieve all client information ///////////////
+app.get('/client', function (req, res){
+	console.log('in get client info');
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in clientinfo');
+		} else {
+			var results = [];
+      
+			var queryResults = client.query('SELECT * FROM clients');
+					queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+            console.log('results are', results);
+						return res.json(results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for traffic info
+});//end router.get for traffic info
+
 // setting catch all route
 app.get('/*', function(req,res){
   console.log('Made it to the catch all route, with',req.params);
