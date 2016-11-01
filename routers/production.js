@@ -20,9 +20,10 @@ router.post ('/production', function (req, res){
 			console.log('connection error in client', client);
 		} else {
 			console.log('in the else now');
-			var queryResults = client.query ('INSERT INTO production (contract_id, talent, who, what, site, why, cart_number, producer, complete_date, spot_length) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);',
-			[client.contract_id, client.talent, client.who, client.what,
-			client.site, client.why, client.cart_number, client.producer, client.complete_date, client.spot_length]);
+			var queryResults = client.query ('INSERT INTO production (contract_id, talent, who, what, site, why, cart_number, producer, complete_date, spot_length) ' +
+			 'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
+			[req.body.contract_id, req.body.talent, req.body.who, req.body.what,
+			req.body.site, req.body.why, req.body.cart_number, req.body.producer, req.body.complete_date, req.body.spot_length]);
 		}
 		queryResults.on('end', function(){
 			done();
