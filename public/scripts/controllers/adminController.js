@@ -26,6 +26,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
       $scope.users = response.data;
     })//end return
   };//end viewUsers
+
   viewUsers();
 
   //Create a new user
@@ -56,7 +57,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
             $scope.createNewUserResponse = response.data;
             console.log(response);
             clearFields();
-            $scope.viewUsers();
+            viewUsers();
           });//end response
         });//end http call /createNewUser
       });//success in creating new user in firebase
