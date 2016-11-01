@@ -71,7 +71,7 @@ app.controller('uwController', ['$scope', function($scope){
         }
       }  // End for loop throuh hours in day
     } // End for loop through days of week
-    
+
     //// Update the flight's total
     console.log($scope.currentNumWeeks);
     for (var j = 1; j <= $scope.currentNumWeeks; j++) {
@@ -79,7 +79,22 @@ app.controller('uwController', ['$scope', function($scope){
         console.log('flightTotal:', $scope.flightTotal);
     }
     console.log('totals:',$scope.totals);
+  }; // end updateTotals
+
+  $scope.incrementCount = function(thisWeek, thisHour, thisDay) {
+    console.log('in incrementCount, with:', thisDay, thisHour, thisWeek);
+    var weekName = 'week'+thisWeek;
+    if (!$scope.weeks[weekName][thisHour]){
+      $scope.weeks[weekName][thisHour] = {};
+    }
+    if ($scope.weeks[weekName][thisHour][thisDay]){
+      $scope.weeks[weekName][thisHour][thisDay]++;
+    } else {
+      $scope.weeks[weekName][thisHour][thisDay] = 1;
+    }
+    $scope.updateTotals(thisWeek, thisHour, thisDay);
   };
+
 
   $scope.submitRunSheetEntry = function (){
     console.log('in submitRunSheetEntry');

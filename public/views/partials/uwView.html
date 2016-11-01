@@ -105,7 +105,7 @@
       <tr ng-repeat="hour in hours">
         <td>{{hour.text}}</td>
         <td ng-repeat="day in days">
-          <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="updateTotals(week.num, hour.title, day)">
+          <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="updateTotals(week.num, hour.title, day)" ng-click="incrementCount(week.num, hour.title, day)">
         </td>
         <td>{{totals["week"+week.num][hour.title]}}</td>
       </tr>
