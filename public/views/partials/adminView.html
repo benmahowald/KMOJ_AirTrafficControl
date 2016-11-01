@@ -1,3 +1,18 @@
 <p>
   Admin View
 </p>
+Name: <input type="text" class="userInput" ng-model="newUserName"/>
+Email: <input type="email" class="userInput" ng-model="newUserEmail"/>
+Password: <input type="password" class="userInput" ng-model="newUserPassword"/>
+Permission Level: <select ng-model="auth" ng-options="authLevel as authLevel.name for authLevel in authLevels" width="30">
+<option value="" ng-if="auth">Select Permission Level</option>
+</select>
+
+<button ng-click="createNewUser()">Create New User</button>
+
+<div>
+  <p ng-repeat='user in users'>
+    <br>
+    Name: {{user.name}} Email: {{user.email}} Permission Level: {{user.permission}} Active: {{user.active}}
+  </p>
+</div>

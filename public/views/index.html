@@ -47,8 +47,14 @@
           <li><a href="search">Search</a></li>
         </ul>
         <ul ng-controller="authController" class="nav navbar-nav navbar-right">
-          <button class="logInOut" ng-click="logIn()" ng-hide="loggedIn">Log In</button>
-          <button class="logInOut" ng-click="logOut()"ng-show="loggedIn">Log Out</button>
+          <div class="login">
+            <div ng-hide="loggedIn">
+              <p class ="signin">E-mail: </p><input type="email" class="userInput" ng-model="userEmail"/>
+              <p class ="signin">Password: </p><input type="password" class="userInput" ng-model="userPassword"/>
+              <button ng-click="logIn()" >Log In</button>
+            </div>
+            <button ng-click="logOut()" ng-show="loggedIn">Log Out</button>
+          </div>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

@@ -6,4 +6,6 @@ var config = {
     storageBucket: "",
     messagingSenderId: "486458567756"
   };
-  firebase.initializeApp(config);
+  
+  var mainApp = firebase.initializeApp(config);
+  var secondaryApp = firebase.initializeApp(config, "Secondary");

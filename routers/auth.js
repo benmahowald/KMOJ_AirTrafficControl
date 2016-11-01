@@ -1,10 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var firebase = require('firebase');
-var path = require('path');
-var pg = require('pg');
-var bodyParser = require('body-parser');
-var connectionString = 'postgres://localhost:5432/kmoj';
 
 //Login
 router.get("/adminLogin", function(req, res){
@@ -19,6 +15,7 @@ router.get("/adminLogin", function(req, res){
     res.send("Please Login");
   });//end id_token error
 });//end adminLogin
+
 
 
 module.exports = router;
