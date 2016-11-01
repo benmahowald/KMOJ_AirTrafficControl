@@ -3,19 +3,19 @@ app.controller('uwController', ['$scope', function($scope){
   //// code for the traffic entry grid
   // Initialize variables
   // weeks will hold the actual scheduling information
-  $scope.weeks = {week1:{}};
-  $scope.totals = {};
+  $scope.weeks = {week1:{handle: 'week'+1}};
+  $scope.totals = {week1:{total: 0}};
   $scope.currentNumWeeks = 1;
   // This object is used as a scaffold help build the grid
   $scope.hours = {
-    am2: {text:'2am-5am', name:'am2'},
-    am5: {text:'5am-6am', name:'am5'},
-    am6: {text:'6am-10am', name:'am6'},
-    am10: {text:'10am-2pm', name:'am10'},
-    pm2: {text:'2pm-6pm', name:'pm2'},
-    pm6: {text:'6pm-7pm', name:'pm6'},
-    pm7: {text:'7pm-10pm', name:'pm7'},
-    pm10: {text:'10pm-2am', name:'pm10'}
+    am2: {text:'2am-5am', title:'am2'},
+    am5: {text:'5am-6am', title:'am5'},
+    am6: {text:'6am-10am', title:'am6'},
+    am10: {text:'10am-2pm', title:'am10'},
+    pm2: {text:'2pm-6pm', title:'pm2'},
+    pm6: {text:'6pm-7pm', title:'pm6'},
+    pm7: {text:'7pm-10pm', title:'pm7'},
+    pm10: {text:'10pm-2am', title:'pm10'}
   };
   // This is used to populate the header and scaffold the grid
   $scope.days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -35,14 +35,46 @@ app.controller('uwController', ['$scope', function($scope){
       var nextWeekNum = currentMaxWeek+1;
       var newTotalWeeks = currentMaxWeek+weeksToAdd;
       for (var i = nextWeekNum; i <= newTotalWeeks; i++) {
-        $scope.weeks['week'+i]={};
+        $scope.weeks['week'+i]={handle: 'week'+i};
+        $scope.totals['week'+i]={total: 0};
         $scope.currentNumWeeks++;
       }
     }
   };
 
-  $scope.updateTotal = function(thisHour){
-    
+  $scope.updateTotals = function(thisWeek, thisHour, thisDay){
+    console.log('in updateTotals, with:', thisDay, thisHour, thisWeek);
+    $scope.totals[thisWeek][thisHour] = 0;
+    $scope.totals[thisWeek].total = 0;
+    var dayCheck;
+    // check to see if anything has been recorded yet
+    for (var i = 0; i < $scope.days.length; i++) {
+      dayCheck = $scope.days[i];
+      // if there is a total for that day then add it to the sum
+      if ($scope.weeks[thisWeek][thisHour][dayCheck]) {
+        $scope.totals[thisWeek][thisHour] =
+          $scope.totals[thisWeek][thisHour] +
+          $scope.weeks[thisWeek][thisHour][dayCheck];
+      }
+      for (var hour in $scope.hours) {
+        if ($scope.hours.hasOwnProperty(hour)) {
+          console.log('hour is:', hour);
+          console.log('dayCheck is:', dayCheck);
+          console.log('$scope.totals[\'week\'+thisWeek]:',$scope.totals[thisWeek]);
+          if ($scope.weeks[thisWeek][hour] && $scope.weeks[thisWeek][hour][dayCheck]) {
+            console.log('total before is:', $scope.totals[thisWeek].total);
+            $scope.totals[thisWeek].total =
+              $scope.totals[thisWeek].total +
+              $scope.weeks[thisWeek][hour][dayCheck];
+            console.log('adding:', $scope.weeks[thisWeek][hour][dayCheck]);
+            console.log('result:', $scope.totals[thisWeek].total);
+          }
+        }
+      }
+    }
+
+
+    console.log('totals:',$scope.totals);
   };
 
   $scope.submitRunSheetEntry = function (){

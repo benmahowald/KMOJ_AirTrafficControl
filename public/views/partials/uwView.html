@@ -1,4 +1,4 @@
-<div class="form">
+<!-- <div class="form">
   <form name="master">
     <h3>Event Info</h3>
     <input type="text" name="event" ng-model="event" value="" placeholder="Event">
@@ -87,10 +87,15 @@
     <input type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
     <input type="text" name="agency_commission" ng-model="agency_comission" value="" placeholder=".15">
   </form>
-</div>
+</div> -->
 <div id="trafficGrid">
   <h3>Run Sheet Entry</h3>
-  <p>How many weeks in the rotation? <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks)" placeholder="1"></p>
+  <p>
+    How many weeks in the rotation?
+     <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks)" placeholder="1">
+     <button type="button" ng-click="showObject()">Submit Schedule</button>
+     Total Spots in flight: {{}}
+  </p>
   <table ng-repeat="week in weeks">
     <th>
       <td ng-repeat="day in days">{{day}}</td>
@@ -99,10 +104,12 @@
     <tr ng-repeat="hour in hours">
       <td>{{hour.text}}</td>
       <td ng-repeat="day in days">
-        <input class="trafficSlot" type="number" ng-model="week[hour.name][day]" ng-change="updateTotal(hour.name)" value="">
+        <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="updateTotals(week.handle, hour.title, day)" value="">
       </td>
-      <td></td>
+      <td>{{totals[week.handle][hour.title]}}</td>
     </tr>
+    <tfoot>
+      Total Spots this week: {{totals[week.handle].total}}
+    </tfoot>
   </table>
-  <button type="button" ng-click="showObject()">Show Object</button>
 </div>
