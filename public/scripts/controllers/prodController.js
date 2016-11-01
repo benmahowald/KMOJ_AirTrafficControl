@@ -2,8 +2,8 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
 
-
-  var prodToSend = {
+  $scope.sendProduction = function(){
+    var prodToSend = {
     talent: $scope.talent,
     who: $scope.who,
     what: $scope.what,
@@ -11,16 +11,13 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     why: $scope.why,
     cart_number: $scope.cart_number,
     producer: $scope.producer,
+    spot_length: $scope.spot_length,
     complete_date: new Date()
   };
 
-
-// send data onto server through post route
-$scope.sendProduction = function (prodtoSend) {
-  console.log('prodToSend', prodToSend);
   $http({
     method: 'POST',
-    url: '/production76',
+    url: '/production/production',
     data: prodToSend
   }).then(function (response){
         console.log('success in prodCtrl post route:', response);
@@ -28,6 +25,23 @@ $scope.sendProduction = function (prodtoSend) {
         console.log('error in prodCtrl post route:', error);
       }); // end then function
 }; // end sendProduction
+//   var prodToSend = {
+//     talent: $scope.talent,
+//     who: $scope.who,
+//     what: $scope.what,
+//     site: $scope.site,
+//     why: $scope.why,
+//     cart_number: $scope.cart_number,
+//     producer: $scope.producer,
+//     spot_length: $scope.spot_length,
+//     complete_date: new Date()
+//   };
+//
+//
+// // send data onto server through post route
+// $scope.sendProduction = function (prodtoSend) {
+//   console.log('prodToSend', prodToSend);
+
 
 
 }]);
