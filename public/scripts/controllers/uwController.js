@@ -3,7 +3,7 @@ app.controller('uwController', ['$scope', function($scope){
   //// code for the traffic entry grid
   // Initialize variables
   // weeks will hold the actual scheduling information
-  $scope.weeks = {week1:{handle: 'week'+1}};
+  $scope.weeks = {week1:{num: 1}};
   $scope.totals = {week1:{total: 0}};
   $scope.currentNumWeeks = 1;
   // This object is used as a scaffold help build the grid
@@ -35,7 +35,7 @@ app.controller('uwController', ['$scope', function($scope){
       var nextWeekNum = currentMaxWeek+1;
       var newTotalWeeks = currentMaxWeek+weeksToAdd;
       for (var i = nextWeekNum; i <= newTotalWeeks; i++) {
-        $scope.weeks['week'+i]={handle: 'week'+i};
+        $scope.weeks['week'+i]={num: i};
         $scope.totals['week'+i]={total: 0};
         $scope.currentNumWeeks++;
       }
@@ -44,36 +44,40 @@ app.controller('uwController', ['$scope', function($scope){
 
   $scope.updateTotals = function(thisWeek, thisHour, thisDay){
     console.log('in updateTotals, with:', thisDay, thisHour, thisWeek);
-    $scope.totals[thisWeek][thisHour] = 0;
-    $scope.totals[thisWeek].total = 0;
+    var weekName = 'week'+thisWeek;
+    // Reset counters
+    $scope.totals[weekName][thisHour] = 0;
+    $scope.totals[weekName].total = 0;
+    $scope.flightTotal = 0;
     var dayCheck;
     // check to see if anything has been recorded yet
     for (var i = 0; i < $scope.days.length; i++) {
       dayCheck = $scope.days[i];
+      //// Update the hour's total
       // if there is a total for that day then add it to the sum
-      if ($scope.weeks[thisWeek][thisHour][dayCheck]) {
-        $scope.totals[thisWeek][thisHour] =
-          $scope.totals[thisWeek][thisHour] +
-          $scope.weeks[thisWeek][thisHour][dayCheck];
+      if ($scope.weeks[weekName][thisHour][dayCheck]) {
+        $scope.totals[weekName][thisHour] =
+          $scope.totals[weekName][thisHour] +
+          $scope.weeks[weekName][thisHour][dayCheck];
       }
+      //// Update the week's total
       for (var hour in $scope.hours) {
         if ($scope.hours.hasOwnProperty(hour)) {
-          console.log('hour is:', hour);
-          console.log('dayCheck is:', dayCheck);
-          console.log('$scope.totals[\'week\'+thisWeek]:',$scope.totals[thisWeek]);
-          if ($scope.weeks[thisWeek][hour] && $scope.weeks[thisWeek][hour][dayCheck]) {
-            console.log('total before is:', $scope.totals[thisWeek].total);
-            $scope.totals[thisWeek].total =
-              $scope.totals[thisWeek].total +
-              $scope.weeks[thisWeek][hour][dayCheck];
-            console.log('adding:', $scope.weeks[thisWeek][hour][dayCheck]);
-            console.log('result:', $scope.totals[thisWeek].total);
+          if ($scope.weeks[weekName][hour] && $scope.weeks[weekName][hour][dayCheck]) {
+            $scope.totals[weekName].total =
+              $scope.totals[weekName].total +
+              $scope.weeks[weekName][hour][dayCheck];
           }
         }
-      }
+      }  // End for loop throuh hours in day
+    } // End for loop through days of week
+    
+    //// Update the flight's total
+    console.log($scope.currentNumWeeks);
+    for (var j = 1; j <= $scope.currentNumWeeks; j++) {
+        $scope.flightTotal = $scope.flightTotal + $scope.totals['week'+j].total;
+        console.log('flightTotal:', $scope.flightTotal);
     }
-
-
     console.log('totals:',$scope.totals);
   };
 
