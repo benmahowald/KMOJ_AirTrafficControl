@@ -1,4 +1,4 @@
-app.controller('uwController', ['$scope', '$mdDialog', function($scope, $mdDialog){
+app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scope, $mdDialog, $window){
   console.log('Underwriter Controller');
   //// code for the traffic entry grid
   // Initialize variables
@@ -51,7 +51,8 @@ app.controller('uwController', ['$scope', '$mdDialog', function($scope, $mdDialo
       weeksDiff = -weeksDiff;
       var newMaxWeek = currentMaxWeek-weeksDiff;
       var emptyOfInfo = true;
-      var weekInQuestion = newMaxWeek+1;
+      var removeStart = newMaxWeek+1;
+      var weekInQuestion = removeStart;
       var thisWeek;
       // Check to see if any information has been entered in the weeks that are
       // about to be deleted
@@ -74,8 +75,6 @@ app.controller('uwController', ['$scope', '$mdDialog', function($scope, $mdDialo
         } // end loop through hours
         weekInQuestion++;
       }
-      var removeWeeks;
-
       // if the weeks in question are not empty of information
       if (!emptyOfInfo) {
         // then confirm the action with the user
@@ -88,30 +87,29 @@ app.controller('uwController', ['$scope', '$mdDialog', function($scope, $mdDialo
         .cancel('Cancel and review');
 
         $mdDialog.show(confirm).then(function() {
-          removeWeeks = true;
+          console.log('You chose True!');
+          $scope.trimWeeks(removeStart, currentMaxWeek, thisWeek, emptyOfInfo);
         }, function() {
-          removeWeeks = false;
+          console.log('You chose False!');
         });
       } else {
         // else the week are empty of information and we can remove them
-        removeWeeks = true;
-      }
-
-      // if we need to here's where we finally remove the weeks in question
-      if (removeWeeks) {
-        for (var j = weekInQuestion; j <= currentMaxWeek; j++) {
-          thisWeek = 'week'+j;
-          delete $scope.weeks[thisWeek];
-          delete $scope.totals[thisWeek];
-          $scope.currentNumWeeks--;
-        }
-        // if it was not empty of info then we need to recalculate the totals
-        if (!emptyOfInfo){
-          // sending coordinates of first slot - safe because always present
-          $scope.updateTotals(1, 'am2', 'Mon');
-        }
+        $scope.trimWeeks(removeStart, currentMaxWeek, thisWeek, emptyOfInfo);
       }
     } // end weeksDiff check (if-else)
+  };
+
+  $scope.trimWeeks = function(removeStart, currentMaxWeek, thisWeek, emptyOfInfo){
+    for (var j = removeStart; j <= currentMaxWeek; j++) {
+      thisWeek = 'week'+j;
+      delete $scope.weeks[thisWeek];
+      delete $scope.totals[thisWeek];
+      $scope.currentNumWeeks--;
+    }
+    // if it was not empty of info then we need to recalculate the totals
+    // if (!emptyOfInfo){
+      //// Update the flight's total
+      $scope.calcFlightTotal();
   };
 
   $scope.updateTotals = function(thisWeek, thisHour, thisDay){
@@ -120,7 +118,6 @@ app.controller('uwController', ['$scope', '$mdDialog', function($scope, $mdDialo
     // Reset counters
     $scope.totals[weekName][thisHour] = 0;
     $scope.totals[weekName].total = 0;
-    $scope.flightTotal = 0;
     var dayCheck;
     // check to see if anything has been recorded yet
     for (var i = 0; i < $scope.days.length; i++) {
@@ -145,13 +142,18 @@ app.controller('uwController', ['$scope', '$mdDialog', function($scope, $mdDialo
     } // End for loop through days of week
 
     //// Update the flight's total
+    $scope.calcFlightTotal();
+  }; // end updateTotals
+
+  $scope.calcFlightTotal = function(){
     console.log($scope.currentNumWeeks);
+    $scope.flightTotal = 0;
     for (var j = 1; j <= $scope.currentNumWeeks; j++) {
       $scope.flightTotal = $scope.flightTotal + $scope.totals['week'+j].total;
       console.log('flightTotal:', $scope.flightTotal);
     }
     console.log('totals:',$scope.totals);
-  }; // end updateTotals
+  };
 
   $scope.incrementCount = function(thisWeek, thisHour, thisDay) {
     console.log('in incrementCount, with:', thisDay, thisHour, thisWeek);
@@ -164,7 +166,14 @@ app.controller('uwController', ['$scope', '$mdDialog', function($scope, $mdDialo
     } else {
       $scope.weeks[weekName][thisHour][thisDay] = 1;
     }
+    // this code was part of an attempt to have the text automatically selected when clicked
+    // if (!$window.getSelection().toString()) {
+    //   // Required for mobile Safari
+    //   console.log(this);
+    //   this[0].setSelectionRange(0, $scope.weeks[weekName][thisHour][thisDay].length);
+    // }
     $scope.updateTotals(thisWeek, thisHour, thisDay);
+
   };
 
 
