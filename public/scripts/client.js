@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ngRoute', 'firebase', 'ngMaterial']);
+var app = angular.module('App', ['ngRoute', 'firebase', 'ngMaterial', 'xeditable']);
 
 app.controller('authController', function($scope, $firebaseArray, $firebaseAuth, $http) {
   var auth = $firebaseAuth();
@@ -35,7 +35,7 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
     }//end if(firebaseUser)
     else{
       console.log('Not logged in.');
-      $scope.signedIn = "Please login"
+      $scope.signedIn = "Please login";
     }//end else
   });//end onAuthStateChanged()
 

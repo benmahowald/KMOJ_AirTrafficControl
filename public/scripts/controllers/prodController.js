@@ -1,7 +1,6 @@
 app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
-
   $scope.sendProduction = function(){
     var prodToSend = {
     talent: $scope.talent,
@@ -14,6 +13,8 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     spot_length: $scope.spot_length,
     complete_date: new Date()
   };
+
+  console.log('prodToSend', prodToSend);
 
   $http({
     method: 'POST',

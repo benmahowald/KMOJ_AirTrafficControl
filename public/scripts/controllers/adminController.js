@@ -15,7 +15,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     $scope.newUserEmail="";
     $scope.newUserPassword = "";
     $scope.auth= $scope.authLevels;
-  }//end clearFields
+  }; //end clearFields
 
   //array to hold users
   $scope.users = [];
@@ -27,7 +27,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     }).then(function(response){
       console.log('returned from server ', response);
       $scope.users = response.data;
-    })//end return
+    }); //end return
   };//end viewUsers
 
   //view users on DOM when page is loaded
