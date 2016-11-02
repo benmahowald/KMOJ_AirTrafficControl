@@ -5,10 +5,28 @@ var pg = require('pg');
 var bodyParser = require('body-parser');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
-router.get ('/production', function (req, res){
-	console.log ('=================');
-});
 // router.get for production view
+	router.get('/productionInfo', function (req, res){
+		console.log('in get production Info');
+		pg.connect(connectionString, function(err, client, done){
+			if (err){
+				console.log('connection err in productionInfo');
+			} else {
+				var results = [];
+				var queryResults = client.query('SELECT flight.start_date, flight.end_date, clients.name, clients.contact, clients.phone, clients.address, production.talent, production.producer, master.event_name, master.spot_length, master.users_id FROM flight INNER JOIN master ON master.flight_id = flight.id INNER JOIN clients ON clients.client_id = master.client_id INNER JOIN production ON production.contract_id = master.id');
+						  queryResults.on('row', function(row){
+							results.push(row);
+							console.log('productionInfo row is ', row);
+						});//end queryResults.on 'row'
+						queryResults.on('end', function(){
+							done();
+							return res.json(results);
+							console.log('results are', results);
+						});//end queryResults on 'end'
+			}
+		});//end pg.connect for production info
+	});//end router.get for production info
+
 
 // console.log('in production router');
 // router.post for production table

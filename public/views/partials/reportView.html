@@ -1,22 +1,14 @@
 
-<h3>Monthly Reporting</h3>
+<h3><strong>Monthly Reporting</strong></h3>
 
 <img src="assets/kmoj.png" style="width:60px;" alt="logo">
 <p>2123 W. Broadyway, Suite 200<br>
   Minneapolis, MN 55411<br>
   Phone: (612)377-0594<br>
   Fax: (612)377-6919<br></p>
-
-  <form>
-    <label for="startDate">Start Date</label><br>
-    <input type="date" name="startDate" ng-model="startDate"><br>
-    <label for="endDate">End Date</label><br>
-    <input type="date" name="endDate" ng-model="endDate"><br>
-    <input type="button" name="getReports" value="Submit" ng-click="getReports()">
-  </form>
-
-  <div id = "content">
-    <table id = "editor" class = "export-table" width = "75%">
+  <div>
+    <div id = "content">
+    <table  width = "75%">
       <tr>
         <th>Cart Number</th>
         <th>Start Date</th>
@@ -34,5 +26,19 @@
         <td>${{report.total_cost}}</td>
       </tr>
     </table>
-    <button id = "cmd">Generate PDF</button>
   </div>
+      <div id = "editor"></div>
+      <button id = "cmd">Generate PDF</button>
+  </div>
+</div>
+
+
+  <div>
+      <form>
+        <label for="startDate">Start Date</label><br>
+        <input type="date" name="startDate" ng-model="startDate"><br>
+        <label for="endDate">End Date</label><br>
+        <input type="date" name="endDate" ng-model="endDate"><br>
+        <input type="button" name="getReports" value="Submit" ng-click="getReports()">
+      </form>
+    </div>
