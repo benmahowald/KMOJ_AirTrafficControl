@@ -3,7 +3,11 @@ var router = express.Router();
 var path = require('path');
 var pg = require('pg');
 var bodyParser = require('body-parser');
+
 // var pdfjsLib = require('pdfjs-dist');
+
+var pdfjsLib = require('pdfjs-dist');
+var nodemailer = require ('nodemailer');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
 router.use(bodyParser.json());
