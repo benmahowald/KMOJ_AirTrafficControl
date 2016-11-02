@@ -183,9 +183,9 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
 
   $scope.submitRunSheetEntry = function (){
     console.log('in submitRunSheetEntry');
-    var objectToSend = {
-      event_name: $scope.event_name,
-      client: $scope.client,
+    var clientToSend = {
+      // client: $scope.client,
+      // client_id: $scope.client_id,
       client_contact: $scope.clientContact,
       phone: $scope.phone,
       cell: $scope.cell,
@@ -194,41 +194,34 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
       website: $scope.website,
       street: $scope.street,
       city: $scope.city,
-      zip: $scope.zip,
-      start_date: $scope.startDate,
-      end_date: $scope.endDate,
-      fa: $scope.fa,
-      psa: $scope.psa,
-      instructions: $scope.instructions,
-      discount: $scope.discount,
-      agency_comission: $scope.agency_comission
+      zip: $scope.zip
     };
-    console.log('UW objectToSend:', objectToSend);
+    console.log('UW clientToSend:', clientToSend);
 
     $http({
       method: 'POST',
-      url: '/',
-      data: objectToSend,
+      url: '/client',
+      data: clientToSend,
     }).then(function (response){
-      console.log('success in uwCtrl post route:', response);
-    }, function (error) {
-      console.log('error in uwCtrl post route:', error);
-    }); // end then function
+          console.log('success in uwCtrl client post route:', response);
+        }, function (error) {
+          console.log('error in uwCtrl client post route:', error);
+        }); // end then function
+
+        var flightInfo = {
+          start_date: $scope.startDate,
+          end_date: $scope.endDate,
+        };
+
+        $http({
+          method: 'POST',
+          url: '/flight',
+          data: flightInfo,
+        }).then(function (response){
+              console.log('success in uwCtrl traffic post route:', response);
+            }, function (error) {
+              console.log('error in uwCtrl traffic post route:', error);
+            }); // end then function
   }; // end submitRunSheetEntry
 
-  // $scope.submitEventInfo = function () {
-  //   console.log('in submitEventInfo');
-  // }; //end submitEventInfo
-  //
-  // $scope.submitContactInfo = function () {
-  //   console.log('in submitContactInfo');
-  // }; //end submitContactInfo
-  //
-  // $scope.submitAddressInfo = function () {
-  //   console.log('in submitAddressInfo');
-  // }; //end submitAddressInfo
-  //
-  // $scope.submitFlightInfo = function () {
-  //   console.log('in submitFlightInfo');
-  // }; //end submitFlightInfo
 }]); // end uwController
