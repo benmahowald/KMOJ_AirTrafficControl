@@ -1,15 +1,17 @@
 app.controller("adminController",["$scope","$http",function($scope,$http){
   console.log('Admin Controller');
 
+console.log("in AdminCTRL $scope.userData",$scope.userData);
+
   $scope.authLevels = [
     { permission: 'Administration'},
     { permission: 'Underwriter'},
     { permission: 'Production'},
     { permission: 'Traffic'},
-    { permission: 'View Only Production and Traffic'}
+    { permission: 'View only production and traffic'}
   ];//end scope.authLevels
 
-//clear input fields
+  //clear input fields
   var clearFields=function(){
     $scope.newUserName = "";
     $scope.newUserEmail="";
@@ -22,7 +24,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
 
   var viewUsers = function(){
     $http({
-      method: 'Get',
+      method: 'GET',
       url: 'admin/userList'
     }).then(function(response){
       console.log('returned from server ', response);
@@ -33,13 +35,16 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
   //view users on DOM when page is loaded
   viewUsers();
 
-  //Create a new user
   $scope.createNewUser = function(){
+    //clear $scope.newUserEmail if you have trouble with creating a user and it states "email is not a string"
     if(firebase.auth().currentUser) {
       console.log("firebase.auth().currentUser",firebase.auth().currentUser);
-      console.log("$scope.auth.permission",$scope.auth.permission);
+
+        console.log("$scope.newUserEmail",$scope.newUserEmail);
+      // console.log("$scope.auth.permission",$scope.auth.permission);
       secondaryApp.auth().createUserWithEmailAndPassword($scope.newUserEmail, $scope.newUserPassword)
       .then(function(firebaseUser) {
+        console.log("$scope.newUserEmail",$scope.newUserEmail);
         console.log("User " + firebaseUser.email + " created successfully!");
         secondaryApp.auth().signOut();
         firebase.auth().currentUser.getToken()
@@ -74,8 +79,8 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     }//end else
   };//end createNewUser()
 
+  //Delete a user
   $scope.deleteUser = function(){
-    console.log("this.user.id",this.user.id);
     $http({
       method: 'DELETE',
       url: '/admin/deleteUser',
@@ -84,7 +89,6 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     }).then(function(response){
       console.log('returned from server ', response);
       viewUsers();
-    })//end return
-  };//end function
-
-}]);//end authController
+    });//end response from server
+  };//end deleteUser
+}]);//end adminController

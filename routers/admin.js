@@ -3,11 +3,10 @@ var router = express.Router();
 var firebase = require('firebase');
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/kmoj';
-
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended: false});
-router.use(bodyParser.json());
 
+router.use(bodyParser.json());
 
 // array to hold all `users`
 var user=[];

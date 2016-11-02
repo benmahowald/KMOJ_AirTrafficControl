@@ -4,12 +4,16 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
   var auth = $firebaseAuth();
   console.log('in authController');
 
+//current logged in user data from database
+$scope.userData;
+
   //User login
   $scope.logIn = function(){
     console.log('in logIn()');
     auth.$signInWithEmailAndPassword($scope.userEmail, $scope.userPassword).then(function(firebaseUser) {
       console.log("Authentication Success!");
       $scope.loggedIn = true;
+      console.log("return from DB after login. FirebaseUser=",firebaseUser);
     }).catch(function(error) {
       console.log("Authentication failed: ", error);
     });//end catch error
@@ -21,15 +25,16 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
       firebaseUser.getToken().then(function(idToken){
         $http({
           method: 'GET',
-          url: '/auth/adminLogin',
+          url: '/auth/Login',
           headers: {
             id_token: idToken
           }//end header object
         }).then(function(response){
-          $scope.signedIn = response.data;
+          $scope.userData = response.data;
+          console.log('user permission is', $scope.userData[0].permission);
           //clear login input fields
           $scope.userEmail = "";
-          $scope.userPassord="";
+          $scope.userPassword="";
         });//end response
       });//end return idToken
     }//end if(firebaseUser)
@@ -39,6 +44,33 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
     }//end else
   });//end onAuthStateChanged()
 
+//loads userData on page load
+$scope.init = function (){
+  if(firebaseUser) {
+    firebaseUser.getToken().then(function(idToken){
+      $http({
+        method: 'GET',
+        url: '/auth/Login',
+        headers: {
+          id_token: idToken
+        }//end header object
+      }).then(function(response){
+        $scope.userData = response.data;
+        console.log('user permission is', $scope.userData[0].permission);
+        //clear login input fields
+        $scope.userEmail = "";
+        $scope.userPassword="";
+      });//end response
+    });//end return idToken
+  }//end if(firebaseUser)
+  else{
+    console.log('Not logged in.');
+    $scope.signedIn = "Please login"
+  }//end else
+};
+
+
+
   //User logout
   $scope.logOut = function(){
     auth.$signOut().then(function(){
@@ -46,18 +78,18 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
       $scope.loggedIn = false;
     });//end signOut
   };//end logOut
-});//end authController
 
-app.controller('mainController', function($scope, $http) {
+
   $scope.linkList =[
-    {route:'admin',text:'Admin', permission:''},
-    {route:'dashboard',text:'Dashboard', permission:''},
-    {route:'production',text:'Production', permission:''},
-    {route:'report',text:'Report', permission:''},
-    {route:'traffic',text:'Traffic', permission:''},
-    {route:'underwriter',text:'Underwriter', permission:''}
-  ];
-});
+    {route:'admin', linkText:'Admin', permission:'Administration'},
+    {route:'dashboard', linkText:'Dashboard', permission:''},
+    {route:'production', linkText:'Production', permission:'Production'},
+    {route:'report', linkText:'Report', permission:''},
+    {route:'traffic', linkText:'Traffic', permission:'Traffic'},
+    {route:'underwriter', linkText:'Underwriter', permission:'Underwriter'}
+  ];//end scope.linkList
+
+});//end authController
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
   // console.log('$routeProvider:',$routeProvider);
