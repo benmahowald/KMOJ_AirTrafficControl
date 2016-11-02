@@ -11,7 +11,7 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
       cell: $scope.cell,
       fax: $scope.fax,
       email: $scope.email,
-      website: $scope.website,
+      webiste: $scope.webiste,
       street: $scope.street,
       city: $scope.city,
       state: $scope.state,
@@ -71,24 +71,29 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
         }); // end then function
     }; // end getClients
 
-    // $scope.getClient();
+
+    $scope.getClient();
+
+    $scope.updatedClient = {};
 
     $scope.updateClient = function(data) {
+      console.log('in updateClient');
 		  console.log( 'Data', data );
-  		$http({
-  			method: 'PUT',
-  			url: '/client/' + $scope.client_id,
-  			data: data
-  		}).then($scope.getClient);
+      for (var field in data) {
+        if (data.hasOwnProperty(field)) {
+          $scope.updatedClient[field] = data[field];
+        }
+      }
+      console.log('$scope.updatedClient = ', $scope.updatedClient);
     }; // end updateClient
 
-  $scope.getClientInfo = function () {
-    console.log('in getClientInfo');
-    var nameToSend = {
-      client_name: $scope.selectedName
-    };
-    console.log('nameToSend:', nameToSend);
-  }; // end getClientInfo
+    $scope.sendUpdatedClient = function () {
+    $http({
+    	method: 'PUT',
+    	url: '/client?q=' + $scope.selectedName,
+    	data: $scope.updatedClient
+    }).then($scope.getClient);
+  }; // end sendUpdatedClient
 
   $scope.clearCreateClient = function () {
     $scope.client_name = '';

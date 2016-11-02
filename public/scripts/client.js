@@ -1,4 +1,4 @@
-var app = angular.module('App', ['ngRoute', 'firebase']);
+var app = angular.module('App', ['ngRoute', 'firebase', 'xeditable']);
 
 app.controller('authController', function($scope, $firebaseArray, $firebaseAuth, $http) {
   var auth = $firebaseAuth();

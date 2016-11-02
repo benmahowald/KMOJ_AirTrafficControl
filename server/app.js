@@ -117,7 +117,29 @@ app.get('/client', function (req, res){
 			var queryResults = client.query('SELECT * FROM clients WHERE name=($1)', [req.query.q]);
 					queryResults.on('row', function(row){
 						results.push(row);
-            console.log('-------------row---------',row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+            console.log('results are', results);
+						return res.json(results);
+					});//end queryResults on 'end'
+  } // end first else
+	});//end pg.connect for traffic info
+});//end router.get for traffic info
+
+app.put('/client', function (req, res){
+	console.log('get client server route hit');
+  console.log('req.query.q', req.query.q);
+  console.log('req.body = ', req.body);
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in clientinfo');
+		} else {
+			var results = [];
+			var queryResults = client.query('UPDATE clients SET name=($1), contact=($2), address=($3), city=($4), state=($5), zip=($6), phone=($7), cell=($8), fax=($9), email=($10), webiste=($11) WHERE name=($12)', [req.body.name, req.body.contact, req.body.address, req.body.city, req.body.state, req.body.zip, req.body.phone, req.body.cell, req.body.fax, req.body.email, req.body.webiste, req.query.q]);
+					queryResults.on('row', function(row){
+						results.push(row);
+            console.log('row', row);
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
 						done();
