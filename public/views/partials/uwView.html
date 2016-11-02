@@ -93,7 +93,7 @@
   <p>
     <span class="boldFont">How many weeks in the rotation?</span>
     <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks, $event)" placeholder="1">
-    <button type="button" ng-click="showObject()">Submit Schedule</button>
+    <button type="button" ng-click="sendContract()">Submit Schedule</button>
     <span class="boldFont">Total Spots in Flight: {{flightTotal}}</span>
   </p>
   <div ng-repeat="week in weeks">

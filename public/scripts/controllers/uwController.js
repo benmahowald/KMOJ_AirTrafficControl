@@ -21,8 +21,33 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
   $scope.days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   console.log($scope.hours);
 
-  $scope.showObject = function(){
+  $scope.sendContract = function(){
     console.log($scope.weeks);
+
+    var numDays = $scope.currentNumWeeks * 7; // seven days in a weeks
+    var dayIndex;
+    var dayCheck;
+    $scope.slotDBinfo = [];
+    slotIndex = 0;
+
+    for (var m = 1; m <= numDays; m++) {
+      weekIndex = floor(m/7);
+      dayIndex = (m-1)-(7*(weekIndex));
+      numWeek = weekIndex+1;
+      dayCheck = $scope.days[dayIndex];
+      for (var hour in $scope.hours) {
+        if ($scope.hours.hasOwnProperty(hour)) {
+          if ($scope.weeks['week'+numWeek][hour][dayCheck]) {
+            $scope.slotDBinfo[slotIndex] = {
+              dayOfRun: m,
+              plays: $scope.weeks['week'+numWeek][hour][dayCheck],
+              slot: hour.text
+            };
+            slotIndex++;
+          }
+        }
+      }
+    }
   };
 
   $scope.updateWeeks = function(weekRequest, ev){
@@ -131,8 +156,8 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
     $scope.totals[weekName].total = 0;
     var dayCheck;
     // check to see if anything has been recorded yet
-    for (var i = 0; i < $scope.days.length; i++) {
-      dayCheck = $scope.days[i];
+    for (var k = 0; k < $scope.days.length; k++) {
+      dayCheck = $scope.days[k];
       //// Update the hour's total
       // if there is a total for that day then add it to the sum
       if ($scope.weeks[weekName][thisHour][dayCheck]) {
@@ -159,8 +184,8 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
   $scope.calcFlightTotal = function(){
     console.log($scope.currentNumWeeks);
     $scope.flightTotal = 0;
-    for (var j = 1; j <= $scope.currentNumWeeks; j++) {
-      $scope.flightTotal = $scope.flightTotal + $scope.totals['week'+j].total;
+    for (var l = 1; l <= $scope.currentNumWeeks; l++) {
+      $scope.flightTotal = $scope.flightTotal + $scope.totals['week'+l].total;
       console.log('flightTotal:', $scope.flightTotal);
     }
     console.log('totals:',$scope.totals);
@@ -201,19 +226,20 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
       psa: $scope.psa,
       instructions: $scope.instructions,
       discount: $scope.discount,
-      agency_comission: $scope.agency_comission
+      agency_comission: $scope.agency_comission,
+      slotInfo: $scope.slotDBinfo
     };
     console.log('UW objectToSend:', objectToSend);
 
-    $http({
-      method: 'POST',
-      url: '/',
-      data: objectToSend,
-    }).then(function (response){
-      console.log('success in uwCtrl post route:', response);
-    }, function (error) {
-      console.log('error in uwCtrl post route:', error);
-    }); // end then function
+    // $http({
+    //   method: 'POST',
+    //   url: '/',
+    //   data: objectToSend,
+    // }).then(function (response){
+    //   console.log('success in uwCtrl post route:', response);
+    // }, function (error) {
+    //   console.log('error in uwCtrl post route:', error);
+    // }); // end then function
   }; // end submitRunSheetEntry
 
   // $scope.submitEventInfo = function () {
