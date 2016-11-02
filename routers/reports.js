@@ -3,10 +3,9 @@ var router = express.Router();
 var path = require('path');
 var pg = require('pg');
 var bodyParser = require('body-parser');
-var pdfjsLib = require('pdfjs-dist');
+// var pdfjsLib = require('pdfjs-dist');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
-<<<<<<< HEAD
 router.use(bodyParser.json());
 
 //generate a report from by getting info from db
@@ -31,7 +30,7 @@ router.get('/reports', function (req, res){
 		}
 	});//end pg.connect for getting reports
 });//end router.get for getting reports
-=======
+
 // var loadingTask = pdfjsLib.getDocument(pdfPath);
 // loadingTask.promise.then(function (pdfDocument) {
 //   // Request a first page
@@ -74,6 +73,6 @@ router.get('/reports', function (req, res){
 // 		}
 // 	});//end pg.connect for getting reports
 // });//end router.get for getting reports
->>>>>>> pdf
+
 
 module.exports = router;
