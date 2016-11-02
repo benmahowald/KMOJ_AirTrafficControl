@@ -46,7 +46,7 @@ users_id INT
 CREATE TABLE users (
 id SERIAL PRIMARY KEY,
 email VARCHAR (100),
-permission INT,
+permission VARCHAR (200),
 name VARCHAR (100),
 active BOOLEAN DEFAULT 'true'
 );

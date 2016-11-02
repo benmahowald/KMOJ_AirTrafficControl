@@ -3,10 +3,11 @@ var router = express.Router();
 var path = require('path');
 var pg = require('pg');
 var bodyParser = require('body-parser');
+var nodemailer = require ('nodemailer');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
-// console.log('in underwrite router');
-//router.post client
+console.log('in underwrite router');
+router.post client
 router.post ('/client', function (req, res){
 	console.log ('req.body for client is', req.body);
 	var client = req.body;
@@ -65,7 +66,7 @@ router.get('/underwriterinfo', function (req, res){
 
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
-						//send mail to production and traffic alert that a new contract has been generated. 
+						//send mail to production and traffic alert that a new contract has been generated.
 						protraffMail();
 						done();
 							console.log('results are', results);

@@ -17,16 +17,15 @@ firebase.initializeApp({
 
 app.use(bodyParser.json());
 
-
-var underwriter = require ('../routers/underwriter');
-app.use('/underwriter', underwriter);
-// require and use auth router
+// require server-side routers
 var auth = require('../routers/auth');
 app.use('/auth', auth);
 
-// require other server-side routers
 var admin = require ('../routers/admin');
 app.use('/admin', admin);
+
+var underwriter = require ('../routers/underwriter');
+app.use('/underwriter', underwriter);
 
 var traffic = require ('../routers/traffic');
 app.use('/traffic', traffic);
@@ -34,11 +33,13 @@ app.use('/traffic', traffic);
 var production = require ('../routers/production');
 app.use('/production', production);
 
+
 var reports = require ('../routers/reports');
 app.use('/reports', reports);
 
-// var nodemailer = require ('../routers/nodemailer');
-// app.use('/nodemailer', nodemailer);
+var nodemailer = require ('../routers/nodemailer');
+app.use('/nodemailer', nodemailer);
+
 
 //port 5000 being used
 var portDecision = process.env.PORT || 5000;

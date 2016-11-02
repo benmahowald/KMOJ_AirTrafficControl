@@ -2,20 +2,21 @@ var app = angular.module('App', ['ngRoute', 'firebase', 'ngMaterial']);
 
 app.controller('authController', function($scope, $firebaseArray, $firebaseAuth, $http) {
   var auth = $firebaseAuth();
+  console.log('in authController');
 
-  //Login
-  $scope.logIn = function login(){
-    auth.$signInWithPopup('google').then(function(firebaseUser) {
-      console.log('Signed in as:', firebaseUser.user.displayName);
+  //User login
+  $scope.logIn = function(){
+    console.log('in logIn()');
+    auth.$signInWithEmailAndPassword($scope.userEmail, $scope.userPassword).then(function(firebaseUser) {
+      console.log("Authentication Success!");
       $scope.loggedIn = true;
     }).catch(function(error) {
-      console.log('Authentication failed:', error);
-    });//end error
-  };//end logIn
+      console.log("Authentication failed: ", error);
+    });//end catch error
+  };//end logIn()
 
-  //runs whenever the user changes authentication states
+  //Authentication state change
   auth.$onAuthStateChanged(function(firebaseUser){
-    // firebaseUser will be null if not logged in
     if(firebaseUser) {
       firebaseUser.getToken().then(function(idToken){
         $http({
@@ -23,24 +24,27 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
           url: '/auth/adminLogin',
           headers: {
             id_token: idToken
-          }
+          }//end header object
         }).then(function(response){
           $scope.signedIn = response.data;
+          //clear login input fields
+          $scope.userEmail = "";
+          $scope.userPassord="";
         });//end response
-      });//end getToken
-    }//end if
-    else {
+      });//end return idToken
+    }//end if(firebaseUser)
+    else{
       console.log('Not logged in.');
-      $scope.signedIn = 'Please Login';
+      $scope.signedIn = "Please login"
     }//end else
-  });//end onAuthStateChanged
+  });//end onAuthStateChanged()
 
-  //Logout
+  //User logout
   $scope.logOut = function(){
     auth.$signOut().then(function(){
-      console.log('Logged out');
+      console.log('Logging the user out!');
       $scope.loggedIn = false;
-    });//end response
+    });//end signOut
   };//end logOut
 });//end authController
 
@@ -98,6 +102,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 // navbar collapse on click of anchor
 $(document).on('click','.navbar-collapse.in',function(e) {
   if( $(e.target).is('a') ) {
-      $(this).collapse('hide');
+    $(this).collapse('hide');
   } // end if statement
 }); // end document ready

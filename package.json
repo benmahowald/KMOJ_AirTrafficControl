@@ -26,5 +26,8 @@
     "moment": "^2.15.2",
     "nodemailer": "^2.6.4",
     "pg": "^6.1.0"
+  },
+  "devDependencies": {
+    "pdfjs-dist": "^1.6.295"
   }
 }

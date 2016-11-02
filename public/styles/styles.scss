@@ -34,6 +34,22 @@ h1, h2, h3, h4 {
 @import '_navbar';
 @import '_form';
 
+.login {
+  margin-top: 12px;
+}
+
+.signin {
+  color: white;
+  display:inline;
+}
+.signin:hover {
+  color: white;
+}
+
+.userInput {
+  width:130px;
+}
+
 // This code removes the arrow buttons from number inputs
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
