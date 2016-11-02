@@ -1,4 +1,4 @@
-<div id = "content">
+
 <h3>Monthly Reporting</h3>
 
 <img src="assets/kmoj.png" style="width:60px;" alt="logo">
@@ -7,7 +7,8 @@
   Phone: (612)377-0594<br>
   Fax: (612)377-6919<br></p>
   <div>
-    <table class = "export-table" width = "75%">
+    <div id = "content">
+    <table  width = "75%">
       <tr>
         <th>Cart Number</th>
         <th>Start Date</th>
@@ -25,11 +26,13 @@
         <td>${{report.total_cost}}</td>
       </tr>
     </table>
-
+  </div>
+      <div id = "editor"></div>
+      <button id = "cmd">Generate PDF</button>
   </div>
 </div>
-<div id = "editor"></div>
-  <button id = "cmd">Generate PDF</button>
+
+
   <div>
       <form>
         <label for="startDate">Start Date</label><br>
