@@ -6,12 +6,12 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
   $scope.getProductions = function (){
     $http({
       method: 'GET',
-      url: '/productionInfo/Productions'
+      url: '/productionInfo/productions'
     }).then(function(response){
-      $scope.Productions = response.data;
-      console.log ($scope.Productions);
+      $scope.productions = response.data;
+      console.log ($scope.productions);
     }, function errorCallback(response){
-      console.log('error getting Productions', response);
+      console.log('error getting productions', response);
     });
   };
 
