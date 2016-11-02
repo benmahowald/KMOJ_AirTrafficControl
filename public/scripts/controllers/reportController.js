@@ -15,6 +15,24 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
     });
   };
 
+  angular.element(document).ready(function () {
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+          '#editor': function (element, renderer){
+          return true;
+          }
+        };
+
+        $('#cmd').click(function(){
+          doc.fromHTML($('#content').html(), 30, 30, {
+            'width': 270,
+            'elementHandlers': specialElementHandlers
+          });
+          doc.save('current-report.pdf');
+        });
+    });
+
+
 }]);
 
 // $scope.downloadReportPdf = function(){
