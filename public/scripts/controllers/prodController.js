@@ -1,6 +1,20 @@
 app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
+  $scope.productionInfo = [];
+
+  $scope.getProductions = function (){
+    $http({
+      method: 'GET',
+      url: '/productionInfo/Productions'
+    }).then(function(response){
+      $scope.Productions = response.data;
+      console.log ($scope.Productions);
+    }, function errorCallback(response){
+      console.log('error getting Productions', response);
+    });
+  };
+
 
   $scope.sendProduction = function(){
     var prodToSend = {

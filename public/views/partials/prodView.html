@@ -1,4 +1,42 @@
-<h3>Production</h3>
+<h3><strong>Production</strong></h3>
+
+<br> </br>
+
+<div id = "content">
+  <table id = "editor" class = "export-table" width = "75%">
+    <tr>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Underwriter Name</th>
+      <th>Client Name</th>
+      <th>Client Contact</th>
+      <th>Client Phone</th>
+      <th>Client Address</th>
+      <th>Event Name</th>
+      <th>
+
+      </th>
+    </tr>
+    <tr ng-repeat="productionInfo in Productions">
+      <td>{{Productions.start_date}}</td>
+      <td>{{Productions.end_date}}</td>
+      <td>{{Productions.uw_name}}</td>
+      <td>{{Productions.clients_name}}</td>
+      <td>{{Productions.contact}}</td>
+      <td>{{Productions.phone}}</td>
+      <td>{{Productions.address</td>
+      <td>{{Productions.event_name}}</td>
+    </tr>
+  </table>
+
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+
+
+
 <div class="form">
   <form class="production">
     <input type="text" name="voice_talent" ng-model="talent" value="" placeholder="Voice Talent">
