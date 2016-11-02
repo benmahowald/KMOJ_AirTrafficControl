@@ -14,5 +14,6 @@ Permission Level: <select ng-model="auth" ng-options="authLevel as authLevel.per
   <p ng-repeat='user in users'>
     <br>
     Name: {{user.name}} Email: {{user.email}} Permission Level: {{user.permission}} Active: {{user.active}}
+      <button ng-click='deleteUser()'>Delete</button>
   </p>
 </div>

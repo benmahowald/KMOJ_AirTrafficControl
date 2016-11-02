@@ -74,4 +74,17 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     }//end else
   };//end createNewUser()
 
+  $scope.deleteUser = function(){
+    console.log("this.user.id",this.user.id);
+    $http({
+      method: 'DELETE',
+      url: '/admin/deleteUser',
+      data: {id: this.user.id},
+      headers: {"Content-Type": "application/json;charset=utf-8"}
+    }).then(function(response){
+      console.log('returned from server ', response);
+      viewUsers();
+    })//end return
+  };//end function
+
 }]);//end authController
