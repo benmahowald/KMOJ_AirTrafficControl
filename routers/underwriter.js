@@ -7,7 +7,7 @@ var nodemailer = require ('nodemailer');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
 console.log('in underwrite router');
-router.post client
+
 router.post ('/client', function (req, res){
 	console.log ('req.body for client is', req.body);
 	var client = req.body;

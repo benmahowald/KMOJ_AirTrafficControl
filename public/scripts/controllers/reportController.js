@@ -15,8 +15,23 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
     });
   };
 
-  angular.element(document).ready(function () {
-        var doc = new jsPDF();
+  // Copyright (c) 2010-2016 James Hall, https://github.com/MrRio/jsPDF
+  //
+  // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+  //
+  // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+  // angular.element(document).ready(function () {
+        var doc = new jsPDF({
+          orientation: 'landscape',
+          unit: 'in',
+          format: [4, 2]
+        });
+        doc.
+        doc.setFontSize(12);
+        doc.text(35, 25, "2123 W. Broadway, Suite 200");
+        doc.text(35, 25, "Minneapolis, MN 55411");
+        doc.text(35, 25, "Phone: (612)377-0954")
+        doc.text(35, 25, "Fax: (612)377-6919")
         var specialElementHandlers = {
           '#editor': function (element, renderer){
           return true;
@@ -24,13 +39,13 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
         };
 
         $('#cmd').click(function(){
-          doc.fromHTML($('#content').html(), 30, 30, {
-            'width': 270,
+          doc.fromHTML($('#content').html(), 15, 15, {
+            'width': 75,
             'elementHandlers': specialElementHandlers
           });
           doc.save('current-report.pdf');
         });
-    });
+
 
 
 }]);
