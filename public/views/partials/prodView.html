@@ -17,15 +17,15 @@
 
       </th>
     </tr>
-    <tr ng-repeat="productionInfo in productions">
-      <td>{{productions.start_date}}</td>
-      <td>{{productions.end_date}}</td>
-      <td>{{productions.uw_name}}</td>
-      <td>{{productions.clients_name}}</td>
-      <td>{{productions.contact}}</td>
-      <td>{{productions.phone}}</td>
-      <td>{{productions.address</td>
-      <td>{{productions.event_name}}</td>
+    <tr ng-init="getProductions()" ng-repeat="production in productions">
+      <td>{{production.start_date}}</td>
+      <td>{{production.end_date}}</td>
+      <td>{{production.uw_name}}</td>
+      <td>{{production.clients_name}}</td>
+      <td>{{production.contact}}</td>
+      <td>{{production.phone}}</td>
+      <td>{{production.address</td>
+      <td>{{production.event_name}}</td>
     </tr>
   </table>
 </div>

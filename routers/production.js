@@ -16,6 +16,7 @@ var connectionString = 'postgres://localhost:5432/kmoj';
 				var queryResults = client.query('SELECT flight.start_date, flight.end_date, clients.name, clients.contact, clients.phone, clients.address, production.talent, production.producer, master.event_name, master.spot_length, master.users_id FROM flight INNER JOIN master ON master.flight_id = flight.id INNER JOIN clients ON clients.client_id = master.client_id INNER JOIN production ON production.contract_id = master.id');
 						  queryResults.on('row', function(row){
 							results.push(row);
+							console.log('productionInfo row is ', row);
 						});//end queryResults.on 'row'
 						queryResults.on('end', function(){
 							done();
