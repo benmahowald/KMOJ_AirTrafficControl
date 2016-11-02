@@ -9,6 +9,7 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
       url: '/reports/reports'
     }).then(function(response){
       $scope.reports = response.data;
+      console.log ($scope.reports);
     }, function errorCallback(response){
       console.log('error getting reports', response);
     });
