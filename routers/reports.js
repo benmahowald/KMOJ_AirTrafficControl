@@ -3,6 +3,7 @@ var router = express.Router();
 var path = require('path');
 var pg = require('pg');
 var bodyParser = require('body-parser');
+
 var nodemailer = require ('nodemailer');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
@@ -24,8 +25,9 @@ router.get('/reports', function (req, res){
 					queryResults.on('end', function(){
 						// invoiceMail();
 						done();
-						return res.json(results);
 						console.log('results are', results);
+						return res.json(results);
+
 					});//end queryResults on 'end'
 		}
 	});//end pg.connect for getting reports
