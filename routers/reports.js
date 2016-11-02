@@ -5,6 +5,8 @@ var pg = require('pg');
 var bodyParser = require('body-parser');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
+router.use(bodyParser.json());
+
 //generate a report from by getting info from db
 router.get('/reports', function (req, res){
 	console.log('in get reports');

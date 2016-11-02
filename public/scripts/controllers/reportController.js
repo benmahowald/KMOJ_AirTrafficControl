@@ -1,4 +1,4 @@
-app.controller('reportController', ['$scope', function($scope){
+app.controller('reportController', ['$scope', '$http', function($scope, $http){
   console.log('Report Controller');
 
   $scope.reports = [];
@@ -11,7 +11,7 @@ app.controller('reportController', ['$scope', function($scope){
       $scope.reports = response.data;
     }, function errorCallback(response){
       console.log('error getting reports', response);
-    }
-  });
+    });
+  };
 
 }]);
