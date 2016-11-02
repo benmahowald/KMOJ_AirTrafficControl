@@ -231,15 +231,15 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
     };
     console.log('UW objectToSend:', objectToSend);
 
-    // $http({
-    //   method: 'POST',
-    //   url: '/',
-    //   data: objectToSend,
-    // }).then(function (response){
-    //   console.log('success in uwCtrl post route:', response);
-    // }, function (error) {
-    //   console.log('error in uwCtrl post route:', error);
-    // }); // end then function
+    $http({
+      method: 'POST',
+      url: '/master',
+      data: objectToSend,
+    }).then(function (response){
+      console.log('success in uwCtrl post route:', response);
+    }, function (error) {
+      console.log('error in uwCtrl post route:', error);
+    }); // end then function
   }; // end submitRunSheetEntry
 
   // $scope.submitEventInfo = function () {
