@@ -75,7 +75,7 @@
   <!-- <option value="" selected>-Select a client-</option>
   <option ng-repeat="current_name in clientNameList" value={{current_name}}>{{current_name}}</option> -->
 </select><br>
-<input type="button" name="getClients" value="Get Client" ng-click="getClientInfo()">
+<input type="button" name="getClients" value="Get Client" ng-click="getClient()">
 
 <form class="form" editable-form name="editableForm" onaftersave="updateClient()">
   <span class="manageEl">Client: <span editable-text="clientData.client_name" onbeforesave="updateClient({client_name: $data})" blur="submit">{{ clientData.client_name || "empty" }}</span></span><br>

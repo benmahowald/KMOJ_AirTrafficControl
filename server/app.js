@@ -85,26 +85,49 @@ app.post('/client', function (req, res){
 });//end router.post for client table
 
 //////////// retrieve all client information ///////////////
-app.get('/client', function (req, res){
-	console.log('in get client info');
+// ('SELECT * FROM clients WHERE name=($1)', [req.query.name]);
+app.get('/clients', function (req, res){
+	console.log('get clients server route hit');
 	pg.connect(connectionString, function(err, client, done){
 		if (err){
 			console.log('connection err in clientinfo');
 		} else {
 			var results = [];
-      
 			var queryResults = client.query('SELECT * FROM clients');
 					queryResults.on('row', function(row){
 						results.push(row);
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
 						done();
+            // console.log('results are', results);
+						return res.json(results);
+					});//end queryResults on 'end'
+  } // end first else
+	});//end pg.connect for traffic info
+});//end router.get for traffic info
+
+app.get('/client', function (req, res){
+	console.log('get client server route hit');
+  console.log(req.query.q);
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in clientinfo');
+		} else {
+			var results = [];
+			var queryResults = client.query('SELECT * FROM clients WHERE name=($1)', [req.query.q]);
+					queryResults.on('row', function(row){
+						results.push(row);
+            console.log('-------------row---------',row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
             console.log('results are', results);
 						return res.json(results);
 					});//end queryResults on 'end'
-		}
+  } // end first else
 	});//end pg.connect for traffic info
 });//end router.get for traffic info
+
 
 // setting catch all route
 app.get('/*', function(req,res){

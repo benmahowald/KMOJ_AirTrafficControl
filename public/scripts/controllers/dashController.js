@@ -1,5 +1,5 @@
 app.controller('dashController', ['$scope', '$http', function($scope, $http) {
-  console.log('Dashboard Controller');
+  // console.log('Dashboard Controller');
 
   $scope.submitClient = function (){
     console.log('in submitClient');
@@ -38,20 +38,19 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
   // retrieves all clients and pushs each name into clientNameList array
   // for client drop down meny
   $scope.getAllClients = function () {
+    console.log('in getAllClients');
     $http({
       method: 'GET',
-      url: '/client',
+      url: '/clients',
     }).then(function (response){
           $scope.allClients = response.data;
-          console.log('getAllClients success:', $scope.allClients);
+          // console.log('getAllClients success:', $scope.allClients);
           for (var i = 0; i < $scope.allClients.length; i++) {
             $scope.clientNameList.push($scope.allClients[i].name);
-            console.log('client name:' + i + " " + $scope.allClients[i].name);
           }
         }, function (error) {
           console.log('error in getAllClients;', error);
         }); // end then function
-        console.log('outside http call:', $scope.clientNameList);
     }; // end getAllClients
 
 
@@ -59,18 +58,20 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
 
   // calls for xeditable functionality to edit client info
   $scope.getClient = function () {
+    console.log('in getClient');
+    console.log('selectedName:', $scope.selectedName);
     $http({
       method: 'GET',
-      url: '/client/' + $scope.selectedName,
+      url: '/client?q=' + $scope.selectedName,
     }).then(function (response){
-          console.log('get manage account success:', response.data);
           $scope.clientData = response.data;
+          console.log('$scope.clientData = ', $scope.clientData);
         }, function (error) {
           console.log('error in get;', error);
         }); // end then function
     }; // end getClients
 
-    $scope.getClient();
+    // $scope.getClient();
 
     $scope.updateClient = function(data) {
 		  console.log( 'Data', data );
@@ -80,6 +81,14 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
   			data: data
   		}).then($scope.getClient);
     }; // end updateClient
+
+  $scope.getClientInfo = function () {
+    console.log('in getClientInfo');
+    var nameToSend = {
+      client_name: $scope.selectedName
+    };
+    console.log('nameToSend:', nameToSend);
+  }; // end getClientInfo
 
   $scope.clearCreateClient = function () {
     $scope.client_name = '';
