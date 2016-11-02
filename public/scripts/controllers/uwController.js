@@ -51,12 +51,13 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
       weeksDiff = -weeksDiff;
       var newMaxWeek = currentMaxWeek-weeksDiff;
       var emptyOfInfo = true;
+      var searchDone = false;
       var removeStart = newMaxWeek+1;
       var weekInQuestion = removeStart;
       var thisWeek;
       // Check to see if any information has been entered in the weeks that are
       // about to be deleted
-      while (emptyOfInfo) {
+      while (emptyOfInfo && !searchDone) {
         thisWeek = 'week'+weekInQuestion;
         // check for any hours in the week object
         for (var hour in $scope.weeks[thisWeek]) {
@@ -74,16 +75,25 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
           }
         } // end loop through hours
         weekInQuestion++;
+        if (weekInQuestion>currentMaxWeek) {
+          searchDone = true;
+        }
       }
       // if the weeks in question are not empty of information
       if (!emptyOfInfo) {
         // then confirm the action with the user
+        var pluralText = 's';
+
+        if(weeksDiff===1){
+          pluralText = '';
+        }
+
         var confirm = $mdDialog.confirm()
-        .title('Remove '+weeksDiff+' weeks - Are you sure?')
-        .textContent('You have entered information in the '+weeksDiff+' weeks you are about to remove.')
+        .title('Remove '+weeksDiff+' week'+pluralText+' - Are you sure?')
+        .textContent('You have entered information in the '+weeksDiff+' week'+pluralText+' you are about to remove.')
         .ariaLabel('Removal Warning')
         .targetEvent(ev)
-        .ok('Remove extra weeks')
+        .ok('Remove extra week'+pluralText)
         .cancel('Cancel and review');
 
         $mdDialog.show(confirm).then(function() {
@@ -107,9 +117,10 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
       $scope.currentNumWeeks--;
     }
     // if it was not empty of info then we need to recalculate the totals
-    // if (!emptyOfInfo){
+    if (!emptyOfInfo){
       //// Update the flight's total
       $scope.calcFlightTotal();
+    }
   };
 
   $scope.updateTotals = function(thisWeek, thisHour, thisDay){
@@ -155,8 +166,8 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
     console.log('totals:',$scope.totals);
   };
 
-  $scope.incrementCount = function(thisWeek, thisHour, thisDay) {
-    console.log('in incrementCount, with:', thisDay, thisHour, thisWeek);
+  $scope.incrementCount = function(thisWeek, thisHour, thisDay, $event) {
+    console.log('in incrementCount, with:', thisDay, thisHour, thisWeek, $event.target);
     var weekName = 'week'+thisWeek;
     if (!$scope.weeks[weekName][thisHour]){
       $scope.weeks[weekName][thisHour] = {};
@@ -166,16 +177,9 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
     } else {
       $scope.weeks[weekName][thisHour][thisDay] = 1;
     }
-    // this code was part of an attempt to have the text automatically selected when clicked
-    // if (!$window.getSelection().toString()) {
-    //   // Required for mobile Safari
-    //   console.log(this);
-    //   this[0].setSelectionRange(0, $scope.weeks[weekName][thisHour][thisDay].length);
-    // }
+
     $scope.updateTotals(thisWeek, thisHour, thisDay);
-
   };
-
 
   $scope.submitRunSheetEntry = function (){
     console.log('in submitRunSheetEntry');
