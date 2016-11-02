@@ -2,12 +2,13 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
 
-  $scope.productionInfo = [];
+  $scope.productions = [];
 
   $scope.getProductions = function (){
+    console.log('in getProductions');
     $http({
       method: 'GET',
-      url: '/productionInfo/productions'
+      url: '/production/productionInfo'
     }).then(function(response){
       $scope.productions = response.data;
       console.log ($scope.productions);

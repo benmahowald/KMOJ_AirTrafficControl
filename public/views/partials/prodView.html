@@ -1,62 +1,61 @@
+
+<h3><strong>Production</strong></h3>
+
+<br> </br>
+
+<div id = "content">
+  <table id = "editor" class = "export-table" width = "75%">
+    <tr>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Underwriter Name</th>
+      <th>Client Name</th>
+      <th>Client Contact</th>
+      <th>Client Phone</th>
+      <th>Client Address</th>
+      <th>Event Name</th>
+      <th>
+
+      </th>
+    </tr>
+    <tr ng-init="getProductions()" ng-repeat="production in productions">
+      <td>{{production.start_date}}</td>
+      <td>{{production.end_date}}</td>
+      <td>{{production.uw_name}}</td>
+      <td>{{production.clients_name}}</td>
+      <td>{{production.contact}}</td>
+      <td>{{production.phone}}</td>
+      <td>{{production.address</td>
+      <td>{{production.event_name}}</td>
+    </tr>
+  </table>
+</div>
+
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+
+
+
+<div class="form">
+  <form class="production">
+    <input type="text" name="event" ng-model="event" value="" placeholder="Event">
+    <input type="text" name="voice_talent" ng-model="talent" value="" placeholder="Voice Talent">
+    <input type="text" name="producer" value="" ng-model="producer" placeholder="Producer" ><br>
+    <input type="radio" name="spot_length" ng-model = "spot_length" value=":15">15-sec
+    <input type="radio" name="spot_length" ng-model = "spot_length" value=":30">30-sec
+    <input type="radio" name="spot_length" ng-model = "spot_length" value=":60">60-sec
+  </form>
+  <form class="production2">
+    <input type="text" name="cart_number" ng-model="cart_number" value="" placeholder="Cart #">
+    <input type="text" name="who" value="" ng-model="who" placeholder="Who">
+    <input type="text" name="where" value="" ng-model="site" placeholder="Where">
+    <input type="text" name="for_more_info" ng-model="why" value="" placeholder="For More Info">
+    <textarea name="what" rows="8" cols="30" ng-model = "what" placeholder="What"></textarea>
+    <input type="button" name="submitProd" value="Submit" ng-click="sendProduction()">
+  </form>
+</div>
+
 <div ng-show="userData[0].permission == 'Production'">
-  <h3><strong>Production</strong></h3>
-
-  <br> </br>
-
-  <div id = "content">
-    <table id = "editor" class = "export-table" width = "75%">
-      <tr>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Underwriter Name</th>
-        <th>Client Name</th>
-        <th>Client Contact</th>
-        <th>Client Phone</th>
-        <th>Client Address</th>
-        <th>Event Name</th>
-        <th>
-
-        </th>
-      </tr>
-      <tr ng-repeat="productionInfo in productions">
-        <td>{{productions.start_date}}</td>
-        <td>{{productions.end_date}}</td>
-        <td>{{productions.uw_name}}</td>
-        <td>{{productions.clients_name}}</td>
-        <td>{{productions.contact}}</td>
-        <td>{{productions.phone}}</td>
-        <td>{{productions.address</td>
-          <td>{{productions.event_name}}</td>
-        </tr>
-      </table>
-    </div>
-
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-
-
-
-
-    <div class="form">
-      <form class="production">
-        <input type="text" name="event" ng-model="event" value="" placeholder="Event">
-        <input type="text" name="voice_talent" ng-model="talent" value="" placeholder="Voice Talent">
-        <input type="text" name="producer" value="" ng-model="producer" placeholder="Producer" ><br>
-        <input type="radio" name="spot_length" ng-model = "spot_length" value=":15">15-sec
-        <input type="radio" name="spot_length" ng-model = "spot_length" value=":30">30-sec
-        <input type="radio" name="spot_length" ng-model = "spot_length" value=":60">60-sec
-      </form>
-      <form class="production2">
-        <input type="text" name="cart_number" ng-model="cart_number" value="" placeholder="Cart #">
-        <input type="text" name="who" value="" ng-model="who" placeholder="Who">
-        <input type="text" name="where" value="" ng-model="site" placeholder="Where">
-        <input type="text" name="for_more_info" ng-model="why" value="" placeholder="For More Info">
-        <textarea name="what" rows="8" cols="30" ng-model = "what" placeholder="What"></textarea>
-        <input type="button" name="submitProd" value="Submit" ng-click="sendProduction()">
-      </form>
-    </div>
-    <div ng-show="userData[0].permission !== 'Production'">
-      404
-    </div>
