@@ -1,18 +1,23 @@
-<h3><strong>Traffic / Run Confirmation / Invoice</strong></h3>
-<img src="assets/kmoj.png" style="width:60px;" alt="logo">
-<p>2123 W. Broadyway, Suite 200<br>
-  Minneapolis, MN 55411<br>
-  Phone: (612)377-0594<br>
-  Fax: (612)377-6919<br>
-<div class="form">
-  <form class="traffic">
-    <input type="text" name="interviews" ng-model="interviews" value="" placeholder="# of interviews">
-    <input type="text" name="socialmedia" ng-model="socialmedia" value="" placeholder="# of SM Posts">
-    <br>
-    <input type="checkbox" name="man_app" ng-model="man_app" value="true">Manager Approval<br>
-    <input type="checkbox" name="uw_app" ng-model="uw_app" value="true">Underwriter Approval<br>
-    <input type="checkbox" name="pr_app" ng-model="pr_app" value="true">Production Approval<br>
-    <input type="checkbox" name="tr_app" ng-model="tr_app" value="true">Traffic Approval<br>
-    <input type="button" name="submitTraf" value="Submit" ng-click="sendTraffic()">
-  </form>
-</div>
+<div ng-show="userData[0].permission == 'Traffic'">
+  <h3><strong>Traffic / Run Confirmation / Invoice</strong></h3>
+  <img src="assets/kmoj.png" style="width:60px;" alt="logo">
+  <p>2123 W. Broadyway, Suite 200<br>
+    Minneapolis, MN 55411<br>
+    Phone: (612)377-0594<br>
+    Fax: (612)377-6919<br>
+    <div class="form">
+      <form class="traffic">
+        <input type="text" name="interviews" ng-model="interviews" value="" placeholder="# of interviews">
+        <input type="text" name="socialmedia" ng-model="socialmedia" value="" placeholder="# of SM Posts">
+        <br>
+        <input type="checkbox" name="man_app" ng-model="man_app" value="true">Manager Approval<br>
+        <input type="checkbox" name="uw_app" ng-model="uw_app" value="true">Underwriter Approval<br>
+        <input type="checkbox" name="pr_app" ng-model="pr_app" value="true">Production Approval<br>
+        <input type="checkbox" name="tr_app" ng-model="tr_app" value="true">Traffic Approval<br>
+        <input type="button" name="submitTraf" value="Submit" ng-click="sendTraffic()">
+      </form>
+    </div>
+  </div>
+  <div ng-show="userData[0].permission !== 'Traffic'">
+    404
+  </div>
