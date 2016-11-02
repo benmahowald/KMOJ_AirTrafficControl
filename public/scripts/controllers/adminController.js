@@ -17,7 +17,7 @@ console.log("in AdminCTRL $scope.userData",$scope.userData);
     $scope.newUserEmail="";
     $scope.newUserPassword = "";
     $scope.auth= $scope.authLevels;
-  }//end clearFields
+  }; //end clearFields
 
   //array to hold users
   $scope.users = [];
@@ -29,7 +29,7 @@ console.log("in AdminCTRL $scope.userData",$scope.userData);
     }).then(function(response){
       console.log('returned from server ', response);
       $scope.users = response.data;
-    })//end return
+    }); //end return
   };//end viewUsers
 
   //view users on DOM when page is loaded

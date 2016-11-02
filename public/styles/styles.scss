@@ -26,6 +26,13 @@ h1, h2, h3, h4 {
   font-family: verdana, sans-serif;
 }
 
+// This code removes the arrow buttons from number inputs
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .active {
   color: #fff;
 }
@@ -50,11 +57,10 @@ h1, h2, h3, h4 {
   width:130px;
 }
 
-// This code removes the arrow buttons from number inputs
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.boldFont {
+  font-style: italic;
+  text-decoration: underline;
+  font-weight: bolder;
 }
 
 .navLog {

@@ -2,7 +2,6 @@
   <div class="form">
     <form name="master">
       <h3>Event Info</h3>
-      <input type="text" name="event" ng-model="event" value="" placeholder="Event">
       <input type="text" name="client" ng-model="client" value="" placeholder="Client">
       <input type="text" name="contact" ng-model="clientContact" value="" placeholder="Contact's Name">
     </form>
@@ -91,23 +90,29 @@
   </div>
   <div id="trafficGrid">
     <h3>Run Sheet Entry</h3>
-    <p>How many weeks in the rotation? <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks)" placeholder="1"></p>
-    <table ng-repeat="week in weeks">
-      <th>
-        <td ng-repeat="day in days">{{day}}</td>
-        <td>---Totals---</td>
-      </th>
-      <tr ng-repeat="hour in hours">
-        <td>{{hour.text}}</td>
-        <td ng-repeat="day in days">
-          <input class="trafficSlot" type="number" ng-model="week[hour.name][day]" ng-change="updateTotal(hour.name)" value="">
-        </td>
-        <td></td>
-      </tr>
-    </table>
-    <button type="button" ng-click="showObject()">Show Object</button>
+    <p>
+      <span class="boldFont">How many weeks in the rotation?</span>
+      <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks, $event)" placeholder="1">
+      <button type="button" ng-click="showObject()">Submit Schedule</button>
+      <span class="boldFont">Total Spots in Flight: {{flightTotal}}</span>
+    </p>
+    <div ng-repeat="week in weeks">
+      <table>
+        <th>
+          <td>---Totals---</td>
+          <td ng-repeat="day in days">{{day}}</td>
+        </th>
+        <tr ng-repeat="hour in hours">
+          <td>{{hour.text}}</td>
+          <td>{{totals["week"+week.num][hour.title]}}</td>
+          <td ng-repeat="day in days">
+            <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="updateTotals(week.num, hour.title, day)" ng-click="incrementCount(week.num, hour.title, day, $event)">
+          </td>
+        </tr>
+      </table>
+      <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
+    </div>
   </div>
-</div>
-<div ng-show="userData[0].permission !== 'Underwriter'">
-  404
-</div>
+  <div ng-show="userData[0].permission !== 'Underwriter'">
+    404
+  </div>
