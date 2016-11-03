@@ -81,27 +81,6 @@ $scope.init = function (){
 
 
 
-  $scope.linkList =[
-    {route:'admin', linkText:'Admin', permission:'Administration'},
-    {route:'admin', linkText:'Admin', permission:'View All'},
-    {route:'admin/employees', linkText:'Employee Authorization', permission:'Administration'},
-    {route:'admin/employees', linkText:'Employee Authorization', permission:'View All'},
-    {route:'admin/report', linkText:'Report', permission:'Administration'},
-    {route:'admin/report', linkText:'Report', permission:'View All'},
-    {route:'production', linkText:'Production', permission:'Production'},
-    {route:'production', linkText:'Production', permission:'View All'},
-    {route:'traffic', linkText:'Traffic', permission:'Traffic'},
-    {route:'traffic', linkText:'Traffic', permission:'View All'},
-    {route:'underwriter', linkText:'Underwriter', permission:'Underwriter'},
-    {route:'underwriter', linkText:'Underwriter', permission:'View All'},
-    {route:'underwriter/createClient', linkText:'Create Client', permission:'Underwriter'},
-    {route:'underwriter/createClient', linkText:'Create Client', permission:'View All'},
-    {route:'underwriter/editClient', linkText:'Edit Client', permission:'Underwriter'},
-    {route:'underwriter/editClient', linkText:'Edit Client', permission:'View All'},
-    {route:'underwriter/aired', linkText:'Aired History', permission:'Underwriter'},
-    {route:'underwriter/aired', linkText:'Aired History', permission:'View All'}
-  ];//end scope.linkList
-
 });//end authController
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
@@ -151,7 +130,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: '/views/partials/index.html'
   }).
   otherwise({
-    redirectTo: '/views/partials/index.html'
+    redirectTo: '/'
   });
 
   // use the HTML5 History API for pretty URLs

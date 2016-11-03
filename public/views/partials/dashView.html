@@ -1,6 +1,8 @@
 <div ng-show="userData[0].permission == 'Underwriter' || 'View All'">
 <h3> <strong>Create A Client</strong></h3>
 <br>
+<br>
+<select ng-change="getMasterDocs()" ng-model="selectedName" ng-options="name for name in clientNameList"></select>
 <div class="form">
   <form name="client">
     <input type="text" name="client" ng-model="client_name" value="" placeholder="Client Name">
@@ -72,7 +74,7 @@
 </div>
 
 <h3>Choose a client to edit.</h3>
-<select ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList">
+<select ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select>
   <!-- <option value="" selected>-Select a client-</option>
   <option ng-repeat="current_name in clientNameList" value={{current_name}}>{{current_name}}</option> -->
 </select>
@@ -112,6 +114,6 @@
   </div>
 </form>
 </div>
-<div ng-show="userData[0].permission !== 'Underwriter'">
+<!-- <div ng-show="userData[0].permission !== 'Underwriter'">
   404
-</div>
+</div> -->

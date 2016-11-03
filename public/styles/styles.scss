@@ -9,12 +9,12 @@
 
 $bodyColor: #333;
 $navColor: #fff;
+$font: 'Open Sans', sans-serif;
 
 html, body, td, table {
   margin: auto auto;
   text-align: center;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: lighter;
+  font-family: $font;
 }
 
 html {
@@ -23,8 +23,7 @@ html {
 }
 
 h1, h2, h3, h4 {
-  font-size: 100%;
-  font-family: verdana, sans-serif;
+  font-family: 'Open Sans', verdana, sans-serif;
 }
 
 // This code removes the arrow buttons from number inputs
@@ -88,4 +87,40 @@ input[type=number]::-webkit-outer-spin-button {
 
 .navbar-default .navbar-nav>li:hover {
   background-color: #3f3f3f;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu,
+.navbar-default .navbar-nav .open .dropdown-menu::after,
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+    background-color: #262626;
+    color:#ffffff;
+}
+
+input {
+  color: #333;
+}
+
+input[placeholder] {
+   color: #333;
+   font-family: $font;
+}
+
+.contractsPending {
+  width: 400px;
+  max-width: 95%;
+  margin: 5px auto 15px;
+  text-align: left;
+  font-family: $font;
+
+}
+
+.pendingContractHeading {
+  width: 400px;
+  max-width: 95%;
+  margin: auto;
+  text-align: left;
+  font-family: $font;
+  border-bottom: 1px solid #333;
 }
