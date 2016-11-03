@@ -2,6 +2,7 @@
   <div class="form">
     <form name="master">
       <h3>Event Info</h3>
+      <select ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList">
       <input type="text" name="client" ng-model="client" value="" placeholder="Client">
       <input type="text" name="contact" ng-model="clientContact" value="" placeholder="Contact's Name">
     </form>
