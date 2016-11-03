@@ -20,8 +20,8 @@ var connectionString = 'postgres://localhost:5432/kmoj';
 						});//end queryResults.on 'row'
 						queryResults.on('end', function(){
 							done();
-							return res.json(results);
 							console.log('results are', results);
+							return res.json(results);
 						});//end queryResults on 'end'
 			}
 		});//end pg.connect for production info

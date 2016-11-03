@@ -57,11 +57,11 @@ app.post('/client', function (req, res){
 			console.log('connection error in client', client);
 		} else {
 			var queryResults = client.query('INSERT INTO clients (name, contact, address, city, state, zip, phone, cell, fax, email, webiste, users_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [req.body.client_name, req.body.contact, req.body.street, req.body.city, req.body.state, req.body.zip, req.body.phone, req.body.cell, req.body.fax, req.body.email, req.body.website, req.body.users_id]);
-		}
 		queryResults.on('end', function(){
 			done();
 			res.send({success: true});
 		});//end queryResults for client table
+    } // end else
 	});//end pg.connect for client table
 });//end router.post for client table
 
