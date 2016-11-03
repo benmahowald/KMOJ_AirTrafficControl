@@ -158,5 +158,30 @@ router.get('/getflight', function (req, res){
 
 
 
+//get invoice info from db for invoice
+router.get('/getInvoice', function (req, res){
+	console.log('in get invoice info');
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in invoice info');
+		} else {
+			var results = [];
+			var queryResults = client.query
+('SELECT master.client_name, master.event_name, master.users_id, (<~uw id), master.start_date, master.end_date, master.total_spots, master.total_cost, master.discounts, master.commission, master.spot_length, master.spot_type, master.copy_id, master.contract_id FROM master INNER JOIN slots ON ')
+
+			('SELECT master.event_name, master.total_cost, master.sign_date, master.interviews, master.socialmedia, master.instructions, master.spot_type, master.spot_length, master.spot_rate, master.total_spots, users.name FROM master ' +
+			// // 																'INNER JOIN users ON users.id = master.users_id;');
+			// 		queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						return res.json(results);
+						console.log('results are', results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for invoice info
+});//end router.get for invoice info
+
 
 module.exports = router;
