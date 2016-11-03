@@ -9,19 +9,23 @@
   margin: auto;
   background-color: #ede08e;
   padding: 20px;
+  font-family: $font;
 }
 
-input, select, textarea {
+input, select, textarea, label {
   width: 300px;
   max-width: 95%;
   margin: 2px;
-  padding: 0 0 0 6px;
+  padding: 2px 2px 2px 6px;
+  font-family: $font;
+  border-radius: 1px;
 }
 
 input[type=checkbox], input[type=radio] {
   display: inline;
   width: 25px;
   text-align: left;
+  font-family: $font;
 }
 
 #submitButton {

@@ -110,4 +110,43 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
     $scope.zip = '';
   }; // end clearCreateClient
 
+//////////////////////////////////// Contract Stuff ////////////////////////
+
+$scope.getMasterDocs = function () {
+  console.log('in getMasterDocs');
+  $http({
+    method: 'GET',
+    url: '/master' + $scope.selectedName,
+  }).then(function (response){
+        $scope.MasterData = response.data;
+        console.log('$scope.clientData = ', $scope.MasterData);
+      }, function (error) {
+        console.log('error in get;', error);
+      }); // end then function
+
+}; // end getContracts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }]); // end dashController

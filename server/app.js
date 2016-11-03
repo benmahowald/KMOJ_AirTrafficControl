@@ -33,7 +33,6 @@ app.use('/traffic', traffic);
 var production = require ('../routers/production');
 app.use('/production', production);
 
-
 var reports = require ('../routers/reports');
 app.use('/reports', reports);
 
@@ -42,7 +41,7 @@ app.use('/nodemailer', nodemailer);
 
 
 //port 5000 being used
-var portDecision = process.env.PORT || 5000;
+var portDecision = process.env.PORT || 8080;
 
 app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);

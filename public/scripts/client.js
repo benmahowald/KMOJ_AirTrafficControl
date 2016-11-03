@@ -81,39 +81,27 @@ $scope.init = function (){
   };//end logOut
 
 
-  $scope.linkList =[
-    {route:'admin', linkText:'Admin', permission:'Administration'},
-      {route:'admin', linkText:'Admin', permission:'View All'},
-    {route:'dashboard', linkText:'Dashboard', permission:'View All'},
-    {route:'production', linkText:'Production', permission:'Production'},
-    {route:'production', linkText:'Production', permission:'View All'},
-    {route:'report', linkText:'Report', permission:'View All'},
-    {route:'traffic', linkText:'Traffic', permission:'Traffic'},
-    {route:'traffic', linkText:'Traffic', permission:'View All'},
-    {route:'underwriter', linkText:'Underwriter', permission:'Underwriter'},
-    {route:'underwriter', linkText:'Underwriter', permission:'View All'}
-  ];//end scope.linkList
 
 });//end authController
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
   $routeProvider.
-  when('/dashboard', {
-    templateUrl: '/views/partials/dashView.html',
-    controller: 'dashController'
-  }).
   when('/admin', {
     templateUrl: '/views/partials/adminView.html',
     controller: 'adminController'
   }).
+  when('/admin/employees', {
+    templateUrl: '/views/partials/adminAuthorizationView.html',
+    controller: 'adminController'
+  }).
+  when('/admin/report', {
+    templateUrl: '/views/partials/reportView.html',
+    controller: 'reportController'
+  }).
   when('/production', {
     templateUrl: '/views/partials/prodView.html',
     controller: 'prodController'
-  }).
-  when('/report', {
-    templateUrl: '/views/partials/reportView.html',
-    controller: 'reportController'
   }).
   when('/search', {
     templateUrl: '/views/partials/searchView.html',
@@ -127,11 +115,23 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: '/views/partials/uwView.html',
     controller: 'uwController'
   }).
+  when('/underwriter/createClient', {
+    templateUrl: '/views/partials/dashView.html',
+    controller: 'dashController'
+  }).
+  when('/underwriter/editClient', {
+    templateUrl: '/views/partials/uwEditClientView.html',
+    controller: 'uwController'
+  }).
+  when('/underwriter/aired', {
+    templateUrl: '/views/partials/uwAiredView.html',
+    controller: 'uwController'
+  }).
   when('/viewall', {
     templateUrl: '/views/partials/index.html'
   }).
   otherwise({
-    redirectTo: '/dashboard'
+    redirectTo: '/'
   });
 
   // use the HTML5 History API for pretty URLs
