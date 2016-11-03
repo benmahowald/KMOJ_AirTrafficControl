@@ -89,3 +89,12 @@ input[type=number]::-webkit-outer-spin-button {
 .navbar-default .navbar-nav>li:hover {
   background-color: #3f3f3f;
 }
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu,
+.navbar-default .navbar-nav .open .dropdown-menu::after,
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+    background-color: #262626;
+    color:#ffffff;
+}

@@ -17,7 +17,7 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
   };
 
 var reportInfo = {
-  cart_number; $scope.cart_number,
+  cart_number: $scope.cart_number,
   start_date: $scope.start_date,
   end_date: $scope.end_date,
   client_name: $scope.client_name,
