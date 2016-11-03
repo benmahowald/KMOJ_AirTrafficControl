@@ -75,11 +75,10 @@
 </div>
 
 <h3>Choose a client to edit.</h3>
-<select ng-model="selectedName" ng-options="name for name in clientNameList">
+<select ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList">
   <!-- <option value="" selected>-Select a client-</option>
   <option ng-repeat="current_name in clientNameList" value={{current_name}}>{{current_name}}</option> -->
-</select><br>
-<input type="button" name="getClients" value="Get Client" ng-click="getClient()">
+</select>
 
 <form class="form" editable-form name="editableForm" onaftersave="sendUpdatedClient()">
   <span>Client: <span editable-text="clientData[0].name" onbeforesave="updateClient({name: $data})" blur="submit">{{ clientData[0].name || "empty" }}</span></span><br>
