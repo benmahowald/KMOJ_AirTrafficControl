@@ -1,4 +1,4 @@
-<div ng-show="userData[0].permission == 'Administration'">
+<div ng-show="userData[0].permission == 'Administration' || 'View All'">
   <h3>
     <strong>Admin View</strong>
   </h3>
@@ -19,6 +19,6 @@
     </p>
   </div>
 </div>
-<div ng-show="userData[0].permission !== 'Administration'">
+<div ng-show="userData[0].permission !== 'Administration' || 'View All'">
   404
 </div>
