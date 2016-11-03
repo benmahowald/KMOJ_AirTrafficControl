@@ -9,11 +9,12 @@
 
 $bodyColor: #333;
 $navColor: #fff;
+$font: 'Open Sans', sans-serif;
 
 html, body, td, table {
   margin: auto auto;
   text-align: center;
-  font-family: 'Quicksand', sans-serif;
+  font-family: $font;
   font-weight: lighter;
 }
 
@@ -87,4 +88,13 @@ input[type=number]::-webkit-outer-spin-button {
 
 .navbar-default .navbar-nav>li:hover {
   background-color: #3f3f3f;
+}
+
+input {
+  color: #333;
+}
+
+input[placeholder] {
+   color: #333;
+   font-family: $font;
 }
