@@ -1,6 +1,7 @@
 app.controller('reportController', ['$scope', '$http', function($scope, $http){
   console.log('Report Controller');
 
+
   $scope.reports = [];
 
   $scope.getReports = function (){
@@ -15,8 +16,18 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
     });
   };
 
+var reportInfo = {
+  cart_number: $scope.cart_number,
+  start_date: $scope.start_date,
+  end_date: $scope.end_date,
+  client_name: $scope.client_name,
+  uw_name: $scope.uw_name,
+  total_cost: $scope.total_cost
+};
+
 
 $scope.getReport = function(){
+
     console.log("In the PDF click");
     var docDefinition =
       {content: [
@@ -28,7 +39,8 @@ $scope.getReport = function(){
         {text: '2123 W. Broadway, Suite 200', alignment: 'center'},
         {text: 'Minneapolis, MN 55411', alignment: 'center'},
         {text: 'Phone: (612)377-0594', alignment: 'center'},
-        {text: 'Fax: (612)377-6919', alignment: 'center'},
+        {text: 'Fax: (612)377-6919\n\n', alignment: 'center'},
+        {text: 'MONTHLY REPORT\n\n', style: 'subheader', alignment: 'center'},
       {
         table: {
         body: [
