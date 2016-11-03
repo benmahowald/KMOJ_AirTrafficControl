@@ -2,7 +2,9 @@ KMOJ
 ----------------------------------------------
 Full stack application to help KMOJ Radio's lives a little easier in their day to day functions.
 
-Technologies Used: Angular, Angular-Aria, Angular-Material, Angular-Messages, Bootstrap, JQuery, Moment-With-Locales, pdfmake, xeditable, Sass, Node, Nodemailer, Express, SQL, Firebase.
+Technologies Used:
+-------------------------------------------------
+Angular, Angular-Aria, Angular-Material, Angular-Messages, Bootstrap, JQuery, Moment-With-Locales, pdfmake, xeditable, Sass, Node, Nodemailer, Express, SQL, Firebase.
 
 Greater Details
 ------------------------------------------------------------------------
