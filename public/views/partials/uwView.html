@@ -1,9 +1,10 @@
-<div ng-show="(userData[0].permission == 'Underwriter') || (userData[0].permission == 'Administration')">
-  <h3>Run Sheet Entry</h3>
+<div ng-show="userData[0].permission == 'Underwriter' || 'View All'">
   <div class="form">
     <form name="master">
       <h3>Event Info</h3>
       <input type="text" name="event" ng-model="event_name" value="" placeholder="Event">
+      <select ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList">
+      </select>
       <input type="text" name="client" ng-model="client" value="" placeholder="Client">
       <input type="text" name="contact" ng-model="clientContact" value="" placeholder="Contact's Name">
     </form>
@@ -91,7 +92,7 @@
     </form>
   </div>
   <div id="trafficGrid">
-          <button type="button" ng-click="submitRunSheetEntry($event)">Submit Contract</button>
+    <button type="button" ng-click="submitRunSheetEntry($event)">Submit Contract</button>
     <p>
       <span class="boldFont">How many weeks in the rotation?</span>
       <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks, $event)" placeholder="1">
@@ -114,6 +115,7 @@
       <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
     </div>
   </div>
-  <div ng-show="userData[0].permission !== 'Underwriter'">
+  <div ng-show="userData[0].permission !== 'Underwriter' || 'View All'">
     404
   </div>
+</div>

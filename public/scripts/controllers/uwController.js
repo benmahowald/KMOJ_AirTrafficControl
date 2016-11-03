@@ -294,4 +294,42 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
     }
   }; // end submitRunSheetEntry
 
+  $scope.clientNameList = [];
+
+  // retrieves all clients and pushs each name into clientNameList array
+  // for client drop down meny
+  $scope.getAllClients = function () {
+    console.log('in getAllClients');
+    $http({
+      method: 'GET',
+      url: '/clients',
+    }).then(function (response){
+          $scope.allClients = response.data;
+          // console.log('getAllClients success:', $scope.allClients);
+          for (var i = 0; i < $scope.allClients.length; i++) {
+            $scope.clientNameList.push($scope.allClients[i].name);
+          }
+        }, function (error) {
+          console.log('error in getAllClients;', error);
+        }); // end then function
+    }; // end getAllClients
+
+    $scope.getAllClients();
+
+    // calls for xeditable functionality to edit client info
+    $scope.getClient = function () {
+      console.log('in getClient');
+      console.log('selectedName:', $scope.selectedName);
+      $http({
+        method: 'GET',
+        url: '/client?q=' + $scope.selectedName,
+      }).then(function (response){
+            $scope.clientData = response.data;
+            console.log('$scope.clientData = ', $scope.clientData);
+          }, function (error) {
+            console.log('error in get;', error);
+          }); // end then function
+      }; // end getClients
+
+
 }]); // end uwController

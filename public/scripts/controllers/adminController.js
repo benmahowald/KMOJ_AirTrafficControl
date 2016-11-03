@@ -8,7 +8,8 @@ console.log("in AdminCTRL $scope.userData",$scope.userData);
     { permission: 'Underwriter'},
     { permission: 'Production'},
     { permission: 'Traffic'},
-    { permission: 'View only production and traffic'}
+    { permission: 'View only production and traffic'},
+    { permission: 'View All'}
   ];//end scope.authLevels
 
   //clear input fields
