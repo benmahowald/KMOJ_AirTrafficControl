@@ -119,3 +119,15 @@ ALTER TABLE master ALTER COLUMN sign_date SET DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE flight ALTER COLUMN start_date SET DEFAULT CURRENT_TIMESTAMP;
 
 ALTER TABLE flight ALTER COLUMN end_date SET DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE users DROP COLUMN permission;
+
+ALTER TABLE users ADD COLUMN permission VARCHAR (200);
+
+--Inserts for users (log in)
+
+INSERT INTO users VALUES (2, 'production@test.com', 'Production', TRUE, 'Production');
+
+INSERT INTO users VALUES (3, 'traffic@test.com', 'Traffic', TRUE, 'Traffic');
+
+INSERT INTO users VALUES (4, 'uw@test.com', 'Underwriter', TRUE, 'Underwriter');

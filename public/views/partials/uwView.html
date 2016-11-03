@@ -1,4 +1,4 @@
-<div ng-show="userData[0].permission == 'Underwriter'">
+<div ng-show="userData[0].permission == 'Underwriter' || 'View All'">
   <div class="form">
     <form name="master">
       <h3>Event Info</h3>
@@ -114,6 +114,6 @@
       <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
     </div>
   </div>
-  <div ng-show="userData[0].permission !== 'Underwriter'">
+  <div ng-show="userData[0].permission !== 'Underwriter' || 'View All'">
     404
   </div>

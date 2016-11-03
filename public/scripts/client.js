@@ -82,17 +82,20 @@ $scope.init = function (){
 
   $scope.linkList =[
     {route:'admin', linkText:'Admin', permission:'Administration'},
-    {route:'dashboard', linkText:'Dashboard', permission:''},
+      {route:'admin', linkText:'Admin', permission:'View All'},
+    {route:'dashboard', linkText:'Dashboard', permission:'View All'},
     {route:'production', linkText:'Production', permission:'Production'},
-    {route:'report', linkText:'Report', permission:''},
+    {route:'production', linkText:'Production', permission:'View All'},
+    {route:'report', linkText:'Report', permission:'View All'},
     {route:'traffic', linkText:'Traffic', permission:'Traffic'},
-    {route:'underwriter', linkText:'Underwriter', permission:'Underwriter'}
+    {route:'traffic', linkText:'Traffic', permission:'View All'},
+    {route:'underwriter', linkText:'Underwriter', permission:'Underwriter'},
+    {route:'underwriter', linkText:'Underwriter', permission:'View All'}
   ];//end scope.linkList
 
 });//end authController
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
-  // console.log('$routeProvider:',$routeProvider);
 
   $routeProvider.
   when('/dashboard', {
@@ -122,6 +125,9 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   when('/underwriter', {
     templateUrl: '/views/partials/uwView.html',
     controller: 'uwController'
+  }).
+  when('/viewall', {
+    templateUrl: '/views/partials/index.html'
   }).
   otherwise({
     redirectTo: '/dashboard'
