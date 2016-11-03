@@ -3,6 +3,8 @@
 
 <br></br>
 
+<select ng-change="getMasterDocs()" ng-model="selectedName" ng-options="name for name in clientNameList"></select>
+
 <h3>Create A Client</h3>
 <div class="form">
   <form name="client">
@@ -75,7 +77,7 @@
 </div>
 
 <h3>Choose a client to edit.</h3>
-<select ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList">
+<select ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select>
   <!-- <option value="" selected>-Select a client-</option>
   <option ng-repeat="current_name in clientNameList" value={{current_name}}>{{current_name}}</option> -->
 </select>
