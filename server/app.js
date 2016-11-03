@@ -42,7 +42,7 @@ app.use('/nodemailer', nodemailer);
 
 
 //port 5000 being used
-var portDecision = process.env.PORT || 6000;
+var portDecision = process.env.PORT || 6060;
 
 app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);

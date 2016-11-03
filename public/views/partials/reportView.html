@@ -28,7 +28,7 @@
     </table>
   </div>
       <div id = "editor"></div>
-      <button id = "cmd">Generate PDF</button>
+      <button ng-click="getReport()" id = "cmd">Generate PDF</button>
   </div>
 </div>
 
@@ -39,6 +39,6 @@
         <input type="date" name="startDate" ng-model="startDate"><br>
         <label for="endDate">End Date</label><br>
         <input type="date" name="endDate" ng-model="endDate"><br>
-        <input type="button" name="getReports" value="Submit" ng-click="getReport()">
+        <input type="button" name="getReports" value="Submit" ng-click="getReports()">
       </form>
     </div>
