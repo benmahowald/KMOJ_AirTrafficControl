@@ -1,8 +1,12 @@
 .form {
   width: 400px;
+  text-align: left;
+}
+
+
+.form, .trafficForm {
   max-width: 95%;
   margin: auto;
-  text-align: left;
   background-color: #ede08e;
   padding: 20px;
 }
@@ -18,4 +22,8 @@ input[type=checkbox], input[type=radio] {
   display: inline;
   width: 25px;
   text-align: left;
+}
+
+#submitButton {
+  margin: 10px;
 }

@@ -5,7 +5,7 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
   console.log('in authController');
 
 //current logged in user data from database
-$scope.userData;
+// $scope.userData;
 
   //User login
   $scope.logIn = function(){
@@ -57,6 +57,7 @@ $scope.init = function (){
       }).then(function(response){
         $scope.userData = response.data;
         console.log('user permission is', $scope.userData[0].permission);
+        console.log('userData:', $scope.userData);
         //clear login input fields
         $scope.userEmail = "";
         $scope.userPassword="";
@@ -65,7 +66,7 @@ $scope.init = function (){
   }//end if(firebaseUser)
   else{
     console.log('Not logged in.');
-    $scope.signedIn = "Please login"
+    $scope.signedIn = "Please login";
   }//end else
 };
 

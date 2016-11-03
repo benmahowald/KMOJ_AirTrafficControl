@@ -8,20 +8,21 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
   $scope.currentNumWeeks = 1;
   // This object is used as a scaffold help build the grid
   $scope.hours = {
-    am2: {text:'2am-5am', title:'am2'},
-    am5: {text:'5am-6am', title:'am5'},
-    am6: {text:'6am-10am', title:'am6'},
-    am10: {text:'10am-2pm', title:'am10'},
-    pm2: {text:'2pm-6pm', title:'pm2'},
-    pm6: {text:'6pm-7pm', title:'pm6'},
-    pm7: {text:'7pm-10pm', title:'pm7'},
-    pm10: {text:'10pm-2am', title:'pm10'}
+    am2: {fullText:'2a-5a', title:'am2'},
+    am5: {fullText:'5a-6a', title:'am5'},
+    am6: {fullText:'6a-10a', title:'am6'},
+    am10: {fullText:'10a-2p', title:'am10'},
+    pm2: {fullText:'2p-6p', title:'pm2'},
+    // This hour is removed because it is not scheduled by UWs
+    // pm6: {fullText:'6p-7p', title:'pm6'},
+    pm7: {fullText:'7p-10p', title:'pm7'},
+    pm10: {fullText:'10p-2a', title:'pm10'}
   };
   // This is used to populate the header and scaffold the grid
   $scope.days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   console.log($scope.hours);
 
-  $scope.sendContract = function(){
+  $scope.buildFlight = function(){
     console.log($scope.weeks);
 
     var numDays = $scope.currentNumWeeks * 7; // seven days in a weeks
@@ -31,24 +32,28 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
     slotIndex = 0;
 
     for (var m = 1; m <= numDays; m++) {
-      weekIndex = floor(m/7);
-      dayIndex = (m-1)-(7*(weekIndex));
-      numWeek = weekIndex+1;
+      numWeek = Math.ceil(m/7);
+      dayIndex = (m-1)-(7*(numWeek-1));
       dayCheck = $scope.days[dayIndex];
+      console.log('numWeek:', numWeek);
       for (var hour in $scope.hours) {
         if ($scope.hours.hasOwnProperty(hour)) {
-          if ($scope.weeks['week'+numWeek][hour][dayCheck]) {
-            $scope.slotDBinfo[slotIndex] = {
-              dayOfRun: m,
-              plays: $scope.weeks['week'+numWeek][hour][dayCheck],
-              slot: hour.text
-            };
-            slotIndex++;
+          if ($scope.weeks['week'+numWeek][hour]){
+            if ($scope.weeks['week'+numWeek][hour][dayCheck]) {
+              $scope.slotDBinfo[slotIndex] = {
+                dayOfRun: m,
+                plays: $scope.weeks['week'+numWeek][hour][dayCheck],
+                slot: $scope.hours[hour].fullText
+              };
+              slotIndex++;
+            }
           }
         }
-      }
-    }
-  };
+      } // end for in loop
+    } // end for loop
+
+    console.log('slotDBinfo:', $scope.slotDBinfo);
+  }; // end buildFlight()
 
   $scope.updateWeeks = function(weekRequest, ev){
     console.log('in updateWeeks with:', weekRequest);
@@ -208,63 +213,133 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
 
   $scope.submitRunSheetEntry = function (ev){
     console.log('in submitRunSheetEntry');
-    var requiredFields = 'The following fields are required:';
+    var requiredFields = 'The following fields are required or have errors:';
     if (!$scope.event_name) {
       requiredFields += ' - Event';
     }
-    if ($scope.client) {
+    if (!$scope.clientData) {
       requiredFields += ' - Client';
     }
     if (!$scope.startDate) {
       requiredFields += ' - Start Date';
+    } else {
+      $scope.startDateTime = moment($scope.startDate).format();
     }
     if (!$scope.endDate) {
       requiredFields += ' - End Date';
+    } else {
+      $scope.endDateTime = moment($scope.endDate).format();
+    }
+    if ($scope.startDate && $scope.endDate) {
+      if (moment($scope.startDateTime).isAfter(moment($scope.endDateTime))) {
+        requiredFields += ' - Start Date after End Date';
+      }
     }
     if (!$scope.fa && !$scope.psa) {
       requiredFields += ' - FA / PSA';
     }
     if (!$scope.instructions) {
-      $scope.instructions = '';
+      $scope.instructions = 'None';
     }
     if (!$scope.discount) {
       $scope.discount = 0;
     }
+    console.log($scope.agency_commission);
     if (!$scope.agency_commission) {
       $scope.agency_commission = 0;
     }
-    if (!$scope.slotDBinfo) {
+
+    // Check the totals for an empty week
+    var emptyWeek = false;
+    for (var week in $scope.totals) {
+      if ($scope.totals.hasOwnProperty(week)) {
+        if ( $scope.totals[week].total === 0 ) {
+          emptyWeek = true;
+        }
+      }
+    }
+    $scope.buildFlight();
+    if ($scope.slotDBinfo.length === 0 || emptyWeek) {
       requiredFields += ' - Traffic Flight Grid';
     }
 
-    if (requiredFields !== 'The following fields are required:'){
+    if (!$scope.spotLength){
+      requiredFields += ' - Spot Length';
+    }
+    if (!$scope.totalCost){
+      requiredFields += ' - Total Cost';
+    }
+    if (!$scope.numInterviews){
+      $scope.numInterviews = 0;
+    }
+    if (!$scope.numSocialMedia){
+      $scope.numSocialMedia = 0;
+    }
+    if (!$scope.voiceTalent){
+      $scope.voiceTalent = '';
+    }
+    if (!$scope.producer){
+      $scope.producer = '';
+    }
+    if (!$scope.whoText){
+      $scope.whoText = '';
+    }
+    if (!$scope.whatText){
+      $scope.whatText = '';
+    }
+    if (!$scope.whenText){
+      $scope.whenText = '';
+    }
+    if (!$scope.whereText){
+      $scope.whereText = '';
+    }
+    if (!$scope.moreInfoText){
+      $scope.moreInfoText = '';
+    }
+
+    console.log('userData:', $scope.userData);
+    console.log(requiredFields);
+    if (requiredFields !== 'The following fields are required or have errors:'){
       $scope.showAlert = function(ev) {
         $mdDialog.show(
           $mdDialog.alert()
-          .parent(angular.element(document.querySelector('#popupContainer')))
           .clickOutsideToClose(true)
-          .title('Missing Required Field!')
+          .title('Error in Required Field!')
           .textContent(requiredFields)
           .ariaLabel('Required Field Alert')
           .ok('Understood')
           .targetEvent(ev)
         );
       };
+      $scope.showAlert();
     } else {
 
       var contractToSend = {
+        user_id: $scope.userData[0].id,
         event_name: $scope.event_name,
-        client: $scope.client,
-        // client_id: $scope.client_id,
+        client_id: $scope.clientData[0].id,
         start_date: $scope.startDate,
         end_date: $scope.endDate,
         fa: $scope.fa,
         psa: $scope.psa,
         instructions: $scope.instructions,
         discount: $scope.discount,
-        agency_comission: $scope.agency_comission,
-        slotInfo: $scope.slotDBinfo
+        agency_commission: $scope.agency_commission,
+        slotInfo: $scope.slotDBinfo,
+        signDate: moment(new Date()).format(),
+        spotLength: $scope.spotLength,
+        totalCost: $scope.totalCost,
+        numInterviews: $scope.numInterviews,
+        numSocialMedia: $scope.numSocialMedia,
+        voiceTalent: $scope.voiceTalent,
+        producer: $scope.producer,
+        whoText: $scope.whoText,
+        whatText: $scope.whatText,
+        whenText: $scope.whenText,
+        whereText: $scope.whereText,
+        moreInfoText: $scope.moreInfoText
       };
+
       console.log('UW contractToSend:', contractToSend);
 
       $http({
@@ -276,21 +351,6 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
       }, function (error) {
         console.log('error in uwCtrl client post route:', error);
       }); // end then function
-
-      // var flightInfo = {
-      //   start_date: $scope.startDate,
-      //   end_date: $scope.endDate,
-      // };
-      //
-      // $http({
-      //   method: 'POST',
-      //   url: '/flight',
-      //   data: flightInfo,
-      // }).then(function (response){
-      //   console.log('success in uwCtrl traffic post route:', response);
-      // }, function (error) {
-      //   console.log('error in uwCtrl traffic post route:', error);
-      // }); // end then function
     }
   }; // end submitRunSheetEntry
 
@@ -304,32 +364,32 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
       method: 'GET',
       url: '/clients',
     }).then(function (response){
-          $scope.allClients = response.data;
-          // console.log('getAllClients success:', $scope.allClients);
-          for (var i = 0; i < $scope.allClients.length; i++) {
-            $scope.clientNameList.push($scope.allClients[i].name);
-          }
-        }, function (error) {
-          console.log('error in getAllClients;', error);
-        }); // end then function
-    }; // end getAllClients
+      $scope.allClients = response.data;
+      // console.log('getAllClients success:', $scope.allClients);
+      for (var i = 0; i < $scope.allClients.length; i++) {
+        $scope.clientNameList.push($scope.allClients[i].name);
+      }
+    }, function (error) {
+      console.log('error in getAllClients;', error);
+    }); // end then function
+  }; // end getAllClients
 
-    $scope.getAllClients();
+  $scope.getAllClients();
 
-    // calls for xeditable functionality to edit client info
-    $scope.getClient = function () {
-      console.log('in getClient');
-      console.log('selectedName:', $scope.selectedName);
-      $http({
-        method: 'GET',
-        url: '/client?q=' + $scope.selectedName,
-      }).then(function (response){
-            $scope.clientData = response.data;
-            console.log('$scope.clientData = ', $scope.clientData);
-          }, function (error) {
-            console.log('error in get;', error);
-          }); // end then function
-      }; // end getClients
+  // calls for xeditable functionality to edit client info
+  $scope.getClient = function () {
+    console.log('in getClient');
+    console.log('selectedName:', $scope.selectedName);
+    $http({
+      method: 'GET',
+      url: '/client?q=' + $scope.selectedName,
+    }).then(function (response){
+      $scope.clientData = response.data;
+      console.log('$scope.clientData = ', $scope.clientData);
+    }, function (error) {
+      console.log('error in get;', error);
+    }); // end then function
+  }; // end getClients
 
 
 }]); // end uwController

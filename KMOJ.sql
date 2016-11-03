@@ -124,6 +124,8 @@ ALTER TABLE users DROP COLUMN permission;
 
 ALTER TABLE users ADD COLUMN permission VARCHAR (200);
 
+ALTER TABLE master ADD COLUMN uw_submit BOOLEAN;
+
 --Inserts for users (log in)
 
 INSERT INTO users VALUES (2, 'production@test.com', 'Production', TRUE, 'Production');
