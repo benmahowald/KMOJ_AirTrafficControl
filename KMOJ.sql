@@ -39,8 +39,8 @@ cell VARCHAR (15),
 fax VARCHAR (15),
 email VARCHAR (50),
 webiste VARCHAR (100),
-users_id INT
 );
+--deleted users_id INT from clients, don't need it to match UW to contract they wrote
 
 --Create users table:
 CREATE TABLE users (
@@ -131,3 +131,5 @@ INSERT INTO users VALUES (2, 'production@test.com', 'Production', TRUE, 'Product
 INSERT INTO users VALUES (3, 'traffic@test.com', 'Traffic', TRUE, 'Traffic');
 
 INSERT INTO users VALUES (4, 'uw@test.com', 'Underwriter', TRUE, 'Underwriter');
+
+ALTER TABLE clients DROP COLUMN users_id;
