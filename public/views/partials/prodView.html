@@ -14,6 +14,7 @@
         <th>Event Name</th>
       </tr>
       <tr ng-repeat="production in productions">
+        <td><input type = "radio" ng-click="retrieveProdId(production.id)"></td>
         <td>{{production.start_date}}</td>
         <td>{{production.end_date}}</td>
         <td>{{production.uw_name}}</td>

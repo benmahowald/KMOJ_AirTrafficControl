@@ -17,6 +17,12 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     });
   };
 
+  $scope.retrieveProdId = function(id){
+    $scope.currentProdId = id;
+    console.log('currentProdId is ', $scope.currentProdId);
+
+  };
+
 
   $scope.sendProduction = function(){
     var prodToSend = {
@@ -35,14 +41,14 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
 
   $http({
     method: 'POST',
-    url: '/production/production',
+    url: '/production/production?q=' + $scope.currentProdId,
     data: prodToSend
   }).then(function (response){
         console.log('success in prodCtrl post route:', response);
       }, function (error) {
         console.log('error in prodCtrl post route:', error);
       }); // end then function
-}; 
+};
 
 
 }]);
