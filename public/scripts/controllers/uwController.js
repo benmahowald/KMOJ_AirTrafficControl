@@ -262,10 +262,11 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
     if ($scope.slotDBinfo.length === 0 || emptyWeek) {
       requiredFields += ' - Traffic Flight Grid';
     }
-
+    $scope.spotLength = ':30';
     if (!$scope.spotLength){
       requiredFields += ' - Spot Length';
     }
+    $scope.totalCost = '0.00';
     if (!$scope.totalCost){
       requiredFields += ' - Total Cost';
     }
