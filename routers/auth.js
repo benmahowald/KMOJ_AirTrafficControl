@@ -35,7 +35,7 @@ router.get("/Login", function(req, res){
           // return result as a json version of array
           return res.json( user );
         });//end on end
-      }; // end no error
+      } // end no error
     }); // end connect
     //
     // res.send("You are logged in " + decodedToken.email);

@@ -18,11 +18,12 @@ router.post ('/slots', function (req, res){
 			var queryResults = client.query ('INSERT INTO slots (day_of_run, plays, slot, flight_id,) '+
 																				'VALUES ($1, $2, $3, $4)' ,
 																			[req.body.day_of_run, req.body.plays, req.body.slot, req.body.flight_id]);
-		}
+
 		queryResults.on('end', function(){
 			done();
 			res.send({success: true});
 		});//end queryResults for slots table
+		}
 	});//end pg.connect for slots table
 });//end router.post for slots table
 
@@ -39,12 +40,13 @@ router.post ('/media', function (req, res){
 			var queryResults = client.query ('INSERT INTO master (interviews, socialmedia, man_app, uw_app, pr_app, tr_app) '+
 																				'VALUES ($1, $2, $3, $4, $5, $6) WHERE users_id = ($1)' ,
 																			[req.body.interviews, req.body.socialmedia, req.body.man_app, req.body.uw_app, req.body.pr_app, req.body.tr_app]);
-		}
+
 		queryResults.on('end', function(){
 			done();
 			res.send({success: true});
 
 		});//end queryResults for media table
+		}
 	});//end pg.connect for media table
 });//end router.post for media table
 
@@ -61,11 +63,12 @@ router.post ('/flight', function (req, res){
 			var queryResults = flight.query ('INSERT INTO flight (contract_id, start_date, end_date, cart_number,) '+
 																				'VALUES ($1, $2, $3, $4)' ,
 																			[flight]);
-		}
+
 		queryResults.on('end', function(){
 			done();
 			res.send({success: true});
 		});//end queryResults for flight table
+		}
 	});//end pg.connect for flight table
 });//end router.post for flight table
 
@@ -84,8 +87,8 @@ router.get('/trafficinfo', function (req, res){
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
 						done();
-						return res.json(results);
 						console.log('results are', results);
+						return res.json(results);
 					});//end queryResults on 'end'
 		}
 	});//end pg.connect for traffic info
@@ -106,8 +109,8 @@ router.get('/clientinfo', function (req, res){
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
 						done();
-						return res.json(results);
 						console.log('results are', results);
+						return res.json(results);
 					});//end queryResults on 'end'
 		}
 	});//end pg.connect for traffic info
@@ -127,8 +130,8 @@ router.get('/getslots', function (req, res){
 			});
 			queryResults.on('end', function(){
 				done();
-				return res.json(results);
 				console.log('slots results are', results);
+				return res.json(results);
 			});//end query results for getslots
 		}
 	}); //end pg.connect for getslots
@@ -149,8 +152,8 @@ router.get('/getflight', function (req, res){
 			});
 			queryResults.on('end', function(){
 				done();
-				return res.json(results);
 				console.log('flight results are', results);
+				return res.json(results);
 			});//end queryResults for getflight
 		}
 	}); //end pg.connect for get flight

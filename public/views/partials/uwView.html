@@ -1,7 +1,9 @@
-<div ng-show="userData[0].permission == 'Underwriter'">
+<div ng-show="(userData[0].permission == 'Underwriter') || (userData[0].permission == 'Administration')">
+  <h3>Run Sheet Entry</h3>
   <div class="form">
     <form name="master">
       <h3>Event Info</h3>
+      <input type="text" name="event" ng-model="event_name" value="" placeholder="Event">
       <input type="text" name="client" ng-model="client" value="" placeholder="Client">
       <input type="text" name="contact" ng-model="clientContact" value="" placeholder="Contact's Name">
     </form>
@@ -85,15 +87,14 @@
       <input type="checkbox" name="PSA" value="PSA" ng-model="psa">
       <textarea  rows="5" cols="100" placeholder="Special Instructions." ng-model="instructions"></textarea>
       <input type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
-      <input type="text" name="agency_commission" ng-model="agency_comission" value="" placeholder=".15">
+      <input type="text" name="agency_commission" ng-model="agency_comission" value="" placeholder="Agency Commission">
     </form>
   </div>
   <div id="trafficGrid">
-    <h3>Run Sheet Entry</h3>
+          <button type="button" ng-click="submitRunSheetEntry($event)">Submit Contract</button>
     <p>
       <span class="boldFont">How many weeks in the rotation?</span>
       <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks, $event)" placeholder="1">
-      <button type="button" ng-click="showObject()">Submit Schedule</button>
       <span class="boldFont">Total Spots in Flight: {{flightTotal}}</span>
     </p>
     <div ng-repeat="week in weeks">

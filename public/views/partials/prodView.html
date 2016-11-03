@@ -1,7 +1,7 @@
-
+<div ng-show="userData[0].permission == 'Production'">
 <h3><strong>Production</strong></h3>
 
-<br> </br>
+<br>
 
 <div id = "content">
   <table id = "editor" class = "export-table" width = "75%">
@@ -31,14 +31,7 @@
   </table>
 </div>
 
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-
-
-
-
+<br>
 <div class="form">
   <form class="production">
     <input type="text" name="event" ng-model="event" value="" placeholder="Event">
@@ -57,5 +50,4 @@
     <input type="button" name="submitProd" value="Submit" ng-click="sendProduction()">
   </form>
 </div>
-
-<div ng-show="userData[0].permission == 'Production'">
+</div>

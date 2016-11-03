@@ -23,11 +23,12 @@ router.post("/createNewUser", function(req, res){
         else {
           var queryResults = client.query ('INSERT INTO users (email, permission, name, active) VALUES ($1, $2, $3, $4)', [req.body.email,req.body.permission,req.body.name,req.body.active]
       );//end queryResults
-    }//end else
+
         queryResults.on('end', function(){
           done();
           res.send({success: true});
         });//end queryResults
+        }//end else
       });//end pg.connect
     } //end if admin check
     else {
@@ -65,7 +66,7 @@ router.get('/userList', function(req,res){
         // return result as a json version of array
         return res.json( user );
       });//end on end
-    }; // end no error
+    } // end no error
   }); // end connect
 });//end userList
 
@@ -89,7 +90,7 @@ router.delete('/deleteUser', function(req,res){
         done();
         return res.json(resultArray);
       });//end on end
-    };//end else
+    }//end else
   });//end pg connect
 });//end deleteUser
 

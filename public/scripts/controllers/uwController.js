@@ -1,4 +1,4 @@
-app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scope, $mdDialog, $window){
+app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope, $mdDialog, $http){
   console.log('Underwriter Controller');
   //// code for the traffic entry grid
   // Initialize variables
@@ -206,55 +206,92 @@ app.controller('uwController', ['$scope', '$mdDialog', '$window', function($scop
     $scope.updateTotals(thisWeek, thisHour, thisDay);
   };
 
-  $scope.submitRunSheetEntry = function (){
+  $scope.submitRunSheetEntry = function (ev){
     console.log('in submitRunSheetEntry');
-    var contractToSend = {
-      client: $scope.client,
-      // client_id: $scope.client_id,
-      client_contact: $scope.clientContact,
-      phone: $scope.phone,
-      cell: $scope.cell,
-      fax: $scope.fax,
-      email: $scope.email,
-      website: $scope.website,
-      street: $scope.street,
-      city: $scope.city,
-      zip: $scope.zip,
-      start_date: $scope.startDate,
-      end_date: $scope.endDate,
-      fa: $scope.fa,
-      psa: $scope.psa,
-      instructions: $scope.instructions,
-      discount: $scope.discount,
-      agency_comission: $scope.agency_comission,
-      slotInfo: $scope.slotDBinfo
-    };
-    console.log('UW contractToSend:', contractToSend);
+    var requiredFields = 'The following fields are required:';
+    if (!$scope.event_name) {
+      requiredFields += ' - Event';
+    }
+    if ($scope.client) {
+      requiredFields += ' - Client';
+    }
+    if (!$scope.startDate) {
+      requiredFields += ' - Start Date';
+    }
+    if (!$scope.endDate) {
+      requiredFields += ' - End Date';
+    }
+    if (!$scope.fa && !$scope.psa) {
+      requiredFields += ' - FA / PSA';
+    }
+    if (!$scope.instructions) {
+      $scope.instructions = '';
+    }
+    if (!$scope.discount) {
+      $scope.discount = 0;
+    }
+    if (!$scope.agency_commission) {
+      $scope.agency_commission = 0;
+    }
+    if (!$scope.slotDBinfo) {
+      requiredFields += ' - Traffic Flight Grid';
+    }
 
-    $http({
-      method: 'POST',
-      url: '/master',
-      data: contractToSend,
-    }).then(function (response){
-          console.log('success in uwCtrl client post route:', response);
-        }, function (error) {
-          console.log('error in uwCtrl client post route:', error);
-        }); // end then function
+    if (requiredFields !== 'The following fields are required:'){
+      $scope.showAlert = function(ev) {
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('Missing Required Field!')
+          .textContent(requiredFields)
+          .ariaLabel('Required Field Alert')
+          .ok('Understood')
+          .targetEvent(ev)
+        );
+      };
+    } else {
 
-        var flightInfo = {
-          start_date: $scope.startDate,
-          end_date: $scope.endDate,
-        };
+      var contractToSend = {
+        event_name: $scope.event_name,
+        client: $scope.client,
+        // client_id: $scope.client_id,
+        start_date: $scope.startDate,
+        end_date: $scope.endDate,
+        fa: $scope.fa,
+        psa: $scope.psa,
+        instructions: $scope.instructions,
+        discount: $scope.discount,
+        agency_comission: $scope.agency_comission,
+        slotInfo: $scope.slotDBinfo
+      };
+      console.log('UW contractToSend:', contractToSend);
 
-        $http({
-          method: 'POST',
-          url: '/flight',
-          data: flightInfo,
-        }).then(function (response){
-              console.log('success in uwCtrl traffic post route:', response);
-            }, function (error) {
-              console.log('error in uwCtrl traffic post route:', error);
-            }); // end then function
+      $http({
+        method: 'POST',
+        url: '/underwriter/master',
+        data: contractToSend,
+      }).then(function (response){
+        console.log('success in uwCtrl client post route:', response);
+      }, function (error) {
+        console.log('error in uwCtrl client post route:', error);
+      }); // end then function
+
+      // var flightInfo = {
+      //   start_date: $scope.startDate,
+      //   end_date: $scope.endDate,
+      // };
+      //
+      // $http({
+      //   method: 'POST',
+      //   url: '/flight',
+      //   data: flightInfo,
+      // }).then(function (response){
+      //   console.log('success in uwCtrl traffic post route:', response);
+      // }, function (error) {
+      //   console.log('error in uwCtrl traffic post route:', error);
+      // }); // end then function
+    }
   }; // end submitRunSheetEntry
 
 }]); // end uwController
