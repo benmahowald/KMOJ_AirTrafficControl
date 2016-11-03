@@ -1,4 +1,4 @@
-<div ng-show="userData[0].permission == 'View All'">
+<div ng-show="userData[0].permission == 'Underwriter' || 'View All'">
 <h3> <strong>Create A Client</strong></h3>
 <br>
 <div class="form">
@@ -111,4 +111,7 @@
     </span>
   </div>
 </form>
+</div>
+<div ng-show="userData[0].permission !== 'Underwriter'">
+  404
 </div>
