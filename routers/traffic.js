@@ -169,7 +169,7 @@ router.get('/contractspending', function (req, res){
 			console.log('get contract connection error is', err);
 		} else {
 			var results = [];
-			var queryResults = client.query ('SELECT * FROM master WHERE man_app=(false)');
+			var queryResults = client.query ('SELECT * FROM master WHERE man_app=(false) AND tr_app=(false)');
 			queryResults.on('row', function(row){
 				results.push(row);
 			});
@@ -183,7 +183,7 @@ router.get('/contractspending', function (req, res){
 });//end router contractspending
 
 router.get('/flightContract', function (req, res){
-	console.log('in get contract');
+	console.log('in get contract -------------------');
 	console.log('req.query.q', req.query.q);
 	pg.connect(connectionString, function(err, client, done){
 		if(err){
@@ -193,7 +193,6 @@ router.get('/flightContract', function (req, res){
 			var queryResults = client.query('SELECT start_date, end_date FROM flight WHERE contract_id=($1)', [req.query.q]);
 			queryResults.on('row', function(row){
 				results.push(row);
-				console.log('row', row);
 			});
 			queryResults.on('end', function(){
 				done();
@@ -204,5 +203,46 @@ router.get('/flightContract', function (req, res){
 	}); //end pg.connect for contractspending
 });//end router contractspending
 
+//get invoice info from db for invoice
+router.get('/invoice', function (req, res){
+	console.log('in get invoice info');
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in invoice info');
+		} else {
+			var results = [];
+			var queryResults = client.query('SELECT  master.event_name, users.name, master.total_spots, master.total_cost, master.discounts, master.commission, flight.start_date, flight.end_date, master.spot_length, master.spot_type, master.spot_rate, master.copy_id, slots.slot, slots.day_of_run, clients.name FROM master INNER JOIN slots ON slots.id = master.id INNER JOIN flight ON flight.contract_id = master.id INNER JOIN clients ON clients.client_id = master.id INNER JOIN users ON users.id = master.id');
+				  queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						console.log('results are', results);
+						return res.json(results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for invoice info
+});//end router.get for invoice info
+
+router.put('/approval', function (req, res){
+  console.log('get approval route hit ----------------');
+  console.log('req.query.q', req.query.q);
+  pg.connect(connectionString, function(err, client, done){
+    if (err){
+      console.log('connection err in clientinfo');
+    } else {
+      var results = [];
+      var queryResults = client.query('UPDATE master SET tr_app=(true) WHERE id=($1)', [req.query.q]);
+      queryResults.on('row', function(row){
+        results.push(row);
+      });//end queryResults.on 'row'
+      queryResults.on('end', function(){
+        done();
+        console.log('results are', results);
+        return res.json(results);
+      });//end queryResults on 'end'
+    } // end first else
+  });//end pg.connect for client info
+});//end router.put for client info
 
 module.exports = router;

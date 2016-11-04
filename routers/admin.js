@@ -70,6 +70,25 @@ router.get('/userList', function(req,res){
   }); // end connect
 });//end userList
 
+//change active status
+router.put('/changeActiveStatus', urlencodedParser, function(req,res){
+  console.log('in changeActiveStatus',req.body);
+  pg.connect(connectionString, function(err,client,done){
+    if(err){
+      console.log('error: ',err);
+    }//end if
+    else{
+      console.log('connected to database in changeActiveStatus');
+      var resultQuery=client.query('UPDATE users SET active=($1) WHERE id=($2)',[req.body.active,req.body.id]);
+      resultQuery.on('end', function(){
+        done();
+        console.log('in changeActiveStatus active=',req.body.active);
+        res.sendStatus(200);
+      });//end
+    };//end else
+  });//end pg connect
+});//end changeActiveStatus
+
 //delete task
 router.delete('/deleteUser', function(req,res){
   console.log('in deleteUser');

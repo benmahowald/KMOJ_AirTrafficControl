@@ -4,14 +4,14 @@
   <p ng-hide="pendingContracts">None</p>
   <div class="contractsPending" ng-repeat="contract in pendingContracts">
     <div>
-      <a ng-click="selectContractFlight(contract.id)">Event Name: {{contract.event_name}}</a>
+      <p class="listOfContracts" ng-click="selectContractFlight(contract.id)">Event Name: {{contract.event_name}}</p>
     </div>
   </div>
-  <div ng-show="flightInfo" class="">
-    <p>Flight Start Date: {{start_date}}<br>
-    Flight End Date: {{end_date}}</p>
-    <input type="button" name="name" value="">
-  </div>
+  <div ng-show="flightInfoExists" class="trafficInfo">
+    <h4>Flight Information</h4>
+    <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p>
+    <input class="button" type="button" name="name" value="Confirm Traffic" ng-click="trafficApproval(currentContractId)">
+    <input class="button" type="button" name="name" value="Run Confirmation PDF" ng-click="getInvoice()">
   </div>
 
  <!-- <div ng-show="userData[0].permission !== 'Traffic'">
