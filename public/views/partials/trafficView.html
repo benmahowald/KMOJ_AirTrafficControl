@@ -8,11 +8,10 @@
     </div>
   </div>
   <div ng-show="flightInfo" class="trafficInfo">
-    <p>Flight Start Date: {{start_date}} Flight End Date: {{end_date}}</p>
+    <h4>Flight Information</h4>
+    <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p>
     <input class="button" type="button" name="name" value="Confirm Traffic" ng-click="trafficApproval(currentContractId)">
     <input class="button" type="button" name="name" value="Run Confirmation PDF" ng-click="getInvoice()">
-    <input type="date" name="name" value="start_date"><input type="date" name="name" value="end_date">
-  </div>
   </div>
 
  <!-- <div ng-show="userData[0].permission !== 'Traffic'">
