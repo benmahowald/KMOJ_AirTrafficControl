@@ -153,6 +153,19 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
     }
   };
 
+  $scope.checkInput = function(thisWeek, thisHour, thisDay){
+    console.log('in checkInput, with:', thisDay, thisHour, thisWeek);
+    var weekName = 'week'+thisWeek;
+
+    if ($scope.weeks[weekName][thisHour][thisDay]<0) {
+      $scope.weeks[weekName][thisHour][thisDay]=0;
+    } else if ($scope.weeks[weekName][thisHour][thisDay]>20){
+      $scope.weeks[weekName][thisHour][thisDay]=20;
+    }
+
+    $scope.updateTotals(thisWeek, thisHour, thisDay);
+  };
+
   $scope.updateTotals = function(thisWeek, thisHour, thisDay){
     console.log('in updateTotals, with:', thisDay, thisHour, thisWeek);
     var weekName = 'week'+thisWeek;
