@@ -127,8 +127,8 @@ app.put('/client', function (req, res){
         return res.json(results);
       });//end queryResults on 'end'
     } // end first else
-  });//end pg.connect for traffic info
-});//end router.get for traffic info
+  });//end pg.connect for client info
+});//end router.put for client info
 
 
 // setting catch all route
