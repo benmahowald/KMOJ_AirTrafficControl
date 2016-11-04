@@ -1,13 +1,13 @@
 <div ng-show="userData[0].permission == 'Traffic' || 'View All'">
   <h3>Traffic Department</h3>
   <h4 class="pendingContractHeading">Pending Contracts</h4>
-  <!-- <p ng-hide="listOfContracts">None</p> -->
+  <p ng-hide="pendingContracts">None</p>
   <div class="contractsPending" ng-repeat="contract in pendingContracts">
     <div>
       <p class="listOfContracts" ng-click="selectContractFlight(contract.id)">Event Name: {{contract.event_name}}</p>
     </div>
   </div>
-  <div ng-show="flightInfo" class="trafficInfo">
+  <div ng-show="flightInfoExists" class="trafficInfo">
     <h4>Flight Information</h4>
     <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p>
     <input class="button" type="button" name="name" value="Confirm Traffic" ng-click="trafficApproval(currentContractId)">
