@@ -204,5 +204,26 @@ router.get('/flightContract', function (req, res){
 	}); //end pg.connect for contractspending
 });//end router contractspending
 
+//get invoice info from db for invoice
+router.get('/invoice', function (req, res){
+	console.log('in get invoice info');
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in invoice info');
+		} else {
+			var results = [];
+			var queryResults = client.query('SELECT  master.event_name, users.name, master.total_spots, master.total_cost, master.discounts, master.commission, flight.start_date, flight.end_date, master.spot_length, master.spot_type, master.spot_rate, master.copy_id, slots.slot, slots.day_of_run, clients.name FROM master INNER JOIN slots ON slots.id = master.id INNER JOIN flight ON flight.contract_id = master.id INNER JOIN clients ON clients.client_id = master.id INNER JOIN users ON users.id = master.id');
+				  queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						return res.json(results);
+						console.log('results are', results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for invoice info
+});//end router.get for invoice info
+
 
 module.exports = router;
