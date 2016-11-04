@@ -12,8 +12,8 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     }).then(function(response){
       $scope.productions = response.data;
       console.log ($scope.productions);
-      $scope.start_date = moment($scope.productions[0].start_date).format('ddd, MMM DD YYYY')
-      $scope.end_date = moment($scope.productions[0].end_date).format('ddd, MMM DD YYYY');
+      // $scope.start_date = moment($scope.productions[0].start_date).format('ddd, MMM DD YYYY')
+      // $scope.end_date = moment($scope.productions[0].end_date).format('ddd, MMM DD YYYY');
     }, function errorCallback(response){
       console.log('error getting productions', response);
     });
