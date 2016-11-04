@@ -13,7 +13,7 @@ var connectionString = 'postgres://localhost:5432/kmoj';
 				console.log('connection err in productionInfo');
 			} else {
 				var results = [];
-				var queryResults = client.query('SELECT flight.start_date, flight.end_date, clients.name, clients.contact, clients.phone, clients.address, production.talent, production.producer, master.event_name, master.spot_length,users.name FROM flight INNER JOIN master ON master.flight_id = flight.id INNER JOIN clients ON clients.client_id = master.client_id INNER JOIN production ON production.contract_id = master.id INNER JOIN users ON master.users_id = users.id;');
+				var queryResults = client.query('SELECT master.id, flight.start_date, flight.end_date, clients.name, clients.contact, clients.phone, clients.address, production.talent, production.producer, master.event_name, master.spot_length,users.name FROM flight INNER JOIN master ON master.flight_id = flight.id INNER JOIN clients ON clients.client_id = master.client_id INNER JOIN production ON production.contract_id = master.id INNER JOIN users ON master.users_id = users.id;');
 						  queryResults.on('row', function(row){
 							results.push(row);
 							console.log('productionInfo row is ', row);
@@ -32,6 +32,7 @@ var connectionString = 'postgres://localhost:5432/kmoj';
 // router.post for production table
 router.post ('/production', function (req, res){
 	console.log ('req.body for client is', req.body);
+	console.log (req.query.q);
 	var client = req.body;
 	pg.connect(connectionString, function (err, client, done){
 		console.log('In production right now');
