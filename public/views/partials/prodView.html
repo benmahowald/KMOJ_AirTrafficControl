@@ -4,25 +4,25 @@
   <div id = "content">
     <table id = "editor" class = "export-table" width = "75%">
       <tr ng-init="getProductions()">
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Underwriter Name</th>
-        <th>Client Name</th>
-        <th>Client Contact</th>
-        <th>Client Phone</th>
-        <th>Client Address</th>
-        <th>Event Name</th>
+        <th width = "auto">Start Date</th>
+        <th width = "auto">End Date</th>
+        <th width = "auto">Underwriter Name</th>
+        <th width = "auto">Client Name</th>
+        <th width = "auto">Client Contact</th>
+        <th width = "auto">Client Phone</th>
+        <th width = "auto">Client Address</th>
+        <th width = "auto">Event Name</th>
       </tr>
       <tr ng-repeat="production in productions">
-        <td><input type = "radio" ng-click="retrieveProdId(production.id)"></td>
-        <td>{{production.start_date}}</td>
-        <td>{{production.end_date}}</td>
+        <td>{{production.start_date | date: 'MMM DD YYYY'}}</td>
+        <td>{{production.end_date | date: 'MMM DD YYYY'}}</td>
         <td>{{production.uw_name}}</td>
         <td>{{production.name}}</td>
         <td>{{production.contact}}</td>
         <td>{{production.phone}}</td>
         <td>{{production.address}}</td>
         <td>{{production.event_name}}</td>
+        <td><input type = "radio" ng-click="retrieveProdId(production.id)"></td>
       </tr>
     </table>
   </div>
