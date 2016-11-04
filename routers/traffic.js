@@ -169,7 +169,7 @@ router.get('/contractspending', function (req, res){
 			console.log('get contract connection error is', err);
 		} else {
 			var results = [];
-			var queryResults = client.query ('SELECT * FROM master WHERE man_app=(false)');
+			var queryResults = client.query ('SELECT * FROM master WHERE man_app=(false) AND tr_app=(false)');
 			queryResults.on('row', function(row){
 				results.push(row);
 			});
@@ -183,7 +183,7 @@ router.get('/contractspending', function (req, res){
 });//end router contractspending
 
 router.get('/flightContract', function (req, res){
-	console.log('in get contract');
+	console.log('in get contract -------------------');
 	console.log('req.query.q', req.query.q);
 	pg.connect(connectionString, function(err, client, done){
 		if(err){
@@ -193,7 +193,6 @@ router.get('/flightContract', function (req, res){
 			var queryResults = client.query('SELECT start_date, end_date FROM flight WHERE contract_id=($1)', [req.query.q]);
 			queryResults.on('row', function(row){
 				results.push(row);
-				console.log('row', row);
 			});
 			queryResults.on('end', function(){
 				done();
@@ -218,12 +217,32 @@ router.get('/invoice', function (req, res){
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
 						done();
-						return res.json(results);
 						console.log('results are', results);
+						return res.json(results);
 					});//end queryResults on 'end'
 		}
 	});//end pg.connect for invoice info
 });//end router.get for invoice info
 
+router.put('/approval', function (req, res){
+  console.log('get approval route hit ----------------');
+  console.log('req.query.q', req.query.q);
+  pg.connect(connectionString, function(err, client, done){
+    if (err){
+      console.log('connection err in clientinfo');
+    } else {
+      var results = [];
+      var queryResults = client.query('UPDATE master SET tr_app=(true) WHERE id=($1)', [req.query.q]);
+      queryResults.on('row', function(row){
+        results.push(row);
+      });//end queryResults.on 'row'
+      queryResults.on('end', function(){
+        done();
+        console.log('results are', results);
+        return res.json(results);
+      });//end queryResults on 'end'
+    } // end first else
+  });//end pg.connect for client info
+});//end router.put for client info
 
 module.exports = router;

@@ -19,6 +19,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
   $scope.selectContractFlight = function (contract_id) {
     console.log('in selectContractFlight');
     console.log('contract_id = ' + contract_id);
+    $scope.currentContractId = contract_id;
     $http({
       method: 'GET',
       url: '/traffic/flightContract?q=' + contract_id,
@@ -35,6 +36,22 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       console.log('err', response);
     }); // end then
   }; // end selectContract
+
+  $scope.trafficApproval = function (contract_id) {
+    console.log('in trafficApproval');
+    console.log('contract_id = ', contract_id);
+    $http({
+      method: 'PUT',
+      url: '/traffic/approval?q=' + contract_id,
+    }).then(function(response){
+    }, function errorCallback (response){
+      console.log('err', response);
+    }); // end then
+  }; // end trafficApproval
+
+  $scope.getInvoice = function () {
+    console.log('in getInvoice');
+  }; // end getInvoice
 
   // $scope.sendTraffic = function (){
   //   var traffictoSend = {

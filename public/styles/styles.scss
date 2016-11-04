@@ -124,7 +124,41 @@ input[placeholder] {
   width: 400px;
   max-width: 95%;
   margin: auto;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
   text-align: left;
   font-family: $font;
   border-bottom: 1px solid #333;
+}
+
+.listOfContracts {
+  border: 1px solid #666;
+  border-radius: 4px;
+  background-color: #ebebeb;
+  cursor: pointer;
+  padding: 5px;
+}
+.listOfContracts:hover {
+  box-shadow: 0 4px 12px 0 #666;
+}
+
+.listOfContracts:focus {
+  outline: none;
+}
+
+.trafficInfo {
+  background-color: #ede08e;
+  width: 400px;
+  max-width: 95%;
+}
+
+.button {
+  padding: 5px 8px;
+  margin: 5px 3px;
+  border-radius: 3px;
+  border: 1px solid #4da445;
+  background-color: #93d799;
+}
+.textToStandOut {
+  font-weight: bold;
 }
