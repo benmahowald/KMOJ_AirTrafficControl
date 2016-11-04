@@ -4,12 +4,13 @@
 }
 
 
-.form, .trafficForm {
+.form, .trafficInfo, {
   max-width: 95%;
   margin: auto;
   background-color: #ede08e;
   padding: 20px;
   font-family: $font;
+  border-radius: 1px;
 }
 
 input, select, textarea, label {
