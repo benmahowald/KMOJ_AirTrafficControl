@@ -32,6 +32,8 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
         }).then(function(response){
           $scope.userData = response.data;
           console.log('user permission is', $scope.userData[0].permission);
+          //show logout button
+          $scope.loggedIn = true;
           //clear login input fields
           $scope.userEmail = "";
           $scope.userPassword="";
@@ -41,35 +43,10 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
     else{
       console.log('Not logged in.');
       $scope.signedIn = "Please login";
+      //show login
+      $scope.loggedIn = false;
     }//end else
   });//end onAuthStateChanged()
-
-//loads userData on page load
-$scope.init = function (){
-  if(firebaseUser) {
-    firebaseUser.getToken().then(function(idToken){
-      $http({
-        method: 'GET',
-        url: '/auth/Login',
-        headers: {
-          id_token: idToken
-        }//end header object
-      }).then(function(response){
-        $scope.userData = response.data;
-        console.log('user permission is', $scope.userData[0].permission);
-        console.log('userData:', $scope.userData);
-        //clear login input fields
-        $scope.userEmail = "";
-        $scope.userPassword="";
-      });//end response
-    });//end return idToken
-  }//end if(firebaseUser)
-  else{
-    console.log('Not logged in.');
-    $scope.signedIn = "Please login";
-  }//end else
-};
-
 
 
   //User logout
