@@ -175,7 +175,7 @@ router.get('/contractspending', function (req, res){
 			});
 			queryResults.on('end', function(){
 				done();
-				console.log('contract results are', results);
+				// console.log('contract results are', results);
 				return res.json(results);
 			});//end queryResults for contractspending
 		}
@@ -206,6 +206,7 @@ router.get('/flightContract', function (req, res){
 //get invoice info from db for invoice
 router.get('/invoice', function (req, res){
 	console.log('in get invoice info');
+	console.log('req.body',req.body);
 	pg.connect(connectionString, function(err, client, done){
 		if (err){
 			console.log('connection err in invoice info');
@@ -214,10 +215,11 @@ router.get('/invoice', function (req, res){
 			var queryResults = client.query('SELECT  master.event_name, users.name, master.total_spots, master.total_cost, master.discounts, master.commission, flight.start_date, flight.end_date, master.spot_length, master.spot_type, master.spot_rate, master.copy_id, slots.slot, slots.day_of_run, clients.name FROM master INNER JOIN slots ON slots.id = master.id INNER JOIN flight ON flight.contract_id = master.id INNER JOIN clients ON clients.client_id = master.id INNER JOIN users ON users.id = master.id');
 				  queryResults.on('row', function(row){
 						results.push(row);
+						// console.log('row=================', row)
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
 						done();
-						console.log('results are', results);
+						console.log('INVOICE results are', results);
 						return res.json(results);
 					});//end queryResults on 'end'
 		}
