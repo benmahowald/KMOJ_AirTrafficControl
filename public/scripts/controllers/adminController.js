@@ -1,7 +1,7 @@
 app.controller("adminController",["$scope","$http",function($scope,$http){
   console.log('Admin Controller');
 
-console.log("in AdminCTRL $scope.userData",$scope.userData);
+// console.log("in AdminCTRL $scope.userData",$scope.userData);
 
   $scope.authLevels = [
     { permission: 'Administration'},
@@ -28,7 +28,7 @@ console.log("in AdminCTRL $scope.userData",$scope.userData);
       method: 'GET',
       url: 'admin/userList'
     }).then(function(response){
-      console.log('returned from server ', response);
+      // console.log('returned from server ', response);
       $scope.users = response.data;
     }); //end return
   };//end viewUsers
@@ -39,9 +39,9 @@ console.log("in AdminCTRL $scope.userData",$scope.userData);
   $scope.createNewUser = function(){
     //clear $scope.newUserEmail if you have trouble with creating a user and it states "email is not a string"
     if(firebase.auth().currentUser) {
-      console.log("firebase.auth().currentUser",firebase.auth().currentUser);
-
-        console.log("$scope.newUserEmail",$scope.newUserEmail);
+      // console.log("firebase.auth().currentUser",firebase.auth().currentUser);
+      //
+      //   console.log("$scope.newUserEmail",$scope.newUserEmail);
       // console.log("$scope.auth.permission",$scope.auth.permission);
       secondaryApp.auth().createUserWithEmailAndPassword($scope.newUserEmail, $scope.newUserPassword)
       .then(function(firebaseUser) {

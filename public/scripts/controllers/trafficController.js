@@ -55,7 +55,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
 
 
   var invoiceInfo = {};
-  $scope.invoice = [];
+  $scope.invoices = [];
 
 
 
@@ -64,7 +64,8 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
   		method: 'GET',
   		url: '/traffic/invoice'
   	}).then(function(response){
-  		$scope.invoice = response.data;
+      console.log('response is ', response);
+  		$scope.invoices = response.data;
       console.log('$scope.invoice is', $scope.invoice);
       console.log('response.data is ', response.data);
   		invoiceInfo.event_name = response.data[0].event_name,
