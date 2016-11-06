@@ -53,7 +53,7 @@ router.get('/userList', function(req,res){
       //clear user array
       user = [];
       // query call to database table
-      var queryResults = client.query( 'SELECT * FROM users ORDER BY active ASC' );
+      var queryResults = client.query( 'SELECT * FROM users ORDER BY active DESC, permission ASC;' );
       queryResults.on( 'row', function( row ){
         // runs for each row in the query result
         user.push( row );
@@ -63,11 +63,30 @@ router.get('/userList', function(req,res){
         done();
         console.log('user: ',user);
         // return result as a json version of array
-        return res.json( user );
+        res.json( user );
       });//end on end
     }; // end no error
   }); // end connect
 });//end userList
+
+//change active status
+router.put('/changeActiveStatus', urlencodedParser, function(req,res){
+  console.log('in changeActiveStatus',req.body);
+  pg.connect(connectionString, function(err,client,done){
+    if(err){
+      console.log('error: ',err);
+    }//end if
+    else{
+      console.log('connected to database in changeActiveStatus');
+      var resultQuery=client.query('UPDATE users SET active=($1) WHERE id=($2)',[req.body.activeStatus,req.body.id]);
+      resultQuery.on('end', function(){
+        done();
+        console.log('in changeActiveStatus active=',req.body.active);
+        res.sendStatus(200);
+      });//end
+    };//end else
+  });//end pg connect
+});//end changeActiveStatus
 
 //delete task
 router.delete('/deleteUser', function(req,res){

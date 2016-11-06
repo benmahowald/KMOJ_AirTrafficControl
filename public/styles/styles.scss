@@ -156,9 +156,15 @@ input[placeholder] {
   padding: 5px 8px;
   margin: 5px 3px;
   border-radius: 3px;
-  border: 1px solid #4da445;
-  background-color: #93d799;
+  // border: 1px solid #4da445;
+  // background-color: #93d799;
 }
 .textToStandOut {
   font-weight: bold;
+}
+
+.changeActiveStatus{
+  background-color: transparent;
+  border: 0;
+  padding: 0;
 }

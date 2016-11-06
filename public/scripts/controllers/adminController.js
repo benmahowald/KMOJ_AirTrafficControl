@@ -1,7 +1,9 @@
 app.controller("adminController",["$scope","$http",function($scope,$http){
   console.log('Admin Controller');
 
-// console.log("in AdminCTRL $scope.userData",$scope.userData);
+
+  console.log("in adminController $scope.userData",$scope.userData);
+
 
   $scope.authLevels = [
     { permission: 'Administration'},
@@ -39,9 +41,10 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
   $scope.createNewUser = function(){
     //clear $scope.newUserEmail if you have trouble with creating a user and it states "email is not a string"
     if(firebase.auth().currentUser) {
-      // console.log("firebase.auth().currentUser",firebase.auth().currentUser);
-      //
-      //   console.log("$scope.newUserEmail",$scope.newUserEmail);
+
+      console.log("firebase.auth().currentUser",firebase.auth().currentUser);
+
+      console.log("$scope.newUserEmail",$scope.newUserEmail);
       // console.log("$scope.auth.permission",$scope.auth.permission);
       secondaryApp.auth().createUserWithEmailAndPassword($scope.newUserEmail, $scope.newUserPassword)
       .then(function(firebaseUser) {
@@ -79,6 +82,27 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
       clearFields();
     }//end else
   };//end createNewUser()
+
+  $scope.changeActiveStatus = function(){
+    var activeStatus;
+    if (this.user.active) {
+      activeStatus = false;
+    }//end if
+    else {
+      activeStatus = true;
+    }//end else
+    console.log("active status",activeStatus);
+    $http({
+      method: 'PUT',
+      url: 'admin/changeActiveStatus',
+      data: {id: this.user.id,
+        active: activeStatus
+      }//end data
+    }).then(function(response){
+      console.log("response from changeActiveStatus",response);
+      viewUsers();
+    });//end reponse from server
+  }//end changeActiveStatus
 
   //Delete a user
   $scope.deleteUser = function(){
