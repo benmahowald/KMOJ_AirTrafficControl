@@ -56,7 +56,6 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
         <ul class="nav navbar-nav">
-
           <li class="dropdown" ng-if="userData[0].permission == 'Administration' || userData[0].permission == 'View All'">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -65,15 +64,15 @@
               <li ng-if="userData[0].permission == 'Administration' || userData[0].permission == 'View All'"><a href="admin/employees">Employee Authorization</a></li>
             </ul>
           </li>
-          <li ng-if="userData[0].permission == 'Production' || userData[0].permission == 'View All'"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="production">Production</a></li>
-          <li ng-if="userData[0].permission == 'Traffic' || userData[0].permission == 'View All'"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="traffic">Traffic</a></li>
-          <li class="dropdown" ng-if="userData[0].permission == 'Underwriter' || userData[0].permission == 'View All'">
+          <li ng-if="userData[0].permission == 'Production' || userData[0].permission == 'Administration' || userData[0].permission == 'View All'"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="production">Production</a></li>
+          <li ng-if="userData[0].permission == 'Traffic' || userData[0].permission == 'Administration' || userData[0].permission == 'View All'"><a data-toggle="collapse" data-target=".navbar-collapse.in" href="traffic">Traffic</a></li>
+          <li class="dropdown" ng-if="userData[0].permission == 'Underwriter' || userData[0].permission == 'Administration' || userData[0].permission == 'View All'">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Underwriter<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li ng-if="userData[0].permission == 'Underwriter' || userData[0].permission == 'View All'"><a href="underwriter">Contracts</a></li>
-              <li ng-if="userData[0].permission == 'Underwriter' || userData[0].permission == 'View All'"><a href="underwriter/createClient">Create Client</a></li>
-              <li ng-if="userData[0].permission == 'Underwriter' || userData[0].permission == 'View All'"><a href="underwriter/editClient">Edit Client</a></li>
-              <li ng-if="userData[0].permission == 'Underwriter' || userData[0].permission == 'View All'"><a href="underwriter/aired">Aired History</a></li>
+              <li ng-if="userData[0].permission == 'Underwriter' || userData[0].permission == 'Administration' || userData[0].permission == 'View All'"><a href="underwriter">Contracts</a></li>
+              <li ng-if="userData[0].permission == 'Underwriter' || userData[0].permission == 'Administration' || userData[0].permission == 'View All'"><a href="underwriter/createClient">Create Client</a></li>
+              <li ng-if="userData[0].permission == 'Underwriter' || userData[0].permission == 'Administration' || userData[0].permission == 'View All'"><a href="underwriter/editClient">Edit Client</a></li>
+              <li ng-if="userData[0].permission == 'Underwriter' || userData[0].permission == 'Administration' || userData[0].permission == 'View All'"><a href="underwriter/aired">Aired History</a></li>
             </ul>
           </li>
           <!-- The search is separated from the list because everyone should see it regardless of permission -->
