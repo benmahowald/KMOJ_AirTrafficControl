@@ -54,7 +54,7 @@ router.get('/userList', function(req,res){
       //clear user array
       user = [];
       // query call to database table
-      var queryResults = client.query( 'SELECT * FROM users ORDER BY active ASC' );
+      var queryResults = client.query( 'SELECT * FROM users ORDER BY active DESC, permission ASC;' );
       queryResults.on( 'row', function( row ){
         // runs for each row in the query result
         user.push( row );
