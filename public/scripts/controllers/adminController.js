@@ -117,7 +117,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     });//end response from server
   };//end deleteUser
 
-  $scope.pendingContracts = function () {
+  pendingContracts = function(){
     console.log('in pendingContracts');
     $http({
       method: 'GET',
@@ -129,7 +129,21 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
       console.log('err', response);
     }); // end then
   }; // end pendingContracts
-  $scope.pendingContracts();
+  pendingContracts();
+
+  approvedContracts = function(){
+    console.log('in approvedContracts');
+    $http({
+      method: 'GET',
+      url: '/admin/approvedContracts',
+    }).then(function(response){
+      $scope.approvedContracts = response.data;
+      console.log('$scope.pendingContracts', $scope.approvedContracts);
+    }, function errorCallback (response){
+      console.log('err', response);
+    }); // end then
+  }; // end approvedContracts
+  approvedContracts();
 
   $scope.managerApproval = function(){
     var managerApproval;
@@ -149,7 +163,8 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
       }//end data
     }).then(function(response){
       console.log("response from managerApproval",response);
-      $scope.pendingContracts();
+      pendingContracts();
+      approvedContracts();
     });//end reponse from server
   }//end managerApproval
 

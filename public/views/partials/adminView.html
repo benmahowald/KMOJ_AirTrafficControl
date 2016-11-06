@@ -1,6 +1,6 @@
 <div ng-show="userData[0].permission == 'Administration' || 'View All'">
   <h3><strong>Pending Contracts</strong></h3>
-  <br><br>
+  <br>
 
   <div class="contract">
     <table class="table">
@@ -33,6 +33,40 @@
         </div>
       </tbody>
     </table>
+
+  <br><br>
+    <h3><strong>Approved Contracts</strong></h3>
+<br>
+    <div class="contract">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Copy ID</th>
+            <th>Event</th>
+            <th>Total Spots</th>
+            <th>Contract Signed</th>
+            <th>Production Approval</th>
+            <th>Traffic Approval</th>
+            <th>Underwriter Approval</th>
+            <th>Flight ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <div>
+            <tr ng-repeat='approval in approvedContracts.slice().reverse()'>
+              <td>{{approval.copy_id}}</td>
+              <td>{{approval.event_name}}</td>
+              <td>{{approval.total_spots}}</td>
+              <td>{{approval.sign_date}}</td>
+              <td>{{approval.pr_app}}</td>
+              <td>{{approval.tr_app}}</td>
+              <td>{{approval.uw_app}}</td>
+              <td>{{approval.flight_id}}</td>
+            </tr>
+          </div>
+        </tbody>
+      </table>
+
 
   </div>
 <!-- <div ng-show="userData[0].permission !== 'Administration'">

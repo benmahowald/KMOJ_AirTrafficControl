@@ -134,6 +134,28 @@ router.get('/pendingContracts', function (req, res){
   }); //end pg.connect
 });//end pendingContracts
 
+router.get('/approvedContracts', function (req, res){
+  console.log('in approvedContracts');
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      console.log('error', err);
+    } //end if error
+    else {
+      var results = [];
+      var queryResults = client.query ('SELECT * FROM master WHERE man_app=(true)');
+      queryResults.on('row', function(row){
+        results.push(row);
+      });
+      queryResults.on('end', function(){
+        done();
+        // console.log('approvedContracts results',results);
+        res.json(results);
+
+      });//end queryResults
+    }//end else
+  }); //end pg.connect
+});//end approvedContracts
+
 //change managerApproval
 router.put('/managerApproval', urlencodedParser, function(req,res){
   console.log('in managerApproval',req.body);
