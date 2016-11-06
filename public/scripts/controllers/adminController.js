@@ -129,7 +129,28 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
       console.log('err', response);
     }); // end then
   }; // end pendingContracts
-
   $scope.pendingContracts();
+
+  $scope.managerApproval = function(){
+    var managerApproval;
+    console.log('MANAGER APPROVAL this.data',this.data);
+    if (this.data.man_app) {
+      managerApproval = false;
+    }//end if
+    else {
+      managerApproval = true;
+    }//end else
+    console.log("approval status",managerApproval);
+    $http({
+      method: 'PUT',
+      url: 'admin/managerApproval',
+      data: {id: this.data.id,
+        man_app: managerApproval
+      }//end data
+    }).then(function(response){
+      console.log("response from managerApproval",response);
+      $scope.pendingContracts();
+    });//end reponse from server
+  }//end managerApproval
 
 }]);//end adminController

@@ -134,4 +134,23 @@ router.get('/pendingContracts', function (req, res){
   }); //end pg.connect
 });//end pendingContracts
 
+//change managerApproval
+router.put('/managerApproval', urlencodedParser, function(req,res){
+  console.log('in managerApproval',req.body);
+  pg.connect(connectionString, function(err,client,done){
+    if(err){
+      console.log('error: ',err);
+    }//end if
+    else{
+      console.log('connected to database in managerApproval');
+      var resultQuery=client.query('UPDATE master SET man_app=($1) WHERE id=($2);',[req.body.man_app,req.body.id]);
+      resultQuery.on('end', function(){
+        done();
+        console.log('in managerApproval man_app=',req.body.man_app);
+        res.sendStatus(200);
+      });//end
+    };//end else
+  });//end pg connect
+});//end managerApproval
+
 module.exports = router;
