@@ -21,7 +21,7 @@ td, table {
 }
 
 html {
-  background: #dcb500;
+  background: #FFF;
   height:0%;
 
 }
@@ -46,7 +46,7 @@ input[type=number]::-webkit-outer-spin-button {
 @import '_form';
 
 .login {
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .signin {
@@ -100,6 +100,17 @@ input[type=number]::-webkit-outer-spin-button {
 .navbar .nav li.dropdown.open.active > .dropdown-toggle {
     background-color: #262626;
     color:#ffffff;
+}
+
+.navbar {
+  border-bottom: 5px solid #dcb500;
+}
+
+button {
+  border-radius: 5px;
+  border-color: black;
+  background: white;
+  border-width: thin;
 }
 
 input {
@@ -167,4 +178,14 @@ input[placeholder] {
   background-color: transparent;
   border: 0;
   padding: 0;
+}
+
+th {
+  text-align: center;
+}
+
+.logo {
+  margin-top: -15px;
+  height: 45px;
+  width: auto;
 }

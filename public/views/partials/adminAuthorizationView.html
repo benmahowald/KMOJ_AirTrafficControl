@@ -1,26 +1,41 @@
 <div ng-show="userData[0].permission == 'Administration' || 'View All'">
-<h3><strong>Add A New Employee</strong></h3>
-<br>
-Name: <input type="text" class="userInput" ng-model="newUserName"/>
-Email: <input type="email" class="userInput" ng-model="newUserEmail"/>
-Password: <input type="password" class="userInput" ng-model="newUserPassword"/>
-Permission Level: <select ng-model="auth" ng-options="authLevel as authLevel.permission for authLevel in authLevels" width="30">
-  <option value="" ng-if="auth">Select Permission Level</option>
-</select>
-<button ng-click="createNewUser()">Create New User</button>
-<br>
-<div><center><h2><strong>List of Current Users</strong></h2></center>
-  <p ng-repeat='user in users'>
-    <br>
-    Name: {{user.name}} Email: {{user.email}} Permission Level: {{user.permission}} Active: <button class='changeActiveStatus' ng-click='changeActiveStatus()'>{{user.active}}</button>
-    &nbsp;&nbsp;&nbsp;
-    <button ng-click='deleteUser()'>Delete</button>
-  </p>
-</div>
+  <h3><strong>Add A New Employee</strong></h3>
+  <br><br>
+  <strong>Name:</strong> <input type="text" class="userInput" ng-model="newUserName"/>
+  <strong>Email:</strong> <input type="email" class="userInput" ng-model="newUserEmail"/>
+  <strong>Password:</strong> <input type="password" class="userInput" ng-model="newUserPassword"/>
+  <strong>Permission Level:</strong> <select ng-model="auth" ng-options="authLevel as authLevel.permission for authLevel in authLevels" width="30">
+    <option value="" ng-if="auth">Select Permission Level</option>
+  </select> &nbsp;&nbsp;
+  <button ng-click="createNewUser()">Create New User</button>
+  <br><br>
+  <div><center><h3><strong>Employee List</strong></h3></center>
+    <div class="contract">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Permission Level</th>
+            <th>Employee Name</th>
+            <th>E-mail</th>
+            <th>Active</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <div>
+            <tr ng-repeat='user in users.slice().reverse()'>
+              <td>{{user.permission}}</td>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td><button class='changeActiveStatus' ng-click='changeActiveStatus()'>{{user.active}}</button></td>
+              <td><button ng-click='deleteUser()'>Delete</button></td>
+            </tr>
+          </div>
+        </tbody>
+      </table>
+    </div>
 
-
-
-</div>
-<!-- <div ng-show="userData[0].permission !== 'Administration'">
+  </div>
+  <!-- <div ng-show="userData[0].permission !== 'Administration'">
   404
 </div> -->
