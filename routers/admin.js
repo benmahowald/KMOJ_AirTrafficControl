@@ -113,4 +113,25 @@ router.delete('/deleteUser', function(req,res){
   });//end pg connect
 });//end deleteUser
 
+router.get('/pendingContracts', function (req, res){
+  console.log('in pendingContracts');
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      console.log('error', err);
+    } //end if error
+    else {
+      var results = [];
+      var queryResults = client.query ('SELECT * FROM master WHERE man_app=(false)');
+      queryResults.on('row', function(row){
+        results.push(row);
+      });
+      queryResults.on('end', function(){
+        done();
+        // console.log('contract results are', results);
+        res.json(results);
+      });//end queryResults
+    }//end else
+  }); //end pg.connect
+});//end pendingContracts
+
 module.exports = router;

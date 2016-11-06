@@ -1,11 +1,40 @@
 <div ng-show="userData[0].permission == 'Administration' || 'View All'">
-  <h3><strong>Admin View</strong></h3>
-<br>
+  <h3><strong>Pending Contracts</strong></h3>
+  <br>
 
+  <div class="contract">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Copy ID</th>
+          <th>Event</th>
+          <th>Total Cost</th>
+          <th>Total Spots</th>
+          <th>Spot Length</th>
+          <th>Interviews</th>
+          <th>Social Media</th>
+          <th>Contract Signed</th>
+          <th>Manager Approval</th>
+        </tr>
+      </thead>
+      <tbody>
+        <div>
+          <tr ng-repeat='data in pendingContracts.slice().reverse()'>
+            <td>{{data.copy_id}}</td>
+            <td>{{data.event_name}}</td>
+            <td>{{data.total_cost}}</td>
+            <td>{{data.total_spots}}</td>
+            <td>{{data.spot_length}}</td>
+            <td>{{data.interviews}}</td>
+            <td>{{data.socialmedia}}</td>
+            <td>{{data.sign_date}}</td>
+            <td><button class='changeActiveStatus' ng-click='managerApproval()'>{{data.man_app}}</button></td>
+          </tr>
+        </div>
+      </tbody>
+    </table>
 
-
-
-</div>
+  </div>
 <!-- <div ng-show="userData[0].permission !== 'Administration'">
   404
 </div> -->

@@ -116,4 +116,20 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
       viewUsers();
     });//end response from server
   };//end deleteUser
+
+  $scope.pendingContracts = function () {
+    console.log('in pendingContracts');
+    $http({
+      method: 'GET',
+      url: '/admin/pendingContracts',
+    }).then(function(response){
+      $scope.pendingContracts = response.data;
+      console.log('$scope.pendingContracts', $scope.pendingContracts);
+    }, function errorCallback (response){
+      console.log('err', response);
+    }); // end then
+  }; // end pendingContracts
+
+  $scope.pendingContracts();
+
 }]);//end adminController
