@@ -48,13 +48,8 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     }).then($scope.getPendingContracts);
   }; // end trafficApproval
 
-
-
-
   var invoiceInfo = {};
   $scope.invoice = [];
-
-
 
   $scope.getInvoiceInfo = function (){
   	$http({
@@ -65,7 +60,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
   		$scope.invoices = response.data;
       console.log('$scope.invoice is', $scope.invoice);
       console.log('response.data is ', response.data);
-  		invoiceInfo.event_name = response.data[0].event_name,
+  		// invoiceInfo.event_name = response.data[0].event_name,
       invoiceInfo.users_name = response.data[0].users_name,
       invoiceInfo.total_spots = response.data[0].total_spots,
       invoiceInfo.total_cost = response.data[0].total_cost,
@@ -183,6 +178,5 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       data: cart_number
     }).then($scope.getCartNum);
   }; // end updateCartNum
-
 
 }]); // end trafficController

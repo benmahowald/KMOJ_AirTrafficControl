@@ -1,5 +1,6 @@
 <div ng-show="userData[0].permission == 'Production' || 'Administration' || 'View All'">
   <h3><strong>Production</strong></h3>
+  <div class="successMessage" ng-show="productionSaved">Production has been submitted</div>
   <br>
   <div id = "content">
     <table id = "editor" class = "export-table" width = "75%">
@@ -34,7 +35,7 @@
 
   <div class="form">
     <form class="production">
-      <input class="createProduction" type="text" name="event" ng-model="event" value="" placeholder="Event">
+      <input class="createProduction" type="text" name="event" ng-model="event_name" value="" placeholder="Event">
       <input class="createProduction" type="text" name="voice_talent" ng-model="talent" value="" placeholder="Voice Talent">
       <input class="createProduction" type="text" name="producer" value="" ng-model="producer" placeholder="Producer" ><br>
       <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":15">15-sec
