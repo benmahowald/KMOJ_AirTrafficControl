@@ -1,11 +1,12 @@
 <div ng-show="userData[0].permission == 'Administration' || 'View All'">
   <h3><strong>Monthly Reporting</strong></h3>
-
+<div class = "contact">
   <img src="assets/kmoj.png" style="width:60px;" alt="logo">
   <p>2123 W. Broadyway, Suite 200<br>
     Minneapolis, MN 55411<br>
     Phone: (612)377-0594<br>
     Fax: (612)377-6919<br></p>
+  </div>
     <div>
       <div id = "content">
         <table  width = "75%">
@@ -17,7 +18,7 @@
             <th>Underwriter Name</th>
             <th>Total Cost</th>
           </tr>
-          <tr ng-repeat="report in reports">
+          <tr class = "reports" ng-repeat="report in reports">
             <td>{{report.cart_number}}</td>
             <td>{{report.start_date}}</td>
             <td>{{report.end_date}}</td>
