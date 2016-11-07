@@ -175,7 +175,7 @@ router.get('/contractspending', function (req, res){
 			});
 			queryResults.on('end', function(){
 				done();
-				console.log('contract results are', results);
+				// console.log('contract results are', results);
 				return res.json(results);
 			});//end queryResults for contractspending
 		}
@@ -206,18 +206,20 @@ router.post('/flightContract', function (req, res){
 //get invoice info from db for invoice
 router.get('/invoice', function (req, res){
 	console.log('in get invoice info');
+	console.log('req.body',req.body);
 	pg.connect(connectionString, function(err, client, done){
 		if (err){
 			console.log('connection err in invoice info');
 		} else {
 			var results = [];
-			var queryResults = client.query('SELECT  master.event_name, users.name, master.total_spots, master.total_cost, master.discounts, master.commission, flight.start_date, flight.end_date, master.spot_length, master.spot_type, master.spot_rate, master.copy_id, slots.slot, slots.day_of_run, clients.name FROM master INNER JOIN slots ON slots.id = master.id INNER JOIN flight ON flight.contract_id = master.id INNER JOIN clients ON clients.client_id = master.id INNER JOIN users ON users.id = master.id');
+			var queryResults = client.query('SELECT  master.event_name, users.name, master.total_spots, master.total_cost, master.discounts, master.commission, flight.start_date, flight.end_date, master.spot_length, master.spot_type, master.spot_rate, master.copy_id, slots.slot, slots.day_of_run, clients.name FROM master INNER JOIN slots ON slots.flight_id = master.flight_id INNER JOIN flight ON flight.contract_id = master.id INNER JOIN clients ON clients.client_id = master.client_id INNER JOIN users ON users.id = master.users_id');
 				  queryResults.on('row', function(row){
 						results.push(row);
+						// console.log('row=================', row)
 					});//end queryResults.on 'row'
 					queryResults.on('end', function(){
 						done();
-						console.log('results are', results);
+						console.log('INVOICE results are', results);
 						return res.json(results);
 					});//end queryResults on 'end'
 		}
@@ -244,5 +246,46 @@ router.put('/approval', function (req, res){
     } // end first else
   });//end pg.connect for client info
 });//end router.put for client info
+
+router.get('/cart_number', function (req, res){
+	console.log('in get flight cart_number', req.query.q);
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in invoice info');
+		} else {
+			var results = [];
+			var queryResults = client.query('SELECT cart_number FROM flight WHERE contract_id=($1)', [req.query.q]);
+				  queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						console.log('results are', results);
+						return res.json(results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for invoice info
+});//end router.get for invoice info
+
+router.put('/cart_number', function (req, res){
+	console.log('in put cart_number');
+	console.log('req.body', req.body + 'req.query.q =', req.query.q);
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in invoice info');
+		} else {
+			var results = [];
+			var queryResults = client.query('UPDATE flight set cart_number=($1) WHERE contract_id=($2)', [req.body[0].cart_number, req.query.q]);
+				  queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						console.log('results are', results);
+						return res.json(results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for invoice info
+});//end router.get for invoice info
 
 module.exports = router;

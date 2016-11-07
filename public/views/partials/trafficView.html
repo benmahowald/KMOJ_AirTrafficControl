@@ -1,17 +1,20 @@
-<div ng-show="userData[0].permission == 'Traffic' || 'View All'">
-  <h3>Traffic Department</h3>
+<div ng-show="userData[0].permission == 'Traffic' || 'Administration' || 'View All'">
+  <h3 ng-init = "getInvoiceInfo()">Traffic Department</h3>
   <h4 class="pendingContractHeading">Pending Contracts</h4>
   <p ng-hide="pendingContracts">None</p>
   <div class="contractsPending" ng-repeat="contract in pendingContracts">
     <div>
-      <p class="listOfContracts" ng-click="selectContractFlight(contract.id)">Event Name: {{contract.event_name}}</p>
+      <p class="listOfContracts" ng-click="selectContractFlight(contract.id)">{{contract.event_name}}</p>
     </div>
   </div>
   <div ng-show="flightInfoExists" class="trafficInfo">
-    <h4>Flight Information</h4>
+    <h4>Flight and Runs Table</h4>
     <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p>
+    <!-- onbeforesave="getCartNum()" -->
+    <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Edit" }}</span></p>
+
+    <!-- <p editable-text="cart_number" e-form="textBtnForm" onbeforesave="updateCartNum()" onaftersave="getCartNum()"><span class="textToStandOut">Cart Number: </span>{{cart_number || No Cart #}}</p> -->
     <input class="button" type="button" name="name" value="Confirm Traffic" ng-click="trafficApproval(currentContractId)">
-    <input class="button" type="button" name="name" value="Run Confirmation PDF" ng-click="getInvoice()">
   </div>
 
  <!-- <div ng-show="userData[0].permission !== 'Traffic'">

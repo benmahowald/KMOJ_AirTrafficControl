@@ -29,6 +29,27 @@ router.post ('/client', function (req, res){
 });//end router.post for client table
 
 //router.post master
+var transporter = nodemailer.createTransport({
+	service: 'Gmail',
+	auth: {
+		user: 'kmojatc@gmail.com',
+		pass: 'manager@kmoj'
+	}
+});
+
+var managerMail = transporter.sendMail({
+	from: 'kmojatc@gmail.com',
+	to: 'kmojproject@gmail.com',
+	subject: 'New contract added to queue!',
+	text: 'Please go to Air Traffic Controller to approve a new contract!'
+}, function (err, res){
+	if (err){
+		console.log('error sending mail', err);
+	} else {
+		console.log('message sent ', res.message);
+	}
+	transporter.close();
+});
 
 router.post ('/master', function (req, res){
 	console.log('req.body is', req.body);
@@ -89,7 +110,7 @@ router.post ('/master', function (req, res){
 
 							queryResultsSlot.on('end', function(){
 								if (i === master.slotInfo.length-1){
-	//////////////// managerMail();
+	 							managerMail();
 								done();
 								res.send({success: true});
 							}

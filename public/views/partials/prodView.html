@@ -1,4 +1,4 @@
-<div ng-show="userData[0].permission == 'Production' || 'View All'">
+<div ng-show="userData[0].permission == 'Production' || 'Administration' || 'View All'">
   <h3><strong>Production</strong></h3>
   <br>
   <div id = "content">
@@ -34,20 +34,20 @@
 
   <div class="form">
     <form class="production">
-      <input type="text" name="event" ng-model="event" value="" placeholder="Event">
-      <input type="text" name="voice_talent" ng-model="talent" value="" placeholder="Voice Talent">
-      <input type="text" name="producer" value="" ng-model="producer" placeholder="Producer" ><br>
-      <input type="radio" name="spot_length" ng-model = "spot_length" value=":15">15-sec
-      <input type="radio" name="spot_length" ng-model = "spot_length" value=":30">30-sec
-      <input type="radio" name="spot_length" ng-model = "spot_length" value=":60">60-sec
+      <input class="createProduction" type="text" name="event" ng-model="event" value="" placeholder="Event">
+      <input class="createProduction" type="text" name="voice_talent" ng-model="talent" value="" placeholder="Voice Talent">
+      <input class="createProduction" type="text" name="producer" value="" ng-model="producer" placeholder="Producer" ><br>
+      <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":15">15-sec
+      <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":30">30-sec
+      <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":60">60-sec
     </form>
     <form class="production2">
-      <input type="text" name="cart_number" ng-model="cart_number" value="" placeholder="Cart #">
-      <input type="text" name="who" value="" ng-model="who" placeholder="Who">
-      <input type="text" name="where" value="" ng-model="site" placeholder="Where">
-      <input type="text" name="for_more_info" ng-model="why" value="" placeholder="For More Info">
-      <textarea name="what" rows="8" cols="30" ng-model = "what" placeholder="What"></textarea>
-      <input type="button" name="submitProd" value="Submit" ng-click="sendProduction()">
+      <input class="createProduction" type="text" name="cart_number" ng-model="cart_number" value="" placeholder="Cart #">
+      <input class="createProduction" type="text" name="who" value="" ng-model="who" placeholder="Who">
+      <input class="createProduction" type="text" name="where" value="" ng-model="site" placeholder="Where">
+      <input class="createProduction" type="text" name="for_more_info" ng-model="why" value="" placeholder="For More Info">
+      <textarea class="createProduction" name="what" rows="8" cols="30" ng-model = "what" placeholder="What"></textarea>
+      <input class="button" type="button" name="submitProd" value="Submit" ng-click="sendProduction()">
     </form>
   </div>
 

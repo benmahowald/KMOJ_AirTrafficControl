@@ -3,8 +3,7 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
 
   var reportInfo = {};
   $scope.reports = [];
-  var invoiceInfo = {};
-  $scope.invoice = [];
+
 
   $scope.getReports = function (){
     $http({
@@ -12,7 +11,6 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
       url: '/reports/reports'
     }).then(function(response){
       $scope.reports = response.data;
-      reportInfo.cart_number = response.data[0].cart_number;
       reportInfo.cart_number = response.data[0].cart_number,
       reportInfo.start_date = response.data[0].start_date,
       reportInfo.end_date = response.data[0].end_date,
@@ -36,32 +34,6 @@ var reportInfo = {
   total_cost: $scope.total_cost
 };
 
-  $scope.getInvoice = function (){
-  	$http({
-  		method: 'GET',
-  		url: '/reports/invoice'
-  	}).then(function(response){
-  		$scope.invoice = response.data;
-  		invoice.client_name = response.data[0].client_name;
-  		invoice.event_name = response.data[0].event_name;
-  		invoice.uw_name = response.data[0].uw_name;
-  		invoice.start_date = response.data[0].start_date;
-  		invoice.end_date = response.data[0].end_date;
-  		invoice.total_spots = response.data[0].total_spots;
-  		invoice.total_cost = response.data[0].total_cost;
-  		invoice.discounts = response.data[0].discounts;
-  		invoice.commission = response.data[0].commission;
-  		invoice.slot = response.data[0].slot;
-  		invoice.day_of_run = response.data[0].day_of_run;
-  		invoice.spot_length = response.data[0].spot_length;
-  		invoice.spot_type = response.data[0].spot_type;
-  		invoice.copy_id = response.data[0].copy_id;
-  		invoice.spot_rate = response.data[0].spot_rate;
-      invoice.contract_id = response.data[0].contract_id;
-  	}, function errorCallback (response){
-  		console.log('error getting invoices', response);
-  	});
-  };
 
 
 
@@ -81,7 +53,7 @@ $scope.getReport = function(){
         {text: 'Phone: (612)377-0594', alignment: 'center'},
         {text: 'Fax: (612)377-6919\n\n', alignment: 'center'},
         {text: 'MONTHLY REPORT\n\n', style: 'subheader', alignment: 'center'},
-        {text: 'MONTHLY REPORT\n\n', alignmnet: 'center'},
+
 
       {
         table: {
@@ -93,7 +65,7 @@ $scope.getReport = function(){
     }//end table
       ]// end content
     };// end docDefinition
-    pdfMake.createPdf(docDefinition).download('current-report.pdf');
+    pdfMake.createPdf(docDefinition).open();
   }; // end downloadFormOnePdf
 
 

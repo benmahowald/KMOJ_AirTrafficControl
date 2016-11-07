@@ -54,7 +54,7 @@ router.get('/userList', function(req,res){
       //clear user array
       user = [];
       // query call to database table
-      var queryResults = client.query( 'SELECT * FROM users ORDER BY active ASC' );
+      var queryResults = client.query( 'SELECT * FROM users ORDER BY active DESC, permission ASC;' );
       queryResults.on( 'row', function( row ){
         // runs for each row in the query result
         user.push( row );
@@ -112,5 +112,67 @@ router.delete('/deleteUser', function(req,res){
     }//end else
   });//end pg connect
 });//end deleteUser
+
+router.get('/pendingContracts', function (req, res){
+  console.log('in pendingContracts');
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      console.log('error', err);
+    } //end if error
+    else {
+      var results = [];
+      var queryResults = client.query ('SELECT * FROM master WHERE man_app=(false)');
+      queryResults.on('row', function(row){
+        results.push(row);
+      });
+      queryResults.on('end', function(){
+        done();
+        // console.log('contract results are', results);
+        res.json(results);
+      });//end queryResults
+    }//end else
+  }); //end pg.connect
+});//end pendingContracts
+
+router.get('/approvedContracts', function (req, res){
+  console.log('in approvedContracts');
+  pg.connect(connectionString, function(err, client, done){
+    if(err){
+      console.log('error', err);
+    } //end if error
+    else {
+      var results = [];
+      var queryResults = client.query ('SELECT * FROM master WHERE man_app=(true)');
+      queryResults.on('row', function(row){
+        results.push(row);
+      });
+      queryResults.on('end', function(){
+        done();
+        // console.log('approvedContracts results',results);
+        res.json(results);
+
+      });//end queryResults
+    }//end else
+  }); //end pg.connect
+});//end approvedContracts
+
+//change managerApproval
+router.put('/managerApproval', urlencodedParser, function(req,res){
+  console.log('in managerApproval',req.body);
+  pg.connect(connectionString, function(err,client,done){
+    if(err){
+      console.log('error: ',err);
+    }//end if
+    else{
+      console.log('connected to database in managerApproval');
+      var resultQuery=client.query('UPDATE master SET man_app=($1) WHERE id=($2);',[req.body.man_app,req.body.id]);
+      resultQuery.on('end', function(){
+        done();
+        console.log('in managerApproval man_app=',req.body.man_app);
+        res.sendStatus(200);
+      });//end
+    };//end else
+  });//end pg connect
+});//end managerApproval
 
 module.exports = router;

@@ -1,11 +1,74 @@
 <div ng-show="userData[0].permission == 'Administration' || 'View All'">
-  <h3><strong>Admin View</strong></h3>
+  <h3><strong>Pending Contracts</strong></h3>
+  <br>
+
+  <div class="contract">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Copy ID</th>
+          <th>Event</th>
+          <th>Total Cost</th>
+          <th>Total Spots</th>
+          <th>Spot Length</th>
+          <th>Interviews</th>
+          <th>Social Media</th>
+          <th>Contract Signed</th>
+          <th>Manager Approval</th>
+        </tr>
+      </thead>
+      <tbody>
+        <div>
+          <tr ng-repeat='data in pendingContracts.slice().reverse()'>
+            <td>{{data.copy_id}}</td>
+            <td>{{data.event_name}}</td>
+            <td>{{data.total_cost}}</td>
+            <td>{{data.total_spots}}</td>
+            <td>{{data.spot_length}}</td>
+            <td>{{data.interviews}}</td>
+            <td>{{data.socialmedia}}</td>
+            <td>{{data.sign_date}}</td>
+            <td><button class='changeActiveStatus' ng-click='managerApproval()'>{{data.man_app}}</button></td>
+          </tr>
+        </div>
+      </tbody>
+    </table>
+
+  <br><br>
+    <h3><strong>Approved Contracts</strong></h3>
 <br>
+    <div class="contract">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Copy ID</th>
+            <th>Event</th>
+            <th>Total Spots</th>
+            <th>Contract Signed</th>
+            <th>Production Approval</th>
+            <th>Traffic Approval</th>
+            <th>Underwriter Approval</th>
+            <th>Flight ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <div>
+            <tr ng-repeat='approval in approvedContracts.slice().reverse()'>
+              <td>{{approval.copy_id}}</td>
+              <td>{{approval.event_name}}</td>
+              <td>{{approval.total_spots}}</td>
+              <td>{{approval.sign_date}}</td>
+              <td>{{approval.pr_app}}</td>
+              <td>{{approval.tr_app}}</td>
+              <td>{{approval.uw_app}}</td>
+              <td>{{approval.flight_id}}</td>
+            </tr>
+          </div>
+        </tbody>
+      </table>
 
 
-
-
-</div>
+  </div>
 <!-- <div ng-show="userData[0].permission !== 'Administration'">
   404
 </div> -->

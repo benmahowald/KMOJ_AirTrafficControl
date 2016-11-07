@@ -1,7 +1,9 @@
 app.controller("adminController",["$scope","$http",function($scope,$http){
   console.log('Admin Controller');
 
-console.log("in AdminCTRL $scope.userData",$scope.userData);
+
+  console.log("in adminController $scope.userData",$scope.userData);
+
 
   $scope.authLevels = [
     { permission: 'Administration'},
@@ -28,7 +30,7 @@ console.log("in AdminCTRL $scope.userData",$scope.userData);
       method: 'GET',
       url: 'admin/userList'
     }).then(function(response){
-      console.log('returned from server ', response);
+      // console.log('returned from server ', response);
       $scope.users = response.data;
     }); //end return
   };//end viewUsers
@@ -39,9 +41,10 @@ console.log("in AdminCTRL $scope.userData",$scope.userData);
   $scope.createNewUser = function(){
     //clear $scope.newUserEmail if you have trouble with creating a user and it states "email is not a string"
     if(firebase.auth().currentUser) {
+
       console.log("firebase.auth().currentUser",firebase.auth().currentUser);
 
-        console.log("$scope.newUserEmail",$scope.newUserEmail);
+      console.log("$scope.newUserEmail",$scope.newUserEmail);
       // console.log("$scope.auth.permission",$scope.auth.permission);
       secondaryApp.auth().createUserWithEmailAndPassword($scope.newUserEmail, $scope.newUserPassword)
       .then(function(firebaseUser) {
@@ -80,6 +83,27 @@ console.log("in AdminCTRL $scope.userData",$scope.userData);
     }//end else
   };//end createNewUser()
 
+  $scope.changeActiveStatus = function(){
+    var activeStatus;
+    if (this.user.active) {
+      activeStatus = false;
+    }//end if
+    else {
+      activeStatus = true;
+    }//end else
+    console.log("active status",activeStatus);
+    $http({
+      method: 'PUT',
+      url: 'admin/changeActiveStatus',
+      data: {id: this.user.id,
+        active: activeStatus
+      }//end data
+    }).then(function(response){
+      console.log("response from changeActiveStatus",response);
+      viewUsers();
+    });//end reponse from server
+  }//end changeActiveStatus
+
   //Delete a user
   $scope.deleteUser = function(){
     $http({
@@ -92,4 +116,56 @@ console.log("in AdminCTRL $scope.userData",$scope.userData);
       viewUsers();
     });//end response from server
   };//end deleteUser
+
+  pendingContracts = function(){
+    console.log('in pendingContracts');
+    $http({
+      method: 'GET',
+      url: '/admin/pendingContracts',
+    }).then(function(response){
+      $scope.pendingContracts = response.data;
+      console.log('$scope.pendingContracts', $scope.pendingContracts);
+    }, function errorCallback (response){
+      console.log('err', response);
+    }); // end then
+  }; // end pendingContracts
+  pendingContracts();
+
+  approvedContracts = function(){
+    console.log('in approvedContracts');
+    $http({
+      method: 'GET',
+      url: '/admin/approvedContracts',
+    }).then(function(response){
+      $scope.approvedContracts = response.data;
+      console.log('$scope.pendingContracts', $scope.approvedContracts);
+    }, function errorCallback (response){
+      console.log('err', response);
+    }); // end then
+  }; // end approvedContracts
+  approvedContracts();
+
+  $scope.managerApproval = function(){
+    var managerApproval;
+    console.log('MANAGER APPROVAL this.data',this.data);
+    if (this.data.man_app) {
+      managerApproval = false;
+    }//end if
+    else {
+      managerApproval = true;
+    }//end else
+    console.log("approval status",managerApproval);
+    $http({
+      method: 'PUT',
+      url: 'admin/managerApproval',
+      data: {id: this.data.id,
+        man_app: managerApproval
+      }//end data
+    }).then(function(response){
+      console.log("response from managerApproval",response);
+      pendingContracts();
+      approvedContracts();
+    });//end reponse from server
+  }//end managerApproval
+
 }]);//end adminController
