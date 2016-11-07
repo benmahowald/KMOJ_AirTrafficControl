@@ -55,7 +55,7 @@ app.post('/client', function (req, res){
     if (err){
       console.log('connection error in client', client);
     } else {
-      var queryResults = client.query('INSERT INTO clients (name, contact, address, city, state, zip, phone, cell, fax, email, webiste, users_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [req.body.client_name, req.body.contact, req.body.street, req.body.city, req.body.state, req.body.zip, req.body.phone, req.body.cell, req.body.fax, req.body.email, req.body.website, req.body.users_id]);
+      var queryResults = client.query('INSERT INTO clients (name, contact, address, city, state, zip, phone, cell, fax, email, webiste, users_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [req.body.client_name, req.body.contact, req.body.street, req.body.city, req.body.state, req.body.zip, req.body.phone, req.body.cell, req.body.fax, req.body.email, req.body.webiste, req.body.users_id]);
       queryResults.on('end', function(){
         done();
         res.send({success: true});
@@ -64,8 +64,6 @@ app.post('/client', function (req, res){
   });//end pg.connect for client table
 });//end router.post for client table
 
-//////////// retrieve all client information ///////////////
-// ('SELECT * FROM clients WHERE name=($1)', [req.query.name]);
 app.get('/clients', function (req, res){
   console.log('get clients server route hit');
   pg.connect(connectionString, function(err, client, done){
@@ -130,7 +128,6 @@ app.put('/client', function (req, res){
   });//end pg.connect for client info
 });//end router.put for client info
 
-
 // setting catch all route
 app.get('/*', function(req,res){
   console.log('Made it to the catch all route, with',req.params);
@@ -141,6 +138,5 @@ app.get('/*', function(req,res){
     file = 'views/index.html';
     // leave params untouched so that NG-routing can still use it
   }
-
   res.sendFile(path.resolve('public/', file));
-});
+}); // end catch all route

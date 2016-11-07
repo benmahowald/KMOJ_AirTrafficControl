@@ -28,15 +28,12 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       method: 'GET',
       url: '/traffic/flightContract?q=' + contract_id,
     }).then(function(response){
-      console.log('traffic contract success', response);
       $scope.flightInfo = response.data;
-      console.log('$scope.flightInfo = ', $scope.flightInfo);
-      console.log('$scope.flightInfo.end_date = ', $scope.flightInfo[0].end_date);
-
       $scope.start_date = moment($scope.flightInfo[0].start_date).format('ddd, MMM DD YYYY');
       $scope.end_date = moment($scope.flightInfo[0].end_date).format('ddd, MMM DD YYYY');
       $scope.flightInfoExists = true;
-      console.log(response);
+      $scope.getCartNum();
+      // console.log(response);
     }, function errorCallback (response){
       console.log('err', response);
     }); // end then
@@ -51,6 +48,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     }).then($scope.getPendingContracts);
   }; // end trafficApproval
 
+<<<<<<< HEAD
 
 
   var invoiceInfo = {};
@@ -161,4 +159,30 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
   //     console.log('err', response);
   //   }); // end then
   // }; // end send traffic
+=======
+  $scope.getCartNum = function () {
+    console.log('in getCartNum');
+    $http({
+      method: 'GET',
+      // whatever url Luis uses
+      url: '/traffic/cart_number?q=' + $scope.currentContractId,
+    }).then(function (response){
+          $scope.cart_number = response.data[0].cart_number;
+          console.log('$scope.cart_number = ', $scope.cart_number);
+        }, function (error) {
+          console.log('error in cart_number get;', error);
+        }); // end then function
+    }; // end getCartNum
+
+    $scope.updateCartNum = function (cart_number) {
+      console.log('in updateCartNum');
+      console.log('cart_number', cart_number);
+    $http({
+      method: 'PUT',
+      url: '/traffic/cart_number?q=' + $scope.currentContractId,
+      data: cart_number
+    }).then($scope.getCartNum);
+  }; // end updateCartNum
+
+>>>>>>> fridayafternoon4
 }]); // end trafficController

@@ -1,6 +1,8 @@
 app.controller('dashController', ['$scope', '$http', function($scope, $http) {
   // console.log('Dashboard Controller');
 
+$scope.clientSaved = false;
+
   $scope.submitClient = function (){
     console.log('in submitClient');
     var clientToSend = {
@@ -18,8 +20,8 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
       zip: $scope.zip
       // users_id: $scope.userProfile.users_id
     };
-    console.log('clientToSend -----------', clientToSend);
-
+    console.log('clientToSend -', clientToSend);
+    if($scope.createClient.client_name.$valid){
     // post route to create a new client
     $http({
       method: 'POST',
@@ -27,10 +29,15 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
       data: clientToSend,
     }).then(function (response){
           console.log('success in dash client post route:', response);
+          $scope.clientSaved = true;
         }, function (error) {
           console.log('error in dash client post route:', error);
         }); // end then function
+        $scope.createClient.$setPristine();
     $scope.clearCreateClient();
+  }else {
+    console.log('$scope.createClient.client_name =',$scope.createClient.client_name);
+  }
   }; //end submitClient
 
   $scope.clientNameList = [];
@@ -103,7 +110,7 @@ app.controller('dashController', ['$scope', '$http', function($scope, $http) {
     $scope.cell = '';
     $scope.fax = '';
     $scope.email = '';
-    $scope.website = '';
+    $scope.webiste = '';
     $scope.street = '';
     $scope.city = '';
     $scope.state = '';
@@ -123,30 +130,6 @@ $scope.getMasterDocs = function () {
       }, function (error) {
         console.log('error in get;', error);
       }); // end then function
-
 }; // end getContracts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }]); // end dashController
