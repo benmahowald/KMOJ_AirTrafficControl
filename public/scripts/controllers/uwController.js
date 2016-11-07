@@ -217,6 +217,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
     if (!$scope.event_name) {
       requiredFields += ' - Event';
     }
+    console.log($scope.clientData);
     if (!$scope.clientData) {
       requiredFields += ' - Client';
     }
@@ -318,7 +319,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
       var contractToSend = {
         user_id: $scope.userData[0].id,
         event_name: $scope.event_name,
-        client_id: $scope.clientData[0].id,
+        client_id: $scope.clientData[0].client_id,
         start_date: $scope.startDate,
         end_date: $scope.endDate,
         fa: $scope.fa,
