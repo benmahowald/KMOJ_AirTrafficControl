@@ -128,10 +128,22 @@ ALTER TABLE master ADD COLUMN uw_submit BOOLEAN;
 
 --Inserts for users (log in)
 
-INSERT INTO users VALUES (2, 'production@test.com', 'Production', TRUE, 'Production');
-
-INSERT INTO users VALUES (3, 'traffic@test.com', 'Traffic', TRUE, 'Traffic');
-
-INSERT INTO users VALUES (4, 'uw@test.com', 'Underwriter', TRUE, 'Underwriter');
+-- INSERT INTO users VALUES (2, 'production@test.com', 'Production', TRUE, 'Production');
+--
+-- INSERT INTO users VALUES (3, 'traffic@test.com', 'Traffic', TRUE, 'Traffic');
+--
+-- INSERT INTO users VALUES (4, 'uw@test.com', 'Underwriter', TRUE, 'Underwriter');
 
 ALTER TABLE clients DROP COLUMN users_id;
+
+--- Updated Inserts for users (log in)
+
+INSERT INTO users VALUES (6, 'production@kmoj.com', 'Production', TRUE, 'Production');
+
+INSERT INTO users VALUES (7, 'traffic@kmoj.com', 'Traffic', TRUE, 'Traffic');
+
+INSERT INTO users VALUES (8, 'uw@kmoj.com', 'Underwriter', TRUE, 'Underwriter');
+
+INSERT INTO users VALUES (9, 'viewall@kmoj.com', 'View All', TRUE, 'View All');
+
+INSERT INTO users VALUES (10, 'admin@kmoj.com', 'Administration', TRUE, 'Administration');
