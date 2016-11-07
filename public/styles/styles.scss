@@ -112,7 +112,7 @@ input[placeholder] {
    font-family: $font;
 }
 
-.createClient, .createProduction {
+.createClient, .createProduction, .createContract {
   border: none;
   width: 95%;
   padding: 10px;
@@ -120,7 +120,7 @@ input[placeholder] {
   font-size: medium;
 }
 
-.createClient:focus {
+.createClient:focus, .createContract:focus {
   outline: none;
 }
 
@@ -193,7 +193,7 @@ input[placeholder] {
   width: 400px;
 }
 
-.stateSelect {
+.stateSelect, {
   width: 100px;
   min-width: auto;
   border: none;
@@ -204,7 +204,18 @@ input[placeholder] {
   font-size: medium;
 }
 
-.stateSelect:focus {
+.selectClient {
+  width: 300px;
+  min-width: auto;
+  border: none;
+  border-radius: 2px;
+  height: 27px;
+  background-color: #fff;
+  color: $font-color;
+  font-size: medium;
+}
+
+.stateSelect:focus, .selectClient:focus {
   outline: none;
 }
 
