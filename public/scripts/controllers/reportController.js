@@ -14,10 +14,11 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
       reportInfo.cart_number = response.data[0].cart_number,
       reportInfo.start_date = response.data[0].start_date,
       reportInfo.end_date = response.data[0].end_date,
-      reportInfo.client_name = response.data[0].client_name,
+      reportInfo.clients_name = response.data[0].clients_name,
       reportInfo.uw_name = response.data[0].uw_name,
       reportInfo.total_cost = response.data[0].total_cost
-      console.log ($scope.reports);
+
+      console.log($scope.reports.clients_name);
       console.log("report info:", reportInfo);
     }, function errorCallback(response){
       console.log('error getting reports', response);
@@ -29,7 +30,7 @@ var reportInfo = {
   cart_number: $scope.cart_number,
   start_date: $scope.start_date,
   end_date: $scope.end_date,
-  client_name: $scope.client_name,
+  clients_name: $scope.clients_name,
   uw_name: $scope.uw_name,
   total_cost: $scope.total_cost
 };
@@ -59,7 +60,7 @@ $scope.getReport = function(){
         table: {
         body: [
               ['Cart Number', 'Start Date', 'End Date', 'Client Name', 'Underwriter Name', 'Total Cost'],
-              ['' + reportInfo.cart_number, '' + reportInfo.start_date, '' + reportInfo.end_date, '' + reportInfo.client_name, '' + reportInfo.uw_name, '' + reportInfo.total_cost]
+              ['' + reportInfo.cart_number, '' + reportInfo.start_date, '' + reportInfo.end_date, '' + reportInfo.clients_name, '' + reportInfo.uw_name, '' + reportInfo.total_cost]
         ]
       }
     }//end table
