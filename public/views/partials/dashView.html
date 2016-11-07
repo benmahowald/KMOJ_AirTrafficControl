@@ -1,8 +1,8 @@
 <div ng-show="userData[0].permission == 'Underwriter' || 'View All'">
 <h3> <strong>Create A Client</strong></h3>
 <div class="successMessage" ng-show="clientSaved">A client was successfully created</div>
-  <form class="form" name="client">
-    <input class="createClient" type="text" name="client" ng-model="client_name" value="" placeholder="Client Name">
+  <form class="form" name="createClient">
+    <input class="createClient" type="text" name="client_name" ng-model="client_name" value="" placeholder="Client Name" required>
     <input class="createClient" type="text" name="contact" ng-model="contact" value="" placeholder="Contact's Name">
     <input class="createClient" type="text" name="phone" ng-model="phone" value="" placeholder="Phone">
     <input class="createClient" type="number" name="cell" ng-model="cell" value="" placeholder="Cell">
@@ -11,8 +11,8 @@
     <input class="createClient" type="text" name="website" ng-model="webiste" value="" placeholder="Website">
     <input class="createClient" type="text" name="street" ng-model="street" value="" placeholder="Street">
     <input class="createClient" type="text" name="city" ng-model="city" value="" placeholder="City">
-    <select class="createClient stateSelect" ng-model="state">
-      <option value="" selected>-State-</option>
+    <select class="stateSelect" ng-model="state">
+      <option value="" selected>State</option>
       <option value="AL">AL</option>
     	<option value="AK">AK</option>
     	<option value="AZ">AZ</option>
@@ -65,7 +65,7 @@
     	<option value="WI">WI</option>
     	<option value="WY">WY</option>
     </select>
-    <input class="createClient" type="number" name="zip" ng-model="zip" value="" placeholder="ZIP">
+    <input class="createClient zip" type="number" name="zip" ng-model="zip" value="" placeholder="ZIP">
     <input class="createClient button" type="button" name="submitClient" value="Create Client" ng-click="submitClient()">
   </form>
 </div>

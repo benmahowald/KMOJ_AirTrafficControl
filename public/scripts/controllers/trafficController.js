@@ -65,7 +65,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     $http({
       method: 'PUT',
       url: '/traffic/cart_number?q=' + $scope.currentContractId,
-      data: $scope.cart_number
+      data: cart_number
     }).then($scope.getCartNum);
   }; // end updateCartNum
 

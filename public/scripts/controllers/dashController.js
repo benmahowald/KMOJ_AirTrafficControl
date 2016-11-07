@@ -20,8 +20,8 @@ $scope.clientSaved = false;
       zip: $scope.zip
       // users_id: $scope.userProfile.users_id
     };
-    console.log('clientToSend -----------', clientToSend);
-
+    console.log('clientToSend -', clientToSend);
+    if($scope.createClient.client_name.$valid){
     // post route to create a new client
     $http({
       method: 'POST',
@@ -33,7 +33,11 @@ $scope.clientSaved = false;
         }, function (error) {
           console.log('error in dash client post route:', error);
         }); // end then function
+        $scope.createClient.$setPristine();
     $scope.clearCreateClient();
+  }else {
+    console.log('$scope.createClient.client_name =',$scope.createClient.client_name);
+  }
   }; //end submitClient
 
   $scope.clientNameList = [];
