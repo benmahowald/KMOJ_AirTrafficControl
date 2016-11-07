@@ -24,9 +24,11 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     console.log('in selectContractFlight');
     console.log('contract_id = ' + contract_id);
     $scope.currentContractId = contract_id;
+    var contractToRetrieve = {contract_id: contract_id};
     $http({
       method: 'GET',
-      url: '/traffic/flightContract?q=' + contract_id,
+      url: '/traffic/flightContract',
+      data: contractToRetrieve
     }).then(function(response){
       console.log('traffic contract success', response);
       $scope.flightInfo = response.data;
@@ -132,7 +134,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
         {text: 'Confirmed Correct:________________________', alignment: 'left' + 'Accepted for KMOJ:________________________', alignment: 'center'},
         ]// end content
 
-      }// end docDefinition
+      };// end docDefinition
       pdfMake.createPdf(docDefinition).open();
   };
   // $scope.sendTraffic = function (){

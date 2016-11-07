@@ -359,7 +359,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
       $http({
         method: 'POST',
         url: '/underwriter/master',
-        data: contractToSend,
+        data: contractToSend
       }).then(function (response){
         console.log('success in uwCtrl client post route:', response);
       }, function (error) {
