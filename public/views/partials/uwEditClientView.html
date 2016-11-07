@@ -1,10 +1,41 @@
 <div ng-show="userData[0].permission == 'Underwriter' || 'View All'">
-<h3><strong>Edit Client Information</strong></h3>
-<br>
+  <h3>Edit Client Information</h3>
+<select ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select></select>
 
-
-
-
+<form class="form" editable-form name="editableForm" onaftersave="sendUpdatedClient()">
+  <span>Client: <span editable-text="clientData[0].name" onbeforesave="updateClient({name: $data})" blur="submit">{{ clientData[0].name || "none" }}</span></span><br>
+  <span class="manageEl">Contact Name: </span>
+  <span editable-text="clientData[0].contact" onbeforesave="updateClient({contact: $data})" blur="submit">{{ clientData[0].contact || "none" }}</span><br>
+  <span class="manageEl">Phone: </span>
+  <span editable-text="clientData[0].phone" onbeforesave="updateClient({phone: $data})" blur="submit">{{ clientData[0].phone || "none" }}</span><br>
+  <span class="manageEl">Cell: </span>
+  <span editable-text="clientData[0].cell" onbeforesave="updateClient({cell: $data})" blur="submit">{{ clientData[0].cell || "none" }}</span><br>
+  <span class="manageEl">Fax: </span>
+  <span editable-text="clientData[0].fax" onbeforesave="updateClient({fax: $data})" blur="submit">{{ clientData[0].fax || "none" }}</span><br>
+  <span class="manageEl">Email: </span>
+  <span editable-text="clientData[0].email" onbeforesave="updateClient({email: $data})" blur="submit">{{ clientData[0].email || "none" }}</span><br>
+  <span class="manageEl">Website: </span>
+  <span editable-text="clientData[0].webiste" onbeforesave="updateClient({webiste: $data})" blur="submit">{{ clientData[0].webiste || "none" }}</span><br>
+  <span class="manageEl">Street: </span>
+  <span editable-text="clientData[0].address" onbeforesave="updateClient({address: $data})" blur="submit">{{ clientData[0].address || "none" }}</span><br>
+  <span class="manageEl">City: </span>
+  <span editable-text="clientData[0].city" onbeforesave="updateClient({city: $data})" blur="submit">{{ clientData[0].city || "none" }}</span><br>
+  <span class="manageEl">State: </span>
+  <span editable-text="clientData[0].state" onbeforesave="updateClient({state: $data})" blur="submit">{{ clientData[0].state || "none" }}</span><br>
+  <span class="manageEl">ZIP: </span>
+  <span editable-text="clientData[0].zip" onbeforesave="updateClient({zip: $data})" blur="submit">{{ clientData[0].zip || "none" }}</span><br>
+  <div>
+    <button type="button" class="submit" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</button>
+    <span ng-show="editableForm.$visible">
+      <button type="submit" class="submit" ng-click="reload()" ng-disabled="editableForm.$waiting">
+        Save
+      </button>
+      <button type="button" class="submit" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+        Cancel
+      </button>
+    </span>
+  </div>
+</form>
 </div>
 <!-- <div ng-show="userData[0].permission !== 'Underwriter'">
   404

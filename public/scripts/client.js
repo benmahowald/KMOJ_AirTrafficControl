@@ -121,7 +121,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   }).
   when('/underwriter/editClient', {
     templateUrl: '/views/partials/uwEditClientView.html',
-    controller: 'uwController'
+    controller: 'dashController'
   }).
   when('/underwriter/aired', {
     templateUrl: '/views/partials/uwAiredView.html',

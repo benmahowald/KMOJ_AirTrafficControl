@@ -245,4 +245,44 @@ router.put('/approval', function (req, res){
   });//end pg.connect for client info
 });//end router.put for client info
 
+router.get('/cart_number', function (req, res){
+	console.log('in get flight cart_number', req.query.q);
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in invoice info');
+		} else {
+			var results = [];
+			var queryResults = client.query('SELECT cart_number FROM flight WHERE contract_id=($1)', [req.query.q]);
+				  queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						console.log('results are', results);
+						return res.json(results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for invoice info
+});//end router.get for invoice info
+
+router.put('/cart_number', function (req, res){
+	console.log('in put cart_number');
+	pg.connect(connectionString, function(err, client, done){
+		if (err){
+			console.log('connection err in invoice info');
+		} else {
+			var results = [];
+			var queryResults = client.query('UPDATE cart_number FROM flight WHERE contract_id=($1)', [req.query.q]);
+				  queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						console.log('results are', results);
+						return res.json(results);
+					});//end queryResults on 'end'
+		}
+	});//end pg.connect for invoice info
+});//end router.get for invoice info
+
 module.exports = router;
