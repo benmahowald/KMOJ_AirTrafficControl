@@ -54,7 +54,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
 
 
   var invoiceInfo = {};
-  $scope.invoices = [];
+  $scope.invoice = [];
 
 
 
@@ -81,7 +81,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       invoiceInfo.copy_id = response.data[0].copy_id,
       invoiceInfo.slot = response.data[0].slot,
       invoiceInfo.day_of_run = response.data[0].day_of_run,
-      invoiceInfo.clients.name = response.data[0].clients.name
+      invoiceInfo.clients_name = response.data[0].clients_name
       console.log('$scope.invoice is ', $scope.invoice);
       console.log('invoice info================:', invoiceInfo);
   	}, function errorCallback (response){
