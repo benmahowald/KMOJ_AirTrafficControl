@@ -23,14 +23,18 @@ td, table {
 }
 
 html {
-  background: #f8f9eb;
+  background: #f6f4ef;
   height:0%;
+  text-align: center;
 }
 
 h1, h2, h3, h4 {
   font-family: 'Open Sans', verdana, sans-serif;
 }
 
+h3 {
+  text-align: center !important;
+}
 // This code removes the arrow buttons from number inputs
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -93,7 +97,8 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #3f3f3f;
 }
 
-.navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a,
+.navbar-default .navbar-nav .open .dropdown-menu,
 .navbar-default .navbar-nav .open .dropdown-menu::after,
 .navbar .nav li.dropdown.open > .dropdown-toggle,
 .navbar .nav li.dropdown.active > .dropdown-toggle,
@@ -195,8 +200,8 @@ margin-bottom: 10px;
   padding: 5px 8px;
   margin: 5px 3px;
   border-radius: 3px;
-  border: 1px solid #8ad084;
-  background-color: #b4e4b9;
+  border: 1px solid #dcb500;
+  background-color: #f9e9bf;
   color: $font-color;
 }
 
@@ -227,8 +232,8 @@ th {
   padding: 10px 15px;
   margin: 20px auto;
   border-radius: 3px;
-  border: 1px solid #8ad084;
-  background-color: #b4e4b9;
+  border: 1px solid #dcb500;
+  background-color: #f9e9bf;
   max-width: 95%;
   width: 400px;
 }
