@@ -1,6 +1,7 @@
 app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
+  $scope.productionSaved = false;
 
   $scope.productions = [];
 
@@ -47,10 +48,23 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     data: prodToSend
   }).then(function (response){
         console.log('success in prodCtrl post route:', response);
+        $scope.productionSaved = true;
+        $scope.clearFields();
       }, function (error) {
         console.log('error in prodCtrl post route:', error);
       }); // end then function
 };
 
+  $scope.clearFields = function () {
+    $scope.talent = '';
+    $scope.who = '';
+    $scope.what = '';
+    $scope.site = '';
+    $scope.why = '';
+    $scope.cart_number = '';
+    $scope.producer = '';
+    $scope.spot_length = '';
+    $scope.event_name = '';
+  };
 
 }]);

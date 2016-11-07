@@ -48,9 +48,6 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     }).then($scope.getPendingContracts);
   }; // end trafficApproval
 
-<<<<<<< HEAD
-
-
   var invoiceInfo = {};
   $scope.invoices = [];
 
@@ -159,7 +156,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
   //     console.log('err', response);
   //   }); // end then
   // }; // end send traffic
-=======
+
   $scope.getCartNum = function () {
     console.log('in getCartNum');
     $http({
@@ -184,5 +181,4 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     }).then($scope.getCartNum);
   }; // end updateCartNum
 
->>>>>>> fridayafternoon4
 }]); // end trafficController
