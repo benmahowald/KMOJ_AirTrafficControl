@@ -1,32 +1,35 @@
 <div ng-show="userData[0].permission == 'Underwriter' || 'Administration' || 'View All'">
-<h3><strong>Edit Client Information</strong></h3>
-<br>
-<select class="stateSelect" data-ng-init="somethingHere" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select>
+<h3>Edit Client Information</h3>
 
-<form class="form" editable-form name="editableForm" onaftersave="sendUpdatedClient()">
-  <span>Client: <span editable-text="clientData[0].name" onbeforesave="updateClient({name: $data})" blur="submit">{{ clientData[0].name || "Edit" }}</span></span><br>
-  <span class="manageEl">Contact Name: </span>
+<select class="selectClient" style="margin-bottom:20px;" data-ng-init="somethingHere" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select>
+
+<form class="form editClientForm" editable-form name="editableForm" onaftersave="sendUpdatedClient()">
+  <span class="editClient">Client:</span>
+  <span editable-text="clientData[0].name" onbeforesave="updateClient({name: $data})" blur="submit">{{ clientData[0].name || "Edit" }}</span><br>
+  <span class="editClient">Contact:</span>
   <span editable-text="clientData[0].contact" onbeforesave="updateClient({contact: $data})" blur="submit">{{ clientData[0].contact || "Edit" }}</span><br>
-  <span class="manageEl">Phone: </span>
+  <span class="editClient">Phone:</span>
   <span editable-text="clientData[0].phone" onbeforesave="updateClient({phone: $data})" blur="submit">{{ clientData[0].phone || "Edit" }}</span><br>
-  <span class="manageEl">Cell: </span>
+  <span class="editClient">Cell:</span>
   <span editable-text="clientData[0].cell" onbeforesave="updateClient({cell: $data})" blur="submit">{{ clientData[0].cell || "Edit" }}</span><br>
-  <span class="manageEl">Fax: </span>
+  <span class="editClient">Fax:</span>
   <span editable-text="clientData[0].fax" onbeforesave="updateClient({fax: $data})" blur="submit">{{ clientData[0].fax || "Edit" }}</span><br>
-  <span class="manageEl">Email: </span>
+  <span class="editClient">Email:</span>
   <span editable-text="clientData[0].email" onbeforesave="updateClient({email: $data})" blur="submit">{{ clientData[0].email || "Edit" }}</span><br>
-  <span class="manageEl">Website: </span>
+  <span class="editClient">Site:</span>
   <span editable-text="clientData[0].webiste" onbeforesave="updateClient({webiste: $data})" blur="submit">{{ clientData[0].webiste || "Edit" }}</span><br>
-  <span class="manageEl">Street: </span>
+  <span class="editClient">Street:</span>
   <span editable-text="clientData[0].address" onbeforesave="updateClient({address: $data})" blur="submit">{{ clientData[0].address || "Edit" }}</span><br>
-  <span class="manageEl">City: </span>
+  <span class="editClient">City:</span>
   <span editable-text="clientData[0].city" onbeforesave="updateClient({city: $data})" blur="submit">{{ clientData[0].city || "Edit" }}</span><br>
-  <span class="manageEl">State: </span>
+  <span class="editClient">State:</span>
   <span editable-text="clientData[0].state" onbeforesave="updateClient({state: $data})" blur="submit">{{ clientData[0].state || "Edit" }}</span><br>
-  <span class="manageEl">ZIP: </span>
+  <span class="editClient">ZIP:</span>
   <span editable-text="clientData[0].zip" onbeforesave="updateClient({zip: $data})" blur="submit">{{ clientData[0].zip || "Edit" }}</span><br>
   <div>
-    <button type="button" class="submit" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</button>
+    <div class="left">
+      <button type="button" class="submit" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</button>
+    </div>
     <span ng-show="editableForm.$visible">
       <button type="submit" class="submit" ng-click="reload()" ng-disabled="editableForm.$waiting">
         Save
