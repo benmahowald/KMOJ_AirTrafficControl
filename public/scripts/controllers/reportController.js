@@ -32,7 +32,7 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
 console.log('reportInfo is ', reportInfo);
 
 
-$scope.getReport = function(invoiceInfo){
+$scope.getReport = function(invoiceInfo, data, columns){
    console.log ('scope . reports inside is', $scope.reports);
 //     var invoiceInfo = {
 //     cart_number: $scope.reports.cart_number,
