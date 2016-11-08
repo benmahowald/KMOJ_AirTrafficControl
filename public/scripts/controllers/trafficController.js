@@ -87,6 +87,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
   	});
   };
 
+      
   $scope.getInvoice = function(){
       console.log("In the PDF click");
       console.log("invoice info:", invoiceInfo);
