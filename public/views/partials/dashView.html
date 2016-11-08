@@ -4,13 +4,13 @@
   <form class="form" name="createClient">
     <input class="createClient" type="text" name="client_name" ng-model="client_name" value="" placeholder="Client Name" required>
     <input class="createClient" type="text" name="contact" ng-model="contact" value="" placeholder="Contact's Name">
-    <input class="createClient" type="text" name="phone" ng-model="phone" value="" placeholder="Phone">
-    <input class="createClient" type="number" name="cell" ng-model="cell" value="" placeholder="Cell">
+    <input class="shareLine" type="text" name="phone" ng-model="phone" value="" placeholder="Phone">
+    <input class="shareLine" type="number" name="cell" ng-model="cell" value="" placeholder="Cell">
     <input class="createClient" type="number" name="fax" ng-model="fax" value="" placeholder="Fax">
     <input class="createClient" type="email" name="email" ng-model="email" value="" placeholder="Email">
     <input class="createClient" type="text" name="website" ng-model="webiste" value="" placeholder="Website">
-    <input class="createClient" type="text" name="street" ng-model="street" value="" placeholder="Street">
-    <input class="createClient" type="text" name="city" ng-model="city" value="" placeholder="City">
+    <input class="shareLine" type="text" name="street" ng-model="street" value="" placeholder="Street">
+    <input class="shareLine" type="text" name="city" ng-model="city" value="" placeholder="City">
     <select class="stateSelect" ng-model="state">
       <option value="" selected>State</option>
       <option value="AL">AL</option>
@@ -66,7 +66,7 @@
     	<option value="WY">WY</option>
     </select>
     <input class="createClient zip" type="number" name="zip" ng-model="zip" value="" placeholder="ZIP">
-    <input class="createClient button" type="button" name="submitClient" value="Create Client" ng-click="submitClient()">
+    <input class="button" type="button" name="submitClient" value="Create Client" ng-click="submitClient()">
   </form>
 </div>
 <!-- <div ng-show="userData[0].permission !== 'Underwriter'">

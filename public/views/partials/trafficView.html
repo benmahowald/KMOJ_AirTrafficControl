@@ -1,7 +1,7 @@
 <div ng-show="userData[0].permission == 'Traffic' || 'Administration' || 'View All'">
   <h3 class="center">Traffic Department</h3>
   <h4 class="pendingContractHeading">Pending Contracts</h4>
-  <p ng-hide="pendingContracts">None</p>
+  <p class="" ng-show="pendingContracts.length < 1">None</p>
   <div class="contractsPending" ng-repeat="contract in pendingContracts">
     <div>
       <p class="listOfContracts" ng-click="selectContractFlight(contract.id)">{{contract.event_name}}</p>
@@ -15,6 +15,7 @@
 
     <!-- <p editable-text="cart_number" e-form="textBtnForm" onbeforesave="updateCartNum()" onaftersave="getCartNum()"><span class="textToStandOut">Cart Number: </span>{{cart_number || No Cart #}}</p> -->
     <input class="button" type="button" name="name" value="Confirm Traffic" ng-click="trafficApproval(currentContractId)">
+    <button class="button" ng-click="getInvoice()" id = "cmd">Generate PDF</button>
   </div>
 
  <!-- <div ng-show="userData[0].permission !== 'Traffic'">
