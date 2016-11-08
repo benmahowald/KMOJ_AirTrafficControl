@@ -98,6 +98,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
         },
           {text: 'KMOJ RUN CONFIRMATION & INVOICE\n', alignment: 'center', style: 'header'},
           {text: 'Order ID: 4328', alignment: 'center'},
+          ['\n\n'],
           {text: '2123 W. Broadway, Suite 200', alignment: 'left'},
           {text: 'Minneapolis, MN 55411', alignment: 'left'},
           {text: 'Phone: (612)377-0594', alignment: 'left'},
@@ -114,14 +115,16 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
                 ['Total Spots:', '' + invoiceInfo.total_spots],
                 ['Total Cost:', '' + invoiceInfo.total_cost],
                 ['Discounts', '' + invoiceInfo.discounts],
-                ['Commission\n\n\n', '' + invoiceInfo.commission + '\n\n\n\n']
+                ['Commission', '' + invoiceInfo.commission]
           ]
 
         }
 
       }, //end table
+        ['\n'],
           {text: 'Scheduled Station: KJOM', style: 'subheader', alignment: 'center'},
           {text: '' + invoiceInfo.client_name + '\n\n\n', alignment: 'center'},
+
       {
         table: {
           body: [
@@ -130,8 +133,11 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
           ]
         }
       },
+          ['\n\n'],
+        {
 
-        {text: 'Confirmed Correct:________________________', alignment: 'left' + 'Accepted for KMOJ:________________________', alignment: 'center'},
+          text: 'Confirmed Correct:________________________       Accepted for KMOJ:________________________ ', alignment: 'center'
+        },
         ]// end content
 
       }// end docDefinition
