@@ -23,18 +23,17 @@ td, table {
 }
 
 html {
-  background: #f6f4ef;
+  background: #faf7eb;
   height:0%;
   text-align: center;
 }
 
 h1, h2, h3, h4 {
   font-family: 'Open Sans', verdana, sans-serif;
+  margin-bottom: 25px;
+  font-weight: bold;
 }
 
-h3 {
-  text-align: center !important;
-}
 // This code removes the arrow buttons from number inputs
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -122,17 +121,40 @@ input {
   color: #333;
 }
 
-input[placeholder] {
-   color: $font-color;
-   font-family: $font;
+.shareLine {
+  width: 46.25%;
+  border: none;
+  padding: 10px;
+  margin-bottom: 5px;
+  font-size: medium;
+  text-align: left;
+  display: inline;
 }
 
-.createClient, .createProduction, .createContract {
+.createClient, .createProduction, .createContract, .reportingInputs, .editable-input {
   border: none;
   width: 95%;
   padding: 10px;
   margin-bottom: 5px;
   font-size: medium;
+  text-align: left;
+}
+
+.editClient {
+    margin-top: 6px;
+}
+
+.editable-input {
+  width: none;
+  width: auto;
+}
+
+.editable-wrap {
+  width: auto;
+}
+
+.editClientForm {
+    text-align: left;
 }
 
 .createClient:focus, .createContract:focus {
@@ -198,11 +220,15 @@ margin-bottom: 10px;
 
 .button {
   padding: 5px 8px;
-  margin: 5px 3px;
+  margin: 8px auto;
   border-radius: 3px;
-  border: 1px solid #dcb500;
+  border: 1px solid #e9d67c;
   background-color: #f9e9bf;
   color: $font-color;
+}
+
+.center {
+  margin: 12px auto;
 }
 
 .button:hover {
@@ -266,4 +292,11 @@ th {
 
 .zip {
   width: auto;
+}
+
+#prodContent {
+  margin: 0 auto 40px auto;
+  border-bottom: 1px solid $font-color;
+  max-width: 75%;
+  font-weight: lighter;
 }

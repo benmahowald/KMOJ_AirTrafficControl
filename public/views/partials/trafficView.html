@@ -1,7 +1,7 @@
 <div ng-show="userData[0].permission == 'Traffic' || 'Administration' || 'View All'">
   <h3 class="center">Traffic Department</h3>
   <h4 class="pendingContractHeading">Pending Contracts</h4>
-  <p ng-show="pendingContracts.length < 1">None</p>
+  <p class="" ng-show="pendingContracts.length < 1">None</p>
   <div class="contractsPending" ng-repeat="contract in pendingContracts">
     <div>
       <p class="listOfContracts" ng-click="selectContractFlight(contract.id)">{{contract.event_name}}</p>
