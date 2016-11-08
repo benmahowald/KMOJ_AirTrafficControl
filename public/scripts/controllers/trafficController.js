@@ -180,5 +180,4 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     }).then($scope.getCartNum);
   }; // end updateCartNum
 
-
 }]); // end trafficController
