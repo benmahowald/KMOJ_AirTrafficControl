@@ -31,6 +31,7 @@ app.controller('authController', function($scope, $firebaseArray, $firebaseAuth,
           }//end header object
         }).then(function(response){
           $scope.userData = response.data;
+          console.log($scope.userData);
           console.log('user permission is', $scope.userData[0].permission);
           //show logout button
           $scope.loggedIn = true;

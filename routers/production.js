@@ -44,18 +44,19 @@ router.post ('/production', function (req, res){
 			'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
 			[req.body.contract_id, req.body.talent, req.body.who, req.body.what,
 				req.body.site, req.body.why, req.body.cart_number, req.body.producer, req.body.complete_date, req.body.spot_length]);
-			}
-			queryResults.on('end', function(){
-				var queryResults = client.query ('UPDATE master SET pr_app = (true) WHERE master.id = ($1)',
-				[req.body.contract_id]);
-			});
+
 				queryResults.on('end', function(){
-					done();
-					res.send({success: true});
+					var queryResults = client.query ('UPDATE master SET pr_app = (true) WHERE master.id = ($1)',
+					[req.body.contract_id]);
+
+					queryResults.on('end', function(){
+						done();
+						res.send({success: true});
+					});
 				});
-			});//end queryResults for client table
+			}
+		});//end queryResults for client table
+	});//end pg.connect for client table
+//end router.post for client table
 
-		});//end pg.connect for client table
-	//end router.post for client table
-
-	module.exports = router;
+module.exports = router;
