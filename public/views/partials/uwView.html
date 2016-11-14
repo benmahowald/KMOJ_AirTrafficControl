@@ -1,29 +1,22 @@
 <div ng-show="userData[0].permission == 'Underwriter' || 'Administration' || 'View All'">
-  <h3><strong>New Contract</strong></h3>
-  <br>
-  <div class="form">
-    <form name="master">
-      <h3>Event Info</h3>
-      <input class="createContract" type="text" name="event" ng-model="event_name" value="" placeholder="Event">
-      <select class="selectClient" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList">
-      </select>
-    </form>
-    <form name="flightInfo">
-      <h3>Flight Info</h3>
-      <label for="startDate">Start Date</label>
+  <h3>New Contract</h3>
+  <form class="form otherLeft">
+      <input class="createContract" type="text" name="event" ng-model="event_name" value="" placeholder="Event Name">
+      <label class="reportLabel" for="client">Choose a client</label>
+      <select name="client" class="selectClient" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select><br>
+      <label class="reportLabel" for="startDate">Start Date</label>
       <input class="createContract" type="date" name="startDate" ng-model="startDate"><br>
-      <label for="endDate">End Date</label><br>
+      <label class="reportLabel" for="endDate">End Date</label><br>
       <input class="createContract" type="date" name="endDate" ng-model="endDate"><br>
-      <label for="FA">FA</label>
+      <label class="reportLabel" for="FA">FA</label>
       <input class="createContract" type="checkbox" name="FA" value="FA" ng-model="fa">
       <label for="PSA">PSA</label>
       <input class="createContract" type="checkbox" name="PSA" value="PSA" ng-model="psa">
       <textarea  class="createContract" rows="5" cols="100" placeholder="Special Instructions" ng-model="instructions"></textarea>
-      <input class="createContract" type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
-      <input class="createContract" type="text" name="agency_commission" ng-model="agency_commission" value="" placeholder="Agency Commission">
-    </form>
-  </div>
-  <button type="button" ng-click="submitRunSheetEntry($event)" id="submitButton">Submit Contract</button>
+      <input class="shareLine" type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
+      <input class="shareLine" type="text" name="agency_commission" ng-model="agency_commission" value="" placeholder="Commission">
+  </form>
+  <br>
   <div id="trafficGrid" class="trafficForm">
     <p>
       <span class="boldFont">How many weeks in the rotation?</span>
@@ -47,6 +40,8 @@
       <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
     </div>
   </div>
+  <button type="button" ng-click="submitRunSheetEntry($event)" id="submitButton">Submit Contract</button>
+
   <!-- <div ng-show="userData[0].permission !== 'Underwriter'">
     404
   </div> -->

@@ -108,6 +108,9 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   when('/viewall', {
     templateUrl: '/views/partials/index.html'
   }).
+  when('/', {
+    templateUrl: '/views/partials/home.html',
+  }).
   otherwise({
     redirectTo: '/'
   });

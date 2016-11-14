@@ -10,7 +10,7 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
     { permission: 'Underwriter'},
     { permission: 'Production'},
     { permission: 'Traffic'},
-    { permission: 'View only production and traffic'},
+    { permission: 'View Only Production and Traffic'},
     { permission: 'View All'}
   ];//end scope.authLevels
 

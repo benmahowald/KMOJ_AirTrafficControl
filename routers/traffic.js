@@ -162,21 +162,21 @@ router.get('/getflight', function (req, res){
 	}); //end pg.connect for get flight
 });//end router.getflight
 
-router.get('/contractspending', function (req, res){
+router.get('/contractsPending', function (req, res){
 	console.log('in get contract');
 	pg.connect(connectionString, function(err, client, done){
 		if(err){
 			console.log('get contract connection error is', err);
 		} else {
 			var results = [];
-			var queryResults = client.query ('SELECT * FROM master WHERE man_app=(false) AND tr_app=(false)');
+			var queryResults = client.query ('SELECT * FROM master WHERE man_app=(true) AND tr_app=(false)');
 			queryResults.on('row', function(row){
 				results.push(row);
 			});
 			queryResults.on('end', function(){
 				done();
-				// console.log('contract results are', results);
-				return res.json(results);
+				console.log('contract results are', results);
+				res.json(results);
 			});//end queryResults for contractspending
 		}
 	}); //end pg.connect for contractspending
@@ -212,7 +212,7 @@ router.get('/invoice', function (req, res){
 			console.log('connection err in invoice info');
 		} else {
 			var results = [];
-			var queryResults = client.query('SELECT  master.event_name, users.name, master.total_spots, master.total_cost, master.discounts, master.commission, flight.start_date, flight.end_date, master.spot_length, master.spot_type, master.spot_rate, master.copy_id, slots.slot, slots.day_of_run, clients.name FROM master INNER JOIN slots ON slots.flight_id = master.flight_id INNER JOIN flight ON flight.contract_id = master.id INNER JOIN clients ON clients.client_id = master.client_id INNER JOIN users ON users.id = master.users_id;');
+			var queryResults = client.query('SELECT  master.event_name, users.name AS users_name, master.total_spots, master.total_cost, master.discounts, master.commission, flight.start_date, flight.end_date, master.spot_length, master.spot_type, master.spot_rate, master.copy_id, slots.slot, slots.day_of_run, clients.name FROM master INNER JOIN slots ON slots.flight_id = master.flight_id INNER JOIN flight ON flight.contract_id = master.id INNER JOIN clients ON clients.client_id = master.client_id INNER JOIN users ON users.id = master.users_id');
 				  queryResults.on('row', function(row){
 						results.push(row);
 						// console.log('row=================', row)
