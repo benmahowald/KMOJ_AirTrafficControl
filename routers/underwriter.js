@@ -82,6 +82,7 @@ router.post ('/master', function (req, res){
 					console.log('master_id', master_id);
 					var flight_id = [];
 
+					console.log('flight info: ', master_id[0].id, master.start_date,  master.end_date);
  					var queryResultsB = client.query ('INSERT INTO flight (' +
 					'contract_id, start_date, end_date) ' +
 					'VALUES ($1, $2, $3) RETURNING id;' ,

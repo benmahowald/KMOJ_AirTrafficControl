@@ -329,17 +329,9 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
         agency_commission: $scope.agency_commission,
         slotInfo: $scope.slotDBinfo,
         signDate: moment(new Date()).format(),
-        spotLength: $scope.spotLength,
         totalCost: $scope.totalCost,
         numInterviews: $scope.numInterviews,
         numSocialMedia: $scope.numSocialMedia,
-        voiceTalent: $scope.voiceTalent,
-        producer: $scope.producer,
-        whoText: $scope.whoText,
-        whatText: $scope.whatText,
-        whenText: $scope.whenText,
-        whereText: $scope.whereText,
-        moreInfoText: $scope.moreInfoText
       };
 
       console.log('UW contractToSend:', contractToSend);
@@ -349,6 +341,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
         url: '/underwriter/master',
         data: contractToSend,
       }).then(function (response){
+        $scope.clearFields();
         console.log('success in uwCtrl client post route:', response);
       }, function (error) {
         console.log('error in uwCtrl client post route:', error);
@@ -393,5 +386,10 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
     }); // end then function
   }; // end getClients
 
-
+  $scope.clearFields = function () {
+    console.log('in clearFields');
+    $scope.event_name = null;
+    $scope.startDate = null;
+    $scope.endDate = null;
+  };
 }]); // end uwController
