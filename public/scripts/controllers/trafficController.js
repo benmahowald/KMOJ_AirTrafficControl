@@ -17,10 +17,11 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
 
   $scope.getPendingContracts();
 
-  $scope.selectContractFlight = function (contract_id) {
+  $scope.selectContractFlight = function (contract_id, event_name) {
     console.log('in selectContractFlight');
     console.log('contract_id = ' + contract_id);
     $scope.currentContractId = contract_id;
+    $scope.currentEventName = event_name;
     $http({
       method: 'GET',
       url: '/traffic/flightContract?q=' + contract_id,
@@ -143,26 +144,6 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       }// end docDefinition
       pdfMake.createPdf(docDefinition).open();
   };
-  // $scope.sendTraffic = function (){
-  //   var traffictoSend = {
-  //     interviews: $scope.interviews,
-  //     socialmedia: $scope.socialmedia,
-  //     man_app: $scope.man_app,
-  //     uw_app: $scope.uw_app,
-  //     pr_app: $scope.pr_app,
-  //     tr_app: $scope.pr_app
-  //   }; // end sendTraffic object
-  //
-  //   $http({
-  //     method: 'POST',
-  //     url: '/traffic/media',
-  //     data: traffictoSend
-  //   }).then(function(response){
-  //     console.log('traffic to send id', response);
-  //   }, function errorCallback (response){
-  //     console.log('err', response);
-  //   }); // end then
-  // }; // end send traffic
 
   $scope.getCartNum = function () {
     console.log('in getCartNum');
@@ -179,13 +160,13 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     }; // end getCartNum
 
     $scope.updateCartNum = function (cart_number) {
-      console.log('in updateCartNum');
-      console.log('cart_number', cart_number);
-    $http({
-      method: 'PUT',
-      url: '/traffic/cart_number?q=' + $scope.currentContractId,
-      data: cart_number
-    }).then($scope.getCartNum);
+      console.log('Current Contract Id:', $scope.currentContractId);
+      console.log('in updateCartNum', cart_number);
+      $http({
+        method: 'PUT',
+        url: '/traffic/cart_number?q=' + $scope.currentContractId,
+        data: cart_number
+      }).then($scope.getCartNum);
   }; // end updateCartNum
 
 }]); // end trafficController

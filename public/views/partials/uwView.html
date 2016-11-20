@@ -1,5 +1,6 @@
 <div ng-show="userData[0].permission == 'Underwriter' || 'Administration' || 'View All'">
   <h3>New Contract</h3>
+  <div class="successMessage" ng-show="contractSaved">{{eventNameCreated}} was created successfully!</div>
   <form class="form otherLeft">
       <input class="createContract" type="text" name="event" ng-model="event_name" value="" placeholder="Event Name">
       <label class="reportLabel" for="client">Choose a client</label>
@@ -11,10 +12,15 @@
       <label class="reportLabel" for="FA">FA</label>
       <input class="createContract" type="checkbox" name="FA" value="FA" ng-model="fa">
       <label for="PSA">PSA</label>
-      <input class="createContract" type="checkbox" name="PSA" value="PSA" ng-model="psa">
-      <textarea  class="createContract" rows="5" cols="100" placeholder="Special Instructions" ng-model="instructions"></textarea>
+      <input class="createContract" type="checkbox" name="PSA" value="PSA" ng-model="psa"><br>
+      <input class="shareLine" type="text" name="socialMedia" value="" ng-model="numSocialMedia" placeholder="Social Media">
+      <input class="shareLine" type="text" name="interviews" value="" ng-model="numInterviews" placeholder="Interviews">
       <input class="shareLine" type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
       <input class="shareLine" type="text" name="agency_commission" ng-model="agency_commission" value="" placeholder="Commission">
+      <textarea  class="createContract" rows="5" cols="100" placeholder="Special Instructions" ng-model="instructions"></textarea>
+      <input class="shareLine" type="text" name="spotRate" value="" ng-model="spot_rate" placeholder="Spot Rate">
+      <input class="shareLine" type="text" name="totalCost" value="" ng-model="totalCost" placeholder="Total Cost">
+
   </form>
   <br>
   <div id="trafficGrid" class="trafficForm">

@@ -37,6 +37,11 @@ input, select, textarea, {
   border-radius: 1px;
 }
 
+input:focus, textarea:focus {
+  box-shadow: 0 0 3px 1px #e9d67c;
+  outline: none;
+}
+
 input[type=date] {
   letter-spacing: 1px;
   font-family: sans-serif;
