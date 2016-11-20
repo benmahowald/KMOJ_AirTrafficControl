@@ -270,12 +270,13 @@ router.get('/cart_number', function (req, res){
 router.put('/cart_number', function (req, res){
 	console.log('in put cart_number');
 	console.log('req.body', req.body + 'req.query.q =', req.query.q);
+	console.log('req = ', req.body.cart_number);
 	pg.connect(connectionString, function(err, client, done){
 		if (err){
-			console.log('connection err in invoice info');
+			console.log('connection err in /cart_number');
 		} else {
 			var results = [];
-			var queryResults = client.query('UPDATE flight set cart_number=($1) WHERE contract_id=($2)', [req.body[0].cart_number, req.query.q]);
+			var queryResults = client.query('UPDATE flight set cart_number=($1) WHERE contract_id=($2)', [req.body.cart_number, req.query.q]);
 				  queryResults.on('row', function(row){
 						results.push(row);
 					});//end queryResults.on 'row'

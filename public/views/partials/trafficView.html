@@ -4,11 +4,12 @@
   <p class="" ng-show="pendingContracts.length < 1">None</p>
   <div class="contractsPending" ng-repeat="contract in pendingContracts">
     <div>
-      <p class="listOfContracts" ng-click="selectContractFlight(contract.id)">{{contract.event_name}}</p>
+      <p class="listOfContracts" ng-click="selectContractFlight(contract.id, contract.event_name)">{{contract.event_name}}</p>
     </div>
   </div>
   <div ng-show="flightInfoExists" class="trafficInfo">
     <h4>Flight and Runs Table</h4>
+    <h3>{{currentEventName}}</h3>
     <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p>
     <!-- onbeforesave="getCartNum()" -->
     <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Edit" }}</span></p>
