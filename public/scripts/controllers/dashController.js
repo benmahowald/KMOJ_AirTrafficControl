@@ -30,11 +30,11 @@ $scope.clientSaved = false;
     }).then(function (response){
           console.log('success in dash client post route:', response);
           $scope.clientSaved = true;
+          $scope.clearCreateClient();
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
         }, function (error) {
           console.log('error in dash client post route:', error);
         }); // end then function
-        $scope.createClient.$setPristine();
-    $scope.clearCreateClient();
   }else {
     console.log('$scope.createClient.client_name =',$scope.createClient.client_name);
   }
@@ -103,18 +103,18 @@ $scope.clientSaved = false;
   }; // end sendUpdatedClient
 
   $scope.clearCreateClient = function () {
-    $scope.client_name = '';
+    $scope.client_name = null;
     // $scope.client_id
-    $scope.contact = '';
-    $scope.phone = '';
-    $scope.cell = '';
-    $scope.fax = '';
-    $scope.email = '';
-    $scope.webiste = '';
-    $scope.street = '';
-    $scope.city = '';
-    $scope.state = '';
-    $scope.zip = '';
+    $scope.contact = null;
+    $scope.phone = null;
+    $scope.cell = null;
+    $scope.fax = null;
+    $scope.email = null;
+    $scope.webiste = null;
+    $scope.street = null;
+    $scope.city = null;
+    $scope.state = null;
+    $scope.zip = null;
   }; // end clearCreateClient
 
 //////////////////////////////////// Contract Stuff ////////////////////////

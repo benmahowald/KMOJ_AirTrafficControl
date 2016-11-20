@@ -1,6 +1,6 @@
 <div ng-show="userData[0].permission == 'Underwriter' || userData[0].permission == 'Administration' || 'View All'">
 <h3> <strong>Create A Client</strong></h3>
-<div class="successMessage" ng-show="clientSaved">A client was successfully created</div>
+<div class="successMessage" ng-show="clientSaved">A client was created successfully!</div>
   <form class="form" name="createClient">
     <input class="createClient" type="text" name="client_name" ng-model="client_name" value="" placeholder="Client Name" required>
     <input class="createClient" type="text" name="contact" ng-model="contact" value="" placeholder="Contact's Name">

@@ -67,12 +67,13 @@ router.post ('/master', function (req, res){
 			console.log('connection error in master', err);
 		} else {
 			var master_id = [];
-			// STILL NEED TO SEND: SIGN_DATE, TOTAL_COST, SPOT_LENGTH, SPOT_RATE, TOTAL_SPOTS, discounts, commission
+			// STILL NEED TO SEND: TOTAL_SPOTS
+			console.log('line 71 before master INSERT');
 			var queryResultsA = client.query ('INSERT INTO master (users_id, client_id, event_name, ' +
-			'instructions, uw_submit, man_app, uw_app, pr_app, tr_app, spot_type, sign_date) ' +
-			'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id;' ,
+			'instructions, uw_submit, man_app, uw_app, pr_app, tr_app, spot_type, sign_date, interviews, total_cost, spot_rate, discounts, commission, socialmedia) ' +
+			'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING id;' ,
 			[master.user_id, master.client_id,  master.event_name,  master.instructions,
-				true, false, false, false, false, spotType, master.signDate]);
+				true, false, false, false, false, spotType, master.signDate, master.numInterviews, master.totalCost, master.spot_rate, master.discount, master.agency_commission, master.numSocialMedia]);
 
 				queryResultsA.on('row', function(row){
 					master_id.push(row);
@@ -113,7 +114,7 @@ router.post ('/master', function (req, res){
 								if (i === master.slotInfo.length-1){
 	 							managerMail();
 								done();
-								res.send({success: true});
+								// res.sendStatus(200);
 							}
 						});//end queryResultsSlot
 						}
@@ -123,6 +124,7 @@ router.post ('/master', function (req, res){
 					});//end queryResultsB
 
 				});//end queryResultsA
+				res.sendStatus(200);
 			}
 		});//end pg.connect
 	});//end router.post for master table

@@ -6,6 +6,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
   $scope.weeks = {week1:{num: 1}};
   $scope.totals = {week1:{total: 0}};
   $scope.currentNumWeeks = 1;
+  $scope.contractSaved = false;
   // This object is used as a scaffold help build the grid
   $scope.hours = {
     am2: {fullText:'2a-5a', title:'am2'},
@@ -332,6 +333,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
         totalCost: $scope.totalCost,
         numInterviews: $scope.numInterviews,
         numSocialMedia: $scope.numSocialMedia,
+        spot_rate: $scope.spot_rate
       };
 
       console.log('UW contractToSend:', contractToSend);
@@ -341,8 +343,10 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
         url: '/underwriter/master',
         data: contractToSend,
       }).then(function (response){
+        $scope.eventNameCreated = response.config.data.event_name;
         $scope.clearFields();
-        console.log('success in uwCtrl client post route:', response);
+        $scope.contractSaved = true;
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       }, function (error) {
         console.log('error in uwCtrl client post route:', error);
       }); // end then function
@@ -391,5 +395,16 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
     $scope.event_name = null;
     $scope.startDate = null;
     $scope.endDate = null;
+    $scope.fa = null;
+    $scope.psa = null;
+    $scope.instructions = null;
+    $scope.discount = null;
+    $scope.agency_commission = null;
+    $scope.slotDBinfo = null;
+    $scope.totalCost = null;
+    $scope.numInterviews = null;
+    $scope.numSocialMedia = null;
+    $scope.spot_rate = null;
+    $scope.selectedName = null;
   };
 }]); // end uwController
