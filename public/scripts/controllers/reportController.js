@@ -25,24 +25,11 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
     });
   };
 
-  console.log('scope.reports is  ', $scope.reports);
-
-
-
-console.log('reportInfo is ', reportInfo);
 
 
 $scope.getReport = function(invoiceInfo, data, columns){
    console.log ('scope . reports inside is', $scope.reports);
-//     var invoiceInfo = {
-//     cart_number: $scope.reports.cart_number,
-//     start_date: $scope.reports.start_date,
-//     end_date: $scope.reports.end_date,
-//     clients_name: $scope.reports.clients_name,
-//     uw_name: $scope.reports.uw_name,
-//     total_cost: $scope.reports.total_cost
-// };
-// ['Cart Number', 'Start Date', 'End Date', 'Client Name', 'Underwriter Name', 'Total Cost'],
+
 
 var invoiceData = [['Cart Number', 'Start Date', 'End Date', 'Client Name', 'Underwriter Name', 'Total Cost']];
   for (var i = 0; i < 6; i++){

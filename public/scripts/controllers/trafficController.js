@@ -128,7 +128,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
           {text: '' + invoiceInfo.client_name + '\n\n\n', alignment: 'center'},
 
       {
-        table: {
+        table: { alignment: 'center',
           body: [
                 ['Run Dates', 'Run Times', 'Day of Run', 'Total Spots', 'Length', 'CopyID', 'Rate', 'Total'],
                 ['' + invoiceInfo.start_date + invoiceInfo.end_date, '' + invoiceInfo.slot, '' + invoiceInfo.day_of_run, '' + invoiceInfo.total_spots, '' + invoiceInfo.spot_length, '' + invoiceInfo.copy_id, '' + invoiceInfo.spot_rate, '' + invoiceInfo.total_cost + '\n\n\n']
