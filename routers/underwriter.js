@@ -115,6 +115,8 @@ router.post ('/master', function (req, res){
 
 								var queryResultsSlot = client.query (slotQuery , queryArray);
 
+								// This function within a loop is necessary to end each slotQuery
+								// and only send the e-mail when all slots have been entered
 								queryResultsSlot.on('end', function(){
 									if (i === master.slotInfo.length-1){
 										managerMail();

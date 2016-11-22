@@ -59,21 +59,21 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
   		$scope.invoices = response.data;
       console.log('$scope.invoice is', $scope.invoice);
       console.log('response.data is ', response.data);
-  		invoiceInfo.event_name = response.data[0].event_name,
-      invoiceInfo.users_name = response.data[0].users_name,
-      invoiceInfo.total_spots = response.data[0].total_spots,
-      invoiceInfo.total_cost = response.data[0].total_cost,
-      invoiceInfo.discounts = response.data[0].discounts,
-      invoiceInfo.commission = response.data[0].commission,
-      invoiceInfo.start_date = response.data[0].start_date,
-      invoiceInfo.end_date = response.data[0].end_date,
-      invoiceInfo.spot_length = response.data[0].spot_length,
-      invoiceInfo.spot_type = response.data[0].spot_type,
-      invoiceInfo.spot_rate = response.data[0].spot_rate,
-      invoiceInfo.copy_id = response.data[0].copy_id,
-      invoiceInfo.slot = response.data[0].slot,
-      invoiceInfo.day_of_run = response.data[0].day_of_run,
-      invoiceInfo.clients_name = response.data[0].clients_name
+  		invoiceInfo.event_name = response.data[0].event_name;
+      invoiceInfo.users_name = response.data[0].users_name;
+      invoiceInfo.total_spots = response.data[0].total_spots;
+      invoiceInfo.total_cost = response.data[0].total_cost;
+      invoiceInfo.discounts = response.data[0].discounts;
+      invoiceInfo.commission = response.data[0].commissio;
+      invoiceInfo.start_date = response.data[0].start_date;
+      invoiceInfo.end_date = response.data[0].end_date;
+      invoiceInfo.spot_length = response.data[0].spot_length;
+      invoiceInfo.spot_type = response.data[0].spot_type;
+      invoiceInfo.spot_rate = response.data[0].spot_rate;
+      invoiceInfo.copy_id = response.data[0].copy_id;
+      invoiceInfo.slot = response.data[0].slot;
+      invoiceInfo.day_of_run = response.data[0].day_of_run;
+      invoiceInfo.clients_name = response.data[0].clients_name;
       console.log('$scope.invoice is ', $scope.invoice);
       console.log('invoice info================:', invoiceInfo);
   	}, function errorCallback (response){
