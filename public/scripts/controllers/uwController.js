@@ -302,11 +302,8 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
     if (!$scope.whatText){
       $scope.whatText = '';
     }
-    if (!$scope.whenText){
-      $scope.whenText = '';
-    }
-    if (!$scope.whereText){
-      $scope.whereText = '';
+    if (!$scope.whyText){
+      $scope.whyText = '';
     }
     if (!$scope.moreInfoText){
       $scope.moreInfoText = '';
@@ -350,8 +347,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
         producer: $scope.producer,
         whoText: $scope.whoText,
         whatText: $scope.whatText,
-        whenText: $scope.whenText,
-        whereText: $scope.whereText,
+        whyText: $scope.whyText,
         moreInfoText: $scope.moreInfoText
       };
 
