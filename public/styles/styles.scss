@@ -194,7 +194,7 @@ input {
   padding-bottom: 6px;
   text-align: left;
   font-family: $font;
-  border-bottom: 1px solid $font-color;
+  border-bottom: 1px solid #7d7c7a;
   font-weight: lighter;
 }
 
@@ -221,7 +221,9 @@ margin-bottom: 10px;
 }
 
 .editor {
-  margin-top: 10px;
+  margin: auto auto;
+  width: 400px;
+  max-width: 95%;
 }
 
 .listOfContracts:focus {
@@ -230,9 +232,9 @@ margin-bottom: 10px;
 
 .trafficInfo {
   background-color: #fbf3d2;
-  width: 550px;
+  width: 400px;
   max-width: 95%;
-  margin-top: 25px;
+  margin: 25px auto 25px;
   border: 1px solid #f4eab7;
 }
 
@@ -313,8 +315,9 @@ th {
 }
 
 #prodContent {
-  margin: 0 auto 40px auto;
+  margin: 0 auto 40px;
   border-bottom: 1px solid $font-color;
-  max-width: 75%;
+  width: 400px;
+  max-width: 95%;
   font-weight: lighter;
 }
