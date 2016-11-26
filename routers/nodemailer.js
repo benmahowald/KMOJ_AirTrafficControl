@@ -30,7 +30,7 @@ var managerMail = transporter.sendMail({
 	if (err){
 		console.log('error sending mail', err);
 	} else {
-		console.log('message sent ', res.message);
+		// console.log('message sent ', res.message);
 	}
 	transporter.close();
 });
@@ -46,7 +46,7 @@ var protraffMail = transporter.sendMail({
 	if (err){
 		console.log('error sending mail to traffic and production', err);
 	} else {
-		console.log ('message sent', res.message);
+		// console.log ('message sent', res.message);
 	}
 	transporter.close();
 });
@@ -62,7 +62,7 @@ function (err, res){
 	if (err){
 		console.log('error sending mail to traffic and production', err);
 	} else {
-		console.log ('message sent', res.message);
+		// console.log ('message sent', res.message);
 	}
 	transporter.close();
 

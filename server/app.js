@@ -41,7 +41,7 @@ app.use('/nodemailer', nodemailer);
 
 
 //port 5000 being used
-var portDecision = process.env.PORT || 8082;
+var portDecision = process.env.PORT || 5000;
 
 app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);
@@ -130,7 +130,7 @@ app.put('/client', function (req, res){
 
 // setting catch all route
 app.get('/*', function(req,res){
-  console.log('Made it to the catch all route, with',req.params);
+  // console.log('Made it to the catch all route, with',req.params);
   var file = req.params[0];
 
   // checking for valid url

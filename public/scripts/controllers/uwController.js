@@ -154,6 +154,19 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
     }
   };
 
+  $scope.checkInput = function(thisWeek, thisHour, thisDay){
+    console.log('in checkInput, with:', thisDay, thisHour, thisWeek);
+    var weekName = 'week'+thisWeek;
+
+    if ($scope.weeks[weekName][thisHour][thisDay]<0) {
+      $scope.weeks[weekName][thisHour][thisDay]=0;
+    } else if ($scope.weeks[weekName][thisHour][thisDay]>20){
+      $scope.weeks[weekName][thisHour][thisDay]=20;
+    }
+
+    $scope.updateTotals(thisWeek, thisHour, thisDay);
+  };
+
   $scope.updateTotals = function(thisWeek, thisHour, thisDay){
     console.log('in updateTotals, with:', thisDay, thisHour, thisWeek);
     var weekName = 'week'+thisWeek;
@@ -290,11 +303,8 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
     if (!$scope.whatText){
       $scope.whatText = '';
     }
-    if (!$scope.whenText){
-      $scope.whenText = '';
-    }
-    if (!$scope.whereText){
-      $scope.whereText = '';
+    if (!$scope.whyText){
+      $scope.whyText = '';
     }
     if (!$scope.moreInfoText){
       $scope.moreInfoText = '';
@@ -333,7 +343,13 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
         totalCost: $scope.totalCost,
         numInterviews: $scope.numInterviews,
         numSocialMedia: $scope.numSocialMedia,
-        spot_rate: $scope.spot_rate
+        spot_rate: $scope.spot_rate,
+        voiceTalent: $scope.voiceTalent,
+        producer: $scope.producer,
+        whoText: $scope.whoText,
+        whatText: $scope.whatText,
+        whyText: $scope.whyText,
+        moreInfoText: $scope.moreInfoText
       };
 
       console.log('UW contractToSend:', contractToSend);
@@ -341,7 +357,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
       $http({
         method: 'POST',
         url: '/underwriter/master',
-        data: contractToSend,
+        data: contractToSend
       }).then(function (response){
         $scope.eventNameCreated = response.config.data.event_name;
         $scope.clearFields();

@@ -182,15 +182,15 @@ router.get('/contractsPending', function (req, res){
 	}); //end pg.connect for contractspending
 });//end router contractspending
 
-router.get('/flightContract', function (req, res){
+router.post('/flightContract', function (req, res){
 	console.log('in get contract -------------------');
-	console.log('req.query.q', req.query.q);
+	console.log('req.body', req.body);
 	pg.connect(connectionString, function(err, client, done){
 		if(err){
 			console.log('get contract connection error is', err);
 		} else {
 			var results = [];
-			var queryResults = client.query('SELECT start_date, end_date FROM flight WHERE contract_id=($1)', [req.query.q]);
+			var queryResults = client.query('SELECT flight.id, flight.cart_number, flight.start_date, flight.end_date FROM flight WHERE contract_id=($1)', [req.body.contract_id]);
 			queryResults.on('row', function(row){
 				results.push(row);
 			});

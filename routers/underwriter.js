@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var nodemailer = require ('nodemailer');
 var connectionString = 'postgres://localhost:5432/kmoj';
 
-console.log('in underwrite router');
+// console.log('in underwrite router');
 
 router.post ('/client', function (req, res){
 	console.log ('req.body for client is', req.body);
@@ -46,7 +46,7 @@ var managerMail = transporter.sendMail({
 	if (err){
 		console.log('error sending mail', err);
 	} else {
-		console.log('message sent ', res.message);
+		// console.log('message sent ', res.message);
 	}
 	transporter.close();
 });
@@ -83,6 +83,7 @@ router.post ('/master', function (req, res){
 					console.log('master_id', master_id);
 					var flight_id = [];
 
+
 					console.log('flight info: ', master_id[0].id, master.start_date,  master.end_date);
  					var queryResultsB = client.query ('INSERT INTO flight (' +
 					'contract_id, start_date, end_date) ' +
@@ -94,32 +95,66 @@ router.post ('/master', function (req, res){
 
 					});//end queryResultsB.on 'row'
 					queryResultsB.on('end', function(){
-						console.log('flight_id', flight_id);
-
-						var slotQuery = '';
-						var queryArray = [];
-						var queryElement = 1;
-						var thisSlot;
-
-						for (var i = 0; i < master.slotInfo.length; i++) {
-							thisSlot = master.slotInfo[i];
-							slotQuery = 'INSERT INTO slots (day_of_run, plays, slot, flight_id) ' +
-							'VALUES ($'+queryElement+', $'+(queryElement+1)+', $'+(queryElement+2)+', $'+(queryElement+3)+'); ';
-							console.log('slotQuery:', slotQuery);
-							queryArray = [thisSlot.dayOfRun, thisSlot.plays, thisSlot.slot, flight_id[0].id];
-
-							var queryResultsSlot = client.query (slotQuery , queryArray);
-
-							queryResultsSlot.on('end', function(){
-								if (i === master.slotInfo.length-1){
-	 							managerMail();
-								done();
+// <<<<<<< HEAD
+						// console.log('flight_id', flight_id);
+						//
+						// var slotQuery = '';
+						// var queryArray = [];
+						// var queryElement = 1;
+						// var thisSlot;
+						//
+						// for (var i = 0; i < master.slotInfo.length; i++) {
+						// 	thisSlot = master.slotInfo[i];
+						// 	slotQuery = 'INSERT INTO slots (day_of_run, plays, slot, flight_id) ' +
+						// 	'VALUES ($'+queryElement+', $'+(queryElement+1)+', $'+(queryElement+2)+', $'+(queryElement+3)+'); ';
+						// 	console.log('slotQuery:', slotQuery);
+						// 	queryArray = [thisSlot.dayOfRun, thisSlot.plays, thisSlot.slot, flight_id[0].id];
+						//
+						// 	var queryResultsSlot = client.query (slotQuery , queryArray);
+						//
+						// 	queryResultsSlot.on('end', function(){
+						// 		if (i === master.slotInfo.length-1){
+	 				// 			managerMail();
+						// 		done();
 								// res.sendStatus(200);
+// =======
+
+						var queryResultsProd = client.query ('INSERT INTO production (' +
+						'who, what, why, site, talent, producer, contract_id) ' +
+						'VALUES ($1, $2, $3, $4, $5, $6, $7);' ,
+						[master.whoText, master.whatText, master.whyText, master.moreInfoText,
+							master.voiceTalent, master.producer, master_id[0].id]);
+
+						queryResultsProd.on('end', function(){
+							console.log('flight_id', flight_id);
+
+							var slotQuery = '';
+							var queryArray = [];
+							var thisSlot;
+
+							for (var i = 0; i < master.slotInfo.length; i++) {
+								thisSlot = master.slotInfo[i];
+								slotQuery = 'INSERT INTO slots (day_of_run, plays, slot, flight_id) ' +
+								'VALUES ($1, $2, $3, $4);';
+								console.log('slotQuery:', slotQuery);
+								queryArray = [thisSlot.dayOfRun, thisSlot.plays, thisSlot.slot, flight_id[0].id];
+
+								var queryResultsSlot = client.query (slotQuery , queryArray);
+
+								// This function within a loop is necessary to end each slotQuery
+								// and only send the e-mail when all slots have been entered
+								queryResultsSlot.on('end', function(){
+									if (i === master.slotInfo.length-1){
+										managerMail();
+										done();
+										res.send({success: true});
+									}
+								});//end queryResultsSlot
+// >>>>>>> 057b006d87c7bafc346dc1cb926f031cf4bf0ed4
 							}
-						});//end queryResultsSlot
-						}
 
 
+						});//end queryResultsProd
 
 					});//end queryResultsB
 

@@ -39,7 +39,7 @@
           <td>{{hour.fullText}}</td>
           <td class="boldFont">{{totals["week"+week.num][hour.title]}}</td>
           <td ng-repeat="day in days">
-            <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="updateTotals(week.num, hour.title, day)" ng-click="incrementCount(week.num, hour.title, day, $event)">
+            <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="checkInput(week.num, hour.title, day)" ng-click="incrementCount(week.num, hour.title, day, $event)">
           </td>
         </tr>
       </table>
