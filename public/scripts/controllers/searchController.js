@@ -8,21 +8,25 @@ app.controller('searchController', ['$scope', '$http', function($scope, $http){
       console.log('search is NOT a number');
       $http({
         method: 'GET',
-        url: '/search/cart_number?q=' + $scope.search,
+        url: '/search/client_name?q=' + $scope.search,
       }).then(function (response){
-            console.log('cart_number search success:', success);
-            clearFields();
+            console.log('client_name search success', response);
+            $scope.search = null;
           }, function (error) {
-            console.log('cart_number search error:', error);
+            console.log('client_name search error:', error);
           }); // end then function
     } else {
       console.log('search IS a number');
-      clearFields();
-    }
+      $http({
+        method: 'GET',
+        url: '/search/cart_number?q=' + $scope.search,
+      }).then(function (response){
+            console.log('cart_number search success:', response);
+            $scope.search = null;
+          }, function (error) {
+            console.log('cart_number search error:', error);
+          }); // end then function
+    } // end else
   }; // end searchFunction
-
-var clearFields = function () {
-  $scope.search = null;
-};
 
 }]); // end searchController
