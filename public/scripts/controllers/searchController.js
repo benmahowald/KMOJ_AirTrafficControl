@@ -1,25 +1,22 @@
-app.controller('searchController', ['$scope', function($scope){
+app.controller('searchController', ['$scope', '$http', function($scope, $http){
   console.log('Search Controller');
 
   $scope.searchFunction = function () {
     console.log('in searchFunction');
-    console.log(typeof(isNaN($scope.search)));
+
     if(isNaN($scope.search) === true) {
       console.log('search is NOT a number');
       $http({
         method: 'GET',
-        url: '/production/production?q=' + $scope.currentProdId,
+        url: '/search/cart_number?q=' + $scope.search,
       }).then(function (response){
-            console.log('success in prodCtrl post route:', response);
-            $scope.productionSaved = true;
-            $scope.clearFields();
+            console.log('cart_number search success:', success);
+            clearFields();
           }, function (error) {
-            console.log('error in prodCtrl post route:', error);
+            console.log('cart_number search error:', error);
           }); // end then function
-    }; // end http call
-      clearFields();
     } else {
-      console.log('log IS a number');
+      console.log('search IS a number');
       clearFields();
     }
   }; // end searchFunction
