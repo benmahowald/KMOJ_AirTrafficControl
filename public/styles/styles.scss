@@ -149,7 +149,7 @@ input {
   display: inline;
 }
 
-.createClient, .createProduction, .createContract, .reportingInputs, .editable-input {
+.createClient, .createProduction, .createContract, .reportingInputs, .searchInput, .editable-input {
   border: none;
   width: 95%;
   padding: 10px;
@@ -264,9 +264,9 @@ margin-bottom: 10px;
   padding: 0;
 }
 
-th {
-  text-align: center;
-}
+// th {
+//   text-align: center;
+// }
 
 .logo {
   margin-top: -15px;
