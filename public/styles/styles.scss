@@ -149,7 +149,8 @@ input {
   display: inline;
 }
 
-.createClient, .createProduction, .createContract, .reportingInputs, .searchInput, .editable-input {
+.createClient, .createProduction, .createContract, .reportingInputs,
+.searchInput, .editable-input, .results {
   border: none;
   width: 95%;
   padding: 10px;

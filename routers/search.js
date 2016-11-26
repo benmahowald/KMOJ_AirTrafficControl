@@ -14,7 +14,7 @@ router.get('/cart_number', function (req, res){
 			console.log('connection err in reports');
 		} else {
 			var results = [];
-			var queryResults = client.query('SELECT flight.cart_number, flight.start_date, flight.end_date, clients.name AS clients_name, users.name AS uw_name, master.total_cost FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON master.client_id = clients.client_id JOIN users ON master.users_id = users.id');
+			var queryResults = client.query('SELECT flight.cart_number, flight.start_date, flight.end_date, clients.name AS clients_name, users.name AS uw_name, master.total_cost FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON master.client_id = clients.client_id JOIN users ON master.users_id = users.id WHERE flight.cart_number=($1)', [req.query.q]);
           queryResults.on('row', function(row){
             results.push(row);
 						// console.log ('this is the row', row);
@@ -37,8 +37,7 @@ router.get('/client_name', function (req, res){
 			console.log('connection err in reports');
 		} else {
 			var results = [];
-			// var queryResults = client.query('SELECT flight.cart_number, flight.start_date, flight.end_date, clients.name AS clients_name, users.name AS uw_name, master.total_cost FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON master.client_id = clients.client_id JOIN users ON master.users_id = users.id');
-        var queryResults = client.query('SELECT');
+        var queryResults = client.query('SELECT flight.cart_number, flight.start_date, flight.end_date, clients.name AS clients_name, users.name AS uw_name, master.total_cost FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON master.client_id = clients.client_id JOIN users ON master.users_id = users.id WHERE clients.name=($1)', [req.query.q]);
           queryResults.on('row', function(row){
             results.push(row);
 						// console.log ('this is the row', row);
