@@ -1,11 +1,13 @@
-<div ng-show="userData[0].permission == 'View All'">
-  <form ng-submit="searchFunction(search)">
-    <input class="searchInput" type="text" name="search" value="" placeholder="Search" ng-model="search">
-  </form>
-  <p class="yourOtherLeft" ng-if="results.length > 0">Found {{results.length}} result(s) for "{{query}}"</p>
-  <p class="yourOtherLeft" ng-if="results.length === 0">No results found for "{{query}}"</p>
-  <div class="left" ng-repeat="item in results">
-    <h5>{{item.clients_name}}</h5>
-    <p><span class="textToStandOut">Cart #:</span> {{item.cart_number}}</p>
+<!-- <div ng-show="userData[0].permission == 'View All'"> -->
+  <div class="searchViewDiv">
+    <form ng-submit="searchFunction(search)">
+      <input class="searchInput" type="text" name="search" value="" placeholder="Search" ng-model="search">
+    </form>
+    <p class="yourOtherLeft" ng-if="results.length > 0">Found {{results.length}} result(s) for "{{query}}".</p>
+    <p class="yourOtherLeft" ng-if="results.length === 0">No results found for "{{query}}".</p>
   </div>
-</div>
+  <div class="searchResults" ng-repeat="item in results">
+    <h5>{{item.clients_name}}</h5>
+    <p><span class="textToStandOut">Underwriter:</span> {{item.uw_name}}<span class="textToStandOut">Cart #:</span> {{item.cart_number}}</p>
+  </div>
+<!-- </div> -->

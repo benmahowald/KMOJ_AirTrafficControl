@@ -2,11 +2,11 @@ app.controller('searchController', ['$scope', '$http', function($scope, $http){
   console.log('In Search Controller');
 
   $scope.searchFunction = function (query) {
-    console.log('in searchFunction');
+    // console.log('in searchFunction');
     $scope.query = query;
-    console.log('query is:', query);
+    // console.log('query is:', query);
     if(isNaN(query) === true) {
-      console.log('search is NOT a number');
+      // console.log('search is NOT a number');
       $http({
         method: 'GET',
         url: '/search/client_name?q=' + query,
@@ -18,12 +18,12 @@ app.controller('searchController', ['$scope', '$http', function($scope, $http){
             console.log('client_name search error:', error);
           }); // end then function
     } else {
-      console.log('search IS a number');
+      // console.log('search IS a number');
       $http({
         method: 'GET',
         url: '/search/cart_number?q=' + $scope.search,
       }).then(function (response){
-            console.log('cart_number search success:', response);
+            // console.log('cart_number search success:', response);
             $scope.results = response.data;
             $scope.search = null;
           }, function (error) {

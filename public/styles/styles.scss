@@ -33,6 +33,11 @@ h1, h2, h3, h4 {
   font-weight: bold;
 }
 
+h5 {
+  font-size: medium;
+  margin-bottom: 0;
+}
+
 // This code removes the arrow buttons from number inputs
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -112,7 +117,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .navbar {
-  border-bottom: 5px solid #dcb500;
+  border-bottom: 3px solid #dcb500;
 }
 
 .dropdown-menu {
@@ -150,7 +155,7 @@ input {
 }
 
 .createClient, .createProduction, .createContract, .reportingInputs,
-.searchInput, .editable-input, .results {
+.editable-input, .results {
   border: none;
   width: 95%;
   padding: 10px;
@@ -320,4 +325,32 @@ margin-bottom: 10px;
   width: 400px;
   max-width: 95%;
   font-weight: lighter;
+}
+
+.searchViewDiv {
+  text-align: left;
+  width: 500px;
+  max-width: 95%;
+  margin: 15px auto 30px;
+}
+
+.searchResults {
+  width: 500px;
+  max-width: 95%;
+  margin: 15px auto 15px;
+  text-align: left;
+  max-width: 95%;
+  background-color: #fbf3d2;
+  border: 1px solid #f4eab7;
+  padding: 0 10px;
+  border-radius: 2px;
+}
+
+.searchInput {
+  padding: 10px;
+  font-size: medium;
+  width: 500px;
+  max-width: 100%;
+  border: none;
+  margin-bottom: 5px;
 }
