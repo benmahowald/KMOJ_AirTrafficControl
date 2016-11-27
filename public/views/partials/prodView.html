@@ -4,17 +4,17 @@
   <div id = "prodContent">
     <table class = "editor" class = "export-table">
       <tr ng-init="getProductions()">
+        <th width = "auto">Event</th>
         <th width = "auto">Start</th>
         <th width = "auto">UW</th>
         <th width = "auto">Client</th>
-        <th width = "auto">Event</th>
       </tr>
       <tr ng-repeat="production in productions">
+        <td><input type="radio" ng-click="retrieveProdId(production.contract_id)"></td>
+        <td>{{production.event_name}}</td>
         <td>{{production.start_date}}</td>
         <td>{{production.uw_name}}</td>
-        <td>{{production.name}}</td>
-        <td>{{production.event_name}}</td>
-        <td><input type = "radio" ng-click="retrieveProdId(production.id)"></td>
+        <td>{{production.client_name}}</td>
       </tr>
     </table>
   </div>
