@@ -34,8 +34,8 @@ h1, h2, h3, h4 {
 }
 
 h5 {
-  font-size: medium;
-  margin-bottom: 0;
+  font-size: 120%;
+  margin-bottom: 5px;
 }
 
 // This code removes the arrow buttons from number inputs
@@ -342,15 +342,35 @@ margin-bottom: 10px;
   max-width: 95%;
   background-color: #fbf3d2;
   border: 1px solid #f4eab7;
-  padding: 0 10px;
+  padding: 0 10px 9px;
   border-radius: 2px;
 }
 
 .searchInput {
-  padding: 10px;
+  padding: 10px 10px 10px 43px;
   font-size: medium;
+  line-height: 90%;
   width: 500px;
   max-width: 100%;
-  border: none;
-  margin-bottom: 5px;
+  border: 1px solid #eeebc2;
+  margin-bottom: 4px;
+  color: $font-color;
+  background-image: url('../assets/search_icon.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 35px 25px;
+}
+
+.clearSearch {
+  float: right;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.clearSearch:hover {
+  text-decoration: underline;
+}
+
+.clearSearch:focus {
+  outline: none;
 }
