@@ -1,4 +1,4 @@
-app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope, $mdDialog, $http){
+app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope, $mdDialog, $http){
   console.log('Underwriter Controller');
   //// code for the traffic entry grid
   // Initialize variables

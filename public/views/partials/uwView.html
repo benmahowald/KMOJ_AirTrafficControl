@@ -6,9 +6,9 @@
       <label class="reportLabel" for="client">Choose a client</label>
       <select name="client" class="selectClient" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select><br>
       <label class="reportLabel" for="startDate">Start Date</label>
-      <input class="createContract" type="date" name="startDate" ng-model="startDate"><br>
+      <md-datepicker ng-model="startDate" md-placeholder="Select Date"></md-datepicker>
       <label class="reportLabel" for="endDate">End Date</label><br>
-      <input class="createContract" type="date" name="endDate" ng-model="endDate"><br>
+      <md-datepicker ng-model="endDate" md-placeholder="Select Date"></md-datepicker>
       <label class="reportLabel" for="FA">FA</label>
       <input class="createContract" type="checkbox" name="FA" value="FA" ng-model="fa">
       <label for="PSA">PSA</label>
