@@ -4,42 +4,42 @@
     <div class="reportLabel">
       <label for="startDate">Start Date</label><br>
     </div>
-      <input class="reportingInputs" type="date" name="startDate" ng-model="startDate"><br>
+    <md-datepicker ng-model="startDate" md-placeholder="Select Date"></md-datepicker>
     <div class="reportLabel">
       <label for="endDate">End Date</label><br>
     </div>
-      <input class="reportingInputs" type="date" name="endDate" ng-model="endDate"><br>
+    <md-datepicker ng-model="endDate" md-placeholder="Select Date"></md-datepicker>
     <input class="button center" type="button" name="getReports" value="View Report" ng-click="getReports()">
   </form>
-    <div>
-      <div id = "content">
-        <table  width = "75%">
-          <tr>
-            <th>Cart Number</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Client Name</th>
-            <th>Underwriter Name</th>
-            <th>Total Cost</th>
-          </tr>
-          <tr class = "reports" ng-repeat="report in reports">
-            <td>{{report.cart_number}}</td>
-            <td>{{report.start_date}}</td>
-            <td>{{report.end_date}}</td>
-            <td>{{report.clients_name}}</td>
-            <td>{{report.uw_name}}</td>
-            <td>${{report.total_cost}}</td>
-          </tr>
-        </table>
-      </div>
-      <div id = "editor"></div>
-      <button ng-click="getReport()" id = "cmd">Generate PDF</button>
+  <div>
+    <div id = "content">
+      <table  width = "75%">
+        <tr>
+          <th>Cart Number</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Client Name</th>
+          <th>Underwriter Name</th>
+          <th>Total Cost</th>
+        </tr>
+        <tr class = "reports" ng-repeat="report in reports">
+          <td>{{report.cart_number}}</td>
+          <td>{{report.start_date}}</td>
+          <td>{{report.end_date}}</td>
+          <td>{{report.clients_name}}</td>
+          <td>{{report.uw_name}}</td>
+          <td>${{report.total_cost}}</td>
+        </tr>
+      </table>
     </div>
+    <div id = "editor"></div>
+    <button ng-click="getReport()" id = "cmd">Generate PDF</button>
+  </div>
 
   <div>
   </div>
 
 </div>
 <!-- <div ng-show="userData[0].permission !== 'Administration'">
-  404
+404
 </div> -->
