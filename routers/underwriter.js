@@ -28,29 +28,6 @@ router.post ('/client', function (req, res){
 	});//end pg.connect for client table
 });//end router.post for client table
 
-//router.post master
-var transporter = nodemailer.createTransport({
-	service: 'Gmail',
-	auth: {
-		user: 'kmojatc@gmail.com',
-		pass: 'manager@kmoj'
-	}
-});
-
-var managerMail = transporter.sendMail({
-	from: 'kmojatc@gmail.com',
-	to: 'kmojproject@gmail.com',
-	subject: 'New contract added to queue!',
-	text: 'Please go to Air Traffic Controller to approve a new contract!'
-}, function (err, res){
-	if (err){
-		console.log('error sending mail', err);
-	} else {
-		// console.log('message sent ', res.message);
-	}
-	transporter.close();
-});
-
 router.post ('/master', function (req, res){
 	console.log('req.body is', req.body);
 	var master = req.body;
@@ -121,6 +98,7 @@ router.post ('/master', function (req, res){
 								// and only send the e-mail when all slots have been entered
 								queryResultsSlot.on('end', function(){
 									if (i === master.slotInfo.length-1){
+										///send an email to GM saying new contract has been generated////
 										managerMail();
 										done();
 										res.send({success: true});
@@ -156,8 +134,6 @@ router.post ('/master', function (req, res){
 
 				});//end queryResults.on 'row'
 				queryResults.on('end', function(){
-					//send mail to production and traffic alert that a new contract has been generated.
-					protraffMail();
 					done();
 					console.log('results are', results);
 					return res.json(results);
