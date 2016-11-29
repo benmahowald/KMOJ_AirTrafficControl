@@ -72,7 +72,7 @@ console.log ('invoice Info is', invoiceInfo);
         table: {
         body: [
               ['Cart Number', 'Start Date', 'End Date', 'Client Name', 'Underwriter Name', 'Total Cost'],
-              [ '' + $scope.invoiceInfo[i][0], '' + $scope.invoiceInfo[i][1], '' + $scope.invoiceInfo[i][2], '' + $scope.invoiceInfo[i][3], '' + $scope.invoiceInfo[i][4], '' + $scope.invoiceInfo[i][5]]
+              [ '' + invoiceData[i][0], '' + invoiceData[i][1], '' + invoiceData[i][2], '' + invoiceData[i][3], '' + invoiceData[i][4], '' + invoiceData[i][5]]
         ]
       }
     }//end table
