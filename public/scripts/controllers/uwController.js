@@ -21,10 +21,10 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
   };
   // This is used to populate the header and scaffold the grid
   $scope.days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  console.log($scope.hours);
+  // console.log($scope.hours);
 
   $scope.buildFlight = function(){
-    console.log($scope.weeks);
+    // console.log($scope.weeks);
 
     var numDays = $scope.currentNumWeeks * 7; // seven days in a weeks
     var dayIndex;

@@ -190,7 +190,7 @@ router.post('/flightContract', function (req, res){
 			console.log('get contract connection error is', err);
 		} else {
 			var results = [];
-			var queryResults = client.query('SELECT flight.id, flight.cart_number, flight.start_date, flight.end_date FROM flight WHERE contract_id=($1)', [req.body.contract_id]);
+			var queryResults = client.query('SELECT flight.id, flight.cart_number, flight.start_date, flight.end_date, slots.day_of_run, slots.plays, slots.slot FROM flight JOIN slots on flight.id=slots.flight_id WHERE contract_id=($1);', [req.body.contract_id]);
 			queryResults.on('row', function(row){
 				results.push(row);
 			});
