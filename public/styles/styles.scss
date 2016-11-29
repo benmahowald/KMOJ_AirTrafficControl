@@ -157,7 +157,8 @@ input {
 .createClient, .createProduction, .createContract, .reportingInputs,
 .editable-input, .results {
   border: none;
-  width: 95%;
+  width: 450px;
+  max-width: 95%;
   padding: 10px;
   margin-bottom: 5px;
   font-size: medium;
@@ -186,7 +187,7 @@ input {
 }
 
 .contractsPending {
-  width: 400px;
+  width: 450px;
   max-width: 95%;
   margin: 5px auto 15px;
   text-align: left;
@@ -194,7 +195,7 @@ input {
 }
 
 .pendingContractHeading {
-  width: 400px;
+  width: 450px;
   max-width: 95%;
   margin: 20px auto 17px;
   padding-bottom: 6px;
@@ -237,7 +238,7 @@ margin-bottom: 10px;
 
 .trafficInfo {
   background-color: #fbf3d2;
-  width: 400px;
+  width: 450px;
   max-width: 95%;
   margin: 25px auto 25px;
   border: 1px solid #f4eab7;
@@ -301,7 +302,8 @@ margin-bottom: 10px;
 }
 
 .selectClient {
-  width: 300px;
+  width: 450px;
+  max-width: 100%;
   min-width: auto;
   border: none;
   border-radius: 2px;
@@ -322,7 +324,7 @@ margin-bottom: 10px;
 #prodContent {
   margin: 0 auto 40px;
   border-bottom: 1px solid $font-color;
-  width: 400px;
+  width: 450px;
   max-width: 95%;
   font-weight: lighter;
 }

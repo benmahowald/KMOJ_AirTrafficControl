@@ -1,7 +1,10 @@
 <div ng-show="userData[0].permission == 'Underwriter' || 'Administration' || 'View All'">
-<h3>Edit Client Information</h3>
+<h3>Edit Client Info</h3>
 
-<select class="selectClient" style="margin-bottom:20px;" data-ng-init="somethingHere" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select>
+<form class="editClient">
+  <label for="selectClient">Choose a client</label>
+  <select class="selectClient" name="selectClient" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select>
+</form>
 
 <form class="form editClientForm" editable-form name="editableForm" onaftersave="sendUpdatedClient()">
   <span class="editClient">Client:</span>
