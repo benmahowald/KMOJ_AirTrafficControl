@@ -4,6 +4,8 @@ var path = require('path');
 var pg = require('pg');
 var bodyParser = require('body-parser');
 var connectionString = 'postgres://localhost:5432/kmoj';
+var nodemailer = require ('nodemailer');
+
 
 // router.get for production view
 router.get('/productionInfo', function (req, res){
