@@ -50,6 +50,8 @@ router.post ('/production', function (req, res){
 					[req.body.contract_id]);
 
 					queryResults.on('end', function(){
+						////sends an email to GM, UW and Bookkeeper generating invoice////
+						invoiceMail();
 						done();
 						res.send({success: true});
 					});
