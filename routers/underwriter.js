@@ -72,6 +72,7 @@ router.post ('/master', function (req, res){
 
 					});//end queryResultsB.on 'row'
 					queryResultsB.on('end', function(){
+
 						var queryResultsProd = client.query ('INSERT INTO production (' +
 						'who, what, why, site, talent, producer, contract_id) ' +
 						'VALUES ($1, $2, $3, $4, $5, $6, $7);' ,
@@ -142,6 +143,23 @@ router.post ('/master', function (req, res){
 		});//end pg.connect for underwriter info
 	});//end router.get for underwriter info
 
-
+	router.delete('/deleteClient', function (req, res){
+	  console.log('hit client delete route');
+	  console.log('client delete query is:', req.query.q);
+	  pg.connect(connectionString, function(err, client, done){
+			if (err){
+				console.log('connection err in delete client');
+			} else {
+				var queryResults = client.query('DELETE FROM clients WHERE name=($1)', [req.query.q]);
+	          queryResults.on('row', function(row){
+	            results.push(row);
+						});//end queryResults.on 'row'
+						queryResults.on('end', function(){
+							done();
+							res.send(200);
+						});//end queryResults on 'end'
+			} // end else
+		});//end pg.connect
+	}); // end delete client
 
 	module.exports = router;
