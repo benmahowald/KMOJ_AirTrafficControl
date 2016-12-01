@@ -168,14 +168,14 @@ router.post ('/master', function (req, res){
 		});//end pg.connect for underwriter info
 	});//end router.get for underwriter info
 
-	router.get('/deleteClient', function (req, res){
+	router.delete('/deleteClient', function (req, res){
 	  console.log('hit client delete route');
 	  console.log('client delete query is:', req.query.q);
 	  pg.connect(connectionString, function(err, client, done){
 			if (err){
 				console.log('connection err in delete client');
 			} else {
-				var queryResults = client.query('DELETE FROM clients', [req.query.q]);
+				var queryResults = client.query('DELETE FROM clients WHERE name=($1)', [req.query.q]);
 	          queryResults.on('row', function(row){
 	            results.push(row);
 						});//end queryResults.on 'row'

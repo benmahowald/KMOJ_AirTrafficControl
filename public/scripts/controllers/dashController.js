@@ -104,9 +104,10 @@ $scope.clientSaved = false;
 
   $scope.deleteClient = function () {
     console.log('delete clicked');
+    confirm('Are you sure you want to delete ' + $scope.selectedName + '?')
     $http({
     	method: 'DELETE',
-    	url: '/deleteClient?q=' + $scope.selectedName,
+    	url: 'underwriter/deleteClient?q=' + $scope.selectedName,
     }).then($scope.getClient);
   }; // end sendUpdatedClient
 
