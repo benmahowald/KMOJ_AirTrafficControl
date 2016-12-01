@@ -166,20 +166,17 @@ input {
 }
 
 .editClient {
-    margin-top: 6px;
+    margin-left: 10px;
 }
 
-.editable-input {
-  width: none;
-  width: auto;
-}
-
-.editable-wrap {
-  width: auto;
+.editable-wrap, .editable-text, .editable-input {
+  width: 95%;
+  margin-bottom: 10px;
 }
 
 .editClientForm {
     text-align: left;
+    font-size: 110%;
 }
 
 .createClient:focus, .createContract:focus {
@@ -303,7 +300,7 @@ margin-bottom: 10px;
 
 .selectClient {
   width: 450px;
-  max-width: 100%;
+  max-width: 95%;
   min-width: auto;
   border: none;
   border-radius: 2px;

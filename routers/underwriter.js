@@ -95,29 +95,6 @@ router.post ('/master', function (req, res){
 
 					});//end queryResultsB.on 'row'
 					queryResultsB.on('end', function(){
-// <<<<<<< HEAD
-						// console.log('flight_id', flight_id);
-						//
-						// var slotQuery = '';
-						// var queryArray = [];
-						// var queryElement = 1;
-						// var thisSlot;
-						//
-						// for (var i = 0; i < master.slotInfo.length; i++) {
-						// 	thisSlot = master.slotInfo[i];
-						// 	slotQuery = 'INSERT INTO slots (day_of_run, plays, slot, flight_id) ' +
-						// 	'VALUES ($'+queryElement+', $'+(queryElement+1)+', $'+(queryElement+2)+', $'+(queryElement+3)+'); ';
-						// 	console.log('slotQuery:', slotQuery);
-						// 	queryArray = [thisSlot.dayOfRun, thisSlot.plays, thisSlot.slot, flight_id[0].id];
-						//
-						// 	var queryResultsSlot = client.query (slotQuery , queryArray);
-						//
-						// 	queryResultsSlot.on('end', function(){
-						// 		if (i === master.slotInfo.length-1){
-	 				// 			managerMail();
-						// 		done();
-								// res.sendStatus(200);
-// =======
 
 						var queryResultsProd = client.query ('INSERT INTO production (' +
 						'who, what, why, site, talent, producer, contract_id) ' +
@@ -191,6 +168,23 @@ router.post ('/master', function (req, res){
 		});//end pg.connect for underwriter info
 	});//end router.get for underwriter info
 
-
+	router.get('/deleteClient', function (req, res){
+	  console.log('hit client delete route');
+	  console.log('client delete query is:', req.query.q);
+	  pg.connect(connectionString, function(err, client, done){
+			if (err){
+				console.log('connection err in delete client');
+			} else {
+				var queryResults = client.query('DELETE FROM clients', [req.query.q]);
+	          queryResults.on('row', function(row){
+	            results.push(row);
+						});//end queryResults.on 'row'
+						queryResults.on('end', function(){
+							done();
+							res.send(200);
+						});//end queryResults on 'end'
+			} // end else
+		});//end pg.connect
+	}); // end delete client
 
 	module.exports = router;

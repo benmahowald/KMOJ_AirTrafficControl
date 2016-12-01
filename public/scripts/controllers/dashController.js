@@ -102,6 +102,14 @@ $scope.clientSaved = false;
     }).then($scope.getClient);
   }; // end sendUpdatedClient
 
+  $scope.deleteClient = function () {
+    console.log('delete clicked');
+    $http({
+    	method: 'DELETE',
+    	url: '/deleteClient?q=' + $scope.selectedName,
+    }).then($scope.getClient);
+  }; // end sendUpdatedClient
+
   $scope.clearCreateClient = function () {
     $scope.client_name = null;
     // $scope.client_id
