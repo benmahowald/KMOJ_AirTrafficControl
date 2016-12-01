@@ -344,12 +344,6 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http', function($scope,
         numInterviews: $scope.numInterviews,
         numSocialMedia: $scope.numSocialMedia,
         spot_rate: $scope.spot_rate,
-        voiceTalent: $scope.voiceTalent,
-        producer: $scope.producer,
-        whoText: $scope.whoText,
-        whatText: $scope.whatText,
-        whyText: $scope.whyText,
-        moreInfoText: $scope.moreInfoText
       };
 
       console.log('UW contractToSend:', contractToSend);
