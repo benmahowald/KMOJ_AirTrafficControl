@@ -14,6 +14,7 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
       reportInfo = response.data;
       $scope.reports = response.data;
       invoiceData = [];
+      $scope.reportSubmit = true;
       // console.log("reportInfo before", reportInfo);
       // delete reportInfo["$$hashKey"];
       // console.log('reportInfo after', reportInfo);

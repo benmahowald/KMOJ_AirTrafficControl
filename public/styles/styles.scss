@@ -217,15 +217,12 @@ input {
   margin-bottom: 20px;
 }
 
-#content {
-  margin-top: 15px;
-}
 .reports {
 margin-bottom: 10px;
 }
 
 .editor {
-  margin: auto auto;
+  margin: 25px auto;
   width: 100%;
 }
 
@@ -251,7 +248,7 @@ margin-bottom: 10px;
 }
 
 .center {
-  margin: 12px auto;
+  margin: 32px auto 12px;
 }
 
 .button:hover {
@@ -372,4 +369,31 @@ margin-bottom: 10px;
 
 .clearSearch:focus {
   outline: none;
+}
+
+.reportTable {
+  margin-top: 45px;
+  width: 95%;
+  max-width: 600px;
+  min-width: 450px;
+  text-align: left;
+    td, table {
+      text-align: left;
+      padding: 8px 0;
+    }
+    tr {
+      border-bottom: 1px solid #999;
+    }
+}
+
+.cmd {
+  margin: 30px auto;
+}
+
+.md-datepicker-is-showing {
+  background: #faf7eb;
+}
+
+.md-calendar-day-header {
+  background: #fbf3d2;
 }
