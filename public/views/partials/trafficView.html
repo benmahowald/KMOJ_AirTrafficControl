@@ -12,10 +12,35 @@
     <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p>
     <!-- onbeforesave="getCartNum()" -->
     <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Not set yet" }}</span></p>
-    <div id="trafficViewGrid" class="trafficForm">
+    <!-- This div shows the Traffic Grid informationally (no editing) -->
+    <div ng-hide="trafficEditRun" id="trafficViewGrid" class="trafficForm">
       <p>
         <span class="boldFont">Weeks in the rotation:</span>
-        <span class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks, $event)" placeholder="1">
+        <span class="trafficSlot" type="number" ng-model="numWeeks" placeholder="1">
+        <span class="boldFont">Total Spots in Flight: {{flightTotal}}</span>
+      </p>
+      <div ng-repeat="week in weeks">
+        <table>
+          <th>
+            <td class="trafficViewCell">-Totals-</td>
+            <td class="trafficViewCell" ng-repeat="day in days">{{day}}</td>
+          </th>
+          <tr ng-repeat="hour in hours">
+            <td>{{hour.fullText}}</td>
+            <td class="boldFont">{{totals["week"+week.num][hour.title]}}</td>
+            <td ng-repeat="day in days">
+              <span class="trafficSlot" type="number" ng-model="week[hour.title][day]" >
+            </td>
+          </tr>
+        </table>
+        <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
+      </div>
+    </div>
+    <!-- This div shows the Traffic Grid with ability to edit -->
+    <div ng-show="trafficEditRun" id="trafficEditGrid" class="trafficForm">
+      <p>
+        <span class="boldFont">How many weeks in the rotation?</span>
+        <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks, $event)" placeholder="1">
         <span class="boldFont">Total Spots in Flight: {{flightTotal}}</span>
       </p>
       <div ng-repeat="week in weeks">
@@ -28,7 +53,7 @@
             <td>{{hour.fullText}}</td>
             <td class="boldFont">{{totals["week"+week.num][hour.title]}}</td>
             <td ng-repeat="day in days">
-              <span class="trafficSlot" type="number" ng-model="week[hour.title][day]" >
+              <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="checkInput(week.num, hour.title, day)" ng-click="incrementCount(week.num, hour.title, day, $event)">
             </td>
           </tr>
         </table>

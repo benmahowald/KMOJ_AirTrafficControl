@@ -1,6 +1,10 @@
 app.controller('trafficController', ['$scope','$http', function($scope, $http){
   console.log('Traffic Controller');
 
+  $scope.weeks = {week1:{num: 1}};
+  $scope.totals = {week1:{total: 0}};
+  $scope.currentNumWeeks = 1;
+
   $scope.hours = {
     am2: {fullText:'2a-5a', title:'am2'},
     am5: {fullText:'5a-6a', title:'am5'},
@@ -14,6 +18,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
   };
   // This is used to populate the header and scaffold the grid
   $scope.days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  $scope.trafficEditRun = false; // default to not editing the Traffic Grid
 
   $scope.getPendingContracts = function () {
     console.log('in getPendingContracts');
@@ -49,7 +54,18 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       $scope.end_date = moment($scope.flightInfo[0].end_date).format('ddd, MMM DD YYYY');
       $scope.cart_number = $scope.flightInfo[0].cart_number;
       $scope.flightInfoExists = true;
+      var flightLastIndex = $scope.flightInfo.length-1;
+      var flightLastDay = $scope.flightInfo[flightLastIndex].day_of_run;
+      var maxWeek = Math.ceil(flightLastDay/7);
 
+      for (var i = 0; i <= maxWeek; i++) {
+        var thisWeek = 'week'+i;
+
+      for (var i = 0; i < $scope.flightInfo.length; i++) {
+
+      }
+
+      }
 
       // console.log(response);
     }, function errorCallback (response){
