@@ -23,7 +23,6 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     $scope.currentContractId = contract_id;
     $scope.currentEventName = event_name;
 
-
     $http({
       method: 'GET',
       url: '/traffic/flightContract?q=' + contract_id,

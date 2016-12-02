@@ -1,25 +1,21 @@
 <div ng-show="userData[0].permission == 'Production' || 'Administration' || 'View All'">
   <h3>Production</h3>
   <div class="successMessage" ng-show="productionSaved">Production has been submitted</div>
-  <div id = "prodContent">
-    <table class = "editor" class = "export-table">
-      <tr ng-init="getProductions()">
-        <th width = "auto">Event</th>
-        <th width = "auto">Start</th>
-        <th width = "auto">UW</th>
-        <th width = "auto">Client</th>
-      </tr>
-      <tr ng-repeat="production in productions">
-        <td><input type="radio" name="selectProd" ng-click="retrieveProdId(production.contract_id)"></td>
-        <td>{{production.event_name}}</td>
-        <td>{{production.start_date}}</td>
-        <td>{{production.uw_name}}</td>
-        <td>{{production.client_name}}</td>
-      </tr>
-    </table>
+  <h4 class="pendingContractHeading">Pending Events</h4>
+  <p class="" ng-show="pendingContracts.length < 1">None</p>
+  <div class="contractsPending" ng-repeat="contract in pendingContracts">
+    <div>
+      <p class="listOfContracts" ng-click="selectContractProd(contract.id, contract.event_name)">{{contract.event_name}}</p>
+    </div>
   </div>
+  <div ng-show="productionInfoExists" class="productionInfo">
+    <h3>{{currentEventName}}</h3>
+    <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p>
+    <!-- onbeforesave="getCartNum()" -->
+    <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Not set yet" }}</span></p>
 
+    <!-- <p editable-text="cart_number" e-form="textBtnForm" onbeforesave="updateCartNum()" onaftersave="getCartNum()"><span class="textToStandOut">Cart Number: </span>{{cart_number || No Cart #}}</p> -->
+    <input class="button" type="button" name="name" value="Confirm Traffic" ng-click="trafficApproval(currentContractId)">
+    <button class="button" ng-click="getInvoiceInfo();getInvoice()" id = "cmd">Generate PDF</button>
+  </div>
 </div>
-<!-- <div ng-show="userData[0].permission !== 'Production'">
-  404
-</div> -->
