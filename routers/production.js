@@ -4,6 +4,8 @@ var path = require('path');
 var pg = require('pg');
 var bodyParser = require('body-parser');
 var connectionString = 'postgres://localhost:5432/kmoj';
+var nodemailer = require ('nodemailer');
+
 
 // router.get for production view
 router.get('/productionInfo', function (req, res){
@@ -13,7 +15,7 @@ router.get('/productionInfo', function (req, res){
 			console.log('connection err in productionInfo');
 		} else {
 			var results = [];
-			var queryResults = client.query('SELECT master.id, flight.start_date, flight.end_date, clients.name, clients.contact, clients.phone, clients.address, production.talent, production.producer, master.event_name, master.spot_length, users.name AS uw_name FROM flight INNER JOIN master ON master.flight_id = flight.id INNER JOIN clients ON clients.client_id = master.client_id INNER JOIN production ON production.contract_id = master.id INNER JOIN users ON master.users_id = users.id WHERE pr_app IS false;');
+			var queryResults = client.query('SELECT master.id AS contract_id, flight.start_date, flight.end_date, clients.name AS client_name, master.event_name, users.name AS uw_name FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON clients.client_id = master.client_id JOIN production ON production.contract_id = master.id INNER JOIN users ON master.users_id = users.id WHERE master.pr_app = false');
 			queryResults.on('row', function(row){
 				results.push(row);
 				console.log('productionInfo row is ', row);
@@ -50,6 +52,8 @@ router.post ('/production', function (req, res){
 					[req.body.contract_id]);
 
 					queryResults.on('end', function(){
+						////sends an email to GM, UW and Bookkeeper generating invoice////
+						invoiceMail();
 						done();
 						res.send({success: true});
 					});

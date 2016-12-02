@@ -1,7 +1,10 @@
 <div ng-show="userData[0].permission == 'Underwriter' || 'Administration' || 'View All'">
-<h3>Edit Client Information</h3>
+<h3>Edit Client Info</h3>
 
-<select class="selectClient" style="margin-bottom:20px;" data-ng-init="somethingHere" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select>
+<form>
+  <label for="selectClient">Choose a client</label><br>
+  <select class="selectClient" name="selectClient" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select>
+</form><br>
 
 <form class="form editClientForm" editable-form name="editableForm" onaftersave="sendUpdatedClient()">
   <span class="editClient">Client:</span>
@@ -28,15 +31,18 @@
   <span editable-text="clientData[0].zip" onbeforesave="updateClient({zip: $data})" blur="submit">{{ clientData[0].zip || "Edit" }}</span><br>
   <div>
     <div class="left">
-      <button type="button" class="submit" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</button>
+      <button type="button" class="logButton" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">Edit</button>
     </div>
     <span ng-show="editableForm.$visible">
-      <button type="submit" class="submit" ng-click="reload()" ng-disabled="editableForm.$waiting">
+      <button type="submit" class="logButton" ng-click="reload()" ng-disabled="editableForm.$waiting">
         Save
       </button>
-      <button type="button" class="submit" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+      <button type="button" class="logButton" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
         Cancel
       </button>
+      <!-- <button type="button" class="logButton" ng-disabled="editableForm.$waiting" ng-click="deleteClient()">
+        Delete
+      </button> -->
     </span>
   </div>
 </form>

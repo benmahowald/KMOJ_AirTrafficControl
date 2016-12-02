@@ -50,6 +50,7 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
         console.log('success in prodCtrl post route:', response);
         $scope.productionSaved = true;
         $scope.clearFields();
+        // $scope.protraffMail();
       }, function (error) {
         console.log('error in prodCtrl post route:', error);
       }); // end then function

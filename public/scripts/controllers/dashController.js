@@ -102,6 +102,15 @@ $scope.clientSaved = false;
     }).then($scope.getClient);
   }; // end sendUpdatedClient
 
+  $scope.deleteClient = function () {
+    console.log('delete clicked');
+    confirm('Are you sure you want to delete ' + $scope.selectedName + '?')
+    $http({
+    	method: 'DELETE',
+    	url: 'underwriter/deleteClient?q=' + $scope.selectedName,
+    }).then($scope.getClient);
+  }; // end sendUpdatedClient
+
   $scope.clearCreateClient = function () {
     $scope.client_name = null;
     // $scope.client_id

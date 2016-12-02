@@ -331,8 +331,8 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         user_id: $scope.userData[0].id,
         event_name: $scope.event_name,
         client_id: $scope.clientData[0].client_id,
-        start_date: $scope.startDate,
-        end_date: $scope.endDate,
+        start_date: moment($scope.startDate).format(),
+        end_date: moment($scope.endDate).format(),
         fa: $scope.fa,
         psa: $scope.psa,
         instructions: $scope.instructions,
@@ -344,12 +344,6 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         numInterviews: $scope.numInterviews,
         numSocialMedia: $scope.numSocialMedia,
         spot_rate: $scope.spot_rate,
-        voiceTalent: $scope.voiceTalent,
-        producer: $scope.producer,
-        whoText: $scope.whoText,
-        whatText: $scope.whatText,
-        whyText: $scope.whyText,
-        moreInfoText: $scope.moreInfoText
       };
 
       console.log('UW contractToSend:', contractToSend);

@@ -4,6 +4,7 @@ var pg = require ('pg');
 var router = express.Router();
 var nodemailer = require ('nodemailer');
 
+
 //using superadmin gmail account with following credentials:
 //username: kmojatc  password: manager@kmoj
 //This is being used as a dummy account for presentation purposes
@@ -21,28 +22,31 @@ var transporter = nodemailer.createTransport({
 
 
 //This message will be sent to the General & Sales Managers @ KMOJ
-var managerMail = transporter.sendMail({
+var managerMail = function(){
+	transporter.sendMail({
 	from: 'kmojatc@gmail.com',
-	to: 'kmojproject@gmail.com',
+	to: 'kmojproject@gmail.com', ///////CHANGE THIS EMAIL TO GM EMAIL/////////////
 	subject: 'New contract added to queue!',
 	text: 'Please go to Air Traffic Controller to approve a new contract!'
 }, function (err, res){
-	if (err){
-		console.log('error sending mail', err);
-	} else {
-		// console.log('message sent ', res.message);
-	}
-	transporter.close();
-});
+		if (err){
+			console.log('error sending mail to traffic and production', err);
+		} else {
+			// console.log ('message sent', res.message);
+		}
+		transporter.close();
+	});
+	};
 
 
 //This message will be sent to the production and traffic staff @ KMOJ
-var protraffMail = transporter.sendMail({
+var protraffMail = function(){
+	transporter.sendMail({
 	from: 'kmojatc@gmail.com',
-	to: 'kmojproject@gmail.com',
+	to: 'kmojproject@gmail.com', ///// Change this EMAIL to the PRODUCTION EMAIL/////////
 	subject: 'New contract generated!!!',
 	text: 'Please complete production and traffic forms for new spot.'
-}, function (err, res){
+},  function (err, res){
 	if (err){
 		console.log('error sending mail to traffic and production', err);
 	} else {
@@ -50,11 +54,13 @@ var protraffMail = transporter.sendMail({
 	}
 	transporter.close();
 });
+};
 
 //This message will be sent to the underwriter of the contract and the bookkeeper at KMOJ
-var invoiceMail = transporter.sendMail({
+var invoiceMail = function(){
+	transporter.sendMail({
 	from: 'kmojatc@gmail.com',
-	to: 'kmojproject@gmail.com',
+	to: 'kmojproject@gmail.com', ///////Change this Email to Bookkeeper and Underwriter  (who did contract) and GM///////
 	subject: 'Invoice Generated',
 	text: 'Please review the run sheet/invoice and proceed with underwriter approval'
 },
@@ -67,5 +73,5 @@ function (err, res){
 	transporter.close();
 
 });
-
+};
 module.exports = router;

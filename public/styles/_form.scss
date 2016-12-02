@@ -1,5 +1,5 @@
 .form {
-  width: 400px;
+  width: 450px;
   text-align: left;
 }
 
@@ -58,12 +58,23 @@ input[type=date]::-webkit-inner-spin-button {
     display: none;
 }
 
-input[type=checkbox], input[type=radio] {
+input[type=checkbox] {
   display: inline;
   width: 25px;
   text-align: left;
   font-family: $font;
-  margin: 0 -5px 0 10px;
+  margin: 0 13px 0 0;
+}
+input[type=radio] {
+  display: inline;
+  width: 25px;
+  text-align: left;
+  font-family: $font;
+  margin: 0 -4px 0 10px;
+}
+
+input[type=radio]:focus, input[type=checkbox]:focus {
+  box-shadow: none;
 }
 
 #submitButton {
