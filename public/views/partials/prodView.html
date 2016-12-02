@@ -10,19 +10,18 @@
   </div>
   <div ng-show="productionInfoExists" class="form">
     <h3>{{prodInfo.event_name}}</h3>
-    <div class="yourOtherOtherLeft">
-      <p>
+      <p class="yourOtherOtherLeft">
         <span class="textToStandOut">Client:</span> {{prodInfo.client_name}}<br>
         <span class="textToStandOut">UW:</span> {{prodInfo.uw_name}}<br>
         <span class="textToStandOut">Producer:</span> {{prodInfo.producer}}<br>
         <span class="textToStandOut">Talent:</span> {{prodInfo.talent}}<br>
         <span class="textToStandOut">Who:</span> {{prodInfo.who}}<br>
         <span class="textToStandOut">What:</span> {{prodInfo.what}}<br>
+        <span class="textToStandOut">Where:</span> {{prodInfo.site}}<br>
         <span class="textToStandOut">Why:</span> {{prodInfo.why}}<br>
-        <span class="textToStandOut">Spot Length:</span> {{prodInfo.spot_length}}<br>
+        <span class="textToStandOut">Spot Length:</span> {{prodInfo.spot_length}} secs<br>
         <span class="textToStandOut">Spot Type:</span> {{prodInfo.spot_type}}<br>
       </p>
-    </div>
     <!-- <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p> -->
     <!-- <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Not set yet" }}</span></p> -->
 

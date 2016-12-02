@@ -35,7 +35,7 @@ router.get('/productionInfo', function (req, res){
 			console.log('connection err in productionInfo');
 		} else {
 			var results = [];
-			var queryResults = client.query('SELECT master.id AS contract_id, clients.name AS client_name, master.event_name, users.name AS uw_name, production.talent, production.producer, production.why, production.who, production.what, master.spot_type, master.spot_length FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON clients.client_id = master.client_id JOIN production ON production.contract_id = master.id INNER JOIN users ON master.users_id = users.id WHERE master.id = ($1)', [req.query.q]);
+			var queryResults = client.query('SELECT master.id AS contract_id, clients.name AS client_name, master.event_name, users.name AS uw_name, production.talent, production.producer, production.why, production.who, production.what, production.site, master.spot_type, master.spot_length FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON clients.client_id = master.client_id JOIN production ON production.contract_id = master.id INNER JOIN users ON master.users_id = users.id WHERE master.id = ($1)', [req.query.q]);
 			queryResults.on('row', function(row){
 				results.push(row);
 				console.log('productionInfo row is ', row);
