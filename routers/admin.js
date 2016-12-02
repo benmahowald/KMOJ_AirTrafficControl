@@ -5,6 +5,7 @@ var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/kmoj';
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended: false});
+var nodemailer = require ('nodemailer');
 
 router.use(bodyParser.json());
 
@@ -168,7 +169,7 @@ router.put('/managerApproval', urlencodedParser, function(req,res){
       var resultQuery=client.query('UPDATE master SET man_app=($1) WHERE id=($2);',[req.body.man_app,req.body.id]);
       resultQuery.on('end', function(){
         ////send email to Production/traffic that new contract is approved/////
-        protraffMail();
+        // protraffMail();
         done();
         console.log('in managerApproval man_app=',req.body.man_app);
         res.sendStatus(200);
@@ -176,5 +177,38 @@ router.put('/managerApproval', urlencodedParser, function(req,res){
     };//end else
   });//end pg connect
 });//end managerApproval
+
+//using superadmin gmail account with following credentials:
+//username: kmojatc  password: manager@kmoj
+//This is being used as a dummy account for presentation purposes
+//Future developer will need to use auth. service to encrypt this info.
+
+//username: kmojatc  password: thepeoplesstation
+
+var transporter = nodemailer.createTransport({
+	service: 'Gmail',
+	auth: {
+		user: 'kmojatc@gmail.com',
+		pass: 'manager@kmoj'
+	}
+});
+
+//This message will be sent to the production and traffic staff @ KMOJ
+var protraffMail = function(){
+	transporter.sendMail({
+	from: 'kmojatc@gmail.com',
+	to: 'kmojproject@gmail.com', ///// Change this EMAIL to the PRODUCTION EMAIL/////////
+	subject: 'New contract generated!!!',
+	text: 'Please complete production and traffic forms for new spot.'
+},  function (err, res){
+	if (err){
+		console.log('error sending mail to traffic and production', err);
+	} else {
+		// console.log ('message sent', res.message);
+	}
+	transporter.close();
+});
+};
+
 
 module.exports = router;

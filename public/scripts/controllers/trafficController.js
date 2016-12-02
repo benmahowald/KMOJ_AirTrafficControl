@@ -67,7 +67,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       invoiceInfo.total_spots = response.data[0].total_spots;
       invoiceInfo.total_cost = response.data[0].total_cost;
       invoiceInfo.discounts = response.data[0].discounts;
-      invoiceInfo.commission = response.data[0].commissio;
+      invoiceInfo.commission = response.data[0].commission;
       invoiceInfo.start_date = response.data[0].start_date;
       invoiceInfo.end_date = response.data[0].end_date;
       invoiceInfo.spot_length = response.data[0].spot_length;
@@ -113,7 +113,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
         {
           table: {
           body: [
-                ['Sponsor: ', '' + invoiceInfo.client_name],
+                ['Sponsor: ', '' + invoiceInfo.clients_name],
                 ['Event:', '' + invoiceInfo.event_name],
                 ['Underwriter:', '' + invoiceInfo.uw_name],
                 ['Run Dates:', '' + invoiceInfo.start_date + invoiceInfo.end_date],
