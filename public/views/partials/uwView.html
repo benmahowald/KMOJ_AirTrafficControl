@@ -2,24 +2,40 @@
   <h3>New Contract</h3>
   <div class="successMessage" ng-show="contractSaved">{{eventNameCreated}} was created successfully!</div>
   <form class="form otherLeft">
-      <input class="createContract" type="text" name="event" ng-model="event_name" value="" placeholder="Event Name">
-      <label class="reportLabel" for="client">Choose a client</label>
-      <select name="client" class="selectClient" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select><br>
-      <label class="reportLabel" for="startDate">Start Date</label>
-      <md-datepicker ng-model="startDate" md-placeholder="Select Date"></md-datepicker>
-      <label class="reportLabel" for="endDate">End Date</label><br>
-      <md-datepicker ng-model="endDate" md-placeholder="Select Date"></md-datepicker>
+    <input class="createContract" type="text" name="event" ng-model="event_name" value="" placeholder="Event Name">
+    <label class="reportLabel" for="client">Choose a client</label>
+    <select name="client" class="selectClient" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select><br>
+    <label class="reportLabel" for="startDate">Start Date</label>
+    <md-datepicker ng-model="startDate" md-placeholder="Select Date"></md-datepicker>
+    <label class="reportLabel" for="endDate">End Date</label><br>
+    <md-datepicker ng-model="endDate" md-placeholder="Select Date"></md-datepicker>
+    <br>
+    <div id="center">
       <label class="reportLabel" for="FA">FA</label>
       <input class="createContract" type="checkbox" name="FA" value="FA" ng-model="fa">
       <label for="PSA">PSA</label>
-      <input class="createContract" type="checkbox" name="PSA" value="PSA" ng-model="psa"><br>
-      <input class="shareLine" type="text" name="socialMedia" value="" ng-model="numSocialMedia" placeholder="Social Media">
-      <input class="shareLine" type="text" name="interviews" value="" ng-model="numInterviews" placeholder="Interviews">
-      <input class="shareLine" type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
-      <input class="shareLine" type="text" name="agency_commission" ng-model="agency_commission" value="" placeholder="Commission">
-      <textarea  class="createContract" rows="5" cols="100" placeholder="Special Instructions" ng-model="instructions"></textarea>
-      <input class="shareLine" type="text" name="spotRate" value="" ng-model="spot_rate" placeholder="Spot Rate">
-      <input class="shareLine" type="text" name="totalCost" value="" ng-model="totalCost" placeholder="Total Cost">
+      <input class="createContract" type="checkbox" name="PSA" value="PSA" ng-model="psa">
+    </div>
+    <input class="shareLine" type="text" name="socialMedia" value="" ng-model="numSocialMedia" placeholder="Social Media">
+    <input class="shareLine" type="text" name="interviews" value="" ng-model="numInterviews" placeholder="Interviews">
+    <input class="shareLine" type="text" name="discount" value="" ng-model="discount" placeholder="Discounts">
+    <input class="shareLine" type="text" name="agency_commission" ng-model="agency_commission" value="" placeholder="Commission">
+    <textarea  class="createContract" rows="5" cols="100" placeholder="Special Instructions" ng-model="instructions"></textarea>
+    <input class="shareLine" type="text" name="spotRate" value="" ng-model="spot_rate" placeholder="Spot Rate">
+    <input class="shareLine" type="text" name="totalCost" value="" ng-model="totalCost" placeholder="Total Cost">
+    <br>
+    <input class="shareLine" type="text" name="voice_talent" ng-model="talent" value="" placeholder="Voice Talent">
+    <input class="shareLine" type="text" name="producer" value="" ng-model="producer" placeholder="Producer" ><br>
+    <div id="center">
+      Spot Length: <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":15">15 sec
+      <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":30">30 sec
+      <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":60">60 sec
+    </div>
+
+    <input class="shareLine" type="text" name="who" value="" ng-model="who" placeholder="Who">
+    <input class="shareLine" type="text" name="where" value="" ng-model="site" placeholder="Where">
+    <input class="createProduction" type="text" name="for_more_info" ng-model="why" value="" placeholder="For More Info">
+    <textarea class="createProduction" name="what" rows="6" cols="30" ng-model = "what" placeholder="What"></textarea>
 
   </form>
   <br>
@@ -47,7 +63,3 @@
     </div>
   </div>
   <button type="button" ng-click="submitRunSheetEntry($event)" id="submitButton">Submit Contract</button>
-
-  <!-- <div ng-show="userData[0].permission !== 'Underwriter'">
-    404
-  </div> -->
