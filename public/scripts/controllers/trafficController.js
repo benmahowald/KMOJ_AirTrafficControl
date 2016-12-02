@@ -23,14 +23,13 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     $scope.currentContractId = contract_id;
     $scope.currentEventName = event_name;
 
-    var contractToRetrieve = {contract_id: contract_id};
 
     $http({
       method: 'GET',
-      url: '/traffic/flightContract',
-      data: contractToRetrieve
+      url: '/traffic/flightContract?q=' + contract_id,
     }).then(function(response){
       $scope.flightInfo = response.data;
+      console.log('flight info:', $scope.flightInfo);
       $scope.start_date = moment($scope.flightInfo[0].start_date).format('ddd, MMM DD YYYY');
       $scope.end_date = moment($scope.flightInfo[0].end_date).format('ddd, MMM DD YYYY');
       $scope.flightInfoExists = true;

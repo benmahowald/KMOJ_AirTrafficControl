@@ -29,8 +29,6 @@ router.get('/productionInfo', function (req, res){
 	});//end pg.connect for production info
 });//end router.get for production info
 
-
-// console.log('in production router');
 // router.post for production table
 router.post ('/production', function (req, res){
 	console.log ('req.body for client is', req.body);
@@ -50,17 +48,15 @@ router.post ('/production', function (req, res){
 				queryResults.on('end', function(){
 					var queryResults = client.query ('UPDATE master SET pr_app = (true) WHERE master.id = ($1)',
 					[req.body.contract_id]);
+					////sends an email to GM, UW and Bookkeeper generating invoice////
+					// invoiceMail();
+					done();
+					res.send({success: true});
+				});//end queryResults.on end
+			}//end else
+		});//end pg.connect for production table
+	});//end router.post for production table
 
-					queryResults.on('end', function(){
-						////sends an email to GM, UW and Bookkeeper generating invoice////
-						invoiceMail();
-						done();
-						res.send({success: true});
-					});
-				});
-			}
-		});//end queryResults for client table
-	});//end pg.connect for client table
-//end router.post for client table
+
 
 module.exports = router;

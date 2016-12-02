@@ -354,13 +354,44 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         data: contractToSend
       }).then(function (response){
         $scope.eventNameCreated = response.config.data.event_name;
-        $scope.clearFields();
-        $scope.contractSaved = true;
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
       }, function (error) {
         console.log('error in uwCtrl client post route:', error);
       }); // end then function
-    }
+
+
+
+
+      //object to send to production table in DB
+      var prodToSend = {
+        talent: $scope.talent,
+        who: $scope.who,
+        what: $scope.what,
+        site: $scope.site,
+        why: $scope.why,
+        producer: $scope.producer,
+        spot_length: $scope.spot_length,
+        complete_date: new Date()
+      };//end prodToSend
+
+      console.log('prodToSend', prodToSend);
+
+      $http({
+        method: 'POST',
+        url: '/production/production?q=' + $scope.currentProdId,
+        data: prodToSend
+      }).then(function (response){
+        console.log('success in prodCtrl post route:', response);
+        //clear input fields
+        $scope.clearFields();
+        $scope.contractSaved = true;
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        // $scope.protraffMail();
+      }, function (error) {
+        console.log('error in prodCtrl post route:', error);
+      }); // end then function
+
+
+        }//end else
   }; // end submitRunSheetEntry
 
   $scope.clientNameList = [];
@@ -416,5 +447,15 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
     $scope.numSocialMedia = null;
     $scope.spot_rate = null;
     $scope.selectedName = null;
-  };
+
+    $scope.talent = null;
+    $scope.who = null;
+    $scope.what = null;
+    $scope.site = null;
+    $scope.why = null;
+    $scope.producer = null;
+    $scope.spot_length = null;
+    $scope.event_name = null;
+  }; // end clearFields
+
 }]); // end uwController

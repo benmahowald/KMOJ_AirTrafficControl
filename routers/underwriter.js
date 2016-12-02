@@ -62,7 +62,7 @@ router.post ('/master', function (req, res){
 
 
 					console.log('flight info: ', master_id[0].id, master.start_date,  master.end_date);
- 					var queryResultsB = client.query ('INSERT INTO flight (' +
+					var queryResultsB = client.query ('INSERT INTO flight (' +
 					'contract_id, start_date, end_date) ' +
 					'VALUES ($1, $2, $3) RETURNING id;' ,
 					[master_id[0].id, master.start_date,  master.end_date]);
@@ -73,93 +73,85 @@ router.post ('/master', function (req, res){
 					});//end queryResultsB.on 'row'
 					queryResultsB.on('end', function(){
 
-						var queryResultsProd = client.query ('INSERT INTO production (' +
-						'who, what, why, site, talent, producer, contract_id) ' +
-						'VALUES ($1, $2, $3, $4, $5, $6, $7);' ,
-						[master.whoText, master.whatText, master.whyText, master.moreInfoText,
-							master.voiceTalent, master.producer, master_id[0].id]);
+								console.log('flight_id', flight_id);
 
-						queryResultsProd.on('end', function(){
-							console.log('flight_id', flight_id);
+								var slotQuery = '';
+								var queryArray = [];
+								var thisSlot;
 
-							var slotQuery = '';
-							var queryArray = [];
-							var thisSlot;
+								for (var i = 0; i < master.slotInfo.length; i++) {
+									thisSlot = master.slotInfo[i];
+									slotQuery = 'INSERT INTO slots (day_of_run, plays, slot, flight_id) ' +
+									'VALUES ($1, $2, $3, $4);';
+									console.log('slotQuery:', slotQuery);
+									queryArray = [thisSlot.dayOfRun, thisSlot.plays, thisSlot.slot, flight_id[0].id];
 
-							for (var i = 0; i < master.slotInfo.length; i++) {
-								thisSlot = master.slotInfo[i];
-								slotQuery = 'INSERT INTO slots (day_of_run, plays, slot, flight_id) ' +
-								'VALUES ($1, $2, $3, $4);';
-								console.log('slotQuery:', slotQuery);
-								queryArray = [thisSlot.dayOfRun, thisSlot.plays, thisSlot.slot, flight_id[0].id];
+									var queryResultsSlot = client.query (slotQuery , queryArray);
 
-								var queryResultsSlot = client.query (slotQuery , queryArray);
-
-								// This function within a loop is necessary to end each slotQuery
-								// and only send the e-mail when all slots have been entered
-								queryResultsSlot.on('end', function(){
-									if (i === master.slotInfo.length-1){
-										///send an email to GM saying new contract has been generated////
-										managerMail();
-										done();
-										res.send({success: true});
-									}
-								});//end queryResultsSlot
-							}
+									// This function within a loop is necessary to end each slotQuery
+									// and only send the e-mail when all slots have been entered
+									queryResultsSlot.on('end', function(){
+										if (i === master.slotInfo.length-1){
+											///send an email to GM saying new contract has been generated////
+											managerMail();
+											done();
+											res.send({success: true});
+										}
+									});//end queryResultsSlot
+								}
 
 
-						});//end queryResultsProd
+						});//end queryResultsB
 
-					});//end queryResultsB
+					});//end queryResultsA
+					res.sendStatus(200);
+				}
+			});//end pg.connect
+		});//end router.post for master table
 
-				});//end queryResultsA
-				res.sendStatus(200);
-			}
-		});//end pg.connect
-	});//end router.post for master table
+		//get underwriter info from db for underwriter
+		router.get('/underwriterinfo', function (req, res){
+			console.log('in get underwriter info');
+			pg.connect(connectionString, function(err, client, done){
+				if (err){
+					console.log('connection err in underwriterinfo');
+				} else {
+					var results = [];
+					var queryResults = client.query('SELECT flight.start_date, flight.end_date, slots.slot, slots.day_of_run, slots.plays, master.discounts') +
+					('master.commission, master.spot_length, master.spot_type, master.copy_id, master.total_spots, master.spot_rate') +
+					('master.total_cost, clients.name, users.name FROM flight INNER JOIN slots ON slots.id = flight.id') +
+					('INNER JOIN master ON master.id = flight.id INNER JOIN clients ON clients.client_id = flight.id INNER JOIN users ON users.id = flight.id;');
+					queryResults.on('row', function(row){
+						results.push(row);
 
-	//get underwriter info from db for underwriter
-	router.get('/underwriterinfo', function (req, res){
-		console.log('in get underwriter info');
-		pg.connect(connectionString, function(err, client, done){
-			if (err){
-				console.log('connection err in underwriterinfo');
-			} else {
-				var results = [];
-				var queryResults = client.query('SELECT flight.start_date, flight.end_date, slots.slot, slots.day_of_run, slots.plays, master.discounts') +
-				('master.commission, master.spot_length, master.spot_type, master.copy_id, master.total_spots, master.spot_rate') +
-				('master.total_cost, clients.name, users.name FROM flight INNER JOIN slots ON slots.id = flight.id') +
-				('INNER JOIN master ON master.id = flight.id INNER JOIN clients ON clients.client_id = flight.id INNER JOIN users ON users.id = flight.id;');
-				queryResults.on('row', function(row){
-					results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						console.log('results are', results);
+						return res.json(results);
+					});//end queryResults on 'end'
+				}
+			});//end pg.connect for underwriter info
+		});//end router.get for underwriter info
 
-				});//end queryResults.on 'row'
-				queryResults.on('end', function(){
-					done();
-					console.log('results are', results);
-					return res.json(results);
-				});//end queryResults on 'end'
-			}
-		});//end pg.connect for underwriter info
-	});//end router.get for underwriter info
+		router.delete('/deleteClient', function (req, res){
+			console.log('hit client delete route');
+			console.log('client delete query is:', req.query.q);
+			pg.connect(connectionString, function(err, client, done){
+				if (err){
+					console.log('connection err in delete client');
+				} else {
+					var queryResults = client.query('DELETE FROM clients WHERE name=($1)', [req.query.q]);
+					queryResults.on('row', function(row){
+						results.push(row);
+					});//end queryResults.on 'row'
+					queryResults.on('end', function(){
+						done();
+						res.send(200);
+					});//end queryResults on 'end'
+				} // end else
+			});//end pg.connect
+		}); // end delete client
 
-	router.delete('/deleteClient', function (req, res){
-	  console.log('hit client delete route');
-	  console.log('client delete query is:', req.query.q);
-	  pg.connect(connectionString, function(err, client, done){
-			if (err){
-				console.log('connection err in delete client');
-			} else {
-				var queryResults = client.query('DELETE FROM clients WHERE name=($1)', [req.query.q]);
-	          queryResults.on('row', function(row){
-	            results.push(row);
-						});//end queryResults.on 'row'
-						queryResults.on('end', function(){
-							done();
-							res.send(200);
-						});//end queryResults on 'end'
-			} // end else
-		});//end pg.connect
-	}); // end delete client
 
 	module.exports = router;

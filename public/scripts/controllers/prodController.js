@@ -1,7 +1,6 @@
 app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
-  $scope.productionSaved = false;
 
   $scope.productions = [];
 
@@ -27,35 +26,6 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
   };
 
 
-  $scope.sendProduction = function(){
-    var prodToSend = {
-    talent: $scope.talent,
-    who: $scope.who,
-    what: $scope.what,
-    site: $scope.site,
-    why: $scope.why,
-    cart_number: $scope.cart_number,
-    producer: $scope.producer,
-    spot_length: $scope.spot_length,
-    complete_date: new Date()
-  };
-
-  console.log('prodToSend', prodToSend);
-
-  $http({
-    method: 'POST',
-    url: '/production/production?q=' + $scope.currentProdId,
-    data: prodToSend
-  }).then(function (response){
-        console.log('success in prodCtrl post route:', response);
-        $scope.productionSaved = true;
-        $scope.clearFields();
-        // $scope.protraffMail();
-      }, function (error) {
-        console.log('error in prodCtrl post route:', error);
-      }); // end then function
-}; // end http call
-
 $scope.getCartNum = function () {
   console.log('in getCartNum');
   $http({
@@ -80,16 +50,6 @@ $scope.getCartNum = function () {
     }).then($scope.getCartNum);
 }; // end updateCartNum
 
-  $scope.clearFields = function () {
-    $scope.talent = '';
-    $scope.who = '';
-    $scope.what = '';
-    $scope.site = '';
-    $scope.why = '';
-    $scope.cart_number = '';
-    $scope.producer = '';
-    $scope.spot_length = '';
-    $scope.event_name = '';
-  }; // end clearFields
+
 
 }]); // end production controller
