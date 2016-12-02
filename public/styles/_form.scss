@@ -14,19 +14,25 @@
   border-radius: 2px;
 }
 
-.otherLeft {
-  text-align: left;
-}
-
 .left {
   text-align: left;
   margin: 3px 0 6px 12px;
 }
+
+.otherLeft {
+  text-align: left;
+}
+
 .yourOtherLeft {
   text-align: left;
   margin: 3px 0 6px 7px;
   color: #c6c28f;
   font-size: 85%;
+}
+
+.yourOtherOtherLeft {
+  text-align: left;
+  margin: 3px 0 6px 20px;
 }
 
 .reportLabel {
