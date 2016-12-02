@@ -1,6 +1,52 @@
 app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
+  $scope.prodInfo = {};
+
+  $scope.getPendingContracts = function () {
+    console.log('in getPendingContracts');
+    $http({
+      method: 'GET',
+      url: '/production/contractsPending',
+    }).then(function(response){
+      $scope.pendingContracts = response.data;
+      // $scope.flightInfoExists = false;
+      console.log('$scope.pendingContracts', $scope.pendingContracts);
+    }, function errorCallback (response){
+      console.log('err', response);
+    }); // end then
+  }; // end getPendingContracts
+
+  $scope.getPendingContracts();
+
+  $scope.selectContractProd = function (contract_id, event_name) {
+    console.log('in selectContractProd');
+    console.log('contract_id = ' + contract_id);
+    // $scope.currentContractId = contract_id;
+    $scope.currentEventName = event_name;
+
+    $http({
+      method: 'GET',
+      url: '/production/productionInfo?q=' + contract_id,
+    }).then(function(response){
+      $scope.prodInfo = response.data[0];
+      console.log('prod info:', $scope.prodInfo);
+      $scope.productionInfoExists = true;
+      // $scope.getCartNum();
+      // console.log(response);
+    }, function errorCallback (response){
+      console.log('err', response);
+    }); // end then
+  }; // end selectContract
+
+  $scope.trafficApproval = function (contract_id) {
+    console.log('in trafficApproval');
+    console.log('contract_id = ', contract_id);
+    $http({
+      method: 'PUT',
+      url: '/traffic/approval?q=' + contract_id,
+    }).then($scope.getPendingContracts);
+  }; // end trafficApproval
 
   $scope.productions = [];
 
@@ -12,8 +58,6 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     }).then(function(response){
       $scope.productions = response.data;
       console.log ($scope.productions);
-      // $scope.start_date = moment($scope.productions[0].start_date).format('ddd, MMM DD YYYY')
-      // $scope.end_date = moment($scope.productions[0].end_date).format('ddd, MMM DD YYYY');
     }, function errorCallback(response){
       console.log('error getting productions', response);
     });

@@ -27,7 +27,7 @@
             <td>{{data.spot_length}}</td>
             <td>{{data.interviews}}</td>
             <td>{{data.socialmedia}}</td>
-            <td>{{data.sign_date}}</td>
+            <td>{{data.sign_date | date: 'MM/dd/yyyy'}}</td>
             <td><button ng-click='managerApproval()'>Approve</button></td>
           </tr>
         </div>
@@ -57,7 +57,7 @@
               <td>{{approval.copy_id}}</td>
               <td>{{approval.event_name}}</td>
               <td>{{approval.total_spots}}</td>
-              <td>{{approval.sign_date}}</td>
+              <td>{{approval.sign_date | date: 'MM/dd/yyyy'}}</td>
               <td>No</td>
               <td>No</td>
               <td>No</td>

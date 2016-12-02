@@ -145,7 +145,7 @@ input {
 }
 
 .shareLine {
-  width: 46.25%;
+  width: 48%;
   border: none;
   padding: 10px;
   margin-bottom: 5px;
@@ -155,10 +155,10 @@ input {
 }
 
 .createClient, .createProduction, .createContract, .reportingInputs,
-.editable-input, .results {
+.editable-input, .results, .productionInfo {
   border: none;
   width: 450px;
-  max-width: 95%;
+  max-width: 98%;
   padding: 10px;
   margin-bottom: 5px;
   font-size: medium;
@@ -401,4 +401,9 @@ margin-bottom: 10px;
 #center{
   text-align: center;
   font-weight: bold;
+}
+
+.yourOtherOtherLeft {
+  text-align: left;
+  margin: 3px 0 20px 20px;
 }
