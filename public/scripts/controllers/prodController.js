@@ -1,6 +1,8 @@
 app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
+  $scope.prodInfo = {};
+
   $scope.getPendingContracts = function () {
     console.log('in getPendingContracts');
     $http({
@@ -25,11 +27,11 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
 
     $http({
       method: 'GET',
-      url: '/productionInfo?q=' + contract_id,
+      url: '/production/productionInfo?q=' + contract_id,
     }).then(function(response){
-      $scope.prodInfo = response.data;
+      $scope.prodInfo = response.data[0];
       console.log('prod info:', $scope.prodInfo);
-      $scope.flightInfoExists = true;
+      $scope.productionInfoExists = true;
       // $scope.getCartNum();
       // console.log(response);
     }, function errorCallback (response){

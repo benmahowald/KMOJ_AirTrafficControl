@@ -19,7 +19,7 @@ router.get('/contractsPending', function (req, res){
 			});
 			queryResults.on('end', function(){
 				done();
-				console.log('contract results are', results);
+				// console.log('contract results are', results);
 				res.json(results);
 			});//end queryResults for contractspending
 		}
@@ -29,12 +29,13 @@ router.get('/contractsPending', function (req, res){
 // router.get for production view
 router.get('/productionInfo', function (req, res){
 	console.log('in get production Info');
+	console.log('query is:', req.query.q);
 	pg.connect(connectionString, function(err, client, done){
 		if (err){
 			console.log('connection err in productionInfo');
 		} else {
 			var results = [];
-			var queryResults = client.query('SELECT master.id AS contract_id, flight.start_date, flight.end_date, clients.name AS client_name, master.event_name, users.name AS uw_name FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON clients.client_id = master.client_id JOIN production ON production.contract_id = master.id INNER JOIN users ON master.users_id = users.id WHERE master.pr_app = false');
+			var queryResults = client.query('SELECT master.id AS contract_id, clients.name AS client_name, master.event_name, users.name AS uw_name, production.talent, production.producer, production.why, production.who, production.what, master.spot_type, master.spot_length FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON clients.client_id = master.client_id JOIN production ON production.contract_id = master.id INNER JOIN users ON master.users_id = users.id WHERE master.id = ($1)', [req.query.q]);
 			queryResults.on('row', function(row){
 				results.push(row);
 				console.log('productionInfo row is ', row);

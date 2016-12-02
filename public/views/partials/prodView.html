@@ -8,14 +8,17 @@
       <p class="listOfContracts" ng-click="selectContractProd(contract.id, contract.event_name)">{{contract.event_name}}</p>
     </div>
   </div>
-  <div ng-show="productionInfoExists" class="productionInfo">
-    <h3>{{currentEventName}}</h3>
-    <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p>
-    <!-- onbeforesave="getCartNum()" -->
-    <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Not set yet" }}</span></p>
+  <div ng-show="productionInfoExists" class="form">
+    <h3>{{prodInfo.event_name}}</h3>
+    <div style="text-align:left;">
+      <p>
+        <span class="textToStandOut">Client:</span> {{prodInfo.client_name}}<br>
+      </p>
+    </div>
+    <!-- <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p> -->
+    <!-- <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Not set yet" }}</span></p> -->
 
     <!-- <p editable-text="cart_number" e-form="textBtnForm" onbeforesave="updateCartNum()" onaftersave="getCartNum()"><span class="textToStandOut">Cart Number: </span>{{cart_number || No Cart #}}</p> -->
-    <input class="button" type="button" name="name" value="Confirm Traffic" ng-click="trafficApproval(currentContractId)">
-    <button class="button" ng-click="getInvoiceInfo();getInvoice()" id = "cmd">Generate PDF</button>
+    <input class="button" type="button" name="name" value="Confirm Production" ng-click="trafficApproval(currentContractId)">
   </div>
 </div>
