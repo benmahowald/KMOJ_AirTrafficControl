@@ -10,7 +10,7 @@
         <th width = "auto">Client</th>
       </tr>
       <tr ng-repeat="production in productions">
-        <td><input type="radio" ng-click="retrieveProdId(production.contract_id)"></td>
+        <td><input type="radio" name="selectProd" ng-click="retrieveProdId(production.contract_id)"></td>
         <td>{{production.event_name}}</td>
         <td>{{production.start_date}}</td>
         <td>{{production.uw_name}}</td>
@@ -18,7 +18,7 @@
       </tr>
     </table>
   </div>
-  
+
 </div>
 <!-- <div ng-show="userData[0].permission !== 'Production'">
   404
