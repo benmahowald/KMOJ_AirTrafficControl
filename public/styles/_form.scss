@@ -14,14 +14,15 @@
   border-radius: 2px;
 }
 
-.otherLeft {
-  text-align: left;
-}
-
 .left {
   text-align: left;
   margin: 3px 0 6px 12px;
 }
+
+.otherLeft {
+  text-align: left;
+}
+
 .yourOtherLeft {
   text-align: left;
   margin: 3px 0 6px 7px;
@@ -29,9 +30,14 @@
   font-size: 85%;
 }
 
+.yourOtherOtherLeft {
+  text-align: left;
+  margin: 3px 0 6px 20px;
+}
+
 .reportLabel {
   text-align: left;
-  margin: 15px 0 0 47px;
+  margin: 15px 0 0 17px;
 }
 
 input, select, textarea, {

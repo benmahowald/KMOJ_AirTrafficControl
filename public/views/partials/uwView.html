@@ -2,7 +2,7 @@
   <h3>New Contract</h3>
   <div class="successMessage" ng-show="contractSaved">{{eventNameCreated}} was created successfully!</div>
   <form class="form otherLeft">
-    <input class="createContract" type="text" name="event" ng-model="event_name" value="" placeholder="Event Name">
+    <input class="createContract" type="text" name="event" ng-model="event_name" value="" placeholder="Event Name" style="margin-top:15px;">
     <label class="reportLabel" for="client">Choose a client</label>
     <select name="client" class="selectClient" ng-change="getClient()" ng-model="selectedName" ng-options="name for name in clientNameList"></select><br>
     <label class="reportLabel" for="startDate">Start Date</label>
@@ -10,8 +10,8 @@
     <label class="reportLabel" for="endDate">End Date</label><br>
     <md-datepicker ng-model="endDate" md-placeholder="Select Date"></md-datepicker>
     <br>
-    <div id="center">
-      <label class="reportLabel" for="FA">FA</label>
+    <div>
+      <label style="margin: 12px 0 12px 17px;" for="FA">FA</label>
       <input class="createContract" type="checkbox" name="FA" value="FA" ng-model="fa">
       <label for="PSA">PSA</label>
       <input class="createContract" type="checkbox" name="PSA" value="PSA" ng-model="psa">
@@ -26,8 +26,8 @@
     <br>
     <input class="shareLine" type="text" name="voice_talent" ng-model="talent" value="" placeholder="Voice Talent">
     <input class="shareLine" type="text" name="producer" value="" ng-model="producer" placeholder="Producer" ><br>
-    <div id="center">
-      Spot Length: <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":15">15 sec
+    <div style="margin: 12px 0 12px 17px;">
+      <b>Spot Length:</b> <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":15">15 sec
       <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":30">30 sec
       <input class="createProduction" type="radio" name="spot_length" ng-model = "spot_length" value=":60">60 sec
     </div>
