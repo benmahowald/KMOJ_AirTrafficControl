@@ -377,13 +377,15 @@ margin-bottom: 10px;
   max-width: 600px;
   min-width: 450px;
   text-align: left;
-    td, table {
-      text-align: left;
-      padding: 8px 0;
-    }
-    tr {
-      border-bottom: 1px solid #999;
-    }
+}
+
+td, table {
+  text-align: left;
+  padding: 8px 0;
+}
+
+tr {
+  border-bottom: 1px solid #999;
 }
 
 .cmd {
