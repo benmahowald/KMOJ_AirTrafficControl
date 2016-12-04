@@ -22,7 +22,7 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
   $scope.selectContractProd = function (contract_id, event_name) {
     console.log('in selectContractProd');
     console.log('contract_id = ' + contract_id);
-    // $scope.currentContractId = contract_id;
+    $scope.currentContractId = contract_id;
     $scope.currentEventName = event_name;
 
     $http({
@@ -45,8 +45,13 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     $http({
       method: 'PUT',
       url: '/production/approval?q=' + contract_id,
-    }).then($scope.getPendingContracts);
-  }; // end trafficApproval
+    }).then(function(response){
+      $scope.productionInfoExists = false;
+      $scope.getPendingContracts();
+    }, function errorCallback(response){
+      console.log('error in prod approval', response);
+    });
+  }; // end prodApproval
 
   $scope.productions = [];
 
