@@ -39,12 +39,12 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     }); // end then
   }; // end selectContract
 
-  $scope.trafficApproval = function (contract_id) {
+  $scope.prodApproval = function (contract_id) {
     console.log('in trafficApproval');
     console.log('contract_id = ', contract_id);
     $http({
       method: 'PUT',
-      url: '/traffic/approval?q=' + contract_id,
+      url: '/production/approval?q=' + contract_id,
     }).then($scope.getPendingContracts);
   }; // end trafficApproval
 
@@ -93,7 +93,5 @@ $scope.getCartNum = function () {
       data: cart_number
     }).then($scope.getCartNum);
 }; // end updateCartNum
-
-
 
 }]); // end production controller
