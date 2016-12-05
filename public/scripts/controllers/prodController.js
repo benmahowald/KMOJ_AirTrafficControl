@@ -22,7 +22,7 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
   $scope.selectContractProd = function (contract_id, event_name) {
     console.log('in selectContractProd');
     console.log('contract_id = ' + contract_id);
-    // $scope.currentContractId = contract_id;
+    $scope.currentContractId = contract_id;
     $scope.currentEventName = event_name;
 
     $http({
@@ -39,14 +39,19 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     }); // end then
   }; // end selectContract
 
-  $scope.trafficApproval = function (contract_id) {
+  $scope.prodApproval = function (contract_id) {
     console.log('in trafficApproval');
     console.log('contract_id = ', contract_id);
     $http({
       method: 'PUT',
-      url: '/traffic/approval?q=' + contract_id,
-    }).then($scope.getPendingContracts);
-  }; // end trafficApproval
+      url: '/production/approval?q=' + contract_id,
+    }).then(function(response){
+      $scope.productionInfoExists = false;
+      $scope.getPendingContracts();
+    }, function errorCallback(response){
+      console.log('error in prod approval', response);
+    });
+  }; // end prodApproval
 
   $scope.productions = [];
 
@@ -93,7 +98,5 @@ $scope.getCartNum = function () {
       data: cart_number
     }).then($scope.getCartNum);
 }; // end updateCartNum
-
-
 
 }]); // end production controller

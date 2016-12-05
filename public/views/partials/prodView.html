@@ -22,10 +22,7 @@
         <span class="textToStandOut">Spot Length:</span> {{prodInfo.spot_length}}<br>
         <span class="textToStandOut">Spot Type:</span> {{prodInfo.spot_type}}<br>
       </p>
-    <!-- <p><span class="textToStandOut">Start:</span> {{start_date}}  -  <span class="textToStandOut">End:</span> {{end_date}}</p> -->
-    <!-- <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Not set yet" }}</span></p> -->
-
-    <!-- <p editable-text="cart_number" e-form="textBtnForm" onbeforesave="updateCartNum()" onaftersave="getCartNum()"><span class="textToStandOut">Cart Number: </span>{{cart_number || No Cart #}}</p> -->
-    <input class="button" type="button" name="name" value="Confirm Production" ng-click="trafficApproval(currentContractId)">
+    <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Not set yet" }}</span></p>
+    <input class="button" type="button" name="name" value="Confirm Production" ng-click="prodApproval(currentContractId)">
   </div><br>
 </div>

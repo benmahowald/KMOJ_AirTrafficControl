@@ -49,6 +49,27 @@ router.get('/productionInfo', function (req, res){
 	});//end pg.connect for production info
 });//end router.get for production info
 
+router.put('/approval', function (req, res){
+  console.log('get approval route hit ----------------');
+  console.log('req.query.q', req.query.q);
+  pg.connect(connectionString, function(err, client, done){
+    if (err){
+      console.log('connection err in clientinfo');
+    } else {
+      var results = [];
+      var queryResults = client.query('UPDATE master SET pr_app=(true) WHERE id=($1)', [req.query.q]);
+      queryResults.on('row', function(row){
+        results.push(row);
+      });//end queryResults.on 'row'
+      queryResults.on('end', function(){
+        done();
+        console.log('results are', results);
+        return res.json(results);
+      });//end queryResults on 'end'
+    } // end first else
+  });//end pg.connect for client info
+});//end router.put for client info
+
 // router.post for production table
 // router.post ('/production', function (req, res){
 // 	console.log ('req.body for client is', req.body);
