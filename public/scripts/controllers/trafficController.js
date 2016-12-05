@@ -52,11 +52,24 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       $scope.end_date = moment($scope.flightInfo[0].end_date).format('ddd, MMM DD YYYY');
       $scope.cart_number = $scope.flightInfo[0].cart_number;
       $scope.flightInfoExists = true;
+      var thisWeek;
+      var thisSlot;
+      var thisDay;
       var flightLastIndex = $scope.flightInfo.length-1;
       var flightLastDay = $scope.flightInfo[flightLastIndex].day_of_run;
+      var maxWeek = Math.ceil(flightLastDay/7);
+      $scope.weeks = {};
+      for (var i = 1; i <= maxWeek; i++) {
+        thisWeek = 'week'+i;
+        $scope.weeks[thisWeek].num = i;
+      }
 
-      for (var i = 0; i < $scope.flightInfo.length; i++) {
 
+      console.log('Organizing Run info:');
+      for (var j = 0; j < $scope.flightInfo.length; j++) {
+        thisWeek = 'week'+Math.ceil($scope.flightInfo[j].day_of_run/7);
+        console.log('Day:',$scope.flightInfo[j].day_of_run,'- Week:',thisWeek);
+        $scope.weeks[thisWeek] = {};
       }
 
       // console.log(response);
