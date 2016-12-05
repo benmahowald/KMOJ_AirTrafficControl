@@ -158,91 +158,97 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
 
   $scope.submitRunSheetEntry = function (ev){
     console.log('in submitRunSheetEntry');
+    // These lines will build the "required fields" message
+    // Initialize the message string
     var requiredFields = 'The following fields are required or have errors:';
-    if (!$scope.event_name) {
-      requiredFields += ' - Event';
+    if (!$scope.event_name) { // if there is no Event Name
+      requiredFields += ' - Event'; // add it to the error message
     }
-    console.log($scope.clientData);
-    if (!$scope.clientData) {
-      requiredFields += ' - Client';
+    if (!$scope.clientData) { // if there is no Client Data
+      requiredFields += ' - Client'; // add it to the error message
     }
-    if (!$scope.startDate) {
-      requiredFields += ' - Start Date';
-    } else {
-      $scope.startDateTime = moment($scope.startDate).format();
+    if (!$scope.startDate) { // if there is no Start Date
+      requiredFields += ' - Start Date'; // add it to the error message
+    } else { // otherwise
+      $scope.startDateTime = moment($scope.startDate).format(); // format it
     }
-    if (!$scope.endDate) {
-      requiredFields += ' - End Date';
-    } else {
-      $scope.endDateTime = moment($scope.endDate).format();
+    if (!$scope.endDate) { // if there is no End Date
+      requiredFields += ' - End Date'; // add it to the error message
+    } else { // otherwise
+      $scope.endDateTime = moment($scope.endDate).format(); // format it
     }
-    if ($scope.startDate && $scope.endDate) {
-      if (moment($scope.startDateTime).isAfter(moment($scope.endDateTime))) {
-        requiredFields += ' - Start Date after End Date';
+    if ($scope.startDate && $scope.endDate) { // if we have both Start and End dates
+      // check to make sure that the Start Date is not after the End Date
+      if (moment($scope.startDateTime).isAfter(moment($scope.endDateTime))) { // if it is
+        requiredFields += ' - Start Date after End Date';  // add it to the error message
       }
     }
-    if (!$scope.fa && !$scope.psa) {
-      requiredFields += ' - FA / PSA';
+    if (!$scope.fa && !$scope.psa) { // if neither FA nor PSA is chosen
+      requiredFields += ' - FA / PSA'; // add it to the error message
     }
-    if (!$scope.instructions) {
-      $scope.instructions = 'None';
+    if (!$scope.instructions) { // if there are no Instructions
+      $scope.instructions = 'None'; // Default it to None
     }
-    if (!$scope.discount) {
-      $scope.discount = 0;
+    if (!$scope.discount) { // if there is no Discount specified
+      $scope.discount = 0; // Default it to Zero
     }
-    console.log($scope.agency_commission);
-    if (!$scope.agency_commission) {
-      $scope.agency_commission = 0;
+    if (!$scope.agency_commission) { // if there is no Commission specified
+      $scope.agency_commission = 0; // Default it to Zero
+    }
+    if (!$scope.spotLength){ // if there is no Spot Length chosen
+      requiredFields += ' - Spot Length'; // add it to the error message
+    }
+    if ($scope.totalCost === undefined){ // if there is no Total Cost specified
+      requiredFields += ' - Total Cost'; // add it to the error message
+    }
+    if (!$scope.numInterviews){ // if no number of Interviews is recorded
+      $scope.numInterviews = 0; // Defalut it to Zero
+    }
+    if (!$scope.numSocialMedia){ // if no number of Social Media Events is recorded
+      $scope.numSocialMedia = 0; // Default it to Zero
+    }
+    if (!$scope.talent){ // if no Voice Talent is specified
+      $scope.voiceTalent = 'No Requirements'; // add defalut message
+    }
+    if (!$scope.producer){ // if no Producer is specified
+      $scope.producer = 'No Requirements'; // add default message
+    }
+    if (!$scope.who){ // if there is no Who Text
+      requiredFields += ' - Who Text'; // add it to the error message
+    }
+    if (!$scope.site){ // if there is no Where Text
+      requiredFields += ' - Where Text'; // add it to the error message
+    }
+    if (!$scope.why){ // if there is no Why Text
+      requiredFields += ' - Why Text'; // add it to the error message
+    }
+    if (!$scope.moreInfo){ // if there is no For More Info Text
+      requiredFields += ' - For More Info Text'; // add it to the error message
+    }
+    if (!$scope.what){ // if there is no What Text
+      requiredFields += ' - What Text'; // add it to the error message
     }
 
     // Check the totals for an empty week
-    var emptyWeek = false;
+    var emptyWeek = false; // set flag to false
     for (var week in $scope.totals) {
       if ($scope.totals.hasOwnProperty(week)) {
-        if ( $scope.totals[week].total === 0 ) {
-          emptyWeek = true;
+        if ( $scope.totals[week].total === 0 ) { // if any week has a total of Zero
+          emptyWeek = true; // change flag to true
         }
       }
     }
-    $scope.buildFlight();
-    if ($scope.slotDBinfo.length === 0 || emptyWeek) {
-      requiredFields += ' - Traffic Flight Grid';
-    }
-    $scope.spotLength = ':30';
-    if (!$scope.spotLength){
-      requiredFields += ' - Spot Length';
-    }
-    if ($scope.totalCost === undefined){
-      requiredFields += ' - Total Cost';
-    }
-    if (!$scope.numInterviews){
-      $scope.numInterviews = 0;
-    }
-    if (!$scope.numSocialMedia){
-      $scope.numSocialMedia = 0;
-    }
-    if (!$scope.voiceTalent){
-      $scope.voiceTalent = '';
-    }
-    if (!$scope.producer){
-      $scope.producer = '';
-    }
-    if (!$scope.whoText){
-      $scope.whoText = '';
-    }
-    if (!$scope.whatText){
-      $scope.whatText = '';
-    }
-    if (!$scope.whyText){
-      $scope.whyText = '';
-    }
-    if (!$scope.moreInfoText){
-      $scope.moreInfoText = '';
+    $scope.buildFlight(); // go get the information recorded in the Traffic Grid
+    if ($scope.slotDBinfo.length === 0 || emptyWeek) { // if there is an empty week
+      requiredFields += ' - Traffic Flight Grid'; // add it to the error message
     }
 
     console.log('userData:', $scope.userData);
     console.log(requiredFields);
+    // check error message to see if anything has been added
     if (requiredFields !== 'The following fields are required or have errors:'){
+      console.log('Missing Required Field or other error found!');
+      // if so, then show the NG-materials error message
       $scope.showAlert = function(ev) {
         $mdDialog.show(
           $mdDialog.alert()
@@ -256,8 +262,8 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
       };
       $scope.showAlert();
     } else {
-
-      console.log('total_cost:', $scope.totalCost);
+      // if not, then go ahead and create the contract in the database
+      console.log('Sending a contract to the databaseURL');
 
       var contractToSend = {
         user_id: $scope.userData[0].id,
@@ -277,7 +283,14 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         numSocialMedia: $scope.numSocialMedia,
         spot_rate: $scope.spot_rate,
         total_spots: $scope.flightTotal,
-        spot_length: $scope.spot_length
+        spot_length: $scope.spot_length,
+        talent: $scope.talent,
+        who: $scope.who,
+        what: $scope.what,
+        site: $scope.site,
+        why: $scope.why,
+        moreInfo: $scope.moreInfo,
+        producer: $scope.producer
       };
 
       console.log('UW contractToSend:', contractToSend);
@@ -290,35 +303,12 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         $scope.eventNameCreated = response.config.data.event_name;
       }, function (error) {
         console.log('error in uwCtrl client post route:', error);
-      }); // end then function
-
-      //object to send to production table in DB
-      var prodToSend = {
-        talent: $scope.talent,
-        who: $scope.who,
-        what: $scope.what,
-        site: $scope.site,
-        why: $scope.why,
-        producer: $scope.producer,
-        complete_date: new Date()
-      };//end prodToSend
-
-      console.log('prodToSend', prodToSend);
-
-      $http({
-        method: 'POST',
-        url: '/production/production?q=' + $scope.currentProdId,
-        data: prodToSend
-      }).then(function (response){
-        console.log('success in prodCtrl post route:', response);
-        //clear input fields
         $scope.clearFields();
         $scope.contractSaved = true;
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         // $scope.protraffMail();
-      }, function (error) {
-        console.log('error in prodCtrl post route:', error);
       }); // end then function
+
         }//end else
   }; // end submitRunSheetEntry
 
