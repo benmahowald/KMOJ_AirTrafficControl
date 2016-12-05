@@ -102,11 +102,15 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
     $scope.talent = null;
     $scope.who = null;
     $scope.what = null;
-    $scope.site = null;
+    $scope.website = null;
     $scope.why = null;
     $scope.producer = null;
     $scope.spot_length = null;
     $scope.event_name = null;
+    $scope.copy_id = null;
+    $scope.weeks = {week1:{num: 1}};
+    $scope.totals = {week1:{total: 0}};
+    $scope.flightTotal = 0;
   }; // end clearFields
 
   $scope.getAllClients = function () {
@@ -306,11 +310,11 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         data: contractToSend
       }).then(function (response){
         $scope.eventNameCreated = response.config.data.event_name;
-      }, function (error) {
-        console.log('error in uwCtrl client post route:', error);
         $scope.clearFields();
         $scope.contractSaved = true;
         document.body.scrollTop = document.documentElement.scrollTop = 0;
+      }, function (error) {
+        console.log('error in uwCtrl client post route:', error);
         // $scope.protraffMail();
       }); // end then function
 

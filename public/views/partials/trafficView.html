@@ -35,33 +35,34 @@
         <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
       </div>
     </div>
-    <!-- This div shows the Traffic Grid with ability to edit -->
-    <div ng-show="trafficEditRun" id="trafficEditGrid" class="trafficForm">
-      <p>
-        <span class="boldFont">How many weeks in the rotation?</span>
-        <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks, $event)" placeholder="1">
-        <span class="boldFont">Total Spots in Flight: {{flightTotal}}</span>
-      </p>
-      <div ng-repeat="week in weeks">
-        <table>
-          <th>
-            <td>-Totals-</td>
-            <td ng-repeat="day in days">{{day}}</td>
-          </th>
-          <tr ng-repeat="hour in hours">
-            <td>{{hour.fullText}}</td>
-            <td class="boldFont">{{totals["week"+week.num][hour.title]}}</td>
-            <td ng-repeat="day in days">
-              <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="checkInput(week.num, hour.title, day)">
-            </td>
-          </tr>
-        </table>
-        <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
-      </div>
-    </div>
     <!-- <p editable-text="cart_number" e-form="textBtnForm" onbeforesave="updateCartNum()" onaftersave="getCartNum()"><span class="textToStandOut">Cart Number: </span>{{cart_number || No Cart #}}</p> -->
-    <input ng-hide="trafficEditRun" class="button" type="button" value="Edit Traffic Grid" ng-click=""><br>
-    <input ng-show="trafficEditRun" class="button" type="button" value="Save Traffic Grid" ng-click=""><br>
+    <input ng-hide="trafficEditRun" class="button" type="button" value="Edit Traffic Grid" ng-click="enableGridEdit()">
+    <input ng-show="trafficEditRun" class="button" type="button" value="Save Traffic Grid" ng-click="submitGridUpdate()"><br>
     <input class="button" type="button" value="Confirm Traffic Scheduled" ng-click="trafficApproval(currentContractId)"><br>
     <button class="button" ng-click="getInvoiceInfo();getInvoice()" id = "cmd">Generate PDF</button>
+  </div>
+  <!-- This div shows the Traffic Grid with ability to edit -->
+  <div ng-show="trafficEditRun" id="trafficEditGrid" class="trafficForm">
+    <p>
+      <span class="boldFont">How many weeks in the rotation?</span>
+      <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks, $event)" placeholder="1">
+      <span class="boldFont">Total Spots in Flight: {{flightTotal}}</span>
+    </p>
+    <div ng-repeat="week in weeks">
+      <table>
+        <th>
+          <td>-Totals-</td>
+          <td ng-repeat="day in days">{{day}}</td>
+        </th>
+        <tr ng-repeat="hour in hours">
+          <td>{{hour.fullText}}</td>
+          <td class="boldFont">{{totals["week"+week.num][hour.fullText]}}</td>
+          <td ng-repeat="day in days">
+            <input class="trafficSlot" type="number" ng-model="week[hour.fullText][day]" ng-change="checkInput(week.num, hour.fullText, day)" ng-click="incrementCount(week.num, hour.fullText, day, $event)">
+          </td>
+        </tr>
+      </table>
+      <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
+    </div>
+    <input ng-show="trafficEditRun" class="button" type="button" value="Save Traffic Grid" ng-click="submitGridUpdate()">
   </div>

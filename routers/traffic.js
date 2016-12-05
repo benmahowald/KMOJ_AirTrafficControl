@@ -8,7 +8,7 @@ var connectionString = 'postgres://localhost:5432/kmoj';
 
 // console.log('in traffic router');
 //router.post slots
-router.post ('/slots', function (req, res){
+router.put ('/slots', function (req, res){
 	console.log ('req.body for slots is', req.body);
 	var slots = req.body;
 	pg.connect(connectionString, function (err, client, done){
