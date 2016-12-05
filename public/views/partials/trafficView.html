@@ -52,7 +52,7 @@
             <td>{{hour.fullText}}</td>
             <td class="boldFont">{{totals["week"+week.num][hour.title]}}</td>
             <td ng-repeat="day in days">
-              <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="checkInput(week.num, hour.title, day)" ng-click="incrementCount(week.num, hour.title, day, $event)">
+              <input class="trafficSlot" type="number" ng-model="week[hour.title][day]" ng-change="checkInput(week.num, hour.title, day)">
             </td>
           </tr>
         </table>
@@ -60,6 +60,8 @@
       </div>
     </div>
     <!-- <p editable-text="cart_number" e-form="textBtnForm" onbeforesave="updateCartNum()" onaftersave="getCartNum()"><span class="textToStandOut">Cart Number: </span>{{cart_number || No Cart #}}</p> -->
-    <input class="button" type="button" name="name" value="Confirm Traffic" ng-click="trafficApproval(currentContractId)"><br>
+    <input ng-hide="trafficEditRun" class="button" type="button" value="Edit Traffic Grid" ng-click=""><br>
+    <input ng-show="trafficEditRun" class="button" type="button" value="Save Traffic Grid" ng-click=""><br>
+    <input class="button" type="button" value="Confirm Traffic Scheduled" ng-click="trafficApproval(currentContractId)"><br>
     <button class="button" ng-click="getInvoiceInfo();getInvoice()" id = "cmd">Generate PDF</button>
   </div>
