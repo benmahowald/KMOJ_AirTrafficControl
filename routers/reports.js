@@ -17,6 +17,10 @@ router.get('/reports', function (req, res){
 			console.log('connection err in reports');
 		} else {
 			var results = [];
+			// Was working on this as a fix for date range before delivery
+			// var queryResults = client.query('SELECT flight.cart_number, flight.start_date, flight.end_date, clients.name AS clients_name, users.name AS uw_name, master.total_cost FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON master.client_id = clients.client_id JOIN users ON master.users_id = users.id WHERE flight.start_date >= ($1) AND flight.start_date <= ($2)',
+      //         [req.body.start_date, req.body.end_date]);
+			// 				console.log('req.body is', req.body);
 			var queryResults = client.query('SELECT flight.cart_number, flight.start_date, flight.end_date, clients.name AS clients_name, users.name AS uw_name, master.total_cost FROM flight JOIN master ON flight.contract_id = master.id JOIN clients ON master.client_id = clients.client_id JOIN users ON master.users_id = users.id');
           queryResults.on('row', function(row){
             results.push(row);
