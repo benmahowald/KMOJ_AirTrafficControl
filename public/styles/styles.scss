@@ -1,30 +1,19 @@
-// Optional CSS Reset
-// html, body, h1, h2, h3, h4, h5, h6, p, ol, ul, li, a {
-// 	padding: 0;
-// 	border: 0;
-// 	margin: 0;
-// 	font-size: 100%;
-// 	font: inherit;
-// }
-
 $navColor: #fff;
 $font-color: #585858;
 $font: currier, sans-serif;
 
-html, body, td, table {
+body, html, table, td {
   text-align: center;
   font-family: $font;
   color: $font-color;
 }
 
-td, table {
-  margin: auto auto;
-}
-
-html {
-  background: #faf7eb;
-  height:0%;
-  text-align: center;
+button {
+  border-radius: 5px;
+  border-color: black;
+  background: #f7edd1;
+  border-width: thin;
+  color: #333;
 }
 
 h1, h2, h3, h4 {
@@ -38,6 +27,16 @@ h5 {
   margin-bottom: 5px;
 }
 
+html {
+  background: #faf7eb;
+  height:0%;
+  text-align: center;
+}
+
+input {
+  color: #333;
+}
+
 // This code removes the arrow buttons from number inputs
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -45,27 +44,33 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.active {
-  color: #fff;
+table, td {
+  margin: auto auto;
+  padding: 8px 0;
+}
+
+tr {
+  border-bottom: 1px solid #999;
 }
 
 @import '_navbar';
 @import '_form';
 
-.login {
-  margin-top: 10px;
+#center{
+  text-align: center;
+  font-weight: bold;
 }
 
-.signin {
-  color: white;
-  display:inline;
-}
-.signin:hover {
-  color: white;
+#prodContent {
+  margin: 0 auto 40px;
+  border-bottom: 1px solid $font-color;
+  width: 450px;
+  max-width: 95%;
+  font-weight: lighter;
 }
 
-.userInput {
-  width:130px;
+.active {
+  color: #fff;
 }
 
 .boldFont {
@@ -74,19 +79,142 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: bolder;
 }
 
-.trafficViewCell {
-  padding: 5px;
+.button {
+  padding: 5px 8px;
+  margin: 8px auto;
+  border-radius: 3px;
+  border: 1px solid #e9d67c;
+  background-color: #f9e9bf;
+  color: $font-color;
 }
 
-.navLog {
+.button:hover {
+  box-shadow: 0 0 1px 0 #7d7c7a;
+}
+
+.center {
+  margin: 32px auto 12px;
+}
+
+.changeActiveStatus{
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.clearSearch {
+  float: right;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.clearSearch:focus {
+  outline: none;
+}
+
+.clearSearch:hover {
+  text-decoration: underline;
+}
+
+.contact {
+  margin-bottom: 20px;
+}
+
+.contractsPending {
+  width: 450px;
+  max-width: 95%;
+  margin: 5px auto 15px;
+  text-align: left;
+  font-family: $font;
+}
+
+.cmd {
+  margin: 30px auto;
+}
+
+.createClient:focus, .createContract:focus {
+  outline: none;
+}
+
+.createClient, .createProduction, .createContract,
+.editable-input, .productionInfo, .reportingInputs, .results {
+  border: none;
+  width: 450px;
+  max-width: 98%;
+  padding: 10px;
+  margin-bottom: 5px;
+  font-size: medium;
+  text-align: left;
+}
+
+.dropdown-menu {
+  text-align: center;
+}
+
+.editable-input, .editable-text, .editable-wrap {
+  width: 95%;
+  margin-bottom: 10px;
+}
+
+.editClient {
+    margin-left: 10px;
+}
+
+.editClientForm {
+    text-align: left;
+    font-size: 110%;
+}
+
+.editor {
+  margin: 25px auto;
+  width: 100%;
+}
+
+.listOfContracts {
+  border: 1px solid #e8e1e1;
+  border-radius: 5px;
+  background-color: #ebebeb;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.listOfContracts:focus {
+  outline: none;
+}
+
+.listOfContracts:hover {
+  box-shadow: 0 0 1px 0 #7d7c7a;
+}
+
+.logButton {
+  border-radius: 5px;
+  border-color: black;
+  background: #fff;
+  border-width: thin;
+  color: #333;
+}
+
+.login {
   margin-top: 10px;
 }
 
-.trafficSlot {
-  width: 60px;
-  text-align: center;
-  margin: 0;
+.logo {
+  margin-top: -15px;
+  height: 45px;
 }
+
+.md-calendar-day-header {
+  background: #fbf3d2;
+}
+
+.md-datepicker-is-showing {
+  background: #faf7eb;
+}
+
+.navbar {
+  border-bottom: 3px solid #dcb500;
+}
+
 .navbar-default .navbar-nav>li>a, .dropdown-menu>a {
   color: $navColor;
 }
@@ -120,79 +248,8 @@ input[type=number]::-webkit-outer-spin-button {
   color: $navColor;
 }
 
-.navbar {
-  border-bottom: 3px solid #dcb500;
-}
-
-.dropdown-menu {
-  text-align: center;
-}
-
-button {
-  border-radius: 5px;
-  border-color: black;
-  background: #f7edd1;
-  border-width: thin;
-  color: #333;
-}
-
-.logButton {
-  border-radius: 5px;
-  border-color: black;
-  background: #fff;
-  border-width: thin;
-  color: #333;
-}
-
-input {
-  color: #333;
-}
-
-.shareLine {
-  width: 48%;
-  border: none;
-  padding: 10px;
-  margin-bottom: 5px;
-  font-size: medium;
-  text-align: left;
-  display: inline;
-}
-
-.createClient, .createProduction, .createContract, .reportingInputs,
-.editable-input, .results, .productionInfo {
-  border: none;
-  width: 450px;
-  max-width: 98%;
-  padding: 10px;
-  margin-bottom: 5px;
-  font-size: medium;
-  text-align: left;
-}
-
-.editClient {
-    margin-left: 10px;
-}
-
-.editable-wrap, .editable-text, .editable-input {
-  width: 95%;
-  margin-bottom: 10px;
-}
-
-.editClientForm {
-    text-align: left;
-    font-size: 110%;
-}
-
-.createClient:focus, .createContract:focus {
-  outline: none;
-}
-
-.contractsPending {
-  width: 450px;
-  max-width: 95%;
-  margin: 5px auto 15px;
-  text-align: left;
-  font-family: $font;
+.navLog {
+  margin-top: 10px;
 }
 
 .pendingContractHeading {
@@ -206,144 +263,26 @@ input {
   font-weight: lighter;
 }
 
-.listOfContracts {
-  border: 1px solid #e8e1e1;
-  border-radius: 5px;
-  background-color: #ebebeb;
-  cursor: pointer;
-  padding: 8px 12px;
-}
-.listOfContracts:hover {
-  box-shadow: 0 0 1px 0 #7d7c7a;
-}
-
-.contact {
-  margin-bottom: 20px;
-}
-
 .reports {
 margin-bottom: 10px;
 }
 
-.editor {
-  margin: 25px auto;
-  width: 100%;
-}
-
-.listOfContracts:focus {
-  outline: none;
-}
-
-.trafficInfo {
-  background-color: #fbf3d2;
-  width: 450px;
-  max-width: 95%;
-  margin: 25px auto 25px;
-  border: 1px solid #f4eab7;
-}
-
-.button {
-  padding: 5px 8px;
-  margin: 8px auto;
-  border-radius: 3px;
-  border: 1px solid #e9d67c;
-  background-color: #f9e9bf;
-  color: $font-color;
-}
-
-.center {
-  margin: 32px auto 12px;
-}
-
-.button:hover {
-  box-shadow: 0 0 1px 0 #7d7c7a;
-}
-
-.textToStandOut {
-  font-weight: bold;
-}
-
-.changeActiveStatus{
-  background-color: transparent;
-  border: 0;
-  padding: 0;
-}
-
-// th {
-//   text-align: center;
-// }
-
-.logo {
-  margin-top: -15px;
-  height: 45px;
-}
-
-.successMessage {
-  padding: 10px 15px;
-  margin: 20px auto;
-  border-radius: 3px;
-  border: 1px solid #dcb500;
-  background-color: #f9e9bf;
-  max-width: 95%;
-  width: 400px;
-}
-
-.stateSelect {
-  width: 100px;
-  min-width: auto;
-  border: none;
-  border-radius: 2px;
-  height: 39px;
-  background-color: #fff;
-  color: $font-color;
-  font-size: medium;
-}
-
-.selectClient {
-  width: 450px;
-  max-width: 95%;
-  min-width: auto;
-  border: none;
-  border-radius: 2px;
-  height: 27px;
-  background-color: #fff;
-  color: $font-color;
-  font-size: medium;
-}
-
-.stateSelect:focus, .selectClient:focus {
-  outline: none;
-}
-
-.zip {
-  width: auto;
-}
-
-#prodContent {
-  margin: 0 auto 40px;
-  border-bottom: 1px solid $font-color;
-  width: 450px;
-  max-width: 95%;
-  font-weight: lighter;
-}
-
-.searchViewDiv {
+.reportTable {
+  margin-top: 45px;
+  width: 95%;
+  max-width: 600px;
+  min-width: 450px;
   text-align: left;
-  width: 500px;
-  max-width: 95%;
-  margin: 15px auto 30px;
 }
 
-.searchResults {
-  width: 500px;
-  max-width: 95%;
-  margin: 15px auto 15px;
+.shareLine {
+  width: 48%;
+  border: none;
+  padding: 10px;
+  margin-bottom: 5px;
+  font-size: medium;
   text-align: left;
-  max-width: 95%;
-  background-color: #fbf3d2;
-  border: 1px solid #f4eab7;
-  padding: 0 10px 9px;
-  border-radius: 2px;
+  display: inline;
 }
 
 .searchInput {
@@ -361,55 +300,102 @@ margin-bottom: 10px;
   background-size: 35px 25px;
 }
 
-.clearSearch {
-  float: right;
-  margin-right: 5px;
-  cursor: pointer;
+.searchResults {
+  width: 500px;
+  max-width: 95%;
+  margin: 15px auto 15px;
+  text-align: left;
+  max-width: 95%;
+  background-color: #fbf3d2;
+  border: 1px solid #f4eab7;
+  padding: 0 10px 9px;
+  border-radius: 2px;
 }
 
-.clearSearch:hover {
-  text-decoration: underline;
+.searchViewDiv {
+  text-align: left;
+  width: 500px;
+  max-width: 95%;
+  margin: 15px auto 30px;
 }
 
-.clearSearch:focus {
+.selectClient {
+  width: 450px;
+  max-width: 95%;
+  min-width: auto;
+  border: none;
+  border-radius: 2px;
+  height: 27px;
+  background-color: #fff;
+  color: $font-color;
+  font-size: medium;
+}
+
+.selectClient:focus, .stateSelect:focus {
   outline: none;
 }
 
-.reportTable {
-  margin-top: 45px;
-  width: 95%;
-  max-width: 600px;
-  min-width: 450px;
-  text-align: left;
+.signin {
+  color: white;
+  display:inline;
 }
 
-td, table {
-  text-align: left;
-  padding: 8px 0;
+.signin:hover {
+  color: white;
 }
 
-tr {
-  border-bottom: 1px solid #999;
+.stateSelect {
+  width: 100px;
+  min-width: auto;
+  border: none;
+  border-radius: 2px;
+  height: 39px;
+  background-color: #fff;
+  color: $font-color;
+  font-size: medium;
 }
 
-.cmd {
-  margin: 30px auto;
+.successMessage {
+  padding: 10px 15px;
+  margin: 20px auto;
+  border-radius: 3px;
+  border: 1px solid #dcb500;
+  background-color: #f9e9bf;
+  max-width: 95%;
+  width: 400px;
 }
 
-.md-datepicker-is-showing {
-  background: #faf7eb;
-}
-
-.md-calendar-day-header {
-  background: #fbf3d2;
-}
-
-#center{
-  text-align: center;
+.textToStandOut {
   font-weight: bold;
+}
+
+.trafficInfo {
+  background-color: #fbf3d2;
+  width: 450px;
+  max-width: 95%;
+  margin: 25px auto 25px;
+  border: 1px solid #f4eab7;
+}
+
+.trafficSlot {
+  width: 60px;
+  text-align: center;
+  margin: 0;
+}
+
+.trafficViewCell {
+  padding: 5px;
+}
+
+.userInput {
+  width:130px;
 }
 
 .yourOtherOtherLeft {
   text-align: left;
   margin: 3px 0 20px 20px;
+}
+
+.zip {
+  width: auto;
 }

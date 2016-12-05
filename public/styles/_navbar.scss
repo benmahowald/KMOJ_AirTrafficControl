@@ -1,26 +1,6 @@
-.navbar-default {
-    background: #303030;
-    border: none;
-    border-radius: 0;
-}
-
-.navbar-default .navbar-nav>li.dropdown{
-  background-color: #303030;
-}
-
-.navbar-toggle {
-  border: none;
-}
-
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+.logInOut {
+  margin-top: 11px;
   background-color: transparent;
-}
-
-.navbar-default .navbar-toggle .icon-bar {
-  background-color: #faf7eb;
-}
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-  border: none;
 }
 
 .logo {
@@ -31,7 +11,27 @@
   width: 115px;
 }
 
-.logInOut {
-  margin-top: 11px;
+.navbar-default {
+    background: #303030;
+    border: none;
+    border-radius: 0;
+}
+
+.navbar-default .navbar-nav>li.dropdown{
+  background-color: #303030;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
   background-color: transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #faf7eb;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border: none;
+}
+
+.navbar-toggle {
+  border: none;
 }
