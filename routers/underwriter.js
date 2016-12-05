@@ -80,13 +80,12 @@ router.post ('/master', function (req, res){
 
 							queryResultsProd.on('end', function(){
 								console.log('flight_id', flight_id);
-								var slotQuery = '';
+								var slotQuery = 'INSERT INTO slots (day_of_run, plays, slot, flight_id) ' +
+								'VALUES ($1, $2, $3, $4);';
 								var queryArray = [];
 								var thisSlot;
 								for (var i = 0; i < master.slotInfo.length; i++) {
 									thisSlot = master.slotInfo[i];
-									slotQuery = 'INSERT INTO slots (day_of_run, plays, slot, flight_id) ' +
-									'VALUES ($1, $2, $3, $4);';
 									console.log('slotQuery:', slotQuery);
 									queryArray = [thisSlot.dayOfRun, thisSlot.plays, thisSlot.slot, flight_id[0].id];
 									var queryResultsSlot = client.query (slotQuery , queryArray);

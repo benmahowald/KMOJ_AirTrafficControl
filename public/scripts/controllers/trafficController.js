@@ -18,6 +18,7 @@ app.controller('trafficController', ['$scope', '$mdDialog', '$http',  function($
   // This is used to populate the header and scaffold the grid
   $scope.days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   $scope.trafficEditRun = false; // default to not editing the Traffic Grid
+  $scope.gridUpdated = false; // default success message to not show
 
   // variables for Invoice PDF
   var invoiceInfo = {};
@@ -31,6 +32,7 @@ app.controller('trafficController', ['$scope', '$mdDialog', '$http',  function($
     var numDays = $scope.currentNumWeeks * 7; // seven days in a weeks
     var dayIndex;
     var dayCheck;
+    var hourCheck;
     $scope.slotDBinfo = [];
     slotIndex = 0;
 
@@ -41,11 +43,12 @@ app.controller('trafficController', ['$scope', '$mdDialog', '$http',  function($
       console.log('numWeek:', numWeek);
       for (var hour in $scope.hours) {
         if ($scope.hours.hasOwnProperty(hour)) {
-          if ($scope.weeks['week'+numWeek][hour]){
-            if ($scope.weeks['week'+numWeek][hour][dayCheck]) {
+          hourCheck = $scope.hours[hour].fullText;
+          if ($scope.weeks['week'+numWeek][hourCheck]){
+            if ($scope.weeks['week'+numWeek][hourCheck][dayCheck]) {
               $scope.slotDBinfo[slotIndex] = {
                 dayOfRun: m,
-                plays: $scope.weeks['week'+numWeek][hour][dayCheck],
+                plays: $scope.weeks['week'+numWeek][hourCheck][dayCheck],
                 slot: $scope.hours[hour].fullText
               };
               slotIndex++;
@@ -80,6 +83,16 @@ app.controller('trafficController', ['$scope', '$mdDialog', '$http',  function($
 
     $scope.updateTotals(thisWeek, thisHour, thisDay);
   }; // end checkInput
+
+  $scope.clearFields = function () {
+    console.log('in clearFields');
+    $scope.weeks = {week1:{num: 1}};
+    $scope.totals = {week1:{total: 0}};
+    $scope.flightTotal = 0;
+
+    $scope.trafficEditRun = false;
+    $scope.flightInfoExists = false;
+  }; // end clearFields
 
   $scope.enableGridEdit = function () {
     $scope.trafficEditRun = true;
@@ -209,24 +222,10 @@ app.controller('trafficController', ['$scope', '$mdDialog', '$http',  function($
     }); // end then
   }; // end getPendingContracts
 
-  $scope.incrementCount = function(thisWeek, thisHour, thisDay, $event) {
-    console.log('in incrementCount, with:', thisDay, thisHour, thisWeek, $event.target);
-    var weekName = 'week'+thisWeek;
-    if (!$scope.weeks[weekName][thisHour]){
-      $scope.weeks[weekName][thisHour] = {};
-    }
-    if ($scope.weeks[weekName][thisHour][thisDay]){
-      $scope.weeks[weekName][thisHour][thisDay]++;
-    } else {
-      $scope.weeks[weekName][thisHour][thisDay] = 1;
-    }
-
-    $scope.updateTotals(thisWeek, thisHour, thisDay);
-  }; // end incrementCount
-
   $scope.selectContractFlight = function (contract_id, event_name) {
     console.log('in selectContractFlight');
     console.log('contract_id = ' + contract_id);
+    $scope.gridUpdated = false;
     $scope.currentContractId = contract_id;
     $scope.currentEventName = event_name;
 
@@ -324,21 +323,26 @@ app.controller('trafficController', ['$scope', '$mdDialog', '$http',  function($
       };
       $scope.showAlert();
     } else {
+      console.log();
       var gridToSend = {
         slotInfo: $scope.slotDBinfo,
+        contract_id: $scope.currentContractId
       };
 
       console.log('Traffic gridToSend:', gridToSend);
 
       $http({
-        method: 'PUT',
+        method: 'POST',
         url: '/traffic/slots',
         data: gridToSend
       }).then(function (response){
-        $scope.eventNameCreated = response.config.data.event_name;
+        console.log('Received Success!!!');
+        $scope.clearFields();
+        $scope.gridUpdated = true;
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       }, function (error) {
         console.log('error in uwCtrl client post route:', error);
-        // $scope.protraffMail();
+
       }); // end then function
 
         }//end else
@@ -383,6 +387,7 @@ app.controller('trafficController', ['$scope', '$mdDialog', '$http',  function($
     // Reset counters
     $scope.totals[weekName][thisHour] = 0;
     $scope.totals[weekName].total = 0;
+    console.log('totals:', $scope.totals[weekName].total);
     var dayCheck;
     // check to see if anything has been recorded yet
     for (var k = 0; k < $scope.days.length; k++) {
@@ -397,10 +402,13 @@ app.controller('trafficController', ['$scope', '$mdDialog', '$http',  function($
       //// Update the week's total
       for (var hour in $scope.hours) {
         if ($scope.hours.hasOwnProperty(hour)) {
-          if ($scope.weeks[weekName][hour] && $scope.weeks[weekName][hour][dayCheck]) {
+          var hourCheck = $scope.hours[hour].fullText;
+          if ($scope.weeks[weekName][hourCheck] && $scope.weeks[weekName][hourCheck][dayCheck]) {
             $scope.totals[weekName].total =
             $scope.totals[weekName].total +
-            $scope.weeks[weekName][hour][dayCheck];
+            $scope.weeks[weekName][hourCheck][dayCheck];
+            console.log('playsToAdd:', $scope.weeks[weekName][hourCheck][dayCheck]);
+            console.log('totals:', $scope.totals[weekName].total);
           }
         }
       }  // End for loop throuh hours in day

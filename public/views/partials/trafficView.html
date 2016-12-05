@@ -1,5 +1,6 @@
 <div ng-show="userData[0].permission == 'Traffic' || 'Administration' || 'View All'">
   <h3 class="center">Traffic</h3>
+  <div class="successMessage" ng-show="gridUpdated">{{currentEventName}} was updated successfully!</div>
   <h4 class="pendingContractHeading">Pending Events</h4>
   <p class="" ng-show="pendingContracts.length < 1">None</p>
   <div class="contractsPending" ng-repeat="contract in pendingContracts">
@@ -58,7 +59,7 @@
           <td>{{hour.fullText}}</td>
           <td class="boldFont">{{totals["week"+week.num][hour.fullText]}}</td>
           <td ng-repeat="day in days">
-            <input class="trafficSlot" type="number" ng-model="week[hour.fullText][day]" ng-change="checkInput(week.num, hour.fullText, day)" ng-click="incrementCount(week.num, hour.fullText, day, $event)">
+            <input class="trafficSlot" type="number" ng-model="week[hour.fullText][day]" ng-change="checkInput(week.num, hour.fullText, day)">
           </td>
         </tr>
       </table>

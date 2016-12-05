@@ -313,9 +313,9 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         $scope.clearFields();
         $scope.contractSaved = true;
         document.body.scrollTop = document.documentElement.scrollTop = 0;
+        // $scope.protraffMail();
       }, function (error) {
         console.log('error in uwCtrl client post route:', error);
-        // $scope.protraffMail();
       }); // end then function
 
         }//end else
