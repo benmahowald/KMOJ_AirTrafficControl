@@ -163,9 +163,10 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
         }
 
       }, //end table
-      ['\n'],
-      {text: 'Scheduled Station: KJOM', style: 'subheader', alignment: 'center'},
-      {text: '' + invoiceInfo.client_name + '\n\n\n', alignment: 'center'},
+        ['\n'],
+          {text: 'Scheduled Station: KMOJ', style: 'subheader', alignment: 'center'},
+          {text: '' + invoiceInfo.clients_name + '\n\n\n', alignment: 'center'},
+
 
       {
         table: { alignment: 'center',
