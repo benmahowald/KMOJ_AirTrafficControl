@@ -41,9 +41,9 @@
   <br>
   <div id="uwTrafficGrid" class="trafficForm">
     <p>
-      <span class="boldFont">How many weeks in the rotation?</span>
+      <span class="boldFont underlineFont">How many weeks in the rotation?</span>
       <input class="trafficSlot" type="number" ng-model="numWeeks" ng-change="updateWeeks(numWeeks, $event)" placeholder="1">
-      <span class="boldFont">Total Spots in Flight: {{flightTotal}}</span>
+      <span class="boldFont underlineFont">Total Spots in Flight: {{flightTotal}}</span>
     </p>
     <div ng-repeat="week in weeks">
       <table>
@@ -59,7 +59,7 @@
           </td>
         </tr>
       </table>
-      <p>Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
+      <p class="boldFont">Week {{week.num}} Total Spots:  {{totals["week"+week.num].total}}</p>
     </div>
   </div>
   <button type="button" ng-click="submitRunSheetEntry($event)" id="submitButton">Submit Contract</button>

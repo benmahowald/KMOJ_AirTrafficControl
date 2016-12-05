@@ -75,7 +75,6 @@ tr {
 
 .boldFont {
   font-style: italic;
-  text-decoration: underline;
   font-weight: bolder;
 }
 
@@ -385,6 +384,10 @@ margin-bottom: 10px;
 
 .trafficViewCell {
   padding: 5px;
+}
+
+.underlineFont {
+  text-decoration: underline;
 }
 
 .userInput {
