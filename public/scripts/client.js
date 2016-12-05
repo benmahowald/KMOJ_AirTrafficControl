@@ -90,7 +90,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controller: 'trafficController'
   }).
   when('/underwriter', {
-    templateUrl: '/views/partials/uwView.html',
+    templateUrl: '/views/partials/uwNewView.html',
     controller: 'uwController'
   }).
   when('/underwriter/createClient', {
@@ -103,6 +103,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   }).
   when('/underwriter/aired', {
     templateUrl: '/views/partials/uwAiredView.html',
+    controller: 'uwController'
+  }).
+  when('/underwriter/contracts', {
+    templateUrl: '/views/partials/uwPendingView.html',
     controller: 'uwController'
   }).
   when('/viewall', {
