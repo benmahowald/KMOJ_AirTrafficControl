@@ -281,8 +281,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
     if (!$scope.spotLength){
       requiredFields += ' - Spot Length';
     }
-    $scope.totalCost = '0.00';
-    if (!$scope.totalCost){
+    if ($scope.totalCost === undefined){
       requiredFields += ' - Total Cost';
     }
     if (!$scope.numInterviews){
@@ -327,6 +326,8 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
       $scope.showAlert();
     } else {
 
+      console.log('total_cost:', $scope.totalCost);
+
       var contractToSend = {
         user_id: $scope.userData[0].id,
         event_name: $scope.event_name,
@@ -344,6 +345,8 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         numInterviews: $scope.numInterviews,
         numSocialMedia: $scope.numSocialMedia,
         spot_rate: $scope.spot_rate,
+        total_spots: $scope.flightTotal,
+        spot_length: $scope.spot_length
       };
 
       console.log('UW contractToSend:', contractToSend);
@@ -354,13 +357,38 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         data: contractToSend
       }).then(function (response){
         $scope.eventNameCreated = response.config.data.event_name;
-        $scope.clearFields();
-        $scope.contractSaved = true;
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
       }, function (error) {
         console.log('error in uwCtrl client post route:', error);
       }); // end then function
-    }
+
+      //object to send to production table in DB
+      var prodToSend = {
+        talent: $scope.talent,
+        who: $scope.who,
+        what: $scope.what,
+        site: $scope.site,
+        why: $scope.why,
+        producer: $scope.producer,
+        complete_date: new Date()
+      };//end prodToSend
+
+      console.log('prodToSend', prodToSend);
+
+      $http({
+        method: 'POST',
+        url: '/production/production?q=' + $scope.currentProdId,
+        data: prodToSend
+      }).then(function (response){
+        console.log('success in prodCtrl post route:', response);
+        //clear input fields
+        $scope.clearFields();
+        $scope.contractSaved = true;
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        // $scope.protraffMail();
+      }, function (error) {
+        console.log('error in prodCtrl post route:', error);
+      }); // end then function
+        }//end else
   }; // end submitRunSheetEntry
 
   $scope.clientNameList = [];
@@ -401,7 +429,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
   }; // end getClients
 
   $scope.clearFields = function () {
-    console.log('in clearFields');
+    // console.log('in clearFields');
     $scope.event_name = null;
     $scope.startDate = null;
     $scope.endDate = null;
@@ -416,5 +444,14 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
     $scope.numSocialMedia = null;
     $scope.spot_rate = null;
     $scope.selectedName = null;
-  };
+    $scope.talent = null;
+    $scope.who = null;
+    $scope.what = null;
+    $scope.site = null;
+    $scope.why = null;
+    $scope.producer = null;
+    $scope.spot_length = null;
+    $scope.event_name = null;
+  }; // end clearFields
+
 }]); // end uwController

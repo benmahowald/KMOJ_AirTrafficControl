@@ -42,14 +42,12 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
     $scope.currentContractId = contract_id;
     $scope.currentEventName = event_name;
 
-    var contractToRetrieve = {contract_id: contract_id};
-
     $http({
       method: 'GET',
-      url: '/traffic/flightContract',
-      data: contractToRetrieve
+      url: '/traffic/flightContract?q=' + contract_id,
     }).then(function(response){
       $scope.flightInfo = response.data;
+      console.log('flight info:', $scope.flightInfo);
       $scope.start_date = moment($scope.flightInfo[0].start_date).format('ddd, MMM DD YYYY');
       $scope.end_date = moment($scope.flightInfo[0].end_date).format('ddd, MMM DD YYYY');
       $scope.cart_number = $scope.flightInfo[0].cart_number;
@@ -58,7 +56,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       var flightLastDay = $scope.flightInfo[flightLastIndex].day_of_run;
 
       for (var i = 0; i < $scope.flightInfo.length; i++) {
-        
+
       }
 
       // console.log(response);
@@ -93,7 +91,7 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       invoiceInfo.total_spots = response.data[0].total_spots;
       invoiceInfo.total_cost = response.data[0].total_cost;
       invoiceInfo.discounts = response.data[0].discounts;
-      invoiceInfo.commission = response.data[0].commissio;
+      invoiceInfo.commission = response.data[0].commission;
       invoiceInfo.start_date = response.data[0].start_date;
       invoiceInfo.end_date = response.data[0].end_date;
       invoiceInfo.spot_length = response.data[0].spot_length;
@@ -139,14 +137,14 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       {
         table: {
           body: [
-            ['Sponsor: ', '' + invoiceInfo.client_name],
-            ['Event:', '' + invoiceInfo.event_name],
-            ['Underwriter:', '' + invoiceInfo.uw_name],
-            ['Run Dates:', '' + invoiceInfo.start_date + invoiceInfo.end_date],
-            ['Total Spots:', '' + invoiceInfo.total_spots],
-            ['Total Cost:', '' + invoiceInfo.total_cost],
-            ['Discounts', '' + invoiceInfo.discounts],
-            ['Commission', '' + invoiceInfo.commission]
+                ['Sponsor: ', '' + invoiceInfo.clients_name],
+                ['Event:', '' + invoiceInfo.event_name],
+                ['Underwriter:', '' + invoiceInfo.uw_name],
+                ['Run Dates:', '' + invoiceInfo.start_date + invoiceInfo.end_date],
+                ['Total Spots:', '' + invoiceInfo.total_spots],
+                ['Total Cost:', '' + invoiceInfo.total_cost],
+                ['Discounts', '' + invoiceInfo.discounts],
+                ['Commission', '' + invoiceInfo.commission]
           ]
 
         }

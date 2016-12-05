@@ -1,7 +1,57 @@
 app.controller('prodController', ['$scope', '$http', function($scope, $http){
   console.log('Production Controller');
 
-  $scope.productionSaved = false;
+  $scope.prodInfo = {};
+
+  $scope.getPendingContracts = function () {
+    console.log('in getPendingContracts');
+    $http({
+      method: 'GET',
+      url: '/production/contractsPending',
+    }).then(function(response){
+      $scope.pendingContracts = response.data;
+      // $scope.flightInfoExists = false;
+      console.log('$scope.pendingContracts', $scope.pendingContracts);
+    }, function errorCallback (response){
+      console.log('err', response);
+    }); // end then
+  }; // end getPendingContracts
+
+  $scope.getPendingContracts();
+
+  $scope.selectContractProd = function (contract_id, event_name) {
+    console.log('in selectContractProd');
+    console.log('contract_id = ' + contract_id);
+    $scope.currentContractId = contract_id;
+    $scope.currentEventName = event_name;
+
+    $http({
+      method: 'GET',
+      url: '/production/productionInfo?q=' + contract_id,
+    }).then(function(response){
+      $scope.prodInfo = response.data[0];
+      console.log('prod info:', $scope.prodInfo);
+      $scope.productionInfoExists = true;
+      // $scope.getCartNum();
+      // console.log(response);
+    }, function errorCallback (response){
+      console.log('err', response);
+    }); // end then
+  }; // end selectContract
+
+  $scope.prodApproval = function (contract_id) {
+    console.log('in trafficApproval');
+    console.log('contract_id = ', contract_id);
+    $http({
+      method: 'PUT',
+      url: '/production/approval?q=' + contract_id,
+    }).then(function(response){
+      $scope.productionInfoExists = false;
+      $scope.getPendingContracts();
+    }, function errorCallback(response){
+      console.log('error in prod approval', response);
+    });
+  }; // end prodApproval
 
   $scope.productions = [];
 
@@ -13,8 +63,6 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
     }).then(function(response){
       $scope.productions = response.data;
       console.log ($scope.productions);
-      // $scope.start_date = moment($scope.productions[0].start_date).format('ddd, MMM DD YYYY')
-      // $scope.end_date = moment($scope.productions[0].end_date).format('ddd, MMM DD YYYY');
     }, function errorCallback(response){
       console.log('error getting productions', response);
     });
@@ -26,35 +74,6 @@ app.controller('prodController', ['$scope', '$http', function($scope, $http){
 
   };
 
-
-  $scope.sendProduction = function(){
-    var prodToSend = {
-    talent: $scope.talent,
-    who: $scope.who,
-    what: $scope.what,
-    site: $scope.site,
-    why: $scope.why,
-    cart_number: $scope.cart_number,
-    producer: $scope.producer,
-    spot_length: $scope.spot_length,
-    complete_date: new Date()
-  };
-
-  console.log('prodToSend', prodToSend);
-
-  $http({
-    method: 'POST',
-    url: '/production/production?q=' + $scope.currentProdId,
-    data: prodToSend
-  }).then(function (response){
-        console.log('success in prodCtrl post route:', response);
-        $scope.productionSaved = true;
-        $scope.clearFields();
-        // $scope.protraffMail();
-      }, function (error) {
-        console.log('error in prodCtrl post route:', error);
-      }); // end then function
-}; // end http call
 
 $scope.getCartNum = function () {
   console.log('in getCartNum');
@@ -79,17 +98,5 @@ $scope.getCartNum = function () {
       data: cart_number
     }).then($scope.getCartNum);
 }; // end updateCartNum
-
-  $scope.clearFields = function () {
-    $scope.talent = '';
-    $scope.who = '';
-    $scope.what = '';
-    $scope.site = '';
-    $scope.why = '';
-    $scope.cart_number = '';
-    $scope.producer = '';
-    $scope.spot_length = '';
-    $scope.event_name = '';
-  }; // end clearFields
 
 }]); // end production controller

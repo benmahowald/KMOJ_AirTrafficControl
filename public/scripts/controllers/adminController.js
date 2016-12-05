@@ -165,7 +165,10 @@ app.controller("adminController",["$scope","$http",function($scope,$http){
       console.log("response from managerApproval",response);
       pendingContracts();
       approvedContracts();
+      protraffMail();
     });//end reponse from server
   }//end managerApproval
+
+
 
 }]);//end adminController

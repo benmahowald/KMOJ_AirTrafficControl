@@ -14,6 +14,7 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
       reportInfo = response.data;
       $scope.reports = response.data;
       invoiceData = [];
+      $scope.reportSubmit = true;
       // console.log("reportInfo before", reportInfo);
       // delete reportInfo["$$hashKey"];
       // console.log('reportInfo after', reportInfo);
@@ -62,7 +63,7 @@ app.controller('reportController', ['$scope', '$http', function($scope, $http){
         {text: 'Phone: (612)377-0594', alignment: 'center'},
         {text: 'Fax: (612)377-6919\n\n', alignment: 'center'},
         {text: 'MONTHLY REPORT\n\n', style: 'subheader', alignment: 'center'},
-        table(externalData, [ 'cart_number','clients_name','end_date','start_date','total_cost','uw_name'])
+        table(externalData, [ 'cart_number','clients_name','start_date','end_date','total_cost','uw_name'])
       ]//end content
     };// end docDefinition
     pdfMake.createPdf(docDefinition).open();
