@@ -56,15 +56,9 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       $scope.flightInfoExists = true;
       var flightLastIndex = $scope.flightInfo.length-1;
       var flightLastDay = $scope.flightInfo[flightLastIndex].day_of_run;
-      var maxWeek = Math.ceil(flightLastDay/7);
-
-      for (var i = 0; i <= maxWeek; i++) {
-        var thisWeek = 'week'+i;
 
       for (var i = 0; i < $scope.flightInfo.length; i++) {
-
-      }
-
+        
       }
 
       // console.log(response);
