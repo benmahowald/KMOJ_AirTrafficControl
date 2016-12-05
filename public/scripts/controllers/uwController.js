@@ -28,6 +28,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
   //---- DECLARE FUNCTIONS
   $scope.buildFlight = function(){
     console.log('In buildFlight');
+    console.log('scope.weeks:', $scope.weeks);
 
     var numDays = $scope.currentNumWeeks * 7; // seven days in a weeks
     var dayIndex;
@@ -195,7 +196,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
     if (!$scope.agency_commission) { // if there is no Commission specified
       $scope.agency_commission = 0; // Default it to Zero
     }
-    if (!$scope.spotLength){ // if there is no Spot Length chosen
+    if (!$scope.spot_length){ // if there is no Spot Length chosen
       requiredFields += ' - Spot Length'; // add it to the error message
     }
     if ($scope.totalCost === undefined){ // if there is no Total Cost specified
@@ -216,13 +217,10 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
     if (!$scope.who){ // if there is no Who Text
       requiredFields += ' - Who Text'; // add it to the error message
     }
-    if (!$scope.site){ // if there is no Where Text
-      requiredFields += ' - Where Text'; // add it to the error message
-    }
     if (!$scope.why){ // if there is no Why Text
       requiredFields += ' - Why Text'; // add it to the error message
     }
-    if (!$scope.moreInfo){ // if there is no For More Info Text
+    if (!$scope.website){ // if there is no For More Info Text
       requiredFields += ' - For More Info Text'; // add it to the error message
     }
     if (!$scope.what){ // if there is no What Text
@@ -253,7 +251,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         $mdDialog.show(
           $mdDialog.alert()
           .clickOutsideToClose(true)
-          .title('Error in Required Field!')
+          .title('Error in Required Field(s)!')
           .textContent(requiredFields)
           .ariaLabel('Required Field Alert')
           .ok('Understood')
@@ -287,7 +285,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         talent: $scope.talent,
         who: $scope.who,
         what: $scope.what,
-        site: $scope.site,
+        site: $scope.website,
         why: $scope.why,
         moreInfo: $scope.moreInfo,
         producer: $scope.producer

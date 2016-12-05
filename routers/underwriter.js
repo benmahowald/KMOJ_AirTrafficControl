@@ -74,37 +74,35 @@ router.post ('/master', function (req, res){
 
 					});//end queryResultsB.on 'row'
 					queryResultsB.on('end', function(){
+						var queryResultsProd = client.query ('INSERT INTO production (' +
+						'who, what, why, site, talent, producer, contract_id) ' +
+						'VALUES ($1, $2, $3, $4, $5, $6, $7);' , [master.who, master.what,
+							master.why, master.site, master.talent, master.producer, master_id[0].id]);
 
+							queryResultsProd.on('end', function(){
 								console.log('flight_id', flight_id);
-
 								var slotQuery = '';
 								var queryArray = [];
 								var thisSlot;
-
 								for (var i = 0; i < master.slotInfo.length; i++) {
 									thisSlot = master.slotInfo[i];
 									slotQuery = 'INSERT INTO slots (day_of_run, plays, slot, flight_id) ' +
 									'VALUES ($1, $2, $3, $4);';
 									console.log('slotQuery:', slotQuery);
 									queryArray = [thisSlot.dayOfRun, thisSlot.plays, thisSlot.slot, flight_id[0].id];
-
 									var queryResultsSlot = client.query (slotQuery , queryArray);
-
 									// This function within a loop is necessary to end each slotQuery
 									// and only send the e-mail when all slots have been entered
 									queryResultsSlot.on('end', function(){
 										if (i === master.slotInfo.length-1){
-											///send an email to GM saying new contract has been generated////
 											managerMail();
 											done();
 											res.send({success: true});
 										}
 									});//end queryResultsSlot
 								}
-
-
+							});//end queryResultsProd
 						});//end queryResultsB
-
 					});//end queryResultsA
 					res.sendStatus(200);
 				}
@@ -156,4 +154,4 @@ router.post ('/master', function (req, res){
 		}); // end delete client
 
 
-	module.exports = router;
+		module.exports = router;
