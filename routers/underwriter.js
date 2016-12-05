@@ -49,10 +49,10 @@ router.post ('/master', function (req, res){
 			// STILL NEED TO SEND: TOTAL_SPOTS
 			console.log('line 71 before master INSERT');
 			var queryResultsA = client.query ('INSERT INTO master (users_id, client_id, event_name, ' +
-			'instructions, uw_submit, man_app, uw_app, pr_app, tr_app, spot_type, sign_date, interviews, total_cost, spot_rate, discounts, commission, socialmedia, total_spots, spot_length) ' +
-			'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19) RETURNING id;' ,
+			'instructions, uw_submit, man_app, uw_app, pr_app, tr_app, spot_type, sign_date, interviews, total_cost, spot_rate, discounts, commission, socialmedia, total_spots, spot_length, copy_id) ' +
+			'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING id;' ,
 			[master.user_id, master.client_id,  master.event_name,  master.instructions,
-				true, false, false, false, false, spotType, master.signDate, master.numInterviews, master.totalCost, master.spot_rate, master.discount, master.agency_commission, master.numSocialMedia, master.total_spots, master.spot_length]);
+				true, false, false, false, false, spotType, master.signDate, master.numInterviews, master.totalCost, master.spot_rate, master.discount, master.agency_commission, master.numSocialMedia, master.total_spots, master.spot_length, master.copy_id]);
 
 				queryResultsA.on('row', function(row){
 					master_id.push(row);

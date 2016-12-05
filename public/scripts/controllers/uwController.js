@@ -199,6 +199,9 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
     if (!$scope.spot_length){ // if there is no Spot Length chosen
       requiredFields += ' - Spot Length'; // add it to the error message
     }
+    if (!$scope.spot_rate){ // if there is no Spot Rate chosen
+      requiredFields += ' - Spot Rate'; // add it to the error message
+    }
     if ($scope.totalCost === undefined){ // if there is no Total Cost specified
       requiredFields += ' - Total Cost'; // add it to the error message
     }
@@ -208,11 +211,14 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
     if (!$scope.numSocialMedia){ // if no number of Social Media Events is recorded
       $scope.numSocialMedia = 0; // Default it to Zero
     }
+    if (!$scope.copy_id){ // if no Copy ID is specified
+      $scope.copy_id = 'None'; // add defalut message
+    }
     if (!$scope.talent){ // if no Voice Talent is specified
-      $scope.voiceTalent = 'No Requirements'; // add defalut message
+      $scope.talent = 'any'; // add defalut message
     }
     if (!$scope.producer){ // if no Producer is specified
-      $scope.producer = 'No Requirements'; // add default message
+      $scope.producer = 'any'; // add default message
     }
     if (!$scope.who){ // if there is no Who Text
       requiredFields += ' - Who Text'; // add it to the error message
@@ -282,6 +288,7 @@ app.controller('uwController', ['$scope', '$mdDialog', '$http',  function($scope
         spot_rate: $scope.spot_rate,
         total_spots: $scope.flightTotal,
         spot_length: $scope.spot_length,
+        copy_id: $scope.copy_id,
         talent: $scope.talent,
         who: $scope.who,
         what: $scope.what,
