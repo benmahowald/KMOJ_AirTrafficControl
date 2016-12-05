@@ -57,21 +57,40 @@ app.controller('trafficController', ['$scope','$http', function($scope, $http){
       var thisDay;
       var flightLastIndex = $scope.flightInfo.length-1;
       var flightLastDay = $scope.flightInfo[flightLastIndex].day_of_run;
-      var maxWeek = Math.ceil(flightLastDay/7);
+      $scope.numWeeks = Math.ceil(flightLastDay/7);
       $scope.weeks = {};
-      for (var i = 1; i <= maxWeek; i++) {
+      $scope.totals = {};
+      $scope.flightTotal = 0;
+      for (var i = 1; i <= $scope.numWeeks; i++) {
         thisWeek = 'week'+i;
+        $scope.weeks[thisWeek]= {};
+        $scope.totals[thisWeek]= {};
         $scope.weeks[thisWeek].num = i;
+        $scope.totals[thisWeek].total = 0;
       }
-
 
       console.log('Organizing Run info:');
       for (var j = 0; j < $scope.flightInfo.length; j++) {
-        thisWeek = 'week'+Math.ceil($scope.flightInfo[j].day_of_run/7);
-        console.log('Day:',$scope.flightInfo[j].day_of_run,'- Week:',thisWeek);
-        $scope.weeks[thisWeek] = {};
-      }
+        var dayOfRun = $scope.flightInfo[j].day_of_run;
+        var weekNum = Math.ceil(dayOfRun/7);
+        thisWeek = 'week'+weekNum;
+        // -((weekNum-1)*7) adjusts the dayOfRun to the correct day of the week
+        // -1 adjust for the index in the $scope.days array
+        thisDay = $scope.days[dayOfRun-((weekNum-1)*7)-1];
+        thisSlot = $scope.flightInfo[j].slot;
 
+        console.log('Day:',$scope.flightInfo[j].day_of_run,'- Week:',thisWeek,
+          '- Plays:', $scope.flightInfo[j].plays);
+        if (!$scope.weeks[thisWeek][thisSlot]) {
+          $scope.weeks[thisWeek][thisSlot] = {};
+          $scope.totals[thisWeek][thisSlot] = 0;
+        }
+        $scope.weeks[thisWeek][thisSlot][thisDay] = $scope.flightInfo[j].plays;
+        $scope.totals[thisWeek][thisSlot] += $scope.flightInfo[j].plays;
+        $scope.totals[thisWeek].total += $scope.flightInfo[j].plays;
+        $scope.flightTotal += $scope.flightInfo[j].plays;
+      }
+      console.log('$scope.weeks',$scope.weeks);
       // console.log(response);
     }, function errorCallback (response){
       console.log('err', response);

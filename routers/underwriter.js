@@ -46,7 +46,6 @@ router.post ('/master', function (req, res){
 			console.log('connection error in master', err);
 		} else {
 			var master_id = [];
-			// STILL NEED TO SEND: TOTAL_SPOTS
 			console.log('line 71 before master INSERT');
 			var queryResultsA = client.query ('INSERT INTO master (users_id, client_id, event_name, ' +
 			'instructions, uw_submit, man_app, uw_app, pr_app, tr_app, spot_type, sign_date, interviews, total_cost, spot_rate, discounts, commission, socialmedia, total_spots, spot_length, copy_id) ' +

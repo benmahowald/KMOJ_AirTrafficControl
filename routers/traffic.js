@@ -74,13 +74,13 @@ router.get('/contractsPending', function (req, res){
 
 router.get('/flightContract', function (req, res){
 	console.log('in get contract -------------------');
-	console.log('req.body', req.body);
+	console.log('req.query', req.query);
 	pg.connect(connectionString, function(err, client, done){
 		if(err){
 			console.log('get contract connection error is', err);
 		} else {
 			var results = [];
-			var queryResults = client.query('SELECT flight.id, flight.cart_number, flight.start_date, flight.end_date, slots.day_of_run, slots.plays, slots.slot FROM flight JOIN slots on flight.id=slots.flight_id WHERE contract_id=($1);', [req.body.contract_id]);
+			var queryResults = client.query('SELECT flight.id, flight.cart_number, flight.start_date, flight.end_date, slots.day_of_run, slots.plays, slots.slot FROM flight JOIN slots on flight.id=slots.flight_id WHERE contract_id=($1);', [req.query.q]);
 			queryResults.on('row', function(row){
 				results.push(row);
 			});

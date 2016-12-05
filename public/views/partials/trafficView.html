@@ -15,8 +15,7 @@
     <!-- This div shows the Traffic Grid informationally (no editing) -->
     <div ng-hide="trafficEditRun" id="trafficViewGrid" class="trafficForm">
       <p>
-        <span class="boldFont">Weeks in the rotation:</span>
-        <span class="trafficSlot" type="number" ng-model="numWeeks" placeholder="1">
+        <span class="boldFont">Weeks in the rotation: {{numWeeks}} - </span>
         <span class="boldFont">Total Spots in Flight: {{flightTotal}}</span>
       </p>
       <div ng-repeat="week in weeks">
@@ -27,9 +26,9 @@
           </th>
           <tr ng-repeat="hour in hours">
             <td>{{hour.fullText}}</td>
-            <td class="boldFont">{{totals["week"+week.num][hour.title]}}</td>
+            <td class="boldFont">{{totals["week"+week.num][hour.fullText]}}</td>
             <td ng-repeat="day in days">
-              <span class="trafficSlot" type="number" ng-model="week[hour.title][day]" >
+              <span class="trafficSlot">{{week[hour.fullText][day]}}</span>
             </td>
           </tr>
         </table>
@@ -61,6 +60,6 @@
       </div>
     </div>
     <!-- <p editable-text="cart_number" e-form="textBtnForm" onbeforesave="updateCartNum()" onaftersave="getCartNum()"><span class="textToStandOut">Cart Number: </span>{{cart_number || No Cart #}}</p> -->
-    <input class="button" type="button" name="name" value="Confirm Traffic" ng-click="trafficApproval(currentContractId)">
+    <input class="button" type="button" name="name" value="Confirm Traffic" ng-click="trafficApproval(currentContractId)"><br>
     <button class="button" ng-click="getInvoiceInfo();getInvoice()" id = "cmd">Generate PDF</button>
   </div>
