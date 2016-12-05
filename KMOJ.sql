@@ -136,6 +136,10 @@ ALTER TABLE master ADD COLUMN uw_submit BOOLEAN;
 
 ALTER TABLE clients DROP COLUMN users_id;
 
+ALTER TABLE master DROP COLUMN flight_id;
+
+ALTER TABLE master DROP COLUMN prod_id;
+
 --- Updated Inserts for users (log in)
 
 INSERT INTO users VALUES (6, 'production@kmoj.com', 'Production', TRUE, 'Production');
