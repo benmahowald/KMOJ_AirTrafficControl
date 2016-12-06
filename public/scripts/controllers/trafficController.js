@@ -128,7 +128,7 @@ app.controller('trafficController', ['$scope', '$mdDialog', '$http',  function($
           height: 40,
           alignment: 'center'
         },
-        {text: 'KMOJ RUN CONFIRMATION & INVOICE\n', alignment: 'center', style: 'header'},
+        {text: 'KMOJ TENTATIVE RUN SCHEDULE\n', alignment: 'center', style: 'header'},
         {text: 'Order ID: 4328', alignment: 'center'},
         ['\n\n'],
         {text: '2123 W. Broadway, Suite 200', alignment: 'left'},
