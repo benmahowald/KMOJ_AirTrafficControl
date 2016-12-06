@@ -140,6 +140,13 @@ ALTER TABLE master DROP COLUMN flight_id;
 
 ALTER TABLE master DROP COLUMN prod_id;
 
+ALTER TABLE master DROP COLUMN copy_id;
+
+ALTER TABLE master ADD copy_id VARCHAR(20);
+
+ALTER TABLE master DROP COLUMN spot_number;
+
+
 --- Updated Inserts for users (log in)
 
 INSERT INTO users VALUES (6, 'production@kmoj.com', 'Production', TRUE, 'Production');

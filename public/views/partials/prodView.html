@@ -10,6 +10,7 @@
   </div>
   <div ng-show="productionInfoExists" class="form">
     <h3>{{prodInfo.event_name}}</h3>
+    <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Not set yet" }}</span></p>
       <p class="yourOtherOtherLeft">
         <span class="textToStandOut">Client:</span> {{prodInfo.client_name}}<br>
         <span class="textToStandOut">UW:</span> {{prodInfo.uw_name}}<br>
@@ -22,7 +23,6 @@
         <span class="textToStandOut">Spot Length:</span> {{prodInfo.spot_length}}<br>
         <span class="textToStandOut">Spot Type:</span> {{prodInfo.spot_type}}<br>
       </p>
-    <p>Cart #: <span editable-text="cart_number" onbeforesave="updateCartNum({cart_number: $data})" blur="submit">{{ cart_number || "Not set yet" }}</span></p>
     <input class="button" type="button" name="name" value="Confirm Production" ng-click="prodApproval(currentContractId)">
   </div><br>
 </div>
