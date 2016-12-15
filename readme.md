@@ -1,10 +1,12 @@
 KMOJ
 ----------------------------------------------
-Full stack application to help KMOJ Radio's lives a little easier in their day to day functions.
+Full stack application that streamlines the underwriting process for KMOJ.FM. It is essentially a sales application that makes KMOJ Radio's lives a little easier in their day to day functions.
+
+<img src="https://cloud.githubusercontent.com/assets/19895930/21232863/c681cb02-c2b2-11e6-86ee-6a4621b8a1d7.png"/ alt="Screen shot of application landing page">
 
 Technologies Used:
 -------------------------------------------------
-Angular, Angular-Aria, Angular-Material, Angular-Messages, Bootstrap, JQuery, Moment-With-Locales, pdfmake, xeditable, Sass, Node, Nodemailer, Express, SQL, Firebase.
+Angular, Angular-Material, Bootstrap, JQuery, MomentJS, pdfmake, xeditable, Sass, Node, Nodemailer, Express, SQL, Firebase.
 
 Greater Details
 ------------------------------------------------------------------------
